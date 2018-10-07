@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
-class Home extends Component {
+class Register extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>Click on get started to start</p>
+          <p>This is the register page</p>
         </header>
       </div>
     );
   }
 }
 
-export default Home;
+export default Register;
