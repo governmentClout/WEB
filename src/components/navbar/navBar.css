@@ -20,7 +20,8 @@
 
 .searchIcon {
   padding: 0.5rem;
-  font-size: 21px;
+  font-size: 19px;
+  opacity: 0.7;
 }
 
 .searchBox {
@@ -40,7 +41,7 @@
   color: #333333;
   font-size: 16px;
   line-height: 19px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .navigation-menu-button {
   background: #00b0f0;
@@ -56,4 +57,120 @@
   color: #00b0f0 !important;
   background: #ffffff;
   padding: 0.6em 1em;
+}
+.navigation-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-right: 1em;
+  align-self: center;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.navigation-toggle span {
+  display: block;
+  position: absolute;
+  height: 5px;
+  width: 50%;
+  background: #00b0f0;
+  opacity: 1;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+.navigation-toggle span:nth-child(even) {
+  left: 50%;
+  border-radius: 0 9px 9px 0;
+}
+.navigation-toggle span:nth-child(odd) {
+  left: 0px;
+  border-radius: 9px 0 0 9px;
+}
+.navigation-toggle span:nth-child(1),
+.navigation-toggle span:nth-child(2) {
+  top: 0px;
+}
+.navigation-toggle span:nth-child(3),
+.navigation-toggle span:nth-child(4) {
+  top: 12px;
+}
+.navigation-toggle span:nth-child(5),
+.navigation-toggle span:nth-child(6) {
+  top: 26px;
+}
+.navigation-toggle.open span:nth-child(1),
+.navigation-toggle.open span:nth-child(6) {
+  transform: rotate(45deg);
+}
+.navigation-toggle.open span:nth-child(2),
+.navigation-toggle.open span:nth-child(5) {
+  transform: rotate(-45deg);
+}
+.navigation-toggle.open span:nth-child(1) {
+  left: 3px;
+  top: 5px;
+}
+.navigation-toggle.open span:nth-child(2) {
+  left: calc(50% - 3px);
+  top: 5px;
+}
+.navigation-toggle.open span:nth-child(3) {
+  left: -50%;
+  opacity: 0;
+}
+.navigation-toggle.open span:nth-child(4) {
+  left: 100%;
+  opacity: 0;
+}
+.navigation-toggle.open span:nth-child(5) {
+  left: 3px;
+  top: 20px;
+}
+.navigation-toggle.open span:nth-child(6) {
+  left: calc(50% - 3px);
+  top: 20px;
+}
+.navigation-menu-mobile {
+  width: 80vw;
+  justify-items: center;
+  max-height: 0;
+  opacity: 0;
+  background: #ffffff;
+  position: absolute;
+  margin-left: 9vw;
+  margin-top: -20px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 3px 4px 10px 1px #00000085;
+  transition: all 0.2s ease-in;
+  overflow-y: hidden;
+}
+.navigation-menu-mobile ul {
+  list-style: none;
+  padding: 1em 3em;
+  text-align: center;
+}
+.navigation-menu-mobile ul li {
+  padding: 1em;
+}
+
+/*****************************/
+/**** Responsive Styling ****/
+/*****************************/
+@media screen and (max-width: 800px) {
+  .navigation-toggle {
+    display: block;
+  }
+  .navigation-menu {
+    display: none;
+  }
+  .navigation-menu-mobile.open {
+    opacity: 1;
+    max-height: 50vh;
+  }
+  .searchContainer {
+    width: 180px;
+    margin: 0.6em;
+  }
 }

@@ -2,16 +2,26 @@ import React, { Component } from "react";
 import "./navBar.css";
 
 class NavBar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    };
+    this.openNav = this.openNav.bind(this);
+  }
 
-  // handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  searchHandler(e) {
+    e.preventDefault();
+  }
+  openNav() {
+    const currentState = this.state.isOpen;
+    this.setState({ isOpen: !currentState });;
+  }
 
   render() {
-    // const { activeItem } = this.state;
-
     return (
       <div className="navigation">
-        <div className="container d-flex justify-content-between">
+        <nav className="container d-flex justify-content-between">
           <div className="d-flex">
             <a href="/" style={{ maxHeight: "70px" }}>
               <img
@@ -20,14 +30,27 @@ class NavBar extends Component {
                 className="navigation-logo"
               />
             </a>
-            <div className="searchContainer">
+            <form className="searchContainer" onSubmit={this.searchHandler}>
               <i className="fas fa-search searchIcon" />
               <input
                 className="searchBox"
                 type="search"
                 placeholder="Type in to search..."
               />
-            </div>
+            </form>
+          </div>
+          <div
+            className={
+              this.state.isOpen ? "navigation-toggle open" : "navigation-toggle"
+            }
+            onClick={this.openNav}
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
           <ul className="navigation-menu">
             <li className="navigation-menu-item">
@@ -45,7 +68,31 @@ class NavBar extends Component {
               </a>
             </li>
           </ul>
-        </div>
+        </nav>
+        <nav
+          className={
+            this.state.isOpen
+              ? "navigation-menu-mobile open"
+              : "navigation-menu-mobile"
+          }
+        >
+          <ul>
+            <li onClick={this.openNav} className="navigation-menu-item">
+              <a href="/">About us</a>
+            </li>
+            <li onClick={this.openNav} className="navigation-menu-item">
+              <a href="/">Petition</a>
+            </li>
+            <li onClick={this.openNav} className="navigation-menu-item">
+              <a href="/">Opinion poll</a>
+            </li>
+            <li onClick={this.openNav} className="navigation-menu-item">
+              <a href="/" className="btn navigation-menu-button">
+                GET STARTED
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     );
   }
