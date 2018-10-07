@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
+  color: #333333;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -10,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* To be removed */
 .App {
   text-align: center;
 }
@@ -31,4 +33,25 @@ code {
 
 .App-link {
   color: #61dafb;
+}
+/*end of code to be removed */
+.bg-white {
+  background: #ffffff !important;
+}
+.btn-gclout-blue {
+  background: #00b0f0;
+  color: #ffffff;
+}
+.form-control {
+  border-radius: 0;
+}
+.form-control:focus {
+  background-color: #fff;
+  border-color: #00b0f0;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+.btn {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
 }
