@@ -58,3 +58,6 @@ code {
 .react-date-picker__button {
   border: none !important;
 }
+.react-date-picker__calendar {
+  z-index: 9999 !important;
+}

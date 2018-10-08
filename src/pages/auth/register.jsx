@@ -6,7 +6,7 @@ import DatePicker from "react-date-picker";
 
 class Register extends Component {
   state = {
-    date_of_birth: new Date()
+    date_of_birth: new Date(1980, 1, 1)
   };
   onDateChange = date_of_birth => this.setState({ date_of_birth });
   render() {
@@ -55,10 +55,9 @@ class Register extends Component {
                     <label htmlFor="date-of-birth">Date of birth</label>
                     <DatePicker
                       className="form-control form-date"
-                      required="true"
                       onChange={this.onDateChange}
                       value={this.state.date_of_birth}
-                      Clear="null"
+                      Calendar={null}
                     />
                   </div>
                 </div>
