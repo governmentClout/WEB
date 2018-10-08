@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
+import DatePicker from "react-date-picker";
 
 class Register extends Component {
+  state = {
+    date_of_birth: new Date()
+  };
+  onDateChange = date_of_birth => this.setState({ date_of_birth });
   render() {
     return (
       <div className="auth-page d-flex">
@@ -48,12 +53,12 @@ class Register extends Component {
                   </div>
                   <div clssName="col ml-2" style={{ marginLeft: "5px" }}>
                     <label htmlFor="date-of-birth">Date of birth</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="date-of-birth"
-                      placeholder="DD/MM/YYYY"
-                      required
+                    <DatePicker
+                      className="form-control form-date"
+                      required="true"
+                      onChange={this.onDateChange}
+                      value={this.state.date_of_birth}
+                      Clear="null"
                     />
                   </div>
                 </div>
