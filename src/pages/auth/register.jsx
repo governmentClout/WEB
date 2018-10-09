@@ -1,15 +1,97 @@
+import { PostData } from '../../services/PostData';
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login'; 
+import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
+
+  constructor(props) {
+
+    super(props);
+    this.state = {
+  
+      redirectToReferrer: false
+
+    }
+    this.signup = this.signup.bind(this);
+  
+  }
+
+  signup(res, type){
+
+    let PostData;
+
+    if(type === 'facebook' && res.email){ 
+
+      PostData = {
+
+        name: res.name,
+        provider: type,
+        email: res.email,
+        provider_id:res.id,
+        token: res.accessToken
+    
+      }
+    
+    }
+
+    if(type === 'google' && res.w3.U3){
+
+      PostData = {
+
+        name: res.w3.ig,
+        provider: type,
+        email: res.w3.U3,
+        provider_id: res.El,
+        token: res.Zi.access_token
+
+      }
+    
+    }
+
+    PostData('register', PostData).then((result) => {
+
+      let responseJson = result;
+      if(responseJson.userData) {
+
+        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+        this.setState({
+
+          redirectToReferrer: true
+        
+        });
+      
+      }
+    })
+  }
+
   state = {
     date_of_birth: new Date(1980, 1, 1)
   };
-  onDateChange = date_of_birth => this.setState({ date_of_birth });
+onDateChange = date_of_birth => this.setState({ date_of_birth });
   render() {
+
+    if(this.state.redirectToReferrer){
+
+      return (<Redirect to={'/home'}/>)
+
+    }
+
+    const responseFacebook = response => {
+  console.log (response);
+  this.signup(response, 'facebook');
+};
+
+const responseGoogle = response => {
+  console.log (response);
+  this.signup(response, 'google')
+};
+
     return (
       <div className="auth-page d-flex">
         <AuthBackground />
@@ -77,18 +159,22 @@ class Register extends Component {
             <div className="vertical-divider">OR</div>
             <div className="col-md-6">
               <div className="social-buttons">
-                <a href="#" className="social-button-facebook btn btn-block">
-                  <i className="fab fa-facebook-f" />
-                  Facebook
-                </a>
+                <FacebookLogin
+                  appId="150936365856004"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  callback={responseFacebook} 
+                  />
                 <a href="#" className="social-button-twitter btn btn-block">
                   <i className="fab fa-twitter" />
                   Twitter
                 </a>
-                <a href="#" className="social-button-google btn btn-block">
-                  <i className="fab fa-google-plus-g" />
-                  Google
-                </a>
+                <GoogleLogin
+                  clientId="721177315518-gano6mhig3v8riqk65culs44kkjltd25.apps.googleusercontent.com"
+                  buttonText="Login with Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                />
               </div>
               <p class="text-center">
                 Already have an account?{" "}
