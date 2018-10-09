@@ -1,12 +1,12 @@
-import { PostData } from '../../services/PostData';
+import { PostData } from "../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login'; 
-import { Redirect } from 'react-router-dom';
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+import { Redirect } from "react-router-dom";
 
 class Register extends Component {
 
@@ -14,58 +14,42 @@ class Register extends Component {
 
     super(props);
     this.state = {
-  
       redirectToReferrer: false
-
-    }
+    };
     this.signup = this.signup.bind(this);
   
   } 
 
-  signup(res, type){
-
+  signup(res, type) {
     let PostData;
 
-    if(type === 'facebook' && res.email){ 
-
+    if (type === "facebook" && res.email) {
       PostData = {
-
         name: res.name,
         provider: type,
         email: res.email,
-        provider_id:res.id,
+        provider_id: res.id,
         token: res.accessToken
-    
-      }
-    
+      };
     }
 
-    if(type === 'google' && res.w3.U3){
-
+    if (type === "google" && res.w3.U3) {
       PostData = {
-
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
-
-      }
-    
+      };
     }
 
-    PostData('register', PostData).then((result) => {
-
+    PostData("register", PostData).then(result => {
       let responseJson = result;
-      if(responseJson.userData) {
-
-        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+      if (responseJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responseJson));
         this.setState({
-
           redirectToReferrer: true
-        
         });
-      
       }
     })
   } */
@@ -73,7 +57,7 @@ class Register extends Component {
   state = {
     date_of_birth: new Date(1980, 1, 1)
   };
-onDateChange = date_of_birth => this.setState({ date_of_birth });
+  onDateChange = date_of_birth => this.setState({ date_of_birth });
   render() {
 
     const responseFacebook = (response ) => {
@@ -158,8 +142,8 @@ onDateChange = date_of_birth => this.setState({ date_of_birth });
                   appId = "2171139129879186"
                   autoLoad={true}
                   fields="name,email,picture"
-                  callback={responseFacebook} 
-                  />
+                  callback={responseFacebook}
+                />
                 <a href="#" className="social-button-twitter btn btn-block">
                   <i className="fab fa-twitter" />
                   Twitter
@@ -170,6 +154,10 @@ onDateChange = date_of_birth => this.setState({ date_of_birth });
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                 />
+                <a href="#" className="social-button-linkedin btn btn-block">
+                  <i className="fab fa-linkedin-in" />
+                  Linkedin
+                </a>
               </div>
               <p class="text-center">
                 Already have an account?{" "}
