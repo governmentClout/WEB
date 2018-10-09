@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
 
-  constructor(props) {
+  /* constructor(props) {
 
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class Register extends Component {
     }
     this.signup = this.signup.bind(this);
   
-  }
+  } 
 
   signup(res, type){
 
@@ -68,7 +68,7 @@ class Register extends Component {
       
       }
     })
-  }
+  } */
 
   state = {
     date_of_birth: new Date(1980, 1, 1)
@@ -76,22 +76,17 @@ class Register extends Component {
 onDateChange = date_of_birth => this.setState({ date_of_birth });
   render() {
 
-    if(this.state.redirectToReferrer){
+    const responseFacebook = (response ) => {
 
-      return (<Redirect to={'/home'}/>)
+      console.log(response);
 
     }
 
-    const responseFacebook = response => {
-  console.log (response);
-  this.signup(response, 'facebook');
-};
+    const responseGoogle = (response) => {
 
-const responseGoogle = response => {
-  console.log (response);
-  this.signup(response, 'google')
-};
+      console.log(response);
 
+    }
     return (
       <div className="auth-page d-flex">
         <AuthBackground />
@@ -160,7 +155,7 @@ const responseGoogle = response => {
             <div className="col-md-6">
               <div className="social-buttons">
                 <FacebookLogin
-                  appId="150936365856004"
+                  appId = "2171139129879186"
                   autoLoad={true}
                   fields="name,email,picture"
                   callback={responseFacebook} 
@@ -170,7 +165,7 @@ const responseGoogle = response => {
                   Twitter
                 </a>
                 <GoogleLogin
-                  clientId="721177315518-gano6mhig3v8riqk65culs44kkjltd25.apps.googleusercontent.com"
+                  clientId = "721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
                   buttonText="Login with Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
