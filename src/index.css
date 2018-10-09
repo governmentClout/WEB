@@ -54,6 +54,7 @@ code {
 .btn {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
+  padding: 0.65em 1em;
 }
 .react-date-picker__button {
   border: none !important;

@@ -89,6 +89,10 @@ class Register extends Component {
                   <i className="fab fa-google-plus-g" />
                   Google
                 </a>
+                <a href="#" className="social-button-linkedin btn btn-block">
+                  <i className="fab fa-linkedin-in" />
+                  Linkedin
+                </a>
               </div>
               <p class="text-center">
                 Already have an account?{" "}
