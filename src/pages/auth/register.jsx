@@ -1,4 +1,3 @@
-import { PostData } from "../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
@@ -7,68 +6,96 @@ import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { Redirect } from "react-router-dom";
+import { PostData } from "../../services/PostData";
 
 class Register extends Component {
 
-  /* constructor(props) {
+  constructor(props) {
 
     super(props);
     this.state = {
-      redirectToReferrer: false
-    };
-    this.signup = this.signup.bind(this);
   
-  } 
+      redirectToReferrer: false
+  
+    };
+    this.register = this.register.bind(this);
+  
+  }
 
-  signup(res, type) {
-    let PostData;
+  register(res, type) {
 
-    if (type === "facebook" && res.email) {
-      PostData = {
+    let postData;
+
+    if (type === 'facebook' && res.email) {
+
+      postData = {
+    
         name: res.name,
         provider: type,
         email: res.email,
         provider_id: res.id,
         token: res.accessToken
+    
       };
+    
     }
 
-    if (type === "google" && res.w3.U3) {
-      PostData = {
+    if (type === 'google' && res.w3.U3) {
+
+      postData = {
+
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
+
       };
+
     }
 
-    PostData("register", PostData).then(result => {
+    PostData('register', postData).then((result) => {
+
       let responseJson = result;
-      if (responseJson.userData) {
-        sessionStorage.setItem("userData", JSON.stringify(responseJson));
+      if(responseJson.userData){
+
+        sessionStorage.setItem('userData', JSON.stringify(responseJson));
         this.setState({
+
           redirectToReferrer: true
+        
         });
+
       }
-    })
-  } */
+    
+    });
+
+  }
 
   state = {
     date_of_birth: new Date(1980, 1, 1)
   };
   onDateChange = date_of_birth => this.setState({ date_of_birth });
+  
   render() {
+    
+    if(this.state.redirectToReferrer) {
+
+      return (<Redirect to={"/"}/>)
+    
+    }
 
     const responseFacebook = (response ) => {
 
       console.log(response);
+      this.signup(response, 'facebook');
 
     }
 
     const responseGoogle = (response) => {
 
       console.log(response);
+      this.signup(response, 'google');
 
     }
     return (

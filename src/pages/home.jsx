@@ -4,11 +4,13 @@ import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
 
-  constructor(props) {
+/*   constructor(props) {
     super(props);
     this.state = {
+
       name: '',
       redirect: false,
+
     };
   }
 
@@ -18,15 +20,15 @@ class Home extends Component {
     this.setState({
       name: data.userData.name
     })
-  }
+  } */
 
   render() {
 
-    if (!sessionStorage.getItem('userData') || this.state.redirect) {
+    /* if (!sessionStorage.getItem('userData') || this.state.redirect) {
       
       return ( <Redirect to={'/'}/>)
     
-    }
+    } */
 
     return (
       <div className="App">

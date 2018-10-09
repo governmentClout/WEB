@@ -1,6 +1,6 @@
 export function PostData(type, userData){
 
-    let baseUrl = 'https://api.staybusy.ng';
+    let baseUrl = 'http://127.0.0.1:8000';
 
     return new Promise((resolve, reject) => {
 
