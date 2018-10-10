@@ -9,95 +9,68 @@ import { Redirect } from "react-router-dom";
 import { PostData } from "../../services/PostData";
 
 class Register extends Component {
-
   constructor(props) {
-
     super(props);
     this.state = {
-  
       redirectToReferrer: false
-  
     };
     this.register = this.register.bind(this);
-  
   }
 
   register(res, type) {
-
     let postData;
 
-    if (type === 'facebook' && res.email) {
-
+    if (type === "facebook" && res.email) {
       postData = {
-    
         name: res.name,
         provider: type,
         email: res.email,
         provider_id: res.id,
         token: res.accessToken
-    
       };
-    
     }
 
-    if (type === 'google' && res.w3.U3) {
-
+    if (type === "google" && res.w3.U3) {
       postData = {
-
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
-
       };
-
     }
 
-    PostData('register', postData).then((result) => {
-
+    PostData("register", postData).then(result => {
       let responseJson = result;
-      if(responseJson.userData){
-
-        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+      if (responseJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responseJson));
         this.setState({
-
           redirectToReferrer: true
-        
         });
-
       }
-    
     });
-
   }
 
   state = {
     date_of_birth: new Date(1980, 1, 1)
   };
   onDateChange = date_of_birth => this.setState({ date_of_birth });
-  
+
   render() {
-    
-    if(this.state.redirectToReferrer) {
-
-      return (<Redirect to={"/"}/>)
-    
+    if (this.state.redirectToReferrer) {
+      return <Redirect to={"/"} />;
     }
 
-    const responseFacebook = (response ) => {
-
+    const responseFacebook = response => {
       console.log(response);
-      this.signup(response, 'facebook');
+      this.signup(response, "facebook");
+    };
 
-    }
-
-    const responseGoogle = (response) => {
-
+    const responseGoogle = response => {
       console.log(response);
-      this.signup(response, 'google');
-
-    }
+      this.signup(response, "google");
+    };
+    const googleId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     return (
       <div className="auth-page d-flex">
         <AuthBackground />
@@ -166,7 +139,7 @@ class Register extends Component {
             <div className="col-md-6">
               <div className="social-buttons">
                 <FacebookLogin
-                  appId = "2171139129879186"
+                  appId="2171139129879186"
                   autoLoad={true}
                   fields="name,email,picture"
                   callback={responseFacebook}
@@ -178,16 +151,16 @@ class Register extends Component {
                   Twitter
                 </a>
                 <GoogleLogin
-                  clientId = "721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                  buttonText="Login with Google"
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText="Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                   className="btn btn-block social-button-google"
                 />
-                /* <a href="#" className="social-button-linkedin btn btn-block">
+                {/*<a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a> */
+                </a>*/}
               </div>
               <p class="text-center">
                 Already have an account?{" "}
