@@ -170,6 +170,8 @@ class Register extends Component {
                   autoLoad={true}
                   fields="name,email,picture"
                   callback={responseFacebook}
+                  cssClass="social-button-facebook btn btn-block"
+                  icon="fa-facebook"
                 />
                 <a href="#" className="social-button-twitter btn btn-block">
                   <i className="fab fa-twitter" />
@@ -180,6 +182,7 @@ class Register extends Component {
                   buttonText="Login with Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
+                  className="btn btn-block social-button-google"
                 />
                 <a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
