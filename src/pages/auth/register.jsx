@@ -181,10 +181,10 @@ class Register extends Component {
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                 />
-                <a href="#" className="social-button-linkedin btn btn-block">
+                /* <a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a>
+                </a> */
               </div>
               <p class="text-center">
                 Already have an account?{" "}
