@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
+import NavBar from "../../components/navbar/navBar"
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
@@ -72,7 +73,9 @@ class Register extends Component {
     };
     const googleId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     return (
-      <div className="auth-page d-flex">
+      <div>
+        <NavBar />
+        <div className="auth-page d-flex">
         <AuthBackground />
         <div className="m-auto col-md-8 bg-white auth-page-card">
           <h2 className="auth-card-title text-center mb-3">
@@ -171,6 +174,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
