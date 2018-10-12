@@ -31,12 +31,12 @@ class NavBar extends Component {
               />
             </a>
             <form className="searchContainer" onSubmit={this.searchHandler}>
-              <i className="fas fa-search searchIcon" />
               <input
                 className="searchBox"
                 type="search"
                 placeholder="Type in to search..."
               />
+              <i className="fas fa-search searchIcon" />
             </form>
           </div>
           <div
