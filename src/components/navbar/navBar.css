@@ -6,6 +6,9 @@
   background: #ffffff;
   position: relative;
 }
+.navigation.--with-shadow {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+}
 .navigation-logo {
   height: 70px;
   width: auto;
@@ -20,23 +23,26 @@
   width: 400px;
   align-items: center;
 }
-
+.searchIconContainer {
+  background: #f1f1f1;
+  margin: 0;
+  height: 100%;
+}
 .searchIcon {
-  padding: 0.5rem;
-  font-size: 19px;
-  opacity: 0.7;
+  padding: 0.8rem;
+  font-size: 16px;
 }
 
 .searchBox {
   border: 0;
-  padding: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   flex: 1;
 }
 .navigation-menu {
   display: flex;
   list-style: none;
   align-items: center;
-  margin-top: -0.5em;
+  /* margin-top: -0.2em; */
 }
 .navigation-menu-item {
   padding: 0 10px;
@@ -52,6 +58,7 @@
   color: #ffffff !important;
   padding: 0.6em 1em;
   border: 2px solid #00b0f0;
+  margin-top: 0.5em !important;
 }
 .navigation-menu-item a:hover {
   color: #00b0f0;
@@ -59,6 +66,29 @@
 }
 .navigation-menu-button:hover {
   filter: brightness(0.95);
+}
+.navigation-menu-icon {
+  background: transparent;
+  border: none;
+  position: relative;
+}
+.navigation-menu-icon:hover {
+  cursor: pointer;
+}
+.navigation-menu-icon[data-badge]:after {
+  content: attr(data-badge);
+  position: absolute;
+  top: -5px;
+  left: 18px;
+  font-size: .7em;
+  background: #27A9F8;
+  color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 1px #333;
 }
 .navigation-toggle {
   display: none;
@@ -157,7 +187,9 @@
 .navigation-menu-mobile ul li {
   padding: 1em;
 }
-
+.navigation-menu-item.only-mobile {
+  display: none;
+}
 /*****************************/
 /**** Responsive Styling ****/
 /*****************************/
@@ -175,5 +207,20 @@
   .searchContainer {
     width: 180px;
     margin: 0.6em;
+  }
+  .--with-shadow .navigation-menu {
+    display: flex;
+  }
+  .--with-shadow .navigation-toggle {
+    display: none;
+  }
+  .--with-shadow .navigation-menu-item.no-mobile {
+    display: none;
+  }
+  .searchContainer.no-mobile {
+    display: none;
+  }
+  .navigation-menu-item.only-mobile {
+    display: block;
   }
 }
