@@ -1,9 +1,20 @@
 .sidebar {
   width: 300px;
   margin-right: 2em;
+}
+.sidebar p {
+  font-size: 14px;
+}
+.sidebar-top {
   background: #ffffff;
   border-radius: 4px;
   padding-bottom: 2em;
+}
+.sidebar-footer {
+  background: #ffffff;
+  border-radius: 4px;
+  margin-top: 1em;
+  padding: 1em;
 }
 .sidebar-cover-image-wrapper {
   width: 100%;
@@ -57,4 +68,19 @@
 }
 .sidebar-politician {
   margin: 1em 0;
+}
+.sidebar-footer > p > a {
+  color: #333333;
+}
+.sidebar-footer > p > a:hover {
+  color: #00b0f0;
+  text-decoration: none;
+}
+.sidebar-footer .smaller-margin {
+  margin-bottom: 0.2em;
+}
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
 }
