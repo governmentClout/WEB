@@ -47,11 +47,6 @@ class Login extends Component {
   
   postData(ev) {
 
-    this.setState({
-
-      loggedIn: true
-
-    })
 
     ev.preventDefault();
 
@@ -119,7 +114,7 @@ class Login extends Component {
             </h2>
             <div className="row --with-divider">
               <div className="col-md-6">
-                <form className="auth-form mb-4">
+                <form onSubmit={this.postData.bind(this)} className="auth-form mb-4">
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
