@@ -7,6 +7,7 @@
   overflow: hidden;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  position: relative;
 }
 .profile-cover-image {
   width: 100%;
@@ -17,22 +18,22 @@
   height: 36px;
   border-radius: 50%;
   background: #00b0f0;
-  box-shadow: 0px 3px 3px rgba(0,0,0,0.12);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.12);
   position: absolute;
-  top: 200px;
-  right: 12%;
+  top: 10%;
+  right: 5%;
   border: none;
   display: flex;
 }
 .floating-edit-button-wrapper.--profile-picture {
-  top: 400px;
-  right: 32%;
+  top: 80%;
+  left: 70%;
 }
 .floating-edit-button-wrapper svg {
   margin: auto;
 }
 .floating-edit-button-wrapper:hover {
-  box-shadow: 3px 6px 6px rgba(0,0,0,0.12);
+  box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
 }
 .lifted-profile-image-wrapper {
@@ -42,6 +43,7 @@
   margin: auto;
   margin-bottom: 1em;
   margin-top: -100px;
+  position: relative;
 }
 .lifted-profile-image {
   height: 100%;
