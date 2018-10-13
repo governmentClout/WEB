@@ -26,6 +26,7 @@ class Home extends Component {
     } else {
 
       this.setState({
+        
         redirect: true
 
       })

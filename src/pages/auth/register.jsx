@@ -11,10 +11,13 @@ import { PostData } from "../../services/PostData";
 import axios from "axios";
 
 class Register extends Component {
+
   constructor(props) {
+
     super(props);
 
     this.state = {
+
       redirectToReferrer: false,
       password: '',
       email: '',
@@ -24,6 +27,7 @@ class Register extends Component {
       provider: 'email'
 
     }
+
     this.register = this.register.bind(this);
 /*     this.signup = this.signup.bind(this); */ 
     this.onChange = this.onChange.bind(this); 
@@ -80,10 +84,8 @@ class Register extends Component {
 
       [key] : event.target.value
 
-    })
-      redirectToReferrer: false
-    };
-    this.register = this.register.bind(this);
+    });
+
   }
 
   // toggleBox(){
@@ -93,43 +95,36 @@ class Register extends Component {
 
   
 
-  /* signup(){
-
-    if(this.state.)
-  } */
-
   register(res, type) {
     let postData;
 
     if (type === "facebook" && res.email) {
+      
       postData = {
+      
         name: res.name,
         provider: type,
         email: res.email,
         provider_id: res.id,
         token: res.accessToken
+      
       };
+    
     }
 
     if (type === "google" && res.w3.U3) {
+    
       postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
+    
       };
+    
     }
 
-    PostData("register", postData).then(result => {
-      let responseJson = result;
-      if (responseJson.userData) {
-        sessionStorage.setItem("userData", JSON.stringify(responseJson));
-        this.setState({
-          redirectToReferrer: true
-        });
-      }
-    });
   }
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
@@ -255,16 +250,15 @@ class Register extends Component {
                   Twitter
                 </a>
                 <GoogleLogin
-                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                  buttonText="Google"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  className="btn btn-block social-button-google"
+                clientId = "721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                buttonText = "Login with Google"
+                onSuccess = {responseGoogle}
+                onFailure = { responseGoogle}
                 />
-                {/*<a href="#" className="social-button-linkedin btn btn-block">
+                {<a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a>*/}
+                </a>}
               </div>
               <p className="text-center">
                 Already have an account?{" "}

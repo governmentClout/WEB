@@ -23,18 +23,6 @@ class Login extends Component {
 
   }
 
-  componentDidMount(){
-
-    if(window.token){
-
-      this.setState({
-
-        loggedIn: true
-
-      })
-    }
-  }
-
   dataChange(ev){
 
     this.setState({
@@ -119,7 +107,9 @@ class Login extends Component {
 
       /* axios ends here */
     } else {
+      
       console.log('noting here');
+    
     }
 
 
@@ -150,7 +140,10 @@ class Login extends Component {
             </h2>
             <div className="row --with-divider">
               <div className="col-md-6">
-                <form className="auth-form mb-4">
+                < form className = "auth-form mb-4"
+                onSubmit = {
+                  this.postData.bind(this)
+                }>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
