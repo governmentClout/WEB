@@ -46,7 +46,8 @@ class Register extends Component {
       dob: this.state.date_of_birth,
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
-      provider: "email"
+      provider: "email",
+      redirectToReferrer: false
 
     }
 
@@ -69,6 +70,21 @@ class Register extends Component {
   }).then(response => {
 
     console.log(response);
+
+    let responseJson = response;
+
+    if(responseJson.data) {
+    
+      sessionStorage.setItem('data', responseJson);
+
+      this.setState({
+
+        redirectToReferrer: true 
+
+      })
+
+    }
+
   
   }).catch(error => {
 
@@ -130,8 +146,11 @@ class Register extends Component {
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
-    if (this.state.redirectToReferrer) {
-      return <Redirect to={"/"} />;
+        
+    if (this.state.redirectToReferrer || sessionStorage.getItem('data')) {
+      
+      return ( <Redirect to = {'/'}/>)
+    
     }
 
     const responseFacebook = response => {
