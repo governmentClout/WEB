@@ -38,12 +38,23 @@ code {
 .bg-white {
   background: #ffffff !important;
 }
-.btn-gclout-blue {
+.btn-gclout-blue,
+.btn-gclout-blue-outline:hover {
   background: #00b0f0;
   color: #ffffff;
+  border: 1px solid #00b0f0;
+  transition: all 0.5s;
+}
+.btn-gclout-blue-outline,
+.btn-gclout-blue:hover {
+  color: #00b0f0;
+  background: transparent;
+  transition: all 0.5s;
+  border: 1px solid #00b0f0;
 }
 .form-control {
-  border-radius: 0;
+  border-radius: 4px;
+  border: 1px solid #BDBDBD;
 }
 .form-control:focus {
   background-color: #fff;
@@ -56,9 +67,34 @@ code {
   margin-bottom: 1em !important;
   padding: 0.65em 1em;
 }
+.btn-gclout-dark {
+  background: #c4c4c4;
+  color: #ffffff;
+  transition: all 0.5s;
+}
+.btn-gclout-dark:hover {
+  background: #00b0f0;
+  transition: all 0.5s
+}
 .react-date-picker__button {
   border: none !important;
 }
 .react-date-picker__calendar {
   z-index: 9999 !important;
+}
+.app-wrapper {
+  background: #e5e5e5;
+  color: #333333;
+}
+.app-container {
+  padding: 2em 0;
+}
+.text-gclout-blue {
+  color: #00b0f0;
+}
+.app-content {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #F0F0F0;
+  border-radius: 4px;
 }

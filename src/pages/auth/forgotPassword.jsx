@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
+import NavBar from "../../components/navbar/navBar"
 import AuthBackground from "./../../components/authBackground/authBackground";
 
 class ForgotPassword extends Component {
   render() {
     return (
-      <div className="auth-page d-flex">
+      <div>
+        <NavBar />
+        <div className="auth-page d-flex">
         <AuthBackground />
         <div className="m-auto col-md-6 bg-white auth-page-card">
           <h2 className="auth-card-title text-center mb-3">
@@ -33,6 +36,7 @@ class ForgotPassword extends Component {
             </form>
           </div>
         </div>
+      </div>
       </div>
     );
   }

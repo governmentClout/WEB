@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import NavBar from './components/navbar/navBar';
 
 class App extends Component {
   render() {
     return (
-      <div >
-          <NavBar />
+          // TODO: Make the normal navbar show when the user is not logged in,
+          // and the authenticated navbar show when the user is logged in
           <div>
             {this.props.children}
           </div>
-      </div>
     );
   }
 }
