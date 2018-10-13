@@ -58,11 +58,12 @@ class Register extends Component {
     url: url,
     data: data,
     mode: 'no-cors',
-     headers: {
+    headers: {
 
-       'Content-Type': 'text/plain;charset=utf-8',
+      'Content-Type': 'text/plain;charset=utf-8',
 
-     }
+    }
+
   }).then(response => {
 
     console.log(response);

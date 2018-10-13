@@ -4,31 +4,42 @@ import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
 
-/*   constructor(props) {
+   constructor(props) {
+    
     super(props);
+    
     this.state = {
 
-      name: '',
       redirect: false,
 
     };
+  
   }
 
   componentDidMount() {
-    let data = JSON.parse(sessionStorage.getItem('userData'));
-    console.log(data);
-    this.setState({
-      name: data.userData.name
-    })
-  } */
+
+    if(sessionStorage.getItem("data")){
+
+      console.log('d is here');
+
+    } else {
+
+      this.setState({
+        redirect: true
+
+      })
+
+    }
+
+  } 
 
   render() {
 
-    /* if (!sessionStorage.getItem('userData') || this.state.redirect) {
-      
-      return ( <Redirect to={'/'}/>)
+    if(this.state.redirect){
+
+      return (<Redirect to={'/login'}/>)
     
-    } */
+    }
 
     return (
       <div className="App">

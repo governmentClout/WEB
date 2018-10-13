@@ -16,7 +16,7 @@ class Login extends Component {
 
       email: '',
       password: '',
-      loggedIn: false
+      redirect: false
     
     };
 
@@ -66,46 +66,77 @@ class Login extends Component {
 
     const url = "http://api.staybusy.ng:3000/login";
 
-    axios({
-      
-      method: 'post',
-      url: url,
-      data: data,
-      mode: 'no-cors',
-      headers: {
+    if(this.state.email && this.state.password){
 
-        'Content-Type': 'text/plain;charset=utf-8',
-      
-      }
-    
-    }).then(response => {
+      /* axios sraers here */
+      console.log('e dey');
 
-      console.log(response);
+      axios({
 
-      this.setState({
+        method: 'post',
+        url: url,
+        data: data,
+        mode: 'no-cors',
+        headers: {
 
-        loggedIn: true
+          'Content-Type': 'text/plain;charset=utf-8',
+
+        }
+
+      }).then(response => {
+
+        let responseJSON = response;
+
+        if (responseJSON.data) {
+
+          sessionStorage.setItem('data', responseJSON);
+
+          this.setState({
+            redirect: true
+
+          });
+
+          console.log('yeahhhh')
+
+        } else {
+
+          console.log('login error');
+
+        }
+
+        console.log(responseJSON);
+
+        console.log(response);
+
+        /* localStorage.setItem('token', response.data.token.token); */
+
+      }).catch(error => {
+
+        console.log(error);
 
       })
 
-      localStorage.setItem('token', response.data.token.token);
-    
-    }).catch(error => {
-
-      console.log(error);
-    
-    })
+      /* axios ends here */
+    } else {
+      console.log('noting here');
+    }
 
 
   }
 
   render() {
 
-    if(this.state.loggedIn){
+    if(this.state.redirect){
 
-      return <Redirect to="/" />
+      return <Redirect to={"/"} />
     
-    } 
+    }
+    
+    if (sessionStorage.getItem('data')) {
+
+      return <Redirect to= {"/"}/>
+
+    }
     
     return (
       <div className="auth-page d-flex">
