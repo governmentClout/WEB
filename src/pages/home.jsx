@@ -14,10 +14,12 @@ class Home extends Component {
       redirect: false,
 
     };
+
+    this.logout = this.logout.bind(this);
   
   }
 
-  componentDidMount() {
+  componentWillMount() {
 
     if(sessionStorage.getItem("data")){
 
@@ -33,7 +35,19 @@ class Home extends Component {
 
     }
 
-  } 
+  }
+  
+  logout(){
+
+    sessionStorage.setItem('data', '');
+    sessionStorage.clear();
+    this.setState({
+
+      redirect: true
+
+    })
+
+  }
 
   render() {
 
@@ -52,7 +66,10 @@ class Home extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p>Click on get started to start</p>
         </header>
-      </div>
+
+        <button type='button' className="button" onClick={this.logout}>Logout</button>
+
+        </div>
       </div>
     );
   }
