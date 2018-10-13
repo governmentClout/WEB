@@ -21,11 +21,11 @@ class Register extends Component {
       password: '',
       email: '',
       phone: '',
-      date_of_birth: '',
+      date_of_birth: new Date(1980, 1, 1),
       tosAgreement: '',
       provider: 'email'
 
-    };
+    }
     this.register = this.register.bind(this);
 /*     this.signup = this.signup.bind(this); */ 
     this.onChange = this.onChange.bind(this); 
@@ -57,9 +57,14 @@ class Register extends Component {
     tosAgreement
     
   }) */
-  axios.post('http://api.staybusy.ng:3000/users', this.state).then(response => {
-    console.log(response);
-  })
+  return axios.post('http://api.staybusy.ng:3000/users', {
+        email,
+        phone,
+        password,
+        date_of_birth,
+        tosAgreement
+      
+  });
   
   }
 
@@ -135,12 +140,6 @@ class Register extends Component {
 
   }
 
-  state = {
-
-    date_of_birth: new Date(1980, 1, 1)
-
-  };
-
   onDateChange = date_of_birth => this.setState({ date_of_birth });
   
   render() {
@@ -165,7 +164,7 @@ class Register extends Component {
 
     }
 
-    const { password, email, phone, tosAgreement, dob } = this.state;
+    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
     return (
       <div className="auth-page d-flex">
@@ -176,7 +175,7 @@ class Register extends Component {
           </h2>
           <div className="row --with-divider">
             <div className="col-md-6">
-              <form className="auth-form mb-4">
+              <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input
@@ -219,7 +218,9 @@ class Register extends Component {
                     <DatePicker
                       className="form-control form-date"
                       onChange={this.onDateChange}
-                      name={dob}
+                      name = {
+                        data_of_birth
+                      }
                       value={this.state.date_of_birth}
                       Calendar={null}
                     />

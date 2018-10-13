@@ -1,3 +1,4 @@
+import { PostData } from './../../services/PostData';
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
@@ -15,36 +16,85 @@ class Login extends Component {
 
       email: '',
       password: '',
-      loggedIn: false
+//      loggedIn: false
     
     };
 
-    this.handleChange=this.handleChange.bind(this);
-    this.submit=this.submit.bind(this);
+    /* this.handleChange=this.handleChange.bind(this);*/
+    // this.login=this.login.bind(this); 
 
   }
 
-  handleChange (event) {
+  dataChange(ev){
 
-    /* console.log(event.target.value); */
-    let name = event.target.name;
-    let value=event.target.value;
-    /* console.log(name, value); */
-    let data = {};
-    data[name]=value;
+    this.setState({
 
-    /* use the data to update state */
-    this.setState(data);
-
+      [ev.target.name]: ev.target.value
+    
+    })
+  
   }
   
+  postData(ev) {
+
+    ev.preventDefault();
+
+    const email = this.state.email;
+    const password = this.state.password;
+
+    const data = {
+
+      email,
+      password
+    
+    }
+
+    const url = "http://api.staybusy.ng:3000/login";
+
+    axios({
+      method: 'post',
+      url: url,
+      data: data,
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      }
+    }).then(response => {
+
+      console.log(response);
+    
+    }).catch(error => {
+
+      console.log(error);
+    
+    })
+
+
+/*     axios('http://api.staybusy.ng:3000/login', data).then(response => {
+
+    console.log(response);
+
+  }); */
+
+  }
+
+  /* login(){
+
+    console.log("login")
+  
+  }
+
+  onChange(){
+    
+  } */
+
   render() {
 
-    if(this.state.loggedIn){
+    /* if(this.state.loggedIn){
 
       return <Redirect to="/" />
     
-    }
+    } */
     
     return (
       <div className="auth-page d-flex">
@@ -55,7 +105,7 @@ class Login extends Component {
           </h2>
           <div className="row --with-divider">
             <div className="col-md-6">
-              <form onSubmit={this.submit} className="auth-form mb-4">
+              <form onSubmit={this.postData.bind(this)} className="auth-form mb-4">
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input
@@ -63,8 +113,8 @@ class Login extends Component {
                     className="form-control"
                     name="email"
                     placeholder="Email address"
-                    onChange={this.handleChange}
-                    value={this.state.email}
+                    onChange={this.dataChange.bind(this)}
+                    value={this.state.email} 
                     required
                   />
                 </div>
@@ -74,8 +124,10 @@ class Login extends Component {
                     type="password"
                     className="form-control"
                     name="password"
-                    onChange={this.handleChange}
-                    value={this.state.password}
+                    onChange = {
+                      this.dataChange.bind(this)
+                    }
+                    value={this.state.password} 
                     placeholder="Password"
                     required
                   />
