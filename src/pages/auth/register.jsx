@@ -8,15 +8,94 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { Redirect } from "react-router-dom";
 import { PostData } from "../../services/PostData";
+import axios from "axios";
 
 class Register extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      redirectToReferrer: false,
+      password: '',
+      email: '',
+      phone: '',
+      date_of_birth: new Date(1980, 1, 1),
+      tosAgreement: '',
+      provider: 'email'
+
+    }
+    this.register = this.register.bind(this);
+/*     this.signup = this.signup.bind(this); */ 
+    this.onChange = this.onChange.bind(this); 
+    this.handleSubmit = this.handleSubmit.bind(this);
+  
+  }
+
+  handleSubmit(e){
+
+    e.preventDefault();
+
+    const data = {
+      
+      phone: this.state.phone,
+      email: this.state.email,
+      dob: this.state.date_of_birth,
+      password: this.state.password,
+      tosAgreement: this.state.tosAgreement,
+      provider: "email"
+
+    }
+
+    const url = 'http://api.staybusy.ng:3000/users'
+    console.log(data);
+
+    /* console.log(this.state); */
+  axios({
+    
+    method: 'post',
+    url: url,
+    data: data,
+    mode: 'no-cors',
+     headers: {
+
+       'Content-Type': 'text/plain;charset=utf-8',
+
+     }
+  }).then(response => {
+
+    console.log(response);
+  
+  }).catch(error => {
+
+    console.log(error);
+  
+  })
+
+}
+
+  onChange(key, event){
+
+    this.setState({
+
+      [key] : event.target.value
+
+    })
       redirectToReferrer: false
     };
     this.register = this.register.bind(this);
   }
+
+  // toggleBox(){
+  //   this.setState({tosAgreement : !this.state.tosAgreement});
+  //   console.log(this.state.tosAgreement);
+  // }
+
+  
+
+  /* signup(){
+
+    if(this.state.)
+  } */
 
   register(res, type) {
     let postData;
@@ -52,9 +131,6 @@ class Register extends Component {
     });
   }
 
-  state = {
-    date_of_birth: new Date(1980, 1, 1)
-  };
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
@@ -69,9 +145,11 @@ class Register extends Component {
 
     const responseGoogle = response => {
       console.log(response);
-      this.signup(response, "google");
-    };
-    const googleId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+      this.signup(response, 'google');
+
+    }
+
+    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
     return (
       <div>
         <NavBar />
@@ -83,13 +161,15 @@ class Register extends Component {
           </h2>
           <div className="row --with-divider">
             <div className="col-md-6">
-              <form className="auth-form mb-4">
+              <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input
                     type="email"
                     className="form-control"
                     name="email"
+                    onChange={(ev) => this.onChange('email', ev)}
+                    value={email}
                     placeholder="Email address"
                     required
                   />
@@ -101,25 +181,30 @@ class Register extends Component {
                     className="form-control"
                     name="password"
                     placeholder="Password"
+                    onChange = {(ev) => this.onChange('password', ev)}
+                    value={password}
                     required
                   />
                 </div>
                 <div className="form-row flex-nowrap">
-                  <div clssName="col" style={{ marginRight: "5px" }}>
-                    <label htmlFor="phone-number">Phone number</label>
+                  <div className="col" style={{ marginRight: "5px" }}>
+                    <label htmlFor="phone">Phone number</label>
                     <input
                       type="phone"
                       className="form-control"
-                      name="phone-number"
-                      placeholder="Phone number"
+                      name="phone"
+                      placeholder = "Phone number"
+                      onChange = {(ev) => this.onChange('phone', ev)}
+                      value={phone}
                       required
                     />
                   </div>
-                  <div clssName="col ml-2" style={{ marginLeft: "5px" }}>
+                  <div className="col ml-2" style={{ marginLeft: "5px" }}>
                     <label htmlFor="date-of-birth">Date of birth</label>
                     <DatePicker
                       className="form-control form-date"
                       onChange={this.onDateChange}
+                      name={data_of_birth}
                       value={this.state.date_of_birth}
                       Calendar={null}
                     />
@@ -127,15 +212,30 @@ class Register extends Component {
                 </div>
                 <div className="form-group mt-2">
                   <div className="form-check">
-                    <input className="mr-2" type="checkbox" required />
-                    <label htmlFor="agreement" className="form-check-label">
+                    <input 
+                    className="mr-2" 
+                    type="checkbox"
+                    ref="check_me"
+                    value={this.state.tosAgreement}
+                    onChange = { (e) => { this.setState({tosAgreement : e.target.checked})} }
+                    
+                    
+                    required />
+                    <label 
+                    htmlFor="agreement" 
+                    className="form-check-label"
+                    name = "tosAgreement"
+                    >
                       I agree with terms and conditions
                     </label>
                   </div>
                 </div>
-                <button className="btn btn-block btn-gclout-blue">
-                  CREATE ACCOUNT
-                </button>
+                <input 
+                type="submit" 
+                value="Login" 
+                className="btn btn-block btn-gclout-blue" 
+                onClick={this.handleSubmit}
+                />
               </form>
             </div>
             <div className="vertical-divider">OR</div>
@@ -165,11 +265,11 @@ class Register extends Component {
                   Linkedin
                 </a>*/}
               </div>
-              <p class="text-center">
+              <p className="text-center">
                 Already have an account?{" "}
                 <Link className="auth-page-link" to="/login">
                   Sign in
-                </Link>{" "}
+                </Link>
               </p>
             </div>
           </div>

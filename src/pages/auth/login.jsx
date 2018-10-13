@@ -1,11 +1,113 @@
+import { PostData } from './../../services/PostData';
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
-class Register extends Component {
+class Login extends Component {
+
+  constructor(props){
+
+    super(props);
+
+    this.state = {
+
+      email: '',
+      password: '',
+      loggedIn: false
+    
+    };
+
+  }
+
+  componentDidMount(){
+
+    if(window.token){
+
+      this.setState({
+
+        loggedIn: true
+
+      })
+    }
+  }
+
+  dataChange(ev){
+
+    this.setState({
+
+      [ev.target.name]: ev.target.value
+    
+    })
+  
+  }
+  
+  postData(ev) {
+
+    this.setState({
+
+      loggedIn: true
+
+    })
+
+    ev.preventDefault();
+
+    const email = this.state.email;
+    const password = this.state.password;
+
+    const data = {
+
+      email,
+      password
+    
+    }
+
+    const url = "http://api.staybusy.ng:3000/login";
+
+    axios({
+      
+      method: 'post',
+      url: url,
+      data: data,
+      mode: 'no-cors',
+      headers: {
+
+        'Content-Type': 'text/plain;charset=utf-8',
+      
+      }
+    
+    }).then(response => {
+
+      console.log(response);
+
+      this.setState({
+
+        loggedIn: true
+
+      })
+
+      localStorage.setItem('token', response.data.token.token);
+    
+    }).catch(error => {
+
+      console.log(error);
+    
+    })
+
+
+  }
+
   render() {
+
+    if(this.state.loggedIn){
+
+      return <Redirect to="/" />
+    
+    } 
+    
     return (
       <div>
         <NavBar />
@@ -21,23 +123,29 @@ class Register extends Component {
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      placeholder="Email address"
-                      required
-                    />
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    placeholder="Email address"
+                    onChange={this.dataChange.bind(this)}
+                    value={this.state.email} 
+                    required
+                  />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                      type="password"
-                      className="form-control"
-                      name="password"
-                      placeholder="Password"
-                      required
-                    />
-                  </div>
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    onChange = {
+                      this.dataChange.bind(this)
+                    }
+                    value={this.state.password} 
+                    placeholder="Password"
+                    required
+                  />
+ </div>
                   <button className="btn btn-block btn-gclout-blue">
                     SIGN IN
                   </button>
@@ -91,6 +199,43 @@ class Register extends Component {
       </div>
     );
   }
+
+  submit(e){
+
+    this.setState({
+      
+      loggedIn: true
+    
+    })
+    
+    e.preventDefault();
+
+    window.axios.post('http://api.staybusy.ng:3000/login', {
+
+    
+    name: this.state.email,
+    password: this.state.password
+    
+  }).then(response => {
+
+    console.log(response);
+
+    this.setState({
+      
+      loggedIn: true 
+  
+    })
+
+    localStorage.setItem('token', response.data.access_token)
+  
+  }).catch(error => {
+
+    console.log(error);
+
+  })
+  
+  }
+
 }
 
-export default Register;
+export default Login;
