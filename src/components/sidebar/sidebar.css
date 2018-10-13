@@ -1,0 +1,86 @@
+.sidebar {
+  width: 300px;
+  margin-right: 2em;
+}
+.sidebar p {
+  font-size: 14px;
+}
+.sidebar-top {
+  background: #ffffff;
+  border-radius: 4px;
+  padding-bottom: 2em;
+}
+.sidebar-footer {
+  background: #ffffff;
+  border-radius: 4px;
+  margin-top: 1em;
+  padding: 1em;
+}
+.sidebar-cover-image-wrapper {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sidebar-cover-image {
+  width: 100%;
+  min-height: 200px;
+  height: auto;
+}
+.sidebar-section {
+  margin: 0 1em;
+  border-bottom: 1px dashed #c4c4c4;
+  padding: 1em;
+}
+.sidebar-section.--lift-up {
+  margin-top: -60px;
+}
+.sidebar-section.--no-border {
+  border: none;
+}
+.sidebar-profile-image-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: auto;
+  margin-bottom: 1em;
+}
+.sidebar-profile-image,
+.politician-profile-image {
+  width: 100%;
+  height: 100%;
+}
+.sidebar-section p {
+  margin-bottom: 0.2em;
+}
+.sidebar-section .text-gclout-blue {
+  margin-bottom: 0.5em;
+}
+.section-half {
+  width: 50%;
+}
+
+.politician-profile-image-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: auto;
+}
+.sidebar-politician {
+  margin: 1em 0;
+}
+.sidebar-footer > p > a {
+  color: #333333;
+}
+.sidebar-footer > p > a:hover {
+  color: #00b0f0;
+  text-decoration: none;
+}
+.sidebar-footer .smaller-margin {
+  margin-bottom: 0.2em;
+}
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}

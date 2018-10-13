@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "../assets/images/logo.png";
+import NavBar from "../components/navbar/navBar"
 import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
@@ -42,11 +43,15 @@ class Home extends Component {
     }
 
     return (
+      <div>
+      <NavBar />
+        
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>Click on get started to start</p>
         </header>
+      </div>
       </div>
     );
   }

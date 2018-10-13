@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
+import NavBar from "../../components/navbar/navBar"
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
@@ -10,13 +11,10 @@ import { PostData } from "../../services/PostData";
 import axios from "axios";
 
 class Register extends Component {
-
   constructor(props) {
-
     super(props);
 
     this.state = {
-  
       redirectToReferrer: false,
       password: '',
       email: '',
@@ -83,7 +81,9 @@ class Register extends Component {
       [key] : event.target.value
 
     })
-
+      redirectToReferrer: false
+    };
+    this.register = this.register.bind(this);
   }
 
   // toggleBox(){
@@ -99,83 +99,62 @@ class Register extends Component {
   } */
 
   register(res, type) {
-
     let postData;
 
-    if (type === 'facebook' && res.email) {
-
+    if (type === "facebook" && res.email) {
       postData = {
-    
         name: res.name,
         provider: type,
         email: res.email,
         provider_id: res.id,
         token: res.accessToken
-    
       };
-    
     }
 
-    if (type === 'google' && res.w3.U3) {
-
+    if (type === "google" && res.w3.U3) {
       postData = {
-
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
-
       };
-
     }
 
-    PostData('register', postData).then((result) => {
-
+    PostData("register", postData).then(result => {
       let responseJson = result;
-      if(responseJson.userData){
-
-        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+      if (responseJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responseJson));
         this.setState({
-
           redirectToReferrer: true
-        
         });
-
       }
-    
     });
-
   }
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
-  
+
   render() {
-    
-    if(this.state.redirectToReferrer) {
-
-      return (<Redirect to={"/"}/>)
-    
+    if (this.state.redirectToReferrer) {
+      return <Redirect to={"/"} />;
     }
 
-    const responseFacebook = (response ) => {
-
+    const responseFacebook = response => {
       console.log(response);
-      this.signup(response, 'facebook');
+      this.signup(response, "facebook");
+    };
 
-    }
-
-    const responseGoogle = (response) => {
-
+    const responseGoogle = response => {
       console.log(response);
       this.signup(response, 'google');
 
     }
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
-
     return (
-      <div className="auth-page d-flex">
+      <div>
+        <NavBar />
+        <div className="auth-page d-flex">
         <AuthBackground />
         <div className="m-auto col-md-8 bg-white auth-page-card">
           <h2 className="auth-card-title text-center mb-3">
@@ -264,25 +243,28 @@ class Register extends Component {
             <div className="col-md-6">
               <div className="social-buttons">
                 <FacebookLogin
-                  appId = "2171139129879186"
+                  appId="2171139129879186"
                   autoLoad={true}
                   fields="name,email,picture"
                   callback={responseFacebook}
+                  cssClass="social-button-facebook btn btn-block"
+                  icon="fa-facebook"
                 />
                 <a href="#" className="social-button-twitter btn btn-block">
                   <i className="fab fa-twitter" />
                   Twitter
                 </a>
                 <GoogleLogin
-                  clientId = "721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                  buttonText="Login with Google"
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText="Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
+                  className="btn btn-block social-button-google"
                 />
-                <a href="#" className="social-button-linkedin btn btn-block">
+                {/*<a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a>
+                </a>*/}
               </div>
               <p className="text-center">
                 Already have an account?{" "}
@@ -293,6 +275,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

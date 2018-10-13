@@ -8,6 +8,8 @@ import Register from "./pages/auth/register";
 import Login from "./pages/auth/login";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import PasswordReset from "./pages/auth/passwordReset";
+import ProfileEdit from "./pages/profile/editProfile";
+import Error404 from "./pages/errors/404";
 
 const Routes = () => (
   <App>
@@ -17,6 +19,10 @@ const Routes = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route exact path="/password-reset" component={PasswordReset} />
+      <Route exact path="/profile/edit" component={ProfileEdit} />
+      {/* The 404 page.. Dont Touch, lol */}
+      <Route component={Error404}/>
+      
     </Switch>
   </App>
 );
