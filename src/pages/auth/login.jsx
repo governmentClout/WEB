@@ -16,13 +16,22 @@ class Login extends Component {
 
       email: '',
       password: '',
-//      loggedIn: false
+      loggedIn: false
     
     };
 
-    /* this.handleChange=this.handleChange.bind(this);*/
-    // this.login=this.login.bind(this); 
+  }
 
+  componentDidMount(){
+
+    if(window.token){
+
+      this.setState({
+
+        loggedIn: true
+
+      })
+    }
   }
 
   dataChange(ev){
@@ -36,6 +45,12 @@ class Login extends Component {
   }
   
   postData(ev) {
+
+    this.setState({
+
+      loggedIn: true
+
+    })
 
     ev.preventDefault();
 
@@ -52,16 +67,28 @@ class Login extends Component {
     const url = "http://api.staybusy.ng:3000/login";
 
     axios({
+      
       method: 'post',
       url: url,
       data: data,
       mode: 'no-cors',
       headers: {
+
         'Content-Type': 'text/plain;charset=utf-8',
+      
       }
+    
     }).then(response => {
 
       console.log(response);
+
+      this.setState({
+
+        loggedIn: true
+
+      })
+
+      localStorage.setItem('token', response.data.token.token);
     
     }).catch(error => {
 
@@ -70,31 +97,15 @@ class Login extends Component {
     })
 
 
-/*     axios('http://api.staybusy.ng:3000/login', data).then(response => {
-
-    console.log(response);
-
-  }); */
-
   }
-
-  /* login(){
-
-    console.log("login")
-  
-  }
-
-  onChange(){
-    
-  } */
 
   render() {
 
-    /* if(this.state.loggedIn){
+    if(this.state.loggedIn){
 
       return <Redirect to="/" />
     
-    } */
+    } 
     
     return (
       <div className="auth-page d-flex">

@@ -34,39 +34,42 @@ class Register extends Component {
   }
 
   handleSubmit(e){
+
     e.preventDefault();
 
-    const {
-  
-      email,
-      phone,
-      password,
-      date_of_birth,
-      tosAgreement 
-
-    } = this.state;
-
-    console.log(this.state);
-
-    /* return Axios.post('http://api.staybusy.ng:3000/users', {
-
-    email,
-    phone,
-    password,  
-    date_of_birth,
-    tosAgreement
-    
-  }) */
-  return axios.post('http://api.staybusy.ng:3000/users', {
-        email,
-        phone,
-        password,
-        date_of_birth,
-        tosAgreement
+    const data = {
       
-  });
+      phone: this.state.phone,
+      email: this.state.email,
+      dob: this.state.date_of_birth,
+      password: this.state.password,
+      tosAgreement: this.state.tosAgreement,
+      provider: "email"
+
+    }
+
+    const url = 'http://api.staybusy.ng:3000/users'
+    console.log(data);
+
+    /* console.log(this.state); */
+  axios({
+    
+    method: 'post',
+    url: url,
+    data: data,
+    mode: 'no-cors',
+     headers: {
+
+       'Content-Type': 'text/plain;charset=utf-8',
+
+     }
+  }).then(response => {
+
+    console.log(response);
   
-  }
+  })
+
+}
 
   onChange(key, event){
 
@@ -218,9 +221,7 @@ class Register extends Component {
                     <DatePicker
                       className="form-control form-date"
                       onChange={this.onDateChange}
-                      name = {
-                        data_of_birth
-                      }
+                      name={data_of_birth}
                       value={this.state.date_of_birth}
                       Calendar={null}
                     />
