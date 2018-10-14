@@ -4,18 +4,92 @@ import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
+import axios from 'axios';
 
 class EditProfile extends Component {
+
   constructor(props) {
+    
     super(props);
-    this.state = { showModal: false, uploadType: "" };
+    
+    this.state = { 
+      
+      user: [],
+      showModal: false, 
+      uploadType: "",
+      firstName: "",
+      lastName: "",
+      nationality: "",
+      state: "",
+      lga: "",
+      photo: ""
+
+    };
+
   }
+  
   shouldShowModal = type => {
-    this.setState({ showModal: true, uploadType: type });
+  
+    this.setState({ 
+      
+      showModal: true, 
+      uploadType: type 
+    
+    });
+
   };
+
   shouldHideModal = () => {
-    this.setState({ showModal: false });
+
+    this.setState({ 
+      
+      showModal: false 
+    
+    });
+  
   };
+
+  isAuthenticated() {
+
+    const token = sessionStorage.getItem('token');
+    const uuid = sessionStorage.getItem('uuid');
+
+    console.log(token, uuid);
+
+  }
+
+  /* componentWillMount(){
+
+    this.findUserById(this.props.params.id)
+
+  } */
+
+  /* componentWillMount() {
+
+    if (sessionStorage.getItem("data")) {
+
+      console.log("data");
+
+    }
+
+  } */
+
+  getId(){
+
+    console.log(sessionStorage.getItem("id"));
+
+  }
+
+
+  findUserById(userId) {
+
+    axios.get("http://api.staybusy.ng:3000/" + userId).then(res => {
+
+    console.log(res);
+
+  })
+
+}
   render() {
     return (
       <div className="app-wrapper">

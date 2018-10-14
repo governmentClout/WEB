@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
 
-   constructor(props) {
+  constructor(props) {
     
     super(props);
     
@@ -21,6 +21,8 @@ class Home extends Component {
 
   componentWillMount() {
 
+    console.log(sessionStorage.getItem('uuid')); 
+  
     if(sessionStorage.getItem("data")){
 
       console.log('d is here');

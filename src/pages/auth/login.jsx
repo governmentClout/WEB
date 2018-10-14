@@ -32,7 +32,7 @@ class Login extends Component {
     })
   
   }
-  
+
   postData(ev) {
 
     this.setState({
@@ -74,18 +74,24 @@ class Login extends Component {
 
       }).then(response => {
 
+        console.log(response.data.user[0].uuid);
+
         let responseJSON = response;
 
         if (responseJSON.data) {
 
-          sessionStorage.setItem('data', responseJSON);
+          console.log(sessionStorage.setItem('uuid', responseJSON.data.user[0].uuid))
 
-          this.setState({
+          sessionStorage.setItem('token', responseJSON.data.user.uuid);
+
+          sessionStorage.setItem('data', responseJSON);
+          
+            this.setState({
+            
             redirect: true
 
-          });
+          }); 
 
-          console.log('yeahhhh')
 
         } else {
 
@@ -95,7 +101,7 @@ class Login extends Component {
 
         console.log(responseJSON);
 
-        console.log(response);
+/*        console.log(response); */
 
         /* localStorage.setItem('token', response.data.token.token); */
 
@@ -111,6 +117,9 @@ class Login extends Component {
       console.log('noting here');
     
     }
+
+
+
 
 
   }
