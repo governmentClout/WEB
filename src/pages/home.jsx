@@ -22,6 +22,7 @@ class Home extends Component {
   componentWillMount() {
 
     console.log(sessionStorage.getItem('uuid')); 
+    console.log(sessionStorage.getItem('token'));
   
     if(sessionStorage.getItem("data")){
 

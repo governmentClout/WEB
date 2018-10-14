@@ -14,7 +14,7 @@ class EditProfile extends Component {
     
     this.state = { 
       
-      user: [],
+      // user: [],
       showModal: false, 
       uploadType: "",
       firstName: "",
@@ -49,14 +49,49 @@ class EditProfile extends Component {
   
   };
 
-  isAuthenticated() {
+  componentDidMount() {
 
-    const token = sessionStorage.getItem('token');
-    const uuid = sessionStorage.getItem('uuid');
+      const uuid = sessionStorage.getItem('uuid'),
+            token = sessionStorage.getItem('token');
 
-    console.log(token, uuid);
+      axios.get('http://api.staybusy.ng:3000/login', uuid)
+            .then(response => {
+
+              console.log(response);
+
+            })
+
+
+     /*  axios.get('http://api.staybusy.ng:3000/login' + uuid)
+        .then(response => {
+
+            //const user = res.data;
+            console.log(response);
+
+            /* this.findUserById(this.props.params.uuid) 
+
+          }
+
+        } */
 
   }
+
+  /* getUserId(){
+
+    return sessionStorage.getItem('uuid');
+
+//    console.log(uuid);
+
+  } */
+
+  
+  /* componentWillMount() {
+
+    const uuid = sessionStorage.getItem('uuid');
+
+    console.log(uuid);
+
+  } */
 
   /* componentWillMount(){
 
@@ -74,14 +109,8 @@ class EditProfile extends Component {
 
   } */
 
-  getId(){
 
-    console.log(sessionStorage.getItem("id"));
-
-  }
-
-
-  findUserById(userId) {
+  /* findUserById(userId) {
 
     axios.get("http://api.staybusy.ng:3000/" + userId).then(res => {
 
@@ -89,7 +118,7 @@ class EditProfile extends Component {
 
   })
 
-}
+} */
   render() {
     return (
       <div className="app-wrapper">
