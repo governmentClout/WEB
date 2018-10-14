@@ -65,7 +65,7 @@ class Login extends Component {
         method: 'post',
         url: url,
         data: data,
-        mode: 'no-cors',
+        /* mode: 'no-cors', */
         headers: {
 
           'Content-Type': 'text/plain;charset=utf-8',
