@@ -11,10 +11,13 @@ import { PostData } from "../../services/PostData";
 import axios from "axios";
 
 class Register extends Component {
+
   constructor(props) {
+
     super(props);
 
     this.state = {
+
       redirectToReferrer: false,
       password: "",
       email: "",
@@ -39,75 +42,109 @@ class Register extends Component {
       dob: this.state.date_of_birth,
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
-      provider: "email"
+      provider: "email",
+      redirectToReferrer: false
     };
 
     const url = "http://api.staybusy.ng:3000/users";
     console.log(data);
 
     /* console.log(this.state); */
-    axios({
-      method: "post",
-      url: url,
-      data: data,
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      }
-    })
-      .then(response => {
-        console.log(response);
+  axios({
+    
+    method: 'post',
+    url: url,
+    data: data,
+    /* mode: 'no-cors', */
+    headers: {
+
+      'Content-Type': 'text/plain;charset=utf-8',
+
+    }
+
+  }).then(response => {
+
+    console.log(response);
+
+    let responseJson = response;
+
+    if(responseJson.data) {
+    
+      sessionStorage.setItem('data', responseJson);
+
+      this.setState({
+
+        redirectToReferrer: true 
+
       })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
-  onChange(key, event) {
+    }
+
+  
+  }).catch(error => {
+
+    console.log(error);
+  
+  })
+
+}
+
+  onChange(key, event){
+
     this.setState({
-      [key]: event.target.value
+
+      [key] : event.target.value
+
     });
+
   }
 
-  register = (res, type) => {
+  // toggleBox(){
+  //   this.setState({tosAgreement : !this.state.tosAgreement});
+  //   console.log(this.state.tosAgreement);
+  // }
+
+  
+
+  register(res, type) {
     let postData;
 
     if (type === "facebook" && res.email) {
+      
       postData = {
+      
         name: res.name,
         provider: type,
         email: res.email,
         provider_id: res.id,
         token: res.accessToken
+      
       };
+    
     }
 
     if (type === "google" && res.w3.U3) {
+    
       postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
         token: res.Zi.access_token
+    
       };
+    
     }
-
-    PostData("register", postData).then(result => {
-      let responseJson = result;
-      if (responseJson.userData) {
-        sessionStorage.setItem("userData", JSON.stringify(responseJson));
-        this.setState({
-          redirectToReferrer: true
-        });
-      }
-    });
-  };
+  }
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
-    if (this.state.redirectToReferrer) {
-      return <Redirect to={"/"} />;
+        
+    if (this.state.redirectToReferrer || sessionStorage.getItem('data')) {
+      
+      return ( <Redirect to = {'/'}/>)
+    
     }
 
     const responseFacebook = response => {
@@ -181,68 +218,40 @@ class Register extends Component {
                       />
                     </div>
                   </div>
-                  <div className="form-group mt-2">
-                    <div className="form-check">
-                      <input
-                        className="mr-2"
-                        type="checkbox"
-                        ref="check_me"
-                        value={this.state.tosAgreement}
-                        onChange={e => {
-                          this.setState({ tosAgreement: e.target.checked });
-                        }}
-                        required
-                      />
-                      <label
-                        htmlFor="agreement"
-                        className="form-check-label"
-                        name="tosAgreement"
-                      >
-                        I agree with terms and conditions
-                      </label>
-                    </div>
-                  </div>
-                  <input
-                    type="submit"
-                    value="Login"
-                    className="btn btn-block btn-gclout-blue"
-                    onClick={this.handleSubmit}
-                  />
-                </form>
-              </div>
-              <div className="vertical-divider">OR</div>
-              <div className="col-md-6">
-                <div className="social-buttons">
-                  <FacebookLogin
-                    appId="2171139129879186"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={responseFacebook}
-                    cssClass="social-button-facebook btn btn-block"
-                    icon="fa-facebook"
-                  />
-                  <a href="#" className="social-button-twitter btn btn-block">
-                    <i className="fab fa-twitter" />
-                    Twitter
-                  </a>
-                  <GoogleLogin
-                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                    buttonText="Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    className="btn btn-block social-button-google"
-                  />
-                  {/*<a href="#" className="social-button-linkedin btn btn-block">
+                </div>
+                <input 
+                type="submit" 
+                value="Login" 
+                className="btn btn-block btn-gclout-blue" 
+                onClick={this.handleSubmit}
+                />
+              </form>
+            </div>
+            <div className="vertical-divider">OR</div>
+            <div className="col-md-6">
+              <div className="social-buttons">
+                <FacebookLogin
+                  appId="2171139129879186"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  callback={responseFacebook}
+                  cssClass="social-button-facebook btn btn-block"
+                  icon="fa-facebook"
+                />
+                <a href="#" className="social-button-twitter btn btn-block">
+                  <i className="fab fa-twitter" />
+                  Twitter
+                </a>
+                <GoogleLogin
+                clientId = "721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                buttonText = "Login with Google"
+                onSuccess = {responseGoogle}
+                onFailure = { responseGoogle}
+                />
+                {<a href="#" className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a>*/}
-                </div>
-                <p className="text-center">
-                  Already have an account?{" "}
-                  <Link className="auth-page-link" to="/login">
-                    Sign in
-                  </Link>
-                </p>
+                </a>}
               </div>
             </div>
           </div>

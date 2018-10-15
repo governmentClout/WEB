@@ -5,31 +5,60 @@ import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
 
-/*   constructor(props) {
+  constructor(props) {
+    
     super(props);
+    
     this.state = {
 
-      name: '',
       redirect: false,
 
     };
+
+    this.logout = this.logout.bind(this);
+  
   }
 
-  componentDidMount() {
-    let data = JSON.parse(sessionStorage.getItem('userData'));
-    console.log(data);
+  componentWillMount() {
+
+    console.log(sessionStorage.getItem('uuid')); 
+    console.log(sessionStorage.getItem('token'));
+  
+    if(sessionStorage.getItem("data")){
+
+      console.log('d is here');
+
+    } else {
+
+      this.setState({
+        
+        redirect: true
+
+      })
+
+    }
+
+  }
+  
+  logout(){
+
+    sessionStorage.setItem('data', '');
+    sessionStorage.clear();
     this.setState({
-      name: data.userData.name
+
+      redirect: true
+
     })
-  } */
+
+  }
 
   render() {
 
-    /* if (!sessionStorage.getItem('userData') || this.state.redirect) {
-      
-      return ( <Redirect to={'/'}/>)
+    if(this.state.redirect){
+
+      return (<Redirect to={'/login'}/>)
     
-    } */
+    }
 
     return (
       <div>
@@ -40,7 +69,10 @@ class Home extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p>Click on get started to start</p>
         </header>
-      </div>
+
+        <button type='button' className="button" onClick={this.logout}>Logout</button>
+
+        </div>
       </div>
     );
   }

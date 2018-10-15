@@ -17,22 +17,10 @@ class Login extends Component {
 
       email: '',
       password: '',
-      loggedIn: false
+      redirect: false
     
     };
 
-  }
-
-  componentDidMount(){
-
-    if(window.token){
-
-      this.setState({
-
-        loggedIn: true
-
-      })
-    }
   }
 
   dataChange(ev){
@@ -44,7 +32,7 @@ class Login extends Component {
     })
   
   }
-  
+
   postData(ev) {
 
 
@@ -62,46 +50,91 @@ class Login extends Component {
 
     const url = "http://api.staybusy.ng:3000/login";
 
-    axios({
+    if(this.state.email && this.state.password){
+
+      /* axios sraers here */
+      console.log('e dey');
+
+      axios({
+
+        method: 'post',
+        url: url,
+        data: data,
+        /* mode: 'no-cors', */
+        headers: {
+
+          'Content-Type': 'text/plain;charset=utf-8',
+
+        }
+
+      }).then(response => {
+
       
-      method: 'post',
-      url: url,
-      data: data,
-      mode: 'no-cors',
-      headers: {
+/*         sessionStorage.setItem(response.data.user[0].uuid) */
 
-        'Content-Type': 'text/plain;charset=utf-8',
+        let responseJSON = response;
       
-      }
-    
-    }).then(response => {
+        if (responseJSON.data) {
 
-      console.log(response);
+          console.log(responseJSON.data.user[0].uuid);
+          console.log(responseJSON.data.token[0].token);
 
-      this.setState({
+          sessionStorage.setItem('uuid', responseJSON.data.user[0].uuid);
+          sessionStorage.setItem('token', responseJSON.data.token[0].token);
 
-        loggedIn: true
+          sessionStorage.setItem('data', responseJSON);
+          
+          this.setState({
+            
+            redirect: true
+
+          }); 
+
+
+        } else {
+
+          console.log('login error');
+
+        }
+
+        console.log(responseJSON);
+
+/*        console.log(response); */
+
+        /* localStorage.setItem('token', response.data.token.token); */
+
+      }).catch(error => {
+
+        console.log(error);
 
       })
 
-      localStorage.setItem('token', response.data.token.token);
+      /* axios ends here */
+    } else {
+      
+      console.log('noting here');
     
-    }).catch(error => {
+    }
 
-      console.log(error);
-    
-    })
+
+
 
 
   }
 
   render() {
 
-    if(this.state.loggedIn){
+    if(this.state.redirect){
 
-      return <Redirect to="/" />
+      return <Redirect to={"/"} />
     
-    } 
+    }
+    
+    if (sessionStorage.getItem('data')) {
+
+      return <Redirect to= {"/"}/>
+
+    }
     
     return (
       <div>
@@ -114,7 +147,10 @@ class Login extends Component {
             </h2>
             <div className="row --with-divider">
               <div className="col-md-6">
-                <form onSubmit={this.postData.bind(this)} className="auth-form mb-4">
+                <form className = "auth-form mb-4"
+                onSubmit = {
+                  this.postData.bind(this)
+                }>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
