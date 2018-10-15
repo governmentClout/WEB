@@ -54,7 +54,8 @@ code {
 }
 .form-control {
   border-radius: 4px;
-  border: 1px solid #BDBDBD;
+  padding: 1.3em;
+  border: 1px solid #bdbdbd;
 }
 .form-control:focus {
   background-color: #fff;
@@ -74,10 +75,17 @@ code {
 }
 .btn-gclout-dark:hover {
   background: #00b0f0;
-  transition: all 0.5s
+  transition: all 0.5s;
 }
 .react-date-picker__button {
-  border: none !important;
+  border-radius: 4px;
+  padding: 0.45rem;
+  border-color: #bdbdbd !important;
+}
+.react-date-picker__button__input__input,
+.react-date-picker__button__icon,
+.react-date-picker__button__input__divider {
+  color: #495057;
 }
 .react-date-picker__calendar {
   z-index: 9999 !important;
@@ -95,6 +103,6 @@ code {
 .app-content {
   flex: 1;
   background: #ffffff;
-  border: 1px solid #F0F0F0;
+  border: 1px solid #f0f0f0;
   border-radius: 4px;
 }

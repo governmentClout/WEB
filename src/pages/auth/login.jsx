@@ -1,141 +1,101 @@
-import { PostData } from './../../services/PostData';
+import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
-
-  constructor(props){
-
+  constructor(props) {
     super(props);
 
     this.state = {
-
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       redirect: false
-    
     };
-
   }
 
-  dataChange(ev){
-
+  dataChange(ev) {
     this.setState({
-
       [ev.target.name]: ev.target.value
-    
-    })
-  
+    });
   }
 
   postData(ev) {
-
-
     ev.preventDefault();
 
     const email = this.state.email;
     const password = this.state.password;
 
     const data = {
-
       email,
       password
-    
-    }
+    };
 
     const url = "http://api.staybusy.ng:3000/login";
 
-    if(this.state.email && this.state.password){
-
+    if (this.state.email && this.state.password) {
       /* axios sraers here */
-      console.log('e dey');
+      console.log("e dey");
 
       axios({
-
-        method: 'post',
+        method: "post",
         url: url,
         data: data,
         /* mode: 'no-cors', */
         headers: {
-
-          'Content-Type': 'text/plain;charset=utf-8',
-
+          "Content-Type": "text/plain;charset=utf-8"
         }
-
-      }).then(response => {
-
-      
-/*         sessionStorage.setItem(response.data.user[0].uuid) */
-
-        let responseJSON = response;
-      
-        if (responseJSON.data) {
-
-          console.log(responseJSON.data.user[0].uuid);
-          console.log(responseJSON.data.token[0].token);
-
-          sessionStorage.setItem('uuid', responseJSON.data.user[0].uuid);
-          sessionStorage.setItem('token', responseJSON.data.token[0].token);
-
-          sessionStorage.setItem('data', responseJSON);
-          
-          this.setState({
-            
-            redirect: true
-
-          }); 
-
-
-        } else {
-
-          console.log('login error');
-
-        }
-
-        console.log(responseJSON);
-
-/*        console.log(response); */
-
-        /* localStorage.setItem('token', response.data.token.token); */
-
-      }).catch(error => {
-
-        console.log(error);
-
       })
+        .then(response => {
+          /*         sessionStorage.setItem(response.data.user[0].uuid) */
+
+          let responseJSON = response;
+
+          if (responseJSON.data) {
+            console.log(responseJSON.data.user.uuid);
+            console.log(responseJSON.data.user.token);
+
+            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+            sessionStorage.setItem("token", responseJSON.data.user.token);
+
+            sessionStorage.setItem("data", responseJSON);
+
+            this.setState({
+              redirect: true
+            });
+          } else {
+            console.log("login error");
+          }
+
+          console.log(responseJSON);
+
+          /*        console.log(response); */
+
+          /* localStorage.setItem('token', response.data.token.token); */
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       /* axios ends here */
     } else {
-      
-      console.log('noting here');
-    
+      console.log("noting here");
     }
-
-
-
-
-
   }
 
   render() {
-
-    if(this.state.redirect){
-
-      return <Redirect to={"/"} />
-    
+    if (this.state.redirect) {
+      return <Redirect to={"/"} />;
     }
-    
-    if (sessionStorage.getItem('data')) {
 
-      return <Redirect to= {"/"}/>
-
+    if (sessionStorage.getItem("data")) {
+      return <Redirect to={"/"} />;
     }
-    
+
     return (
       <div>
         <NavBar />
@@ -147,36 +107,34 @@ class Login extends Component {
             </h2>
             <div className="row --with-divider">
               <div className="col-md-6">
-                <form className = "auth-form mb-4"
-                onSubmit = {
-                  this.postData.bind(this)
-                }>
+                <form
+                  className="auth-form mb-4"
+                  onSubmit={this.postData.bind(this)}
+                >
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="Email address"
-                    onChange={this.dataChange.bind(this)}
-                    value={this.state.email} 
-                    required
-                  />
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      placeholder="Email address"
+                      onChange={this.dataChange.bind(this)}
+                      value={this.state.email}
+                      required
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    onChange = {
-                      this.dataChange.bind(this)
-                    }
-                    value={this.state.password} 
-                    placeholder="Password"
-                    required
-                  />
- </div>
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      onChange={this.dataChange.bind(this)}
+                      value={this.state.password}
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
                   <button className="btn btn-block btn-gclout-blue">
                     SIGN IN
                   </button>
@@ -231,42 +189,31 @@ class Login extends Component {
     );
   }
 
-  submit(e){
-
+  submit(e) {
     this.setState({
-      
       loggedIn: true
-    
-    })
-    
+    });
+
     e.preventDefault();
 
-    window.axios.post('http://api.staybusy.ng:3000/login', {
+    window.axios
+      .post("http://api.staybusy.ng:3000/login", {
+        name: this.state.email,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response);
 
-    
-    name: this.state.email,
-    password: this.state.password
-    
-  }).then(response => {
+        this.setState({
+          loggedIn: true
+        });
 
-    console.log(response);
-
-    this.setState({
-      
-      loggedIn: true 
-  
-    })
-
-    localStorage.setItem('token', response.data.access_token)
-  
-  }).catch(error => {
-
-    console.log(error);
-
-  })
-  
+        localStorage.setItem("token", response.data.access_token);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
-
 }
 
 export default Login;
