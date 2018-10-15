@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import NavBar from "../../components/navbar/navBar"
+import NavBar from "../../components/navbar/navBar";
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
@@ -19,28 +19,24 @@ class Register extends Component {
     this.state = {
 
       redirectToReferrer: false,
-      password: '',
-      email: '',
-      phone: '',
+      password: "",
+      email: "",
+      phone: "",
       date_of_birth: new Date(1980, 1, 1),
-      tosAgreement: '',
-      provider: 'email'
-
-    }
-
+      tosAgreement: "",
+      provider: "email"
+    };
     this.register = this.register.bind(this);
-/*     this.signup = this.signup.bind(this); */ 
-    this.onChange = this.onChange.bind(this); 
+    /*     this.signup = this.signup.bind(this); */
+
+    this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  
   }
 
-  handleSubmit(e){
-
+  handleSubmit(e) {
     e.preventDefault();
 
     const data = {
-      
       phone: this.state.phone,
       email: this.state.email,
       dob: this.state.date_of_birth,
@@ -48,10 +44,9 @@ class Register extends Component {
       tosAgreement: this.state.tosAgreement,
       provider: "email",
       redirectToReferrer: false
+    };
 
-    }
-
-    const url = 'http://api.staybusy.ng:3000/users'
+    const url = "http://api.staybusy.ng:3000/users";
     console.log(data);
 
     /* console.log(this.state); */
@@ -140,7 +135,6 @@ class Register extends Component {
       };
     
     }
-
   }
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
@@ -160,89 +154,69 @@ class Register extends Component {
 
     const responseGoogle = response => {
       console.log(response);
-      this.signup(response, 'google');
-
-    }
+      this.signup(response, "google");
+    };
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
     return (
       <div>
         <NavBar />
         <div className="auth-page d-flex">
-        <AuthBackground />
-        <div className="m-auto col-md-8 bg-white auth-page-card">
-          <h2 className="auth-card-title text-center mb-3">
-            Create An Account
-          </h2>
-          <div className="row --with-divider">
-            <div className="col-md-6">
-              <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="email">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    onChange={(ev) => this.onChange('email', ev)}
-                    value={email}
-                    placeholder="Email address"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    placeholder="Password"
-                    onChange = {(ev) => this.onChange('password', ev)}
-                    value={password}
-                    required
-                  />
-                </div>
-                <div className="form-row flex-nowrap">
-                  <div className="col" style={{ marginRight: "5px" }}>
-                    <label htmlFor="phone">Phone number</label>
+          <AuthBackground />
+          <div className="m-auto col-md-8 bg-white auth-page-card">
+            <h2 className="auth-card-title text-center mb-3">
+              Create An Account
+            </h2>
+            <div className="row --with-divider">
+              <div className="col-md-6">
+                <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="email">Email address</label>
                     <input
-                      type="phone"
+                      type="email"
                       className="form-control"
-                      name="phone"
-                      placeholder = "Phone number"
-                      onChange = {(ev) => this.onChange('phone', ev)}
-                      value={phone}
+                      name="email"
+                      onChange={ev => this.onChange("email", ev)}
+                      value={email}
+                      placeholder="Email address"
                       required
                     />
                   </div>
-                  <div className="col ml-2" style={{ marginLeft: "5px" }}>
-                    <label htmlFor="date-of-birth">Date of birth</label>
-                    <DatePicker
-                      className="form-control form-date"
-                      onChange={this.onDateChange}
-                      name={data_of_birth}
-                      value={this.state.date_of_birth}
-                      Calendar={null}
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      placeholder="Password"
+                      onChange={ev => this.onChange("password", ev)}
+                      value={password}
+                      required
                     />
                   </div>
-                </div>
-                <div className="form-group mt-2">
-                  <div className="form-check">
-                    <input 
-                    className="mr-2" 
-                    type="checkbox"
-                    ref="check_me"
-                    value={this.state.tosAgreement}
-                    onChange = { (e) => { this.setState({tosAgreement : e.target.checked})} }
-                    
-                    
-                    required />
-                    <label 
-                    htmlFor="agreement" 
-                    className="form-check-label"
-                    name = "tosAgreement"
-                    >
-                      I agree with terms and conditions
-                    </label>
+                  <div className="form-row flex-nowrap">
+                    <div className="col" style={{ marginRight: "5px" }}>
+                      <label htmlFor="phone">Phone number</label>
+                      <input
+                        type="phone"
+                        className="form-control"
+                        name="phone"
+                        placeholder="Phone number"
+                        onChange={ev => this.onChange("phone", ev)}
+                        value={phone}
+                        required
+                      />
+                    </div>
+                    <div className="col ml-2" style={{ marginLeft: "5px" }}>
+                      <label htmlFor="date-of-birth">Date of birth</label>
+                      <DatePicker
+                        className="form-control form-date"
+                        onChange={this.onDateChange}
+                        name={data_of_birth}
+                        value={this.state.date_of_birth}
+                        Calendar={null}
+                      />
+                    </div>
                   </div>
                 </div>
                 <input 
@@ -279,16 +253,9 @@ class Register extends Component {
                   Linkedin
                 </a>}
               </div>
-              <p className="text-center">
-                Already have an account?{" "}
-                <Link className="auth-page-link" to="/login">
-                  Sign in
-                </Link>
-              </p>
             </div>
           </div>
         </div>
-      </div>
       </div>
     );
   }
