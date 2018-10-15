@@ -17,17 +17,20 @@ class EditProfile extends Component {
       // user: [],
       showModal: false, 
       uploadType: "",
-      firstName: "",
-      lastName: "",
+      fname: "",
+      lname: "",
       nationality: "",
       state: "",
       lga: "",
-      photo: ""
+      photo: "",
+      phone: "",
+      password: "",
+      cPassword: ""
 
     };
 
   }
-  
+
   shouldShowModal = type => {
   
     this.setState({ 
@@ -49,76 +52,71 @@ class EditProfile extends Component {
   
   };
 
+  dataChange(ev) {
+
+    this.setState({
+
+      [ev.targer.name]: ev.target.value
+
+    })
+
+  }
+
+  postData(ev) {
+
+    ev.preventDefault();
+
+    const fname = this.state.fname, 
+          lname = this.state.lname, 
+          email = this.state.email, 
+          phone = this.state.phone, 
+          nationality = this.state.nationality, 
+          state = this.state.state, 
+          lga = this.state.lga, 
+          password = this.state.password, 
+          cPassword = this.state.cPassword
+
+  }
+
   componentDidMount() {
 
       const uuid = sessionStorage.getItem('uuid'),
             token = sessionStorage.getItem('token');
 
-      axios.get('http://api.staybusy.ng:3000/login', uuid)
+      axios.put('http://api.staybusy.ng:3000/profiles')
             .then(response => {
 
               console.log(response);
 
-            })
-
-
-     /*  axios.get('http://api.staybusy.ng:3000/login' + uuid)
-        .then(response => {
-
-            //const user = res.data;
-            console.log(response);
+            }) 
 
             /* this.findUserById(this.props.params.uuid) 
 
-          }
 
-        } */
+
+
+    this.findUserById(this.props.params.id) */
 
   }
 
-  /* getUserId(){
+  editProfile(id){
 
-    return sessionStorage.getItem('uuid');
+    this.setState({
 
-//    console.log(uuid);
+      editMode: true
 
-  } */
+    })
 
-  
-  /* componentWillMount() {
+    const uuid = sessionStorage.getItem('uuid'),
+      token = sessionStorage.getItem('token');
 
-    const uuid = sessionStorage.getItem('uuid');
+    let contactId = uuid;
+    alert(contactId);
 
-    console.log(uuid);
-
-  } */
-
-  /* componentWillMount(){
-
-    this.findUserById(this.props.params.id)
-
-  } */
-
-  /* componentWillMount() {
-
-    if (sessionStorage.getItem("data")) {
-
-      console.log("data");
-
-    }
-
-  } */
+  }
 
 
-  /* findUserById(userId) {
 
-    axios.get("http://api.staybusy.ng:3000/" + userId).then(res => {
-
-    console.log(res);
-
-  })
-
-} */
   render() {
     return (
       <div className="app-wrapper">
@@ -176,7 +174,7 @@ class EditProfile extends Component {
               </button>
             </div>
             <div className="col-md-9 mx-auto">
-              <form>
+              <form onSubmit={this.updateProfile}>
                 <div className="form-row">
                   <div
                     className="form-group col"
@@ -184,7 +182,7 @@ class EditProfile extends Component {
                   >
                     <label htmlFor="Fname">First Name</label>
                     <input
-                      name="Fname"
+                      name="fname"
                       className="form-control"
                       type="text"
                       placeholder="John"
@@ -195,7 +193,7 @@ class EditProfile extends Component {
                     className="form-group col"
                     style={{ paddingRight: "0", paddingLeft: "10px" }}
                   >
-                    <label htmlFor="Lname">Last Name</label>
+                    <label htmlFor="lname">Last Name</label>
                     <input
                       name="Lname"
                       className="form-control"
@@ -329,6 +327,11 @@ class EditProfile extends Component {
         >
       </div>
     );
+  }
+
+  submit(){
+
+    axios.put('http://api.staybusy.ng:3000/users')
   }
 }
 

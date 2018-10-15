@@ -78,14 +78,14 @@ class Login extends Component {
 /*         sessionStorage.setItem(response.data.user[0].uuid) */
 
         let responseJSON = response;
-      
+        
         if (responseJSON.data) {
 
-          console.log(responseJSON.data.user[0].uuid);
-          console.log(responseJSON.data.token[0].token);
+          /* console.log(responseJSON.data.user.uuid);
+          console.log(responseJSON.data.user.token); */
 
-          sessionStorage.setItem('uuid', responseJSON.data.user[0].uuid);
-          sessionStorage.setItem('token', responseJSON.data.token[0].token);
+          sessionStorage.setItem('uuid', responseJSON.data.user.uuid);
+          sessionStorage.setItem('token', responseJSON.data.user.token);
 
           sessionStorage.setItem('data', responseJSON);
           
