@@ -38,12 +38,24 @@ code {
 .bg-white {
   background: #ffffff !important;
 }
-.btn-gclout-blue {
+.btn-gclout-blue,
+.btn-gclout-blue-outline:hover {
   background: #00b0f0;
   color: #ffffff;
+  border: 1px solid #00b0f0;
+  transition: all 0.5s;
+}
+.btn-gclout-blue-outline,
+.btn-gclout-blue:hover {
+  color: #00b0f0;
+  background: transparent;
+  transition: all 0.5s;
+  border: 1px solid #00b0f0;
 }
 .form-control {
-  border-radius: 0;
+  border-radius: 4px;
+  padding: 1.3em;
+  border: 1px solid #bdbdbd;
 }
 .form-control:focus {
   background-color: #fff;
@@ -56,9 +68,44 @@ code {
   margin-bottom: 1em !important;
   padding: 0.65em 1em;
 }
+.btn-gclout-dark {
+  background: #c4c4c4;
+  color: #ffffff;
+  transition: all 0.5s;
+}
+.btn-gclout-dark:hover {
+  background: #00b0f0;
+  transition: all 0.5s;
+}
 .react-date-picker__button {
-  border: none !important;
+  border-radius: 4px;
+  padding: 0.45rem;
+  border-color: #bdbdbd !important;
+}
+.react-date-picker__button__input__input,
+.react-date-picker__button__icon,
+.react-date-picker__button__input__divider {
+  color: #495057;
+}
+.react-date-picker {
+  display: block !important;
 }
 .react-date-picker__calendar {
   z-index: 9999 !important;
+}
+.app-wrapper {
+  background: #e5e5e5;
+  color: #333333;
+}
+.app-container {
+  padding: 2em 0;
+}
+.text-gclout-blue {
+  color: #00b0f0;
+}
+.app-content {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
 }

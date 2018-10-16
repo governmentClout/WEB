@@ -15,7 +15,7 @@ class NavBar extends Component {
   }
   openNav() {
     const currentState = this.state.isOpen;
-    this.setState({ isOpen: !currentState });;
+    this.setState({ isOpen: !currentState });
   }
 
   render() {
@@ -36,7 +36,9 @@ class NavBar extends Component {
                 type="search"
                 placeholder="Type in to search..."
               />
-              <i className="fas fa-search searchIcon" />
+              <span className="searchIconContainer">
+                <i className="fas fa-search searchIcon" />
+              </span>
             </form>
           </div>
           <div
@@ -87,7 +89,7 @@ class NavBar extends Component {
               <a href="/">Opinion poll</a>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
-              <a href="/" className="btn navigation-menu-button">
+              <a href="/register" className="btn navigation-menu-button">
                 GET STARTED
               </a>
             </li>

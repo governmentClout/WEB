@@ -1,0 +1,14 @@
+.footer-section-light {
+  background: #FAFAFA;
+  color: #333333;
+  padding: 2em 0;
+}
+.footer-section-light .footer-link {
+  color: #333333;
+}
+.footer-section-light .footer-link:hover,
+.footer-section-light .footer-link:visited,
+.footer-section-light .footer-link:focus, {
+  color: #00B0F0 !important;
+  text-decoration: none;
+}
