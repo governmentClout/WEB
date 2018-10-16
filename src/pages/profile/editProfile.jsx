@@ -24,10 +24,11 @@ class EditProfile extends Component {
       lga: "",
       photo: "",
       phone: "",
-      password: "",
-      cPassword: ""
-
+    
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
 
   }
 
@@ -52,7 +53,80 @@ class EditProfile extends Component {
   
   };
 
-  dataChange(ev) {
+  dataChange(ev){
+
+    this.setState({
+
+      [ev.target.name]: ev.target.value
+
+    })
+
+  }
+
+  /* postData(ev){
+
+    ev.preventDefault();
+
+    const id = sessionStorage.getItem('uuid');
+  
+    const uuid = id;
+    const nationality = this.state.nationality;
+      const state = this.state.state;
+      const lga = this.state.lga;
+    const photo = this.state.photo;
+      const firstName = this.state.fname;
+      const lastName = this.state.lname;
+
+    const data = {
+
+      uuid,
+      nationality,
+      state,
+      lga,
+      photo,
+      firstName,
+      lastName
+    
+    }
+
+    const url = "http://api.staybusy.ng:3000/profiles";
+
+    axios({
+
+      method: 'post',
+      url: url,
+      data: data,
+      headers: {
+
+        'Content-Type': 'text/plain;charset=utf-8',
+
+      }
+    }).then(response => {
+
+      console.log(response);
+
+    })
+  
+  } */
+
+  handleChange(event){
+
+    event.preventDefault();
+
+    // console.log(event.target.value);
+    console.log(event);
+    let name = event.target.name;
+    let value = event.target.value;
+    console.log(name, value);
+
+    let data = {};
+    data[name] = value;
+
+    this.setState(data);
+
+  }
+
+  /* dataChange(ev) {
 
     this.setState({
 
@@ -76,30 +150,47 @@ class EditProfile extends Component {
           password = this.state.password, 
           cPassword = this.state.cPassword
 
-  }
+  } */
 
-  componentDidMount() {
+  /*componentDidMount() {
 
       const uuid = sessionStorage.getItem('uuid'),
             token = sessionStorage.getItem('token');
 
-      axios.put('http://api.staybusy.ng:3000/profiles')
-            .then(response => {
+    axios.get('http://api.staybusy.ng:3000/users')
+    .then(res => console.log(res));
+
+      /* axios({
+
+        method: 'get',
+        url: 'http://api.staybusy.ng:3000/users',
+        headers: {
+
+          uuid: '46b5a59b-b9bc-4df2-b49f-12786374bd71',
+          token: 'sdwus6Z2isARGUw6WFf8ZEijXsFyrlj5too0fj5qNITTp2Ts6STSk7mVoKQCTV1OuedmnGgoLV0cYreFDOWcmM3mmt1SwvGMYrtE'
+        
+          }
+
+      }).then(response => {
 
               console.log(response);
 
-            }) 
+      }).then(error => {
+
+        console.log(error);
+
+      }) */
 
             /* this.findUserById(this.props.params.uuid) 
 
 
 
 
-    this.findUserById(this.props.params.id) */
+    this.findUserById(this.props.params.id) 
 
-  }
+  } */
 
-  editProfile(id){
+  /* editProfile(id){
 
     this.setState({
 
@@ -113,7 +204,7 @@ class EditProfile extends Component {
     let contactId = uuid;
     alert(contactId);
 
-  }
+  } */
 
 
 
@@ -158,6 +249,9 @@ class EditProfile extends Component {
               <button
                 className="floating-edit-button-wrapper --profile-picture"
                 onClick={() => this.shouldShowModal("Profile Photo")}
+                onChange={this.handleChange}
+                name="photo"
+                value={this.state.photo} 
               >
                 <svg
                   width="22"
@@ -174,7 +268,7 @@ class EditProfile extends Component {
               </button>
             </div>
             <div className="col-md-9 mx-auto">
-              <form onSubmit={this.updateProfile}>
+              <form onSubmit={this.submit}>
                 <div className="form-row">
                   <div
                     className="form-group col"
@@ -185,6 +279,8 @@ class EditProfile extends Component {
                       name="fname"
                       className="form-control"
                       type="text"
+                      value={ this.state.fname}
+                      onChange={this.handleChange}
                       placeholder="John"
                       required
                     />
@@ -195,23 +291,15 @@ class EditProfile extends Component {
                   >
                     <label htmlFor="lname">Last Name</label>
                     <input
-                      name="Lname"
+                      name="lname"
                       className="form-control"
                       type="text"
                       placeholder="Doe"
+                      value={this.state.lname}
+                      onChange = {this.handleChange}
                       required
                     />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
-                  <input
-                    name="email"
-                    className="form-control"
-                    type="email"
-                    placeholder="johndoe@gclout.com"
-                    required
-                  />
                 </div>
                 <div className="form-row">
                   <div
@@ -223,6 +311,10 @@ class EditProfile extends Component {
                       name="phone"
                       className="form-control"
                       type="phone"
+                      onChange = {
+                        this.handleChange
+                      }
+                      value={this.state.phone}
                       placeholder="+234 [0] 802 345 6789"
                       required
                     />
@@ -236,6 +328,10 @@ class EditProfile extends Component {
                       name="nationality"
                       className="form-control"
                       type="text"
+                      value={this.state.nationality}
+                      onChange = {
+                        this.handleChange
+                      }
                       placeholder="Nigerian"
                       required
                     />
@@ -251,6 +347,10 @@ class EditProfile extends Component {
                       name="state"
                       className="form-control"
                       defaultValue="lag"
+                      value={this.state.state}
+                      onChange = {
+                        this.handleChange
+                      }
                       required
                     >
                       <option value="lag">Lagos</option>
@@ -267,36 +367,17 @@ class EditProfile extends Component {
                       name="lga"
                       className="form-control"
                       type="text"
+                      value={this.state.lga}
+                      onChange = {
+                        this.handleChange
+                      }
                       placeholder="Kosofe"
                       required
                     />
                   </div>
                 </div>
                 <div className="form-row">
-                  <div
-                    className="form-group col"
-                    style={{ paddingLeft: "0", paddingRight: "10px" }}
-                  >
-                    <label htmlFor="password">Password</label>
-                    <input
-                      name="password"
-                      className="form-control"
-                      type="password"
-                      required
-                    />
-                  </div>
-                  <div
-                    className="form-group col"
-                    style={{ paddingRight: "0", paddingLeft: "10px" }}
-                  >
-                    <label htmlFor="cPassword">Confirm Password</label>
-                    <input
-                      name="cPassword"
-                      className="form-control"
-                      type="password"
-                      required
-                    />
-                  </div>
+                  
                 </div>
                 <div className="d-flex">
                   <button
@@ -329,10 +410,81 @@ class EditProfile extends Component {
     );
   }
 
-  submit(){
+  submit(e){
 
-    axios.put('http://api.staybusy.ng:3000/users')
+    e.preventDefault();
+
+    const uuid = sessionStorage.getItem('uuid'),
+          token = sessionStorage.getItem('token');
+
+//    console.log(uuid);
+
+   /*  axios.put('http://api.staybusy.ng:3000/profiles', {
+
+    "uuid": uuid,
+    "nationality": this.state.nationality,
+    "state": this.state.state,
+    "lga": this.state.lga,
+    "photo": this.state.photo,
+    "firstName": this.state.fname,
+    "lastName": this.state.lname
+    
+  }).then(response => {
+
+    console.log(response);
+
+  }) */
+  const url = 'http://api.staybusy.ng:3000/profiles/';
+
+  const data = {
+
+    "uuid": uuid,
+    "nationality": this.state.nationality,
+    "state": this.state.state,
+    "lga": this.state.lga,
+    "photo": "http://simpleicon.com/wp-content/uploads/user1.png",
+    "firstName": this.state.fname,
+    "lastName": this.state.lname
+
+  };
+
+  const userToken = {
+
+    "token" : token
+
   }
+
+  console.log(userToken);
+
+  console.log(data);
+
+  /* axios({
+
+    method: 'put',
+    url: url,
+    data: data,
+    mode: 'no-cors', 
+    headers: {
+      
+      'token': token,
+      'uuid': uuid,
+      'Content-Type': 'text/plain;charset=utf-8;application/json',
+      'Accept': 'application/json; charset=utf-8'
+      
+    }
+
+  }).then(response => {
+
+    console.log(response);
+  
+  }).catch(error => {
+
+    console.log(error);
+
+  }) */
+
+}
+
 }
 
 export default EditProfile;
