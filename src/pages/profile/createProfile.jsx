@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
-import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
-import axios from 'axios';
+import axios from "axios";
 
 class EditProfile extends Component {
-
   constructor(props) {
-    
     super(props);
-    
-    this.state = { 
-      
+
+    this.state = {
       // user: [],
-      showModal: false, 
+      showModal: false,
       uploadType: "",
       fname: "",
       lname: "",
@@ -23,44 +19,30 @@ class EditProfile extends Component {
       state: "",
       lga: "",
       photo: "",
-      phone: "",
-    
+      phone: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
-
   }
 
   shouldShowModal = type => {
-  
-    this.setState({ 
-      
-      showModal: true, 
-      uploadType: type 
-    
+    this.setState({
+      showModal: true,
+      uploadType: type
     });
-
   };
 
   shouldHideModal = () => {
-
-    this.setState({ 
-      
-      showModal: false 
-    
+    this.setState({
+      showModal: false
     });
-  
   };
 
-  dataChange(ev){
-
+  dataChange(ev) {
     this.setState({
-
       [ev.target.name]: ev.target.value
-
-    })
-
+    });
   }
 
   /* postData(ev){
@@ -109,8 +91,7 @@ class EditProfile extends Component {
   
   } */
 
-  handleChange(event){
-
+  handleChange(event) {
     event.preventDefault();
 
     // console.log(event.target.value);
@@ -123,7 +104,6 @@ class EditProfile extends Component {
     data[name] = value;
 
     this.setState(data);
-
   }
 
   /* dataChange(ev) {
@@ -181,7 +161,7 @@ class EditProfile extends Component {
 
       }) */
 
-            /* this.findUserById(this.props.params.uuid) 
+  /* this.findUserById(this.props.params.uuid) 
 
 
 
@@ -206,16 +186,13 @@ class EditProfile extends Component {
 
   } */
 
-
-
   render() {
     return (
       <div className="app-wrapper">
         <NavBarAuthenticated />
-        <div className="container app-container d-md-flex">
-          <Sidebar />
+        <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
-            <h4 className="page-title">Edit your profile</h4>
+            <h4 className="page-title">Create your profile</h4>
             <div className="profile-cover-image-wrapper">
               <img
                 className="profile-cover-image"
@@ -251,7 +228,7 @@ class EditProfile extends Component {
                 onClick={() => this.shouldShowModal("Profile Photo")}
                 onChange={this.handleChange}
                 name="photo"
-                value={this.state.photo} 
+                value={this.state.photo}
               >
                 <svg
                   width="22"
@@ -270,25 +247,19 @@ class EditProfile extends Component {
             <div className="col-md-9 mx-auto">
               <form onSubmit={this.submit}>
                 <div className="form-row">
-                  <div
-                    className="form-group col"
-                    style={{ paddingLeft: "0", paddingRight: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="Fname">First Name</label>
                     <input
                       name="fname"
                       className="form-control"
                       type="text"
-                      value={ this.state.fname}
+                      value={this.state.fname}
                       onChange={this.handleChange}
                       placeholder="John"
                       required
                     />
                   </div>
-                  <div
-                    className="form-group col"
-                    style={{ paddingRight: "0", paddingLeft: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="lname">Last Name</label>
                     <input
                       name="lname"
@@ -296,61 +267,46 @@ class EditProfile extends Component {
                       type="text"
                       placeholder="Doe"
                       value={this.state.lname}
-                      onChange = {this.handleChange}
+                      onChange={this.handleChange}
                       required
                     />
                   </div>
                 </div>
                 <div className="form-row">
-                  <div
-                    className="form-group col"
-                    style={{ paddingLeft: "0", paddingRight: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="phone">Phone Number</label>
                     <input
                       name="phone"
                       className="form-control"
                       type="phone"
-                      onChange = {
-                        this.handleChange
-                      }
+                      onChange={this.handleChange}
                       value={this.state.phone}
                       placeholder="+234 [0] 802 345 6789"
                       required
                     />
                   </div>
-                  <div
-                    className="form-group col"
-                    style={{ paddingRight: "0", paddingLeft: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="nationality">Nationality</label>
                     <input
                       name="nationality"
                       className="form-control"
                       type="text"
                       value={this.state.nationality}
-                      onChange = {
-                        this.handleChange
-                      }
+                      onChange={this.handleChange}
                       placeholder="Nigerian"
                       required
                     />
                   </div>
                 </div>
                 <div className="form-row">
-                  <div
-                    className="form-group col"
-                    style={{ paddingLeft: "0", paddingRight: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="state">State</label>
                     <select
                       name="state"
                       className="form-control"
                       defaultValue="lag"
                       value={this.state.state}
-                      onChange = {
-                        this.handleChange
-                      }
+                      onChange={this.handleChange}
                       required
                     >
                       <option value="lag">Lagos</option>
@@ -358,41 +314,22 @@ class EditProfile extends Component {
                       <option value="osun">Osun</option>
                     </select>
                   </div>
-                  <div
-                    className="form-group col"
-                    style={{ paddingRight: "0", paddingLeft: "10px" }}
-                  >
+                  <div className="form-group col-md">
                     <label htmlFor="lga">L.G.A</label>
                     <input
                       name="lga"
                       className="form-control"
                       type="text"
                       value={this.state.lga}
-                      onChange = {
-                        this.handleChange
-                      }
+                      onChange={this.handleChange}
                       placeholder="Kosofe"
                       required
                     />
                   </div>
                 </div>
-                <div className="form-row">
-                  
-                </div>
                 <div className="d-flex">
-                  <button
-                    className="btn btn-gclout-dark"
-                    type="button"
-                    style={{ marginRight: "10px" }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="btn btn-gclout-blue"
-                    type="submit"
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Save
+                  <button className="btn btn-gclout-blue" type="submit">
+                    Create Profile
                   </button>
                 </div>
               </form>
@@ -410,16 +347,15 @@ class EditProfile extends Component {
     );
   }
 
-  submit(e){
-
+  submit(e) {
     e.preventDefault();
 
-    const uuid = sessionStorage.getItem('uuid'),
-          token = sessionStorage.getItem('token');
+    const uuid = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
 
-//    console.log(uuid);
+    //    console.log(uuid);
 
-   /*  axios.put('http://api.staybusy.ng:3000/profiles', {
+    /*  axios.put('http://api.staybusy.ng:3000/profiles', {
 
     "uuid": uuid,
     "nationality": this.state.nationality,
@@ -434,31 +370,27 @@ class EditProfile extends Component {
     console.log(response);
 
   }) */
-  const url = 'http://api.staybusy.ng:3000/profiles/';
+    const url = "http://api.staybusy.ng:3000/profiles/";
 
-  const data = {
+    const data = {
+      uuid: uuid,
+      nationality: this.state.nationality,
+      state: this.state.state,
+      lga: this.state.lga,
+      photo: "http://simpleicon.com/wp-content/uploads/user1.png",
+      firstName: this.state.fname,
+      lastName: this.state.lname
+    };
 
-    "uuid": uuid,
-    "nationality": this.state.nationality,
-    "state": this.state.state,
-    "lga": this.state.lga,
-    "photo": "http://simpleicon.com/wp-content/uploads/user1.png",
-    "firstName": this.state.fname,
-    "lastName": this.state.lname
+    const userToken = {
+      token: token
+    };
 
-  };
+    console.log(userToken);
 
-  const userToken = {
+    console.log(data);
 
-    "token" : token
-
-  }
-
-  console.log(userToken);
-
-  console.log(data);
-
-  /* axios({
+    /* axios({
 
     method: 'put',
     url: url,
@@ -482,9 +414,7 @@ class EditProfile extends Component {
     console.log(error);
 
   }) */
-
-}
-
+  }
 }
 
 export default EditProfile;

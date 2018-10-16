@@ -113,7 +113,7 @@ class Register extends Component {
 
   render() {
     if (this.state.redirectToReferrer || sessionStorage.getItem("data")) {
-      return <Redirect to={"/profile/edit"} />;
+      return <Redirect to={"/profile/create"} />;
     }
 
     const responseFacebook = response => {
@@ -188,25 +188,26 @@ class Register extends Component {
                     </div>
                   </div>
                   <div className="form-group mt-2">
-                  <div className="form-check">
-                    <input 
-                    className="mr-2" 
-                    type="checkbox"
-                    ref="check_me"
-                    value={this.state.tosAgreement}
-                    onChange = { (e) => { this.setState({tosAgreement : e.target.checked})} }
-                    
-                    
-                    required />
-                    <label 
-                    htmlFor="agreement" 
-                    className="form-check-label"
-                    name = "tosAgreement"
-                    >
-                      I agree with terms and conditions
-                    </label>
+                    <div className="form-check">
+                      <input
+                        className="mr-2"
+                        type="checkbox"
+                        ref="check_me"
+                        value={this.state.tosAgreement}
+                        onChange={e => {
+                          this.setState({ tosAgreement: e.target.checked });
+                        }}
+                        required
+                      />
+                      <label
+                        htmlFor="agreement"
+                        className="form-check-label"
+                        name="tosAgreement"
+                      >
+                        I agree with terms and conditions
+                      </label>
+                    </div>
                   </div>
-</div>
                   <input
                     type="submit"
                     value="Register"
