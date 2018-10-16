@@ -113,7 +113,7 @@ class Register extends Component {
 
   render() {
     if (this.state.redirectToReferrer || sessionStorage.getItem("data")) {
-      return <Redirect to={"/"} />;
+      return <Redirect to={"/profile/edit"} />;
     }
 
     const responseFacebook = response => {
@@ -163,8 +163,8 @@ class Register extends Component {
                       required
                     />
                   </div>
-                  <div className="form-row flex-nowrap">
-                    <div className="col" style={{ marginRight: "5px" }}>
+                  <div className="form-row">
+                    <div className="col-md" style={{ marginRight: "5px" }}>
                       <label htmlFor="phone">Phone number</label>
                       <input
                         type="phone"
@@ -176,8 +176,8 @@ class Register extends Component {
                         required
                       />
                     </div>
-                    <div className="col ml-2" style={{ marginLeft: "5px" }}>
-                      <label htmlFor="date-of-birth">Date of birth</label>
+                    <div className="col-md ml-2" style={{ marginLeft: "5px" }}>
+                      <label>Date of birth</label>
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
@@ -187,6 +187,26 @@ class Register extends Component {
                       />
                     </div>
                   </div>
+                  <div className="form-group mt-2">
+                  <div className="form-check">
+                    <input 
+                    className="mr-2" 
+                    type="checkbox"
+                    ref="check_me"
+                    value={this.state.tosAgreement}
+                    onChange = { (e) => { this.setState({tosAgreement : e.target.checked})} }
+                    
+                    
+                    required />
+                    <label 
+                    htmlFor="agreement" 
+                    className="form-check-label"
+                    name = "tosAgreement"
+                    >
+                      I agree with terms and conditions
+                    </label>
+                  </div>
+</div>
                   <input
                     type="submit"
                     value="Register"
@@ -218,7 +238,7 @@ class Register extends Component {
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                   >
-                  <i className="fab fa-google" /> Google
+                    <i className="fab fa-google" /> Google
                   </GoogleLogin>
                   <a href="#" className="social-button-linkedin btn btn-block">
                     <i className="fab fa-linkedin-in" />
@@ -227,7 +247,7 @@ class Register extends Component {
                 </div>
                 <p className="text-center">
                   Already have an account?{" "}
-                  <Link className="auth-page-link" to="/register">
+                  <Link className="auth-page-link" to="/login">
                     Sign in
                   </Link>{" "}
                 </p>

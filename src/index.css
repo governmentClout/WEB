@@ -87,6 +87,9 @@ code {
 .react-date-picker__button__input__divider {
   color: #495057;
 }
+.react-date-picker {
+  display: block !important;
+}
 .react-date-picker__calendar {
   z-index: 9999 !important;
 }
