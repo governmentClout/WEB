@@ -10,7 +10,9 @@ class Error404 extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1>Error 404!!</h1>
           <p>The page you are looking for does not exist!</p>
-          Go <Link to="/">Home</Link>
+          <p>
+            Go <Link to="/">Home</Link>{" "}
+          </p>
         </header>
       </div>
     );

@@ -7,7 +7,6 @@ class ForgotPassword extends Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
         <AuthBackground />
         <div className="m-auto col-md-6 bg-white auth-page-card">

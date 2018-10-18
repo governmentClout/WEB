@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
-import NavBar from "../../components/navbar/navBar"
+import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
 
 class PasswordReset extends Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-6 bg-white auth-page-card">

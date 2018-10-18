@@ -1,7 +1,6 @@
 import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
-import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -62,11 +61,12 @@ class Login extends Component {
             sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
             sessionStorage.setItem("token", responseJSON.data.user.token);
 
-            sessionStorage.setItem("data", responseJSON);
+            sessionStorage.setItem("data", JSON.stringify(responseJSON));
 
             this.setState({
               redirect: true
             });
+            this.props.login(responseJSON.data.user);
           } else {
             console.log("login error");
           }
@@ -92,13 +92,12 @@ class Login extends Component {
       return <Redirect to={"/"} />;
     }
 
-    if (sessionStorage.getItem("data")) {
+    if (this.props.isLoggedIn) {
       return <Redirect to={"/"} />;
     }
 
     return (
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">
@@ -190,10 +189,6 @@ class Login extends Component {
   }
 
   submit(e) {
-    this.setState({
-      loggedIn: true
-    });
-
     e.preventDefault();
 
     window.axios

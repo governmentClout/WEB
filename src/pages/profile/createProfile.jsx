@@ -189,7 +189,6 @@ class EditProfile extends Component {
   render() {
     return (
       <div className="app-wrapper">
-        <NavBarAuthenticated />
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
             <h4 className="page-title">Create your profile</h4>

@@ -62,7 +62,7 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          sessionStorage.setItem("data", responseJson);
+          sessionStorage.setItem("data", JSON.strigify(responseJson));
 
           this.setState({
             redirectToReferrer: true
@@ -126,10 +126,9 @@ class Register extends Component {
       this.signup(response, "google");
     };
 
-    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+    const { password, email, phone, tosAgreement, date_of_birth } = this.state;
     return (
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">
@@ -181,7 +180,7 @@ class Register extends Component {
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
-                        name={data_of_birth}
+                        name={date_of_birth}
                         value={this.state.date_of_birth}
                         Calendar={null}
                       />
