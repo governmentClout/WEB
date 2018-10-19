@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
-import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
+import { Redirect } from "react-router-dom";
 
 class PasswordReset extends Component {
   render() {
+    if (this.props.isLoggedIn) {
+      return <Redirect to={"/"} />;
+    }
     return (
       <div>
         <div className="auth-page d-flex">

@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import NavBar from "../../components/navbar/navBar";
 import { Link } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { Redirect } from "react-router-dom";
-import { PostData } from "../../services/PostData";
 import axios from "axios";
 
 class Register extends Component {

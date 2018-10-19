@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Manager, Reference, Popper } from "react-popper";
 import Notifications from "../notifications/notifications";
 import "./navBar.css";
+import { Link } from "react-router-dom";
 
 class NavBarAuthenticated extends Component {
   constructor(props) {
@@ -152,7 +153,7 @@ class NavBarAuthenticated extends Component {
                       >
                         <ul className="profile-dropdown-list">
                           <li className="profile-dropdown-list-item">
-                            <a href="#">Profile</a>
+                            <Link to="/profile">Profile</Link>
                           </li>
                           <li className="profile-dropdown-list-item">
                             <a href="#">Settings</a>
