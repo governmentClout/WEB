@@ -135,7 +135,7 @@ class ArticleCreation extends Component {
     this.updateWordCount = this.updateWordCount.bind(this);
   }
   updateWordCount(event) {
-    this.setState({ post: event.target.value });
+    this.setState({ article: event.target.value });
     if (this.state.article === "") {
       this.setState({ wordCount: 0 });
     } else {

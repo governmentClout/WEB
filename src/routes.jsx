@@ -30,8 +30,12 @@ const Routes = () => (
         component={PasswordReset}
       />
       <ProtectedRoute exact={true} path="/" component={Home} />
-      <ProtectedRoute path="/profile/create" component={ProfileCreate} />
-      <ProtectedRoute path="/profile" component={ProfilePage} />
+      <ProtectedRoute
+        exact={true}
+        path="/profile/create"
+        component={ProfileCreate}
+      />
+      <ProtectedRoute exact={true} path="/profile" component={ProfilePage} />
       {/* The 404 page.. Dont Touch, lol */}
       <Route component={Error404} />
     </Switch>
