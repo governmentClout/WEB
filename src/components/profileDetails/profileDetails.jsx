@@ -18,6 +18,8 @@ class ProfileDetails extends Component {
               <button className="btn btn-gclout-blue-outline align-self-center">
                 Edit Profile
               </button>
+              <button className="btn btn-gclout-blue mr-2">Message</button>
+              <button className="btn btn-gclout-blue-outline">Add friend</button>
             </div>
             <div className="main-details d-md-flex justify-content-btween">
               <div className="col-md-4 dashed-border-right details-column">
@@ -32,12 +34,6 @@ class ProfileDetails extends Component {
                   />
                 </div>
                 <h5 className="text-center">James Adewale</h5>
-                <div claassName="d-flex justify-content-center">
-                  <button className="btn btn-gclout-blue mr-2">Message</button>
-                  <button className="btn btn-gclout-blue-outline">
-                    Add friend
-                  </button>
-                </div>
                 <div className="d-flex justify-content-between friends-details">
                   <div className="text-center col-6">
                     <p>Following</p>

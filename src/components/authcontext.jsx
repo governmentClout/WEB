@@ -1,15 +1,15 @@
 import React, { Component } from "react";
+const AuthContext = React.createContext();
 
-const LoggedInContext = React.createContext();
-
-export class LoggedInProvider extends Component {
-  constructor(props) {
-    super(props);
-
+class AuthProvider extends Component {
+  constructor() {
+    super();
     this.state = {
       isLoggedIn: false,
       user: {}
     };
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
   componentDidMount() {
     if (localStorage.getItem("token")) {
@@ -24,35 +24,38 @@ export class LoggedInProvider extends Component {
       });
     }
   }
-  login = user => {
+
+  login(user) {
     this.setState({
       user: user,
       isLoggedIn: true
     });
-  };
-  logout = () => {
+  }
+  logout() {
     this.setState({
       user: "",
       isLoggedIn: false
     });
-    localStorage.clear();
-  };
+    localStorage.removeItem("token");
+    localStorage.removeItem("data");
+    localStorage.removeItem("uid");
+  }
 
   render() {
-    const { children } = this.props;
     return (
-      <LoggedInContext.Provider
+      <AuthContext.Provider
         value={{
+          isLoggedIn: this.state.isLoggedIn,
           login: this.login,
           logout: this.logout,
-          isLoggedIn: this.state.isLoggedIn,
           user: this.state.user
         }}
       >
-        {children}
-      </LoggedInContext.Provider>
+        {this.props.children}
+      </AuthContext.Provider>
     );
   }
 }
 
-export const LoggedInConsumer = LoggedInContext.Consumer;
+const AuthConsumer = AuthContext.Consumer;
+export { AuthProvider, AuthConsumer };

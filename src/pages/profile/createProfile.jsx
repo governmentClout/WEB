@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
@@ -50,7 +49,7 @@ class EditProfile extends Component {
 
     ev.preventDefault();
 
-    const id = sessionStorage.getItem('uuid');
+    const id = localStorage.getItem('uuid');
   
     const uuid = id;
     const nationality = this.state.nationality;
@@ -135,8 +134,8 @@ class EditProfile extends Component {
 
   /*componentDidMount() {
 
-      const uuid = sessionStorage.getItem('uuid'),
-            token = sessionStorage.getItem('token');
+      const uuid = localStorage.getItem('uuid'),
+            token = localStorage.getItem('token');
 
     axios.get('http://api.staybusy.ng:3000/users')
     .then(res => console.log(res));
@@ -179,8 +178,8 @@ class EditProfile extends Component {
 
     })
 
-    const uuid = sessionStorage.getItem('uuid'),
-      token = sessionStorage.getItem('token');
+    const uuid = localStorage.getItem('uuid'),
+      token = localStorage.getItem('token');
 
     let contactId = uuid;
     alert(contactId);
@@ -354,8 +353,8 @@ class EditProfile extends Component {
   submit(e) {
     e.preventDefault();
 
-    const uuid = sessionStorage.getItem("uuid"),
-      token = sessionStorage.getItem("token");
+    const uuid = localStorage.getItem("uuid"),
+      token = localStorage.getItem("token");
 
     //    console.log(uuid);
 

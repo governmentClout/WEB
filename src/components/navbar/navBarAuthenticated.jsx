@@ -10,7 +10,6 @@ class NavBarAuthenticated extends Component {
     this.state = { showNotifications: false, showProfile: false };
     this.showNotifications = this.showNotifications.bind(this);
     this.showProfile = this.showProfile.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   searchHandler(e) {
@@ -22,11 +21,7 @@ class NavBarAuthenticated extends Component {
   }
   showProfile() {
     let currentState = this.state.showProfile;
-    this.setState({ showProfile: !currentState });
-  }
-  logout() {
-    sessionStorage.setItem("data", "");
-    sessionStorage.clear();
+    this.setState({ showProfile: !currentState })
   }
 
   render() {
@@ -159,12 +154,12 @@ class NavBarAuthenticated extends Component {
                             <a href="#">Settings</a>
                           </li>
                           <li className="profile-dropdown-list-item">
-                            <button
+                          <button
                               className="profile-dropdown-button"
                               onClick={this.props.logout}
                             >
                               Logout
-                            </button>
+                  </button>
                           </li>
                         </ul>
                       </div>
@@ -176,7 +171,7 @@ class NavBarAuthenticated extends Component {
             </li>
           </ul>
         </nav>
-      </div>
+        </div> 
     );
   }
 }

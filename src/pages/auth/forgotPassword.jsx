@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Redirect } from "react-router-dom";
 
 class ForgotPassword extends Component {
   render() {
-    if (this.props.isLoggedIn) {
-      return <Redirect to={"/"} />;
-    }
     return (
       <div>
         <div className="auth-page d-flex">

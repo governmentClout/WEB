@@ -32,24 +32,28 @@ class MakePost extends Component {
         <div className="make-post-header d-flex">
           <button className="btn btn-tab" onClick={this.newPostToggle}>
             <i
-              class="fas fa-file text-gclout-blue"
+              className="fas fa-file text-gclout-blue"
               style={{ marginRight: "10px" }}
             />
             Post
           </button>
           <button className="btn btn-tab" onClick={this.newArticleToggle}>
             <i
-              class="fas fa-clipboard-list text-gclout-blue"
+              className="fas fa-clipboard-list text-gclout-blue"
               style={{ marginRight: "10px" }}
             />
             Article
           </button>
-          {this.state.showNewPost || this.state.showNewArticle ? <p
-            className="text-right close-btn ml-auto align-self-center"
-            onClick={this.closeAll}
-          >
-            <i className="fas fa-times" />
-          </p> : "" }
+          {this.state.showNewPost || this.state.showNewArticle ? (
+            <p
+              className="text-right close-btn ml-auto align-self-center"
+              onClick={this.closeAll}
+            >
+              <i className="fas fa-times" />
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <PostCreation show={this.state.showNewPost} />
         <ArticleCreation show={this.state.showNewArticle} />
@@ -68,7 +72,7 @@ class PostCreation extends Component {
   }
   updateWordCount(event) {
     this.setState({ post: event.target.value });
-    if (this.state.post == "") {
+    if (this.state.post === "") {
       this.setState({ wordCount: 0 });
     } else {
       let wordCount = this.state.post.split(" ").length;
@@ -83,9 +87,6 @@ class PostCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          {/* <p className="text-right close-btn">
-            <i className="fas fa-times" />
-          </p> */}
           <h5>Post</h5>
           <form>
             <div className="form-group">
@@ -135,7 +136,7 @@ class ArticleCreation extends Component {
   }
   updateWordCount(event) {
     this.setState({ post: event.target.value });
-    if (this.state.article == "") {
+    if (this.state.article === "") {
       this.setState({ wordCount: 0 });
     } else {
       let wordCount = this.state.article.split(" ").length;
@@ -150,9 +151,6 @@ class ArticleCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          {/* <p className="text-right close-btn">
-            <i className="fas fa-times" />
-          </p> */}
           <h5>Article</h5>
           <form>
             <div className="form-group">

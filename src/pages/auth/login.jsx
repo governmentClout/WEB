@@ -4,7 +4,6 @@ import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -12,8 +11,7 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: "",
-      redirect: false
+      password: ""
     };
   }
 
@@ -50,7 +48,7 @@ class Login extends Component {
         }
       })
         .then(response => {
-          /*         sessionStorage.setItem(response.data.user[0].uuid) */
+          /*         localStorage.setItem(response.data.user[0].uuid) */
 
           let responseJSON = response;
 
@@ -58,24 +56,14 @@ class Login extends Component {
             console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token);
 
-            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
-            sessionStorage.setItem("token", responseJSON.data.user.token);
+            localStorage.setItem("uuid", responseJSON.data.user.uuid);
+            localStorage.setItem("token", responseJSON.data.user.token);
 
-            sessionStorage.setItem("data", JSON.stringify(responseJSON));
-
-            this.setState({
-              redirect: true
-            });
+            localStorage.setItem("data", JSON.stringify(responseJSON));
             this.props.login(responseJSON.data.user);
           } else {
             console.log("login error");
           }
-
-          console.log(responseJSON);
-
-          /*        console.log(response); */
-
-          /* localStorage.setItem('token', response.data.token.token); */
         })
         .catch(error => {
           console.log(error);
@@ -88,16 +76,7 @@ class Login extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={"/"} />;
-    }
-
-    if (this.props.isLoggedIn) {
-      return <Redirect to={"/"} />;
-    }
-
     return (
-      <div>
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">
@@ -184,7 +163,6 @@ class Login extends Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 
