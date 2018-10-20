@@ -32,6 +32,12 @@ class ProfileDetails extends Component {
                   />
                 </div>
                 <h5 className="text-center">James Adewale</h5>
+                <div claassName="d-flex justify-content-center">
+                  <button className="btn btn-gclout-blue mr-2">Message</button>
+                  <button className="btn btn-gclout-blue-outline">
+                    Add friend
+                  </button>
+                </div>
                 <div className="d-flex justify-content-between friends-details">
                   <div className="text-center col-6">
                     <p>Following</p>
@@ -74,7 +80,10 @@ class ProfileDetails extends Component {
           </div>
           <div className="officer-details">
             <p className="text-gclout-blue">Political Ofice Holders</p>
-            <div className="d-flex officers justify-content-between">
+            <div
+              className="d-flex officers justify-content-between"
+              style={{ overflow: "auto" }}
+            >
               <div className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img

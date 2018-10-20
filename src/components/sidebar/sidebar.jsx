@@ -4,7 +4,7 @@ import "./sidebar.css";
 class Sidebar extends Component {
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar  d-none d-md-block">
         <div className="sidebar-top">
           <div className="sidebar-cover-image-wrapper">
             <img

@@ -4,7 +4,7 @@ import "./sidebar.css";
 class SidebarFooter extends Component {
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar  d-none d-md-block">
         <div className="sidebar-footer">
           <p>
             &copy; {new Date().getFullYear()} GClout | All copyrights rights

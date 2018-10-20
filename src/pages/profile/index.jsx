@@ -10,7 +10,7 @@ import MakePost from "../../components/makePost/makePost";
 class ProfilePage extends Component {
   render() {
     if (!this.props.isLoggedIn) {
-      return () => <Redirect to={"/login"} />;
+      return <Redirect to={"/login"} />;
     } else {
       return (
         <div className="app-wrapper">
@@ -22,7 +22,10 @@ class ProfilePage extends Component {
                 <MakePost />
               </div>
             </div>
-            <div className="col-md-3" style={{ padding: "0px" }}>
+            <div
+              className="col-md-3 d-none d-md-block"
+              style={{ padding: "0px" }}
+            >
               <Suggestions />
               <Trending />
             </div>

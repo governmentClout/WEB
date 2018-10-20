@@ -189,7 +189,7 @@ class EditProfile extends Component {
 
   render() {
     if (!this.props.isLoggedIn) {
-      return (() => <Redirect to={"/login"} />);
+      return <Redirect to={"/login"} />;
     } else {
       return (
         <div className="app-wrapper">
