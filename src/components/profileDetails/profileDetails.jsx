@@ -55,17 +55,17 @@ class ProfileDetails extends Component {
                 <p className="text-gclout-blue">Other Information</p>
                 <div className="d-flex justify-content-between">
                   <div className="col-6">
-                    <p class="slightly-bold">Nationality</p>
+                    <p className="slightly-bold">Nationality</p>
                     <p>Nigeria</p>
                     <br />
-                    <p class="slightly-bold">L.G.A</p>
+                    <p className="slightly-bold">L.G.A</p>
                     <p>Ikeja</p>
                   </div>
                   <div className="col-6">
-                    <p class="slightly-bold">State</p>
+                    <p className="slightly-bold">State</p>
                     <p>Lagos State</p>
                     <br />
-                    <p class="slightly-bold">Date of birth</p>
+                    <p className="slightly-bold">Date of birth</p>
                     <p>23/07/1990</p>
                   </div>
                 </div>

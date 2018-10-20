@@ -1,6 +1,9 @@
 .real-details-container {
   background: #ffffff;
 }
+.profile-details-container {
+  margin-bottom: 2em;
+}
 .friends-details {
   padding-top: 0.6em;
 }

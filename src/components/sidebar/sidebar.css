@@ -1,6 +1,6 @@
 .sidebar {
   width: 270px;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 .sidebar p {
   font-size: 14px;
@@ -13,7 +13,6 @@
 .sidebar-footer {
   background: #ffffff;
   border-radius: 4px;
-  margin-top: 1em;
   padding: 1em;
 }
 .sidebar-cover-image-wrapper {

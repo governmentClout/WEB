@@ -3,8 +3,8 @@ import "./trending.css";
 
 class Trending extends Component {
   constructor(props) {
-    super(props)
-    this.state = { liked: false }
+    super(props);
+    this.state = { liked: false };
   }
   render() {
     return (
@@ -35,16 +35,16 @@ class Trending extends Component {
               <div className="col-6 d-flex">
                 <button className="like-btn">
                   {this.state.liked ? (
-                    <i class="fas fa-thumbs-up" />
+                    <i className="fas fa-thumbs-up" />
                   ) : (
-                    <i class="far fa-thumbs-up" />
+                    <i className="far fa-thumbs-up" />
                   )}{" "}
                   10 Likes{" "}
                 </button>
               </div>
               <div className="col-6 d-flex">
                 <button className="like-btn">
-                  <i class="far fa-comment" /> 7 comments
+                  <i className="far fa-comment" /> 7 comments
                 </button>
               </div>
             </div>
@@ -71,16 +71,16 @@ class Trending extends Component {
               <div className="col-6 d-flex">
                 <button className="like-btn">
                   {this.state.liked ? (
-                    <i class="fas fa-thumbs-up" />
+                    <i className="fas fa-thumbs-up" />
                   ) : (
-                    <i class="far fa-thumbs-up" />
+                    <i className="far fa-thumbs-up" />
                   )}{" "}
                   10 Likes{" "}
                 </button>
               </div>
               <div className="col-6 d-flex">
                 <button className="like-btn">
-                  <i class="far fa-comment" /> 7 comments
+                  <i className="far fa-comment" /> 7 comments
                 </button>
               </div>
             </div>
@@ -107,16 +107,16 @@ class Trending extends Component {
               <div className="col-6 d-flex">
                 <button className="like-btn">
                   {this.state.liked ? (
-                    <i class="fas fa-thumbs-up" />
+                    <i className="fas fa-thumbs-up" />
                   ) : (
-                    <i class="far fa-thumbs-up" />
+                    <i className="far fa-thumbs-up" />
                   )}{" "}
                   10 Likes{" "}
                 </button>
               </div>
               <div className="col-6 d-flex">
                 <button className="like-btn">
-                  <i class="far fa-comment" /> 7 comments
+                  <i className="far fa-comment" /> 7 comments
                 </button>
               </div>
             </div>

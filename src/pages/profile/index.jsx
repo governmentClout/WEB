@@ -5,6 +5,7 @@ import ProfileDetails from "../../components/profileDetails/profileDetails";
 import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
 import SidebarFooter from "../../components/sidebar/sidebarFooter";
+import MakePost from "../../components/makePost/makePost";
 
 class ProfilePage extends Component {
   render() {
@@ -18,6 +19,7 @@ class ProfilePage extends Component {
               <ProfileDetails />
               <div className="d-flex">
                 <SidebarFooter />
+                <MakePost />
               </div>
             </div>
             <div className="col-md-3" style={{ padding: "0px" }}>

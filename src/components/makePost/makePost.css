@@ -1,0 +1,41 @@
+.make-post {
+  border-radius: 8px;
+  background: #ffffff;
+  flex: 1;
+  align-self: flex-start;
+}
+.make-post-header {
+  background: #f2f2f2;
+  padding: 0.5em 1em;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.btn-tab {
+  border: none;
+  margin: 0 !important;
+  background: transparent;
+  border-right: 1px solid #c4c4c4;
+}
+.btn-tab:focus {
+  box-shadow: 0 0 0 0;
+  border: none;
+  outline: none;
+}
+.new-post-container {
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+.new-post-container.show {
+  max-height: 1000px;
+  transition: all 0.5s;
+}
+.close-btn {
+  font-size: 21px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.close-btn:hover {
+  cursor: pointer;
+  color: #00b0f0;
+}

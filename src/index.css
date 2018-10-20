@@ -64,8 +64,8 @@ code {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
 }
 .btn {
-  margin-top: 1em !important;
-  margin-bottom: 1em !important;
+  margin-top: 1em;
+  margin-bottom: 1em;
   padding: 0.65em 1em;
 }
 .btn-gclout-dark {
@@ -94,7 +94,7 @@ code {
   z-index: 9999 !important;
 }
 .app-wrapper {
-  background: #e5e5e5;
+  background: #fafafa;
   color: #333333;
 }
 .app-container {
@@ -136,4 +136,8 @@ button:focus {
 .lifted-profile-image {
   height: 100%;
   width: 100%;
+}
+.border-red,
+.border-red:focus {
+  border-color: #f22f2f !important;
 }

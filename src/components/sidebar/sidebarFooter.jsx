@@ -23,7 +23,7 @@ class SidebarFooter extends Component {
             <p className="smaller-margin">
               <a href="#" className="advert-link">
                 <span className="text-gclout-blue">
-                  <i class="far fa-share-square" />
+                  <i className="fas fa-external-link-alt" />
                 </span>{" "}
                 Advertise with GClout
               </a>
