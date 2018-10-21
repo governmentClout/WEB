@@ -2,7 +2,7 @@ import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -76,7 +76,9 @@ class Login extends Component {
   }
 
   render() {
+    
     return (
+      this.props.isLoggedIn ? <Redirect to="/" /> :
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">

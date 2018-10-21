@@ -208,6 +208,9 @@
   background: transparent;
   display: flex;
 }
+.dropdown-toggle:hover {
+  cursor: pointer;
+}
 .dropdown-toggle::after {
   margin-top: 20px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./sidebar.css";
+import SidebarFooter from "./sidebarFooter";
 
 class Sidebar extends Component {
   render() {
@@ -120,6 +121,7 @@ class Sidebar extends Component {
             </div>
           </div>
         </div>
+        <SidebarFooter />
       </div>
     );
   }

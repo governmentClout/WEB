@@ -1,22 +1,19 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "../../assets/css/profile.css";
-import ProfileDetails from "../../components/profileDetails/profileDetails";
 import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
-import SidebarFooter from "../../components/sidebar/sidebarFooter";
-import MakePost from "../../components/makePost/makePost";
+import Sidebar from "../../components/sidebar/sidebar";
+import FriendsList from "../../components/friends/friends"
 
-class ProfilePage extends Component {
+class FriendsPage extends Component {
   render() {
     return  (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
-            <ProfileDetails />
             <div className="d-flex">
-              <SidebarFooter />
-              <MakePost />
+              <Sidebar />
+              <FriendsList />
             </div>
           </div>
           <div
@@ -32,4 +29,4 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage;
+export default FriendsPage;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
@@ -117,6 +117,7 @@ class Register extends Component {
 
     const { password, email, phone, date_of_birth } = this.state;
     return (
+      this.props.isLoggedIn ? <Redirect to="/" /> :
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
