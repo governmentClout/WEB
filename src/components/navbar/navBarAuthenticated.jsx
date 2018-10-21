@@ -144,8 +144,8 @@ class NavBarAuthenticated extends Component {
                           this.state.showProfile
                             ? "profile-dropdown show"
                             : "profile-dropdown"
-                        }
-                      >
+                          }
+                        >
                         <ul className="profile-dropdown-list">
                           <li className="profile-dropdown-list-item">
                             <Link to="/profile">Profile</Link>
@@ -154,12 +154,12 @@ class NavBarAuthenticated extends Component {
                             <a href="#">Settings</a>
                           </li>
                           <li className="profile-dropdown-list-item">
-                          <button
+                            <button
                               className="profile-dropdown-button"
                               onClick={this.props.logout}
                             >
                               Logout
-                  </button>
+                            </button>
                           </li>
                         </ul>
                       </div>

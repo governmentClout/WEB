@@ -3,25 +3,29 @@ import "../../assets/css/profile.css";
 import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
 import Sidebar from "../../components/sidebar/sidebar";
-import Friend from "../../components/friend/friend"
+import Friend from "../../components/friend/friend";
 
-class FriendsPage extends Component {
+class SuggestedFriendsPage extends Component {
   searchHandler(e) {
     e.preventDefault();
   }
   render() {
-    return  (
+    return (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
             <div className="d-flex">
               <Sidebar />
               <div className="friends-list-container">
-                <div className="friends-list-header d-flex">
-                  <h5>300 Friends</h5>
+                <div className="friends-list-header">
+                  <h5>GClout Friends Suggestion</h5>
+                  <p>These are people you may know</p>
                 </div>
                 <div className="friends-search-container">
-                  <form className="searchContainer" onSubmit={this.searchHandler}>
+                  <form
+                    className="searchContainer"
+                    onSubmit={this.searchHandler}
+                  >
                     <input
                       className="searchBox"
                       type="search"
@@ -33,7 +37,7 @@ class FriendsPage extends Component {
                   </form>
                 </div>
                 <div className="friends-list">
-                  <Friend />
+                  <Friend type="suggested" />
                 </div>
               </div>
             </div>
@@ -51,4 +55,4 @@ class FriendsPage extends Component {
   }
 }
 
-export default FriendsPage;
+export default SuggestedFriendsPage;

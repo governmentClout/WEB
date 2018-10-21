@@ -24,3 +24,49 @@
   box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
 }
+.friends-list-container {
+  border-radius: 8px;
+  background: #ffffff;
+  flex: 1;
+  align-self: flex-start;
+}
+.friends-list-header {
+  padding: 1em 1em;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.friends-list-header h5,
+.friends-list-header p {
+  margin-bottom: 0.2em;
+}
+.friends-search-container {
+  padding: 0.5em;
+  background: #f1f1f1;
+}
+.friends-search-container .searchContainer {
+  display: inline-flex;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  overflow: hidden;
+  max-height: 40px;
+  width: 90%;
+  align-items: center;
+}
+.searchIconContainer {
+  background: #f1f1f1;
+  margin: 0;
+  height: 100%;
+}
+.searchIcon {
+  padding: 0.8rem;
+  font-size: 16px;
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  flex: 1;
+}
+.friends-list {
+  padding: 1em;
+}

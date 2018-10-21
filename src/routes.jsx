@@ -13,6 +13,7 @@ import PasswordReset from "./pages/auth/passwordReset";
 import ProfileCreate from "./pages/profile/createProfile";
 import ProfilePage from "./pages/profile/index";
 import FriendsPage from "./pages/profile/friends";
+import SuggestedFriendsPage from "./pages/profile/suggestedFriends";
 import Error404 from "./pages/errors/404";
 import { AuthConsumer } from "./components/authcontext";
 
@@ -57,6 +58,11 @@ const Routes = () => (
           <Route exact path="/profile/create" components={ProfileCreate} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/friends" component={FriendsPage} />
+          <Route
+            exact
+            path="/friends/suggested"
+            component={SuggestedFriendsPage}
+          />
           {/* The 404 page.. Dont Touch, lol */}
           <Route component={Error404} />
         </Switch>
