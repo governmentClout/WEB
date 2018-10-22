@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
 
-class EditProfile extends Component {
+class CreateProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -187,7 +185,7 @@ class EditProfile extends Component {
   } */
 
   render() {
-    return  (
+    return (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
@@ -417,4 +415,4 @@ class EditProfile extends Component {
 //   }
 // }
 
-export default EditProfile;
+export default CreateProfile;

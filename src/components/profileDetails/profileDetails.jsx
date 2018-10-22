@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import "./profileDetails.css";
+import Modal from "../modal/modal";
+import ProfileEdit from "../profileEdit/profileEdit";
 
 class ProfileDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+  }
+  handleToggleModal() {
+    this.setState({ showModal: !this.state.showModal });
+  }
   render() {
+    const { showModal } = this.state;
     return (
       <React.Fragment>
         <div className="profile-details-container">
@@ -15,12 +27,22 @@ class ProfileDetails extends Component {
           </div>
           <div className="container real-details-container">
             <div className="top-details d-flex justify-content-end">
-              <button className="btn btn-gclout-blue-outline align-self-center">
+              <button
+                className="btn btn-gclout-blue-outline align-self-center"
+                onClick={() => this.handleToggleModal()}
+              >
                 Edit Profile
               </button>
               <button className="btn btn-gclout-blue mr-2">Message</button>
-              <button className="btn btn-gclout-blue-outline">Add friend</button>
+              <button className="btn btn-gclout-blue-outline">
+                Add friend
+              </button>
             </div>
+            {showModal && (
+              <Modal onCloseRequest={() => this.handleToggleModal()}>
+                <ProfileEdit />
+              </Modal>
+            )}
             <div className="main-details d-md-flex justify-content-btween">
               <div className="col-md-4 dashed-border-right details-column">
                 <div

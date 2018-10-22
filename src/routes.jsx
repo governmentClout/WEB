@@ -3,8 +3,6 @@ import { Route, Switch } from "react-router-dom";
 //import Main App file
 import App from "./App";
 //import pages to be routed (should be a jsx files in the /pages folder)
-import ProtectedRoute from "./components/protectedRoute";
-import AuthenticationRoute from "./components/authenticationRoute";
 import Home from "./pages/home";
 import Register from "./pages/auth/register";
 import LoginPage from "./pages/auth/login";
