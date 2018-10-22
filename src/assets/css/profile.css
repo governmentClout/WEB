@@ -1,6 +1,9 @@
 .page-title {
   padding: 0.5em 1.5em;
 }
+.flex-1 {
+  flex: 1;
+}
 .floating-edit-button-wrapper {
   width: 36px;
   height: 36px;
