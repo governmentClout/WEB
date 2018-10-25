@@ -1,50 +1,81 @@
 import React, { Component } from "react";
 import "./makePost.css";
+import PostMedia from "./postMedia";
 
 class MakePost extends Component {
   constructor(props) {
     super(props);
-    this.state = { showNewPost: false, showNewArticle: false };
+    this.state = {
+      showNewPost: false,
+      showNewArticle: false,
+      showNewPoll: false
+    };
     this.newPostToggle = this.newPostToggle.bind(this);
     this.newArticleToggle = this.newArticleToggle.bind(this);
+    this.newPollToggle = this.newPollToggle.bind(this);
     this.closeAll = this.closeAll.bind(this);
   }
   newPostToggle() {
-    if (this.state.showNewArticle) {
-      this.setState({ showNewArticle: false });
+    if (this.state.showNewArticle || this.state.showNewPoll) {
+      this.setState({ showNewArticle: false, showNewPoll: false });
     }
     let currentState = this.state.showNewPost;
     this.setState({ showNewPost: !currentState });
   }
+  newPollToggle() {
+    if (this.state.showNewPost || this.state.showNewArticle) {
+      this.setState({ showNewArticle: false, showNewPost: false });
+    }
+    let currentState = this.state.showNewPoll;
+    this.setState({ showNewPoll: !currentState });
+  }
   newArticleToggle() {
-    if (this.state.showNewPost) {
-      this.setState({ showNewPost: false });
+    if (this.state.showNewPost || this.state.showNewPoll) {
+      this.setState({ showNewPost: false, showNewPoll: false });
     }
     let currentState = this.state.showNewArticle;
     this.setState({ showNewArticle: !currentState });
   }
   closeAll() {
-    this.setState({ showNewPost: false, showNewArticle: false });
+    this.setState({
+      showNewPost: false,
+      showNewArticle: false,
+      showNewPoll: false
+    });
   }
   render() {
     return (
-      <div className="make-post">
+      <div className={this.props.type !== "poll" ? "make-post": "make-post not-rounded"}>
         <div className="make-post-header d-flex">
-          <button className="btn btn-tab" onClick={this.newPostToggle}>
-            <i
-              className="fas fa-file text-gclout-blue"
-              style={{ marginRight: "10px" }}
-            />
-            Post
-          </button>
-          <button className="btn btn-tab" onClick={this.newArticleToggle}>
-            <i
-              className="fas fa-clipboard-list text-gclout-blue"
-              style={{ marginRight: "10px" }}
-            />
-            Article
-          </button>
-          {this.state.showNewPost || this.state.showNewArticle ? (
+          {this.props.type !== "poll" ? (
+            <>
+              <button className="btn btn-tab" onClick={this.newPostToggle}>
+                <i
+                  className="fas fa-file text-gclout-blue"
+                  style={{ marginRight: "10px" }}
+                />
+                Post
+              </button>
+              <button className="btn btn-tab" onClick={this.newArticleToggle}>
+                <i
+                  className="fas fa-clipboard-list text-gclout-blue"
+                  style={{ marginRight: "10px" }}
+                />
+                Article
+              </button>
+            </>
+          ) : (
+            <button className="btn btn-tab" onClick={this.newPollToggle}>
+              <i
+                className="fas fa-poll text-gclout-blue"
+                style={{ marginRight: "10px" }}
+              />
+              Poll
+            </button>
+          )}
+          {this.state.showNewPost ||
+          this.state.showNewArticle ||
+          this.state.showNewPoll ? (
             <p
               className="text-right close-btn ml-auto align-self-center"
               onClick={this.closeAll}
@@ -55,8 +86,14 @@ class MakePost extends Component {
             ""
           )}
         </div>
-        <PostCreation show={this.state.showNewPost} />
-        <ArticleCreation show={this.state.showNewArticle} />
+        {this.props.type !== "poll" ? (
+          <>
+            <PostCreation show={this.state.showNewPost} />
+            <ArticleCreation show={this.state.showNewArticle} />
+          </>
+        ) : (
+          <PollCreation show={this.state.showNewPoll} />
+        )}
       </div>
     );
   }
@@ -67,10 +104,9 @@ export default MakePost;
 class PostCreation extends Component {
   constructor(props) {
     super(props);
-    this.state = { wordCount: 0, post: "" };
-    this.updateWordCount = this.updateWordCount.bind(this);
+    this.state = { wordCount: 0, post: "", uploadImages: false };
   }
-  updateWordCount(event) {
+  updateWordCount = event => {
     this.setState({ post: event.target.value });
     if (this.state.post === "") {
       this.setState({ wordCount: 0 });
@@ -78,7 +114,12 @@ class PostCreation extends Component {
       let wordCount = this.state.post.split(" ").length;
       this.setState({ wordCount: wordCount });
     }
-  }
+  };
+  showImageUploader = event => {
+    event.preventDefault();
+    let currentState = this.state.uploadImages;
+    this.setState({ uploadImages: !currentState });
+  };
   render() {
     return (
       <div
@@ -106,16 +147,20 @@ class PostCreation extends Component {
             <p className="text-right mb-0">
               {100 - this.state.wordCount} {""} words left
             </p>
+            <PostMedia showUploader={this.state.uploadImages} />
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
-                style={{ marginTop: "0", marginBottom: "0" }}
+                style={{ marginBottom: "0" }}
               >
                 Share post
               </button>
               <button
                 className="btn btn-gclout-blue-outline"
-                style={{ marginTop: "0", marginBottom: "0" }}
+                style={{ marginBottom: "0" }}
+                onClick={this.showImageUploader}
+                type="button"
+                role="button"
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
@@ -131,7 +176,7 @@ class PostCreation extends Component {
 class ArticleCreation extends Component {
   constructor(props) {
     super(props);
-    this.state = { wordCount: 0, article: "" };
+    this.state = { wordCount: 0, article: "", uploadImages: false };
     this.updateWordCount = this.updateWordCount.bind(this);
   }
   updateWordCount(event) {
@@ -143,6 +188,11 @@ class ArticleCreation extends Component {
       this.setState({ wordCount: wordCount });
     }
   }
+  showImageUploader = event => {
+    event.preventDefault();
+    let currentState = this.state.uploadImages;
+    this.setState({ uploadImages: !currentState });
+  };
   render() {
     return (
       <div
@@ -176,19 +226,80 @@ class ArticleCreation extends Component {
             <p className="text-right mb-0">
               {this.state.wordCount} {""} words
             </p>
+            <PostMedia showUploader={this.state.uploadImages} />
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
-                style={{ marginTop: "0", marginBottom: "0" }}
+                style={{ marginBottom: "0" }}
               >
                 Share article
               </button>
               <button
                 className="btn btn-gclout-blue-outline"
-                style={{ marginTop: "0", marginBottom: "0" }}
+                style={{ marginBottom: "0" }}
+                onClick={this.showImageUploader}
+                type="button"
+                role="button"
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+class PollCreation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { wordCount: 0, poll: "", sector: "" };
+  }
+  render() {
+    return (
+      <div
+        className={
+          this.props.show ? "new-post-container show" : "new-post-container"
+        }
+      >
+        <div className="pt-4 px-4 pb-5">
+          <form>
+            <div className="form-group">
+              <label>Sector</label>
+              <select
+                name="poll_sector"
+                className="form-control"
+                value={this.state.sector}
+                onChange={this.handleChange}
+                required
+              >
+                <option value="economy">Economy</option>
+                <option value="infrastructure">Infrastructure</option>
+                <option value="education">Education</option>
+                <option value="politics">Politics</option>
+                <option value="security">Security</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="technology">Technology</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Opininion</label>
+              <textarea
+                className="form-control"
+                rows="4"
+                name="new_poll"
+                value={this.state.poll}
+                placeholder="Type opinion here..."
+              />
+            </div>
+            <div className="d-flex">
+              <button
+                className="btn btn-gclout-blue mr-2"
+                style={{ marginBottom: "0" }}
+              >
+                Share poll
               </button>
             </div>
           </form>

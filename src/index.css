@@ -141,3 +141,7 @@ button:focus {
 .border-red:focus {
   border-color: #f22f2f !important;
 }
+select.form-control {
+  padding: 0;
+  padding-left: 1.3em;
+}

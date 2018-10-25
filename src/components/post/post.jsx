@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./post.css";
 import PostActions from "./postActions";
 
+
 export default class SinglePost extends Component {
   static propTypes = {
     postType: PropTypes.string,

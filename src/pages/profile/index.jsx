@@ -16,7 +16,7 @@ class ProfilePage extends Component {
             <ProfileDetails />
             <div className="d-flex">
               <SidebarFooter />
-              <div class="flex-1">
+              <div className="flex-1">
                 <MakePost />
               </div>
             </div>
