@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
-import axios from "axios";
 
-class EditProfile extends Component {
+class CreateProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -49,7 +47,7 @@ class EditProfile extends Component {
 
     ev.preventDefault();
 
-    const id = sessionStorage.getItem('uuid');
+    const id = localStorage.getItem('uuid');
   
     const uuid = id;
     const nationality = this.state.nationality;
@@ -134,8 +132,8 @@ class EditProfile extends Component {
 
   /*componentDidMount() {
 
-      const uuid = sessionStorage.getItem('uuid'),
-            token = sessionStorage.getItem('token');
+      const uuid = localStorage.getItem('uuid'),
+            token = localStorage.getItem('token');
 
     axios.get('http://api.staybusy.ng:3000/users')
     .then(res => console.log(res));
@@ -178,8 +176,8 @@ class EditProfile extends Component {
 
     })
 
-    const uuid = sessionStorage.getItem('uuid'),
-      token = sessionStorage.getItem('token');
+    const uuid = localStorage.getItem('uuid'),
+      token = localStorage.getItem('token');
 
     let contactId = uuid;
     alert(contactId);
@@ -189,7 +187,6 @@ class EditProfile extends Component {
   render() {
     return (
       <div className="app-wrapper">
-        <NavBarAuthenticated />
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
             <h4 className="page-title">Create your profile</h4>
@@ -346,16 +343,17 @@ class EditProfile extends Component {
       </div>
     );
   }
+}
 
-  submit(e) {
-    e.preventDefault();
+// submit(e) {
+//   e.preventDefault();
 
-    const uuid = sessionStorage.getItem("uuid"),
-      token = sessionStorage.getItem("token");
+//   const uuid = localStorage.getItem("uuid"),
+//     token = localStorage.getItem("token");
 
-    //    console.log(uuid);
+//    console.log(uuid);
 
-    /*  axios.put('http://api.staybusy.ng:3000/profiles', {
+/*  axios.put('http://api.staybusy.ng:3000/profiles', {
 
     "uuid": uuid,
     "nationality": this.state.nationality,
@@ -370,27 +368,27 @@ class EditProfile extends Component {
     console.log(response);
 
   }) */
-    const url = "http://api.staybusy.ng:3000/profiles/";
+// const url = "http://api.staybusy.ng:3000/profiles/";
 
-    const data = {
-      uuid: uuid,
-      nationality: this.state.nationality,
-      state: this.state.state,
-      lga: this.state.lga,
-      photo: "http://simpleicon.com/wp-content/uploads/user1.png",
-      firstName: this.state.fname,
-      lastName: this.state.lname
-    };
+// const data = {
+//   uuid: uuid,
+//   nationality: this.state.nationality,
+//   state: this.state.state,
+//   lga: this.state.lga,
+//   photo: "http://simpleicon.com/wp-content/uploads/user1.png",
+//   firstName: this.state.fname,
+//   lastName: this.state.lname
+// };
 
-    const userToken = {
-      token: token
-    };
+// const userToken = {
+//   token: token
+// };
 
-    console.log(userToken);
+// console.log(userToken);
 
-    console.log(data);
+// console.log(data);
 
-    /* axios({
+/* axios({
 
     method: 'put',
     url: url,
@@ -414,7 +412,7 @@ class EditProfile extends Component {
     console.log(error);
 
   }) */
-  }
-}
+//   }
+// }
 
-export default EditProfile;
+export default CreateProfile;
