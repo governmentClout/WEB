@@ -18,7 +18,8 @@ class Register extends Component {
       phone: "",
       date_of_birth: new Date(1980, 1, 1),
       tosAgreement: "",
-      provider: "email"
+      provider: "email",
+      loading: false
     };
     this.register = this.register.bind(this);
     /*     this.signup = this.signup.bind(this); */
@@ -28,6 +29,7 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ loading: true})
     e.preventDefault();
 
     const data = {
@@ -59,13 +61,14 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          localStorage.setItem("data", JSON.strigify(responseJson));
+          localStorage.setItem("data", JSON.stringify(responseJson));
 
           this.props.login(responseJson.data.user);
         }
       })
       .catch(error => {
         console.log(error);
+        this.setState({loading: false})
       });
   }
 
@@ -170,7 +173,6 @@ class Register extends Component {
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
-                        name={date_of_birth}
                         value={this.state.date_of_birth}
                         Calendar={null}
                       />
@@ -197,12 +199,11 @@ class Register extends Component {
                       </label>
                     </div>
                   </div>
-                  <input
+                  <button
                     type="submit"
-                    value="Register"
                     className="btn btn-block btn-gclout-blue"
                     onClick={this.handleSubmit}
-                  />
+                  >{this.state.loading ? <i class="fas fa-circle-notch fa-spin" /> : "Register"} </button>
                 </form>
               </div>
               <div className="vertical-divider">OR</div>
