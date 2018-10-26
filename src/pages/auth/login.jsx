@@ -19,12 +19,17 @@ class Login extends Component {
   }
 
   dataChange(ev) {
+
     this.setState({
+    
       [ev.target.name]: ev.target.value
+    
     });
+  
   }
 
   postData(ev) {
+
     ev.preventDefault();
 
     const email = this.state.email;
@@ -56,6 +61,8 @@ class Login extends Component {
           let responseJSON = response;
 
           if (responseJSON.data) {
+            /* console.log(responseJSON.data.user.uuid);
+            console.log(responseJSON.data.user.token); */
             console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token);
 
@@ -89,11 +96,15 @@ class Login extends Component {
 
   render() {
     if (this.state.redirect) {
+      
       return <Redirect to={"/"} />;
+    
     }
 
     if (sessionStorage.getItem("data")) {
+      
       return <Redirect to={"/"} />;
+    
     }
 
     return (

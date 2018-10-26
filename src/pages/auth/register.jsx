@@ -48,6 +48,7 @@ class Register extends Component {
 
     /* console.log(this.state); */
     axios({
+
       method: "post",
       url: url,
       data: data,

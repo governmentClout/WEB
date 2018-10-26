@@ -1,15 +1,19 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
-import {PostData} from '../../services/PostData'
+import {
+  PostData
+} from '../../services/PostData'
 
 class EditProfile extends Component {
-  
+
   constructor(props) {
-  
+
     super(props);
 
     this.state = {
@@ -21,15 +25,14 @@ class EditProfile extends Component {
       nationality: "",
       state: "",
       lga: "",
-      photo: "",
-      phone: ""
+      photo: ""
 
     };
 
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
     this.createProfile = this.createProfile.bind(this);
-  
+
   }
 
   shouldShowModal = type => {
@@ -51,15 +54,14 @@ class EditProfile extends Component {
     });
   }
 
-  createProfile(e){
+  createProfile(e) {
 
     const id = sessionStorage.getItem('uuid'),
           tk = sessionStorage.getItem('token');
 
-    console.log(id);
-    console.log(tk);
-
     e.preventDefault();
+
+/*     const url = "http://localhost:3000/profiles"; */
 
     const url = "http://api.staybusy.ng:3000/profiles";
 
@@ -69,61 +71,72 @@ class EditProfile extends Component {
       "nationality": this.state.nationality,
       "state": this.state.state,
       "lga": this.state.lga,
-      "photo": "https://source.unsplash.com/user/erondu/1600x900",
+      "photo": "https://picsum.photos/200/300",
       "firstName": this.state.fname,
-      "lastName": this.state.lname
-    
+      "lastName": this.state.lname,
+      "token": sessionStorage.getItem('token')
+
     }
 
-    axios({
+    console.log(data);
 
-      method: "post",
-      url: url,
-      data: data,
-       mode: 'no-cors',
-       auth: {
-         "uuid": id,
-         "token": tk
-       },
+    /* const headerConfig = {
+
       headers: {
-         /* "auth":{
-           "uuid": id,
-           "token": tk
-         }, */
-
-          "Accept": "application/json",
-            "Content-Type": "application/json;text/plain;charset=utf-8"
-            
-       
-      }
-
-/*        Authorization: {
 
         "token": tk,
-        "uuid": id
+        "uuid": id,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
 
-      }  */
-    
-    })
-    .then(response => {
-      
-      console.log(response)
-      
-    })
-    .catch(error => {
+      }
+    }; */
 
-      console.log(error);
+/*     axios.post(url, data, headerConfig).then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err)); */
 
-    });
+        axios({
 
-    console.log(data);
-  
+          method: "post",
+          url: url,
+          data: data,
+          headers: {
+
+            "token": tk,
+            "uuid": id,
+            "Content-Type": "text/plain;charset=utf-8;application/x-www-form-urlencoded"
+          
+          }
+
+    // /*        Authorization: {
+
+    //         "token": tk,
+    //         "uuid": id
+
+    //       }  */
+
+        })
+        .then(response => {
+          
+          console.log(response)
+          
+        })
+        .catch(error => {
+
+          console.log(error);
+
+        });
+
+        console.log(data); 
+
   }
 
-  onChange(e){
+  onChange(e) {
 
     this.setState({
-      
+
       [e.target.name]: e.target.value
 
     });
@@ -132,189 +145,207 @@ class EditProfile extends Component {
 
   }
 
-
-
-  handleChange(event) {
-    event.preventDefault();
-
-    // console.log(event.target.value);
-    console.log(event);
-    let name = event.target.name;
-    let value = event.target.value;
-    console.log(name, value);
-
-    let data = {};
-    data[name] = value;
-
-    this.setState(data);
-  }
-
   render() {
-    return (
-      <div className="app-wrapper">
-        <NavBarAuthenticated />
-        <div className="container app-container d-md-flex col-md-8 nx-auto">
-          <div className="app-content">
-            <h4 className="page-title">Create your profile</h4>
-            <div className="profile-cover-image-wrapper">
-              <img
-                className="profile-cover-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
-                alt="cover"
-              />
-              <button
-                className="floating-edit-button-wrapper"
-                onClick={() => this.shouldShowModal("Cover Photo")}
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="lifted-profile-image-wrapper">
-              <img
-                className="lifted-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                alt="profile image"
-              />
-              <button
-                className="floating-edit-button-wrapper --profile-picture"
-                onClick={() => this.shouldShowModal("Profile Photo")}
-                onChange={this.handleChange}
-                name="photo"
-                value={this.state.photo}
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="col-md-9 mx-auto">
-              <form>
-                <div className="form-row">
-                  <div className="form-group col-md">
-                    <label htmlFor="Fname">First Name</label>
-                    <input
-                      name="fname"
-                      className="form-control"
-                      type="text"
-                      value={this.state.fname}
-                      onChange={this.onChange}
-                      placeholder="John"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md">
-                    <label htmlFor="lname">Last Name</label>
-                    <input
-                      name="lname"
-                      className="form-control"
-                      type="text"
-                      placeholder="Doe"
-                      value={this.state.lname}
-                      onChange={this.onChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input
-                      name="phone"
-                      className="form-control"
-                      type="phone"
-                      onChange = {
-                        this.onChange
-                      }
-                      value={this.state.phone}
-                      placeholder="+234 [0] 802 345 6789"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md">
-                    <label htmlFor="nationality">Nationality</label>
-                    <input
-                      name="nationality"
-                      className="form-control"
-                      type="text"
-                      value={this.state.nationality}
-                      onChange = {
-                        this.onChange
-                      }
-                      placeholder="Nigerian"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md">
-                    <label htmlFor="state">State</label>
-                    <select
-                      name="state"
-                      className="form-control"
-                      defaultValue="lag"
-                      value={this.state.state}
-                      onChange = {
-                        this.onChange
-                      }
-                      required
-                    >
-                      <option value="lag">Lagos</option>
-                      <option value="ogun">Ogun</option>
-                      <option value="osun">Osun</option>
-                    </select>
-                  </div>
-                  <div className="form-group col-md">
-                    <label htmlFor="lga">L.G.A</label>
-                    <input
-                      name="lga"
-                      className="form-control"
-                      type="text"
-                      value={this.state.lga}
-                      onChange = {
-                        this.onChange
-                      }
-                      placeholder="Kosofe"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <button className="btn btn-gclout-blue" onClick={this.createProfile} type="submit">
-                    Create Profile
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <Footer />
-        <UploadModal
-          show={this.state.showModal}
-          handleClose={this.shouldHideModal}
-          uploadType={this.state.uploadType}
-        />
-        >
-      </div>
+    return ( <
+      div className = "app-wrapper" >
+      <
+      NavBarAuthenticated / >
+      <
+      div className = "container app-container d-md-flex col-md-8 nx-auto" >
+      <
+      div className = "app-content" >
+      <
+      h4 className = "page-title" > Create your profile < /h4> <
+      div className = "profile-cover-image-wrapper" >
+      <
+      img className = "profile-cover-image"
+      src = "https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+      alt = "cover" /
+      >
+      <
+      button className = "floating-edit-button-wrapper"
+      onClick = {
+        () => this.shouldShowModal("Cover Photo")
+      } >
+      <
+      svg width = "22"
+      height = "22"
+      viewBox = "0 0 22 22"
+      fill = "none"
+      xmlns = "http://www.w3.org/2000/svg" >
+      <
+      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+      fill = "white" /
+      >
+      <
+      /svg> <
+      /button> <
+      /div> <
+      div className = "lifted-profile-image-wrapper" >
+      <
+      img className = "lifted-profile-image"
+      src = "https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+      alt = "profile image" /
+      >
+      <
+      button className = "floating-edit-button-wrapper --profile-picture"
+      onClick = {
+        () => this.shouldShowModal("Profile Photo")
+      }
+      onChange = {
+        this.handleChange
+      }
+      name = "photo"
+      value = {
+        this.state.photo
+      } >
+      <
+      svg width = "22"
+      height = "22"
+      viewBox = "0 0 22 22"
+      fill = "none"
+      xmlns = "http://www.w3.org/2000/svg" >
+      <
+      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+      fill = "white" /
+      >
+      <
+      /svg> <
+      /button> <
+      /div> <
+      div className = "col-md-9 mx-auto" >
+      <
+      form >
+      <
+      div className = "form-row" >
+      <
+      div className = "form-group col-md" >
+      <
+      label htmlFor = "Fname" > First Name < /label> <
+      input name = "fname"
+      className = "form-control"
+      type = "text"
+      value = {
+        this.state.fname
+      }
+      onChange = {
+        this.onChange
+      }
+      placeholder = "John"
+      required /
+      >
+      <
+      /div> <
+      div className = "form-group col-md" >
+      <
+      label htmlFor = "lname" > Last Name < /label> <
+      input name = "lname"
+      className = "form-control"
+      type = "text"
+      placeholder = "Doe"
+      value = {
+        this.state.lname
+      }
+      onChange = {
+        this.onChange
+      }
+      required /
+      >
+      <
+      /div> <
+      /div> 
+
+
+      <div className = "form-row" >
+      < div className = "form-group col-md" >
+      
+      </div> 
+      <
+      div className = "form-group col-md" >
+      <
+      label htmlFor = "nationality" > Nationality < /label> <
+      input name = "nationality"
+      className = "form-control"
+      type = "text"
+      value = {
+        this.state.nationality
+      }
+      onChange = {
+        this.onChange
+      }
+      placeholder = "Nigerian"
+      required /
+      >
+      <
+      /div> <
+      /div> <
+      div className = "form-row" >
+      <
+      div className = "form-group col-md" >
+      <
+      label htmlFor = "state" > State < /label> <
+      select name = "state"
+      className = "form-control"
+      defaultValue = "lag"
+      value = {
+        this.state.state
+      }
+      onChange = {
+        this.onChange
+      }
+      required >
+      <
+      option value = "lag" > Lagos < /option> <
+      option value = "ogun" > Ogun < /option> <
+      option value = "osun" > Osun < /option> <
+      /select> <
+      /div> <
+      div className = "form-group col-md" >
+      <
+      label htmlFor = "lga" > L.G.A < /label> <
+      input name = "lga"
+      className = "form-control"
+      type = "text"
+      value = {
+        this.state.lga
+      }
+      onChange = {
+        this.onChange
+      }
+      placeholder = "Kosofe"
+      required /
+      >
+      <
+      /div> <
+      /div> <
+      div className = "d-flex" >
+      <
+      button className = "btn btn-gclout-blue"
+      onClick = {
+        this.createProfile
+      }
+      type = "submit" >
+      Create Profile <
+      /button> <
+      /div> <
+      /form> <
+      /div> <
+      /div> <
+      /div> <
+      Footer / >
+      <
+      UploadModal show = {
+        this.state.showModal
+      }
+      handleClose = {
+        this.shouldHideModal
+      }
+      uploadType = {
+        this.state.uploadType
+      }
+      /> >
+      <
+      /div>
     );
   }
 
