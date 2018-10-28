@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import NavBar from "../../components/navbar/navBar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Register extends Component {
@@ -62,11 +60,9 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          sessionStorage.setItem("data", responseJson);
+          localStorage.setItem("data", JSON.strigify(responseJson));
 
-          this.setState({
-            redirectToReferrer: true
-          });
+          this.props.login(responseJson.data.user);
         }
       })
       .catch(error => {
@@ -86,10 +82,8 @@ class Register extends Component {
   // }
 
   register(res, type) {
-    let postData;
-
     if (type === "facebook" && res.email) {
-      postData = {
+      let postData = {
         name: res.name,
         provider: type,
         email: res.email,
@@ -99,7 +93,7 @@ class Register extends Component {
     }
 
     if (type === "google" && res.w3.U3) {
-      postData = {
+      let postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
@@ -112,10 +106,6 @@ class Register extends Component {
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
-    if (this.state.redirectToReferrer || sessionStorage.getItem("data")) {
-      return <Redirect to={"/profile/create"} />;
-    }
-
     const responseFacebook = response => {
       console.log(response);
       this.signup(response, "facebook");
@@ -126,10 +116,10 @@ class Register extends Component {
       this.signup(response, "google");
     };
 
-    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+    const { password, email, phone, date_of_birth } = this.state;
     return (
+      this.props.isLoggedIn ? <Redirect to="/" /> :
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">
@@ -181,7 +171,7 @@ class Register extends Component {
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
-                        name={data_of_birth}
+                        name={date_of_birth}
                         value={this.state.date_of_birth}
                         Calendar={null}
                       />

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
-import NavBar from "../../components/navbar/navBar";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -12,8 +10,7 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: "",
-      redirect: false
+      password: ""
     };
   }
 
@@ -46,6 +43,7 @@ class Login extends Component {
       console.log("e dey");
 
       axios({
+
         method: "post",
         url: url,
         data: data,
@@ -55,33 +53,23 @@ class Login extends Component {
         }
       })
         .then(response => {
-          /*         sessionStorage.setItem(response.data.user[0].uuid) */
+          /*         localStorage.setItem(response.data.user[0].uuid) */
 
           let responseJSON = response;
 
           if (responseJSON.data) {
-            /* console.log(responseJSON.data.user.uuid);
-            console.log(responseJSON.data.user.token); */
+        
             console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token);
 
-            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
-            sessionStorage.setItem("token", responseJSON.data.user.token);
+            localStorage.setItem("uuid", responseJSON.data.user.uuid);
+            localStorage.setItem("token", responseJSON.data.user.token);
 
-            sessionStorage.setItem("data", responseJSON);
-
-            this.setState({
-              redirect: true
-            });
+            localStorage.setItem("data", JSON.stringify(responseJSON));
+            this.props.login(responseJSON.data.user);
           } else {
             console.log("login error");
           }
-
-          console.log(responseJSON);
-
-          /*        console.log(response); */
-
-          /* localStorage.setItem('token', response.data.token.token); */
         })
         .catch(error => {
           console.log(error);
@@ -107,8 +95,7 @@ class Login extends Component {
     }
 
     return (
-      <div>
-        <NavBar />
+      this.props.isLoggedIn ? <Redirect to="/" /> :
         <div className="auth-page d-flex">
           <AuthBackground />
           <div className="m-auto col-md-8 bg-white auth-page-card">
@@ -195,15 +182,10 @@ class Login extends Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 
   submit(e) {
-    this.setState({
-      loggedIn: true
-    });
-
     e.preventDefault();
 
     window.axios

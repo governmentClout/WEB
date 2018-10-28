@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { AuthProvider, AuthConsumer } from "./components/authcontext";
+import NavBarAuthenticated from "./components/navbar/navBarAuthenticated";
+import NavBar from "./components/navbar/navBar";
 
 class App extends Component {
   render() {
     return (
-          // TODO: Make the normal navbar show when the user is not logged in,
-          // and the authenticated navbar show when the user is logged in
-          <div>
-            {this.props.children}
-          </div>
+      <AuthProvider>
+        <AuthConsumer>
+          {({ isLoggedIn, logout }) =>
+            isLoggedIn ? <NavBarAuthenticated logout={logout} /> : <NavBar />
+          }
+        </AuthConsumer>
+        {this.props.children}
+      </AuthProvider>
     );
   }
 }
