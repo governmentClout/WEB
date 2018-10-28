@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
-import axios from 'axios';
+import axios from "axios";
 
 class MakePost extends Component {
   constructor(props) {
@@ -46,7 +46,11 @@ class MakePost extends Component {
   }
   render() {
     return (
-      <div className={this.props.type !== "poll" ? "make-post": "make-post not-rounded"}>
+      <div
+        className={
+          this.props.type !== "poll" ? "make-post" : "make-post not-rounded"
+        }
+      >
         <div className="make-post-header d-flex">
           {this.props.type !== "poll" ? (
             <>
@@ -103,96 +107,82 @@ class MakePost extends Component {
 export default MakePost;
 
 class PostCreation extends Component {
-  
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      
-      wordCount: 0, 
-      post: "", 
-      uploadImages: false 
-    
+      wordCount: 0,
+      post: "",
+      uploadImages: false
     };
-  
   }
 
-  dataChange(ev){
-
-    this.setState ({
-
+  dataChange(ev) {
+    this.setState({
       [ev.target.name]: ev.target.value
-
-    })
-
+    });
   }
 
   postData(ev) {
-
     const id = sessionStorage.getItem("uuid"),
-          token = sessionStorage.getItem("token");
-    
+      token = sessionStorage.getItem("token");
+
     console.log(id);
-    console.log(token); 
+    console.log(token);
 
     ev.preventDefault();
 
     const post = this.state.post;
 
     const data = {
-
       post
-
-    }
+    };
 
     console.log(data);
+    console.log("lmao");
 
-/*     const url = "http://api.gclout.com:3000/posts"; */
+    /*     const url = "http://api.gclout.com:3000/posts"; */
 
     /* if(this.state.post){ */
 
-      fetch('http://api.gclout.com:3000/posts', {
+    // fetch('http://api.gclout.com:3000/posts', {
+    // method: "post",
+    // body: JSON.stringify({
+    //   post: this.state.post
+    //   }),
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   "token": token,
+    //   "uuid": id
+    // }
+    // }).then(function(response){
+    //   console.log(response);
+    // }).then(function(body){
+    //   console.log(body);
+    // });
+
+    axios({
       method: "post",
-      body: JSON.stringify({
-        post: this.state.post
-        }),
+      url: "http://api.gclout.com/posts",
+      data: data,
       headers: {
-        "Content-Type": "application/json",
-        "token": token,
-        "uuid": id
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        token: token,
+        mode: "no-cors",
+        uuid: id
       }
-      }).then(function(response){
+    })
+      .then(response => {
         console.log(response);
-      }).then(function(body){
-        console.log(body);
-      }); 
+      })
+      .catch(err => console.log(err));
 
-/*       axios({
-
-        method: "post",
-        url: url,
-        data: data,
-        headers: {
-
-          "Content-Type": "text/plain;charset=utf-8;application/json",
-          "token": token,
-          "uuid": id
-
-        }
-
-      }).then(response => {
-
-        console.log(response);
-
-      }).catch(err => console.log(err));  */
-
-/*       console.log(axios)
+    /*       console.log(axios)
  */
     /* } */
-
-
   }
-  
+
   updateWordCount = event => {
     this.setState({ post: event.target.value });
     if (this.state.post === "") {
@@ -202,17 +192,19 @@ class PostCreation extends Component {
       this.setState({ wordCount: wordCount });
     }
   };
-  
+
   showImageUploader = event => {
     event.preventDefault();
     let currentState = this.state.uploadImages;
     this.setState({ uploadImages: !currentState });
   };
-  
+
   render() {
     return (
       <div
-        className={ this.props.show ? "new-post-container show" : "new-post-container" }
+        className={
+          this.props.show ? "new-post-container show" : "new-post-container"
+        }
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>

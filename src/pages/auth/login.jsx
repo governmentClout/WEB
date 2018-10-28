@@ -38,7 +38,7 @@ class Login extends Component {
     
     };
 
-    const url = "http://api.staybusy.ng:3000/login";
+    const url = "http://api.gclout.com:3000/login";
 
     if (this.state.email && this.state.password) {
       /* axios sraers here */
@@ -197,7 +197,7 @@ class Login extends Component {
     e.preventDefault();
 
     window.axios
-      .post("http://api.staybusy.ng:3000/login", {
+      .post("http://api.gclout.com:3000/login", {
         name: this.state.email,
         password: this.state.password
       })

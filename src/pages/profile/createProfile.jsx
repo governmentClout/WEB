@@ -3,13 +3,10 @@ import React, { Component } from "react";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
-import axios from 'axios';
-
+import axios from "axios";
 
 class CreateProfile extends Component {
-
   constructor(props) {
-
     super(props);
 
     this.state = {
@@ -22,67 +19,52 @@ class CreateProfile extends Component {
       state: "",
       lga: "",
       photo: ""
-
     };
 
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
     this.createProfile = this.createProfile.bind(this);
-
   }
 
   shouldShowModal = type => {
-  
     this.setState({
       showModal: true,
       uploadType: type
-  
     });
-  
   };
 
   shouldHideModal = () => {
-  
     this.setState({
       showModal: false
-  
     });
-  
   };
 
   dataChange(ev) {
-  
     this.setState({
-  
       [ev.target.name]: ev.target.value
-  
     });
-  
   }
 
   createProfile(e) {
-
-    const id = sessionStorage.getItem('uuid'),
-          tk = sessionStorage.getItem('token');
+    const id = sessionStorage.getItem("uuid"),
+      tk = sessionStorage.getItem("token");
 
     e.preventDefault();
 
-/*     const url = "http://localhost:3000/profiles"; */
+    /*     const url = "http://localhost:3000/profiles"; */
 
-    const url = "http://api.staybusy.ng:3000/profiles";
+    const url = "http://api.gclout.com:3000/profiles";
 
     const data = {
-
-      "uuid": sessionStorage.getItem('uuid'),
-      "nationality": this.state.nationality,
-      "state": this.state.state,
-      "lga": this.state.lga,
-      "photo": "https://picsum.photos/200/300",
-      "firstName": this.state.fname,
-      "lastName": this.state.lname,
-      "token": sessionStorage.getItem('token')
-
-    }
+      uuid: sessionStorage.getItem("uuid"),
+      nationality: this.state.nationality,
+      state: this.state.state,
+      lga: this.state.lga,
+      photo: "https://picsum.photos/200/300",
+      firstName: this.state.fname,
+      lastName: this.state.lname,
+      token: sessionStorage.getItem("token")
+    };
 
     console.log(data);
 
@@ -98,57 +80,46 @@ class CreateProfile extends Component {
       }
     }; */
 
-/*     axios.post(url, data, headerConfig).then(res => {
+    /*     axios.post(url, data, headerConfig).then(res => {
         console.log(res);
       })
       .catch(err => console.log(err)); */
 
-        axios({
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        token: tk,
+        uuid: id,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        Accept: "application/json",
+        "X-Requested-With": "application/xmlHTTPRequest"
+      }
 
-          method: "post",
-          url: url,
-          data: data,
-          headers: {
+      // /*        Authorization: {
 
-            "token": tk,
-            "uuid": id,
-            "Content-Type": "text/plain;charset=utf-8;application/x-www-form-urlencoded"
-          
-          }
+      //         "token": tk,
+      //         "uuid": id
 
-    // /*        Authorization: {
+      //       }  */
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-    //         "token": tk,
-    //         "uuid": id
-
-    //       }  */
-
-        })
-        .then(response => {
-          
-          console.log(response)
-          
-        })
-        .catch(error => {
-
-          console.log(error);
-
-        });
-
-        console.log(data); 
-
+    console.log(data);
   }
 
   onChange(e) {
-
     this.setState({
-
       [e.target.name]: e.target.value
-
     });
 
     console.log(this.state);
-
   }
 
   render() {
@@ -320,7 +291,7 @@ class CreateProfile extends Component {
 
 //    console.log(uuid);
 
-/*  axios.put('http://api.staybusy.ng:3000/profiles', {
+/*  axios.put('http://api.gclout.com:3000/profiles', {
 
     "uuid": uuid,
     "nationality": this.state.nationality,
@@ -335,7 +306,7 @@ class CreateProfile extends Component {
     console.log(response);
 
   }) */
-// const url = "http://api.staybusy.ng:3000/profiles/";
+// const url = "http://api.gclout.com:3000/profiles/";
 
 // const data = {
 //   uuid: uuid,

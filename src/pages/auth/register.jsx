@@ -40,7 +40,7 @@ class Register extends Component {
       redirectToReferrer: false
     };
 
-    const url = "http://api.staybusy.ng:3000/users";
+    const url = "http://api.gclout.com:3000/users";
     console.log(data);
 
     /* console.log(this.state); */
