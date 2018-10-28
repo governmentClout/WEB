@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
+import axios from 'axios';
 
 class MakePost extends Component {
   constructor(props) {
@@ -115,6 +116,82 @@ class PostCreation extends Component {
     };
   
   }
+
+  dataChange(ev){
+
+    this.setState ({
+
+      [ev.target.name]: ev.target.value
+
+    })
+
+  }
+
+  postData(ev) {
+
+    const id = sessionStorage.getItem("uuid"),
+          token = sessionStorage.getItem("token");
+    
+    console.log(id);
+    console.log(token); 
+
+    ev.preventDefault();
+
+    const post = this.state.post;
+
+    const data = {
+
+      post
+
+    }
+
+    console.log(data);
+
+/*     const url = "http://api.gclout.com:3000/posts"; */
+
+    /* if(this.state.post){ */
+
+      fetch('http://api.gclout.com:3000/posts', {
+      method: "post",
+      body: JSON.stringify({
+        post: this.state.post
+        }),
+      headers: {
+        "Content-Type": "application/json",
+        "token": token,
+        "uuid": id
+      }
+      }).then(function(response){
+        console.log(response);
+      }).then(function(body){
+        console.log(body);
+      }); 
+
+/*       axios({
+
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
+
+          "Content-Type": "text/plain;charset=utf-8;application/json",
+          "token": token,
+          "uuid": id
+
+        }
+
+      }).then(response => {
+
+        console.log(response);
+
+      }).catch(err => console.log(err));  */
+
+/*       console.log(axios)
+ */
+    /* } */
+
+
+  }
   
   updateWordCount = event => {
     this.setState({ post: event.target.value });
@@ -139,7 +216,7 @@ class PostCreation extends Component {
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>
-          <form>
+          <form onSubmit={this.postData.bind(this)}>
             <div className="form-group">
               <textarea
                 className={
@@ -151,6 +228,7 @@ class PostCreation extends Component {
                 name="new_post"
                 onChange={this.updateWordCount}
                 value={this.state.post}
+                onFormChange={this.dataChange.bind(this)}
                 placeholder="Type post here..."
               />
             </div>

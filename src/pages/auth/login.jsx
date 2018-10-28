@@ -32,8 +32,10 @@ class Login extends Component {
     const password = this.state.password;
 
     const data = {
+      
       email,
       password
+    
     };
 
     const url = "http://api.staybusy.ng:3000/login";
@@ -59,8 +61,14 @@ class Login extends Component {
 
           if (responseJSON.data) {
         
-            console.log(responseJSON.data.user.uuid);
-            console.log(responseJSON.data.user.token);
+            /* console.log(responseJSON.data.user.uuid);
+            console.log(responseJSON.data.user.token); */
+
+            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+            sessionStorage.setItem("token", responseJSON.data.user.token);
+
+/*             console.log(sessionStorage.getItem("uuid"))
+            console.log(sessionStorage.getItem("token")) */
 
             localStorage.setItem("uuid", responseJSON.data.user.uuid);
             localStorage.setItem("token", responseJSON.data.user.token);
