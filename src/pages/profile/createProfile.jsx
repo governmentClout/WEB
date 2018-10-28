@@ -6,9 +6,6 @@ import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
-import {
-  PostData
-} from '../../services/PostData'
 
 class EditProfile extends Component {
 
@@ -174,7 +171,7 @@ class EditProfile extends Component {
       fill = "none"
       xmlns = "http://www.w3.org/2000/svg" >
       <
-      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 f3.25695L18.74 7.4757L20.7987 5.41695Z"
       fill = "white" /
       >
       <

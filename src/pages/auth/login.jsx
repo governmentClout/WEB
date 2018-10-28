@@ -1,4 +1,3 @@
-import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import NavBar from "../../components/navbar/navBar";
