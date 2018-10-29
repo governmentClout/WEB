@@ -10,7 +10,7 @@ import {
   PostData
 } from '../../services/PostData'
 
-class EditProfile extends Component {
+class createProfile extends Component {
 
   constructor(props) {
 
@@ -56,15 +56,15 @@ class EditProfile extends Component {
 
   createProfile(e) {
 
-        const id = sessionStorage.getItem("uuid"),
-          token = sessionStorage.getItem("token");
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
 
-          console.log(id);
-          console.log(token);
+    console.log(id);
+    console.log(token);
 
-          e.preventDefault();
+    e.preventDefault();
 
-/*     const url = "http://localhost:3000/profiles"; */
+    /*     const url = "http://localhost:3000/profiles"; */
 
     const url = "http://api.staybusy.ng:3000/profiles";
 
@@ -95,26 +95,26 @@ class EditProfile extends Component {
       }
     }; */
 
-/*     axios.post(url, data, headerConfig).then(res => {
-        console.log(res);
+    /*     axios.post(url, data, headerConfig).then(res => {
+            console.log(res);
+          })
+          .catch(err => console.log(err)); */
+    axios({
+        method: "post",
+        url: "http://api.gclout.com:3000/profiles",
+        data: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          token: token,
+          uuid: id
+        }
       })
-      .catch(err => console.log(err)); */
-axios({
-      method: "post",
-      url: "http://api.gclout.com:3000/profiles",
-      data: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        token: token,
-        uuid: id
-      }
-    })
       .then(response => {
         console.log(response);
       })
       .catch(err => console.log(err));
 
-        console.log(data); 
+    console.log(data);
 
   }
 
@@ -163,8 +163,8 @@ axios({
       fill = "white" /
       >
       <
-      /svg> <
-      /button> <
+      /svg> < /
+      button > <
       /div> <
       div className = "lifted-profile-image-wrapper" >
       <
@@ -195,8 +195,8 @@ axios({
       fill = "white" /
       >
       <
-      /svg> <
-      /button> <
+      /svg> < /
+      button > <
       /div> <
       div className = "col-md-9 mx-auto" >
       <
@@ -237,15 +237,17 @@ axios({
       required /
       >
       <
-      /div> <
-      /div> 
+      /div> < /
+      div >
 
 
-      <div className = "form-row" >
-      < div className = "form-group col-md" >
-      
-      </div> 
       <
+      div className = "form-row" >
+      <
+      div className = "form-group col-md" >
+
+      <
+      /div>  <
       div className = "form-group col-md" >
       <
       label htmlFor = "nationality" > Nationality < /label> <
@@ -262,13 +264,14 @@ axios({
       required /
       >
       <
-      /div> <
-      /div> <
+      /div> < /
+      div > <
       div className = "form-row" >
       <
       div className = "form-group col-md" >
-      <label htmlFor="state">State</label> 
-      <select name = "state"
+      <
+      label htmlFor = "state" > State < /label>  <
+      select name = "state"
       className = "form-control"
       defaultValue = "lag"
       value = {
@@ -281,8 +284,8 @@ axios({
       <
       option value = "lag" > Lagos < /option> <
       option value = "ogun" > Ogun < /option> <
-      option value = "osun" > Osun < /option> <
-      /select> <
+      option value = "osun" > Osun < /option> < /
+      select > <
       /div> <
       div className = "form-group col-md" >
       <
@@ -300,8 +303,8 @@ axios({
       required /
       >
       <
-      /div> <
-      /div> <
+      /div> < /
+      div > <
       div className = "d-flex" >
       <
       button className = "btn btn-gclout-blue"
@@ -310,12 +313,12 @@ axios({
       }
       type = "submit" >
       Create Profile <
-      /button> <
-      /div> <
-      /form> <
-      /div> <
-      /div> <
-      /div> <
+      /button> < /
+      div > <
+      /form> < /
+      div > <
+      /div> < /
+      div > <
       Footer / >
       <
       UploadModal show = {
@@ -327,8 +330,7 @@ axios({
       uploadType = {
         this.state.uploadType
       }
-      /> >
-      <
+      /> > <
       /div>
     );
   }
@@ -403,4 +405,4 @@ axios({
   }
 }
 
-export default EditProfile;
+export default createProfile;

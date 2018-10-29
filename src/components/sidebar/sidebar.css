@@ -1,6 +1,6 @@
 .sidebar {
-  width: 300px;
-  margin-right: 2em;
+  width: 270px;
+  margin-right: 1em;
 }
 .sidebar p {
   font-size: 14px;
@@ -9,11 +9,11 @@
   background: #ffffff;
   border-radius: 4px;
   padding-bottom: 2em;
+  margin-bottom: 1em;
 }
 .sidebar-footer {
   background: #ffffff;
   border-radius: 4px;
-  margin-top: 1em;
   padding: 1em;
 }
 .sidebar-cover-image-wrapper {
@@ -78,6 +78,22 @@
 }
 .sidebar-footer .smaller-margin {
   margin-bottom: 0.2em;
+}
+.advert-section {
+  padding-top: 1em;
+}
+.advert-section p {
+  font-size: 16px;
+}
+.advert-link {
+  color: #333333;
+}
+.advert-link:hover {
+  color: #00b0f0;
+  text-decoration: none;
+}
+.friends-details {
+  padding-top: 0.6em;
 }
 @media screen and (max-width: 768px) {
   .sidebar {

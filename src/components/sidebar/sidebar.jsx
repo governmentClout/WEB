@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./sidebar.css";
+import SidebarFooter from "./sidebarFooter";
 
 class Sidebar extends Component {
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar  d-none d-md-block">
         <div className="sidebar-top">
           <div className="sidebar-cover-image-wrapper">
             <img
@@ -22,37 +23,14 @@ class Sidebar extends Component {
               />
             </div>
             <h5 className="text-center">James Adewale</h5>
-            <div className="d-flex sidebar-buttons justify-content-between">
-              <button className="btn btn-gclout-blue-outline">
-                Send Message
-              </button>
-              <button className="btn btn-gclout-blue">Friends</button>
-            </div>
-          </div>
-          <div className="sidebar-section">
-            <p className="text-gclout-blue">Contact Information</p>
-            <p>Email Address</p>
-            <p>jamesadewale@gmail.com</p>
-            <br />
-            <p>Phone Number</p>
-            <p>+234 [0] 802 345 6789</p>
-          </div>
-          <div className="sidebar-section">
-            <p className="text-gclout-blue">Other Information</p>
-            <div className="d-flex">
-              <div className="section-half">
-                <p>Nationality</p>
-                <p>Nigeria</p>
-                <br />
-                <p>L.G.A</p>
-                <p>Ikeja</p>
+            <div className="d-flex justify-content-between friends-details">
+              <div className="text-center col-6">
+                <p>Following</p>
+                <h5 className="text-gclout-blue">300</h5>
               </div>
-              <div className="section-half">
-                <p>State</p>
-                <p>Lagos State</p>
-                <br />
-                <p>Date of birth</p>
-                <p>23/07/1990</p>
+              <div className="text-center col-6">
+                <p>Friends</p>
+                <h5 className="text-gclout-blue">300</h5>
               </div>
             </div>
           </div>
@@ -143,18 +121,7 @@ class Sidebar extends Component {
             </div>
           </div>
         </div>
-        <div className="sidebar-footer">
-          <p>&copy; {(new Date()).getFullYear()} GClout | All copyrights rights reserved</p>
-          <p>
-            <a href="#">Help &FAQ</a> | <a href="#">Terms Of Use</a> |{" "}
-            <a href="#">Privacy Policy</a>
-          </p>
-          <p className="smaller-margin">
-            <strong>Contact Us</strong>
-          </p>
-          <p  className="smaller-margin">Email: gclout@gmail.com</p>
-          <p  className="smaller-margin">Phone: 080 3333 3333</p>
-        </div>
+        <SidebarFooter />
       </div>
     );
   }
