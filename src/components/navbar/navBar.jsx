@@ -30,7 +30,7 @@ class NavBar extends Component {
                 className="navigation-logo"
               />
             </a>
-            <form className="searchContainer" onSubmit={this.searchHandler}>
+            <form className="searchContainer no-mobile" onSubmit={this.searchHandler}>
               <input
                 className="searchBox"
                 type="search"
