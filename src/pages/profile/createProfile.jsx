@@ -99,7 +99,7 @@ class EditProfile extends Component {
         console.log(res);
       })
       .catch(err => console.log(err)); */
-/* axios({
+axios({
       method: "post",
       url: "http://api.gclout.com:3000/profiles",
       data: data,
@@ -112,7 +112,7 @@ class EditProfile extends Component {
       .then(response => {
         console.log(response);
       })
-      .catch(err => console.log(err)); */
+      .catch(err => console.log(err));
 
         console.log(data); 
 
