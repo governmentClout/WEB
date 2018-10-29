@@ -127,7 +127,7 @@
 @media screen and (max-width: 800px) {
   .auth-page-card {
     margin: 5em auto !important;
-    border-radius: 0;
+    overflow-x: hidden;
   }
   .vertical-divider {
     display: none;

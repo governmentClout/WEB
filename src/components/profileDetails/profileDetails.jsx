@@ -33,10 +33,10 @@ class ProfileDetails extends Component {
               >
                 Edit Profile
               </button>
-              <button className="btn btn-gclout-blue mr-2">Message</button>
+              {/* <button className="btn btn-gclout-blue mr-2">Message</button>
               <button className="btn btn-gclout-blue-outline">
                 Add friend
-              </button>
+              </button> */}
             </div>
             {showModal && (
               <Modal onCloseRequest={() => this.handleToggleModal()}>

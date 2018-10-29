@@ -1,5 +1,5 @@
 .navigation {
-  width: 100%;
+  width: 100vw;
   height: 80px;
   padding: 10px;
   z-index: 700;
@@ -20,7 +20,7 @@
   overflow: hidden;
   max-height: 40px;
   margin: 0.6em 2em;
-  width: 400px;
+  width: 300px;
   align-items: center;
 }
 .searchIconContainer {

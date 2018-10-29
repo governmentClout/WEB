@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./navBar.css";
+import {Link} from "react-router-dom";
 
 export default class NavBarMobile extends Component {
   render() {
@@ -20,20 +21,22 @@ export default class NavBarMobile extends Component {
               </button>
             </li>
             <li className="navigation-menu-item">
-              <button className=" image-wrapper">
-                <img
-                  className="navbar-profile-image"
-                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                  alt="profile"
-                />
-              </button>
+              <a href="/profile">
+                <button className=" image-wrapper">
+                  <img
+                    className="navbar-profile-image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    alt="profile"
+                  />
+                </button>
+              </a>
             </li>
           </ul>
         </div>
         <nav>
           <ul className="mobile-navigation-menu d-flex justify-content-around">
             <li className="mobile-navigation-menu-item">
-              <a href="#">
+              <Link to="/activity">
                 <svg
                   width="18"
                   height="18"
@@ -48,7 +51,7 @@ export default class NavBarMobile extends Component {
                     fill="#333333"
                   />
                 </svg>
-              </a>
+              </Link>
             </li>
             <li className="mobile-navigation-menu-item">
               <a href="#">

@@ -124,12 +124,12 @@ class Register extends Component {
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
-          <div className="m-auto col-md-8 bg-white auth-page-card">
+          <div className="m-auto col-lg-8 col-md-10 bg-white auth-page-card">
             <h2 className="auth-card-title text-center mb-3">
               Create An Account
             </h2>
             <div className="row --with-divider">
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
@@ -207,7 +207,7 @@ class Register extends Component {
                 </form>
               </div>
               <div className="vertical-divider">OR</div>
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <div className="social-buttons">
                   <FacebookLogin
                     appId="2171139129879186"
