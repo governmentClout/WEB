@@ -161,20 +161,25 @@ class PostCreation extends Component {
     //   console.log(body);
     // });
 
+    const header = {
+
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+      token: token,
+      uuid: id
+
+    }
+
+    console.log(header);
+
     axios({
       
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
       mode: "no-cors",
-      headers: {
+      headers: header
     
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        token: token,
-        uuid: id
-    
-      }
     
     })
       .then(response => {
