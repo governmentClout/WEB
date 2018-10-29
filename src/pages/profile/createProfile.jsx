@@ -267,9 +267,8 @@ axios({
       div className = "form-row" >
       <
       div className = "form-group col-md" >
-      <
-      label htmlFor = "state" > State < /label> <
-      select name = "state"
+      <label htmlFor="state">State</label> 
+      <select name = "state"
       className = "form-control"
       defaultValue = "lag"
       value = {
