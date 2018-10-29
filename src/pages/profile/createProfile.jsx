@@ -56,10 +56,13 @@ class EditProfile extends Component {
 
   createProfile(e) {
 
-    const id = sessionStorage.getItem('uuid'),
-          token = sessionStorage.getItem('token');
+        const id = sessionStorage.getItem("uuid"),
+          token = sessionStorage.getItem("token");
 
-    e.preventDefault();
+          console.log(id);
+          console.log(token);
+
+          e.preventDefault();
 
 /*     const url = "http://localhost:3000/profiles"; */
 
@@ -96,7 +99,7 @@ class EditProfile extends Component {
         console.log(res);
       })
       .catch(err => console.log(err)); */
-axios({
+/* axios({
       method: "post",
       url: "http://api.gclout.com:3000/profiles",
       data: data,
@@ -109,7 +112,7 @@ axios({
       .then(response => {
         console.log(response);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err)); */
 
         console.log(data); 
 

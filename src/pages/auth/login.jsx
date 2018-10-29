@@ -40,7 +40,7 @@ class Login extends Component {
       password
     };
 
-    const url = "http://api.staybusy.ng:3000/login";
+    const url = "http://api.gclout.com:3000/login";
 
     if (this.state.email && this.state.password) {
       /* axios sraers here */
