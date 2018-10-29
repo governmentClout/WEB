@@ -173,14 +173,14 @@ class PostCreation extends Component {
     console.log(header);
 
     axios({
-      
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
-      mode: "no-cors",
-      headers: header
-    
-    
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: token,
+        uuid: id
+      }
     })
       .then(response => {
         console.log(response);
