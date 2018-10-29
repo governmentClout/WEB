@@ -17,16 +17,16 @@ class NavBarAuthenticated extends Component {
   }
   showNotifications() {
     let currentState = this.state.showNotifications;
-    this.setState({ showNotifications: !currentState });
+    this.setState({ showNotifications: !currentState, showProfile: false });
   }
   showProfile() {
     let currentState = this.state.showProfile;
-    this.setState({ showProfile: !currentState })
+    this.setState({ showProfile: !currentState, showNotifications: false });
   }
 
   render() {
     return (
-      <div className="navigation --with-shadow">
+      <div className="navigation --with-shadow  no-mobile">
         <nav className="container d-flex justify-content-between">
           <div className="d-flex">
             <a href="/" style={{ maxHeight: "70px" }}>
@@ -144,16 +144,25 @@ class NavBarAuthenticated extends Component {
                           this.state.showProfile
                             ? "profile-dropdown show"
                             : "profile-dropdown"
-                          }
-                        >
+                        }
+                      >
                         <ul className="profile-dropdown-list">
-                          <li className="profile-dropdown-list-item">
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
                             <Link to="/profile">Profile</Link>
                           </li>
-                          <li className="profile-dropdown-list-item">
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
                             <a href="#">Settings</a>
                           </li>
-                          <li className="profile-dropdown-list-item">
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
                             <button
                               className="profile-dropdown-button"
                               onClick={this.props.logout}
@@ -171,7 +180,7 @@ class NavBarAuthenticated extends Component {
             </li>
           </ul>
         </nav>
-        </div> 
+      </div>
     );
   }
 }
