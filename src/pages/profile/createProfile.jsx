@@ -1,19 +1,13 @@
-import React, {
-  Component
-} from "react";
 import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
+import React, { Component } from "react";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
-import {
-  PostData
-} from '../../services/PostData'
 
 class createProfile extends Component {
 
   constructor(props) {
-
     super(props);
 
     this.state = {
@@ -26,13 +20,11 @@ class createProfile extends Component {
       state: "",
       lga: "",
       photo: ""
-
     };
 
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
     this.createProfile = this.createProfile.bind(this);
-
   }
 
   shouldShowModal = type => {
@@ -66,20 +58,18 @@ class createProfile extends Component {
 
     /*     const url = "http://localhost:3000/profiles"; */
 
-    const url = "http://api.staybusy.ng:3000/profiles";
+    const url = "http://api.gclout.com:3000/profiles";
 
     const data = {
-
-      "uuid": sessionStorage.getItem('uuid'),
-      "nationality": this.state.nationality,
-      "state": this.state.state,
-      "lga": this.state.lga,
-      "photo": "https://picsum.photos/200/300",
-      "firstName": this.state.fname,
-      "lastName": this.state.lname,
-      "token": sessionStorage.getItem('token')
-
-    }
+      uuid: sessionStorage.getItem("uuid"),
+      nationality: this.state.nationality,
+      state: this.state.state,
+      lga: this.state.lga,
+      photo: "https://picsum.photos/200/300",
+      firstName: this.state.fname,
+      lastName: this.state.lname,
+      token: sessionStorage.getItem("token")
+    };
 
     console.log(data);
 
@@ -116,18 +106,15 @@ class createProfile extends Component {
 
     console.log(data);
 
+    console.log(data);
   }
 
   onChange(e) {
-
     this.setState({
-
       [e.target.name]: e.target.value
-
     });
 
     console.log(this.state);
-
   }
 
   render() {

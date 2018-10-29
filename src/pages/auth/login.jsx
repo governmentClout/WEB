@@ -1,4 +1,3 @@
-import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import NavBar from "../../components/navbar/navBar";
@@ -36,8 +35,10 @@ class Login extends Component {
     const password = this.state.password;
 
     const data = {
+      
       email,
       password
+    
     };
 
     const url = "http://api.gclout.com:3000/login";
@@ -47,6 +48,7 @@ class Login extends Component {
       console.log("e dey");
 
       axios({
+
         method: "post",
         url: url,
         data: data,
@@ -61,10 +63,15 @@ class Login extends Component {
           let responseJSON = response;
 
           if (responseJSON.data) {
+        
             /* console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token); */
-            console.log(responseJSON.data.user.uuid);
-            console.log(responseJSON.data.user.token);
+
+            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+            sessionStorage.setItem("token", responseJSON.data.user.token);
+
+/*             console.log(sessionStorage.getItem("uuid"))
+            console.log(sessionStorage.getItem("token")) */
 
             sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
             sessionStorage.setItem("token", responseJSON.data.user.token);
@@ -208,7 +215,7 @@ class Login extends Component {
     e.preventDefault();
 
     window.axios
-      .post("http://api.staybusy.ng:3000/login", {
+      .post("http://api.gclout.com:3000/login", {
         name: this.state.email,
         password: this.state.password
       })

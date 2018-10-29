@@ -12,7 +12,7 @@ class AuthProvider extends Component {
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
-    if (localStorage.getItem("token")) {
+    /* if (localStorage.getItem("token")) {
       this.setState({
         isLoggedIn: true,
         user: JSON.parse(localStorage.getItem("data")).data.user
@@ -22,7 +22,7 @@ class AuthProvider extends Component {
         isLoggedIn: false,
         user: {}
       });
-    }
+    } */
   }
 
   login(user) {
