@@ -40,7 +40,7 @@ class Notifications extends Component {
             </li>
           </ul>
           <div className="notification-dropdown-footer text-center">
-            <a href="#">View more</a>
+            <a href="/notifications">View more</a>
           </div>
         </div>
       </React.Fragment>

@@ -112,7 +112,7 @@ class Login extends Component {
                 </div>
                 <button className="btn btn-block btn-gclout-blue">
                   {this.state.loading ? (
-                    <i class="fas fa-circle-notch fa-spin" />
+                    <i className="fas fa-circle-notch fa-spin" />
                   ) : (
                     "Sign in"
                   )}
@@ -137,22 +137,22 @@ class Login extends Component {
             <div className="vertical-divider">OR</div>
             <div className="col-md-6">
               <div className="social-buttons">
-                <a href="#" className="social-button-facebook btn btn-block">
+                <button className="social-button-facebook btn btn-block">
                   <i className="fab fa-facebook-f" />
                   Facebook
-                </a>
-                <a href="#" className="social-button-twitter btn btn-block">
+                </button>
+                <button className="social-button-twitter btn btn-block">
                   <i className="fab fa-twitter" />
                   Twitter
-                </a>
-                <a href="#" className="social-button-google btn btn-block">
+                </button>
+                <button className="social-button-google btn btn-block">
                   <i className="fab fa-google-plus-g" />
                   Google
-                </a>
-                <a href="#" className="social-button-linkedin btn btn-block">
+                </button>
+                <button className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
-                </a>
+                </button>
               </div>
               <p className="text-center">
                 Dont have an account?{" "}

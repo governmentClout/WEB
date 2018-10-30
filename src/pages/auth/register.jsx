@@ -29,7 +29,7 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
-    this.setState({ loading: true})
+    this.setState({ loading: true });
     e.preventDefault();
 
     const data = {
@@ -47,13 +47,12 @@ class Register extends Component {
 
     /* console.log(this.state); */
     axios({
-
       method: "post",
       url: url,
       data: data,
       /* mode: 'no-cors', */
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       }
     })
       .then(response => {
@@ -62,14 +61,14 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          localStorage.setItem("data", JSON.stringify(responseJson));
+          sessionStorage.setItem("data", JSON.stringify(responseJson));
 
           this.props.login(responseJson.data.user);
         }
       })
       .catch(error => {
         console.log(error);
-        this.setState({loading: false})
+        this.setState({ loading: false });
       });
   }
 
@@ -93,6 +92,7 @@ class Register extends Component {
         provider_id: res.id,
         token: res.accessToken
       };
+      console.log(postData);
     }
 
     if (type === "google" && res.w3.U3) {
@@ -103,6 +103,7 @@ class Register extends Component {
         provider_id: res.El,
         token: res.Zi.access_token
       };
+      console.log(postData);
     }
   }
 
@@ -119,9 +120,10 @@ class Register extends Component {
       this.signup(response, "google");
     };
 
-    const { password, email, phone, date_of_birth } = this.state;
-    return (
-      this.props.isLoggedIn ? <Redirect to="/" /> :
+    const { password, email, phone } = this.state;
+    return this.props.isLoggedIn ? (
+      <Redirect to="/" />
+    ) : (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
@@ -204,7 +206,13 @@ class Register extends Component {
                     type="submit"
                     className="btn btn-block btn-gclout-blue"
                     onClick={this.handleSubmit}
-                  >{this.state.loading ? <i class="fas fa-circle-notch fa-spin" /> : "Register"} </button>
+                  >
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Register"
+                    )}{" "}
+                  </button>
                 </form>
               </div>
               <div className="vertical-divider">OR</div>
@@ -215,11 +223,14 @@ class Register extends Component {
                     autoLoad={true}
                     fields="name,email,picture"
                     callback={responseFacebook}
-                    cssClass="social-button-facebook btn btn-block"
+                    cssclassName="social-button-facebook btn btn-block"
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
-                  <a href="#" className="social-button-twitter btn btn-block">
+                  <a
+                    href="/register"
+                    className="social-button-twitter btn btn-block"
+                  >
                     <i className="fab fa-twitter" />
                     Twitter
                   </a>
@@ -232,7 +243,10 @@ class Register extends Component {
                   >
                     <i className="fab fa-google" /> Google
                   </GoogleLogin>
-                  <a href="#" className="social-button-linkedin btn btn-block">
+                  <a
+                    href="/register"
+                    className="social-button-linkedin btn btn-block"
+                  >
                     <i className="fab fa-linkedin-in" />
                     Linkedin
                   </a>

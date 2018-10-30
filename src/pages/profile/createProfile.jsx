@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
@@ -39,8 +38,8 @@ class CreateProfile extends Component {
   };
 
   createProfile(e) {
-    const id = localStorage.getItem("uuid"),
-      token = localStorage.getItem("token");
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
 
     console.log(id);
     console.log(token);
@@ -48,14 +47,14 @@ class CreateProfile extends Component {
     e.preventDefault();
 
     const data = {
-      uuid: localStorage.getItem("uuid"),
+      uuid: sessionStorage.getItem("uuid"),
       nationality: this.state.nationality,
       state: this.state.state,
       lga: this.state.lga,
       photo: "https://picsum.photos/200/300",
       firstName: this.state.fname,
       lastName: this.state.lname,
-      token: localStorage.getItem("token")
+      token: sessionStorage.getItem("token")
     };
 
     console.log(data);
@@ -117,7 +116,7 @@ class CreateProfile extends Component {
               <img
                 className="lifted-profile-image"
                 src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                alt="profile image"
+                alt="profile"
               />
               <button
                 className="floating-edit-button-wrapper --profile-picture"

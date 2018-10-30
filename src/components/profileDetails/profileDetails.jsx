@@ -52,7 +52,7 @@ class ProfileDetails extends Component {
                   <img
                     className="lifted-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="profile image"
+                    alt="profile7"
                   />
                 </div>
                 <h5 className="text-center">James Adewale</h5>
@@ -107,7 +107,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -118,7 +118,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile1"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -129,7 +129,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile2"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -140,7 +140,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile3"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -151,7 +151,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile4"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -162,7 +162,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile5"
                   />
                 </div>
                 <p>Marks Webber</p>
@@ -173,7 +173,7 @@ class ProfileDetails extends Component {
                   <img
                     className="officer-profile-image"
                     src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    alt="friend profile6"
                   />
                 </div>
                 <p>Marks Webber</p>

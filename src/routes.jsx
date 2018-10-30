@@ -55,16 +55,42 @@ const Routes = () => (
             path="/"
             render={props => <Home isLoggedIn={isLoggedIn} {...props} />}
           />
-          <Route exact path="/profile/create" component={ProfileCreate} />
-          <Route exact path="/profile" component={ProfilePage} />
-          <Route exact path="/friends" component={FriendsPage} />
+          <Route
+            exact
+            path="/profile/create"
+            render={props => (
+              <ProfileCreate isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={props => <ProfilePage isLoggedIn={isLoggedIn} {...props} />}
+          />
+          <Route
+            exact
+            path="/friends"
+            render={props => <FriendsPage isLoggedIn={isLoggedIn} {...props} />}
+          />
           <Route
             exact
             path="/friends/suggested"
             component={SuggestedFriendsPage}
           />
-          <Route exact path="/activity" component={ActivityPage} />
-          <Route exact path="/polls" component={OpinionPollPage} />
+          <Route
+            exact
+            path="/activity"
+            render={props => (
+              <ActivityPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/polls"
+            render={props => (
+              <OpinionPollPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
           {/* The 404 page.. Dont Touch, lol */}
           <Route component={Error404} />
         </Switch>

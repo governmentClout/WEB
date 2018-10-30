@@ -15,6 +15,7 @@ class Suggestions extends Component {
               <img
                 src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
                 className="suggestion-image"
+                alt="suggested1"
               />
             </div>
             <span className="suggested-name">Mark Anthony</span>{" "}
@@ -25,6 +26,7 @@ class Suggestions extends Component {
               <img
                 src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
                 className="suggestion-image"
+                alt="suggested2"
               />
             </div>
             <span className="suggested-name">Mark Anthony</span>{" "}
@@ -35,6 +37,7 @@ class Suggestions extends Component {
               <img
                 src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
                 className="suggestion-image"
+                alt="suggested3"
               />
             </div>
             <span className="suggested-name">Mark Anthony</span>{" "}
@@ -42,7 +45,7 @@ class Suggestions extends Component {
           </div>
         </div>
         <div className="suggestion-footer">
-          <a href="#" className="suggestion-footer-link">
+          <a href="/friends" className="suggestion-footer-link">
             View More
           </a>
         </div>

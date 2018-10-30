@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "../../assets/css/profile.css";
 import ProfileDetails from "../../components/profileDetails/profileDetails";
 import Suggestions from "../../components/suggestions/suggestions";

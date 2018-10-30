@@ -43,8 +43,8 @@ class SinglePoll extends Component {
                   checked={this.state.selectedOption === "yes"}
                   onChange={this.handleOptionChange}
                 />
-                <span class="checkmark" />
-                <label class="form-check-label" htmlFor="pollOptions">
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
                   Yes/Agree/True
                 </label>
               </div>
@@ -57,8 +57,8 @@ class SinglePoll extends Component {
                   checked={this.state.selectedOption === "no"}
                   onChange={this.handleOptionChange}
                 />
-                <span class="checkmark" />
-                <label class="form-check-label" htmlFor="pollOptions">
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
                   No/Disagree/False
                 </label>
               </div>
@@ -71,8 +71,8 @@ class SinglePoll extends Component {
                   checked={this.state.selectedOption === "maybe"}
                   onChange={this.handleOptionChange}
                 />
-                <span class="checkmark" />
-                <label class="form-check-label" htmlFor="pollOptions">
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
                   Undecided/Ambiguos
                 </label>
               </div>

@@ -14,7 +14,7 @@ class ActivityPage extends Component {
           <div className="col-md-9">
             <div className="d-flex">
               <Sidebar />
-              <div class="flex-1">
+              <div className="flex-1">
                 <MakePost />
                 <SinglePost />
                 <SinglePost postType="sponsored" />

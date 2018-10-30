@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import "./post.css";
 import PostActions from "./postActions";
 
-
 export default class SinglePost extends Component {
   static propTypes = {
     postType: PropTypes.string,
@@ -27,7 +26,7 @@ export default class SinglePost extends Component {
             </div>
             <div className="post-owner-details">
               <p>Oreoluwa Ojo</p>
-              {this.props.postType == "sponsored" ? (
+              {this.props.postType === "sponsored" ? (
                 <p className="post-type">Sponsored</p>
               ) : (
                 ""
@@ -57,6 +56,7 @@ class PostMedia extends Component {
       <div className="post-media-container">
         <img
           className="post-image img-fluid"
+          alt="post"
           src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
         />
       </div>

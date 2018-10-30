@@ -157,7 +157,7 @@ class NavBarAuthenticated extends Component {
                             className="profile-dropdown-list-item"
                             onClick={this.showProfile}
                           >
-                            <a href="#">Settings</a>
+                            <Link to="/profile">Settings</Link>
                           </li>
                           <li
                             className="profile-dropdown-list-item"

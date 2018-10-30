@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./navBar.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class NavBarMobile extends Component {
   render() {
@@ -45,8 +45,8 @@ export default class NavBarMobile extends Component {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM6 14H4V12H6V14ZM6 10H4V8H6V10ZM6 6H4V4H6V6ZM14 14H7V12H14V14ZM14 10H7V8H14V10ZM14 6H7V4H14V6Z"
                     fill="#333333"
                   />
@@ -54,7 +54,7 @@ export default class NavBarMobile extends Component {
               </Link>
             </li>
             <li className="mobile-navigation-menu-item">
-              <a href="#">
+              <Link to="polls">
                 <svg
                   width="18"
                   height="18"
@@ -63,16 +63,16 @@ export default class NavBarMobile extends Component {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM16 7.2L10 14L6 10L2 14V11L6 7L10 11L16 4.2V7.2Z"
                     fill="#333333"
                   />
                 </svg>
-              </a>
+              </Link>
             </li>
             <li className="mobile-navigation-menu-item">
-              <a href="#">
+              <a href="/notifications">
                 <svg
                   width="16"
                   height="20"
@@ -88,7 +88,7 @@ export default class NavBarMobile extends Component {
               </a>
             </li>
             <li className="mobile-navigation-menu-item">
-              <a href="#">
+              <a href="/messages">
                 <svg
                   width="20"
                   height="16"

@@ -113,7 +113,9 @@ class PostCreation extends Component {
     this.state = {
       wordCount: 0,
       post: "",
-      uploadImages: false
+      uploadImages: false,
+      disable: false,
+      loading: false
     };
   }
 
@@ -124,6 +126,7 @@ class PostCreation extends Component {
   }
 
   postData(ev) {
+    this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -137,41 +140,6 @@ class PostCreation extends Component {
     const data = {
       post
     };
-
-    console.log(data);
-    console.log("lmao");
-
-    /*     const url = "http://api.gclout.com:3000/posts"; */
-
-    /* if(this.state.post){ */
-
-    // fetch('http://api.gclout.com:3000/posts', {
-    // method: "post",
-    // body: JSON.stringify({
-    //   post: this.state.post
-    //   }),
-    // headers: {
-    //   "Content-Type": "application/json",
-    //   "token": token,
-    //   "uuid": id
-    // }
-    // }).then(function(response){
-    //   console.log(response);
-    // }).then(function(body){
-    //   console.log(body);
-    // });
-
-    const header = {
-
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-      "Access-Control-Allow-Origin": "*",
-      token: token,
-      uuid: id
-
-    }
-
-    console.log(header);
-
     axios({
       method: "post",
       url: "http://api.gclout.com:3000/posts",
@@ -183,13 +151,13 @@ class PostCreation extends Component {
       }
     })
       .then(response => {
+        this.setState({loading: false, post: ""});
         console.log(response);
       })
-      .catch(err => console.log(err));
-
-    /*       console.log(axios)
- */
-    /* } */
+      .catch(err => {
+        this.setState({loading: false, post: ""});
+        console.log(err)
+      });
   }
 
   updateWordCount = event => {
@@ -199,6 +167,11 @@ class PostCreation extends Component {
     } else {
       let wordCount = this.state.post.split(" ").length;
       this.setState({ wordCount: wordCount });
+    }
+    if (this.state.wordCount > 100 || this.state.wordCount === 0) {
+      this.setState({ disable: false });
+    } else {
+      this.setState({ disable: true });
     }
   };
 
@@ -228,8 +201,9 @@ class PostCreation extends Component {
                 rows="4"
                 name="new_post"
                 onChange={this.updateWordCount}
+                onCut={this.updateWordCount}
+                onPaste={this.updateWordCount}
                 value={this.state.post}
-                onFormChange={this.dataChange.bind(this)}
                 placeholder="Type post here..."
               />
             </div>
@@ -241,15 +215,15 @@ class PostCreation extends Component {
               <button
                 className="btn btn-gclout-blue mr-2"
                 style={{ marginBottom: "0" }}
+                disabled={!this.state.disable}
               >
-                Share post
+                {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"} 
               </button>
               <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
                 onClick={this.showImageUploader}
                 type="button"
-                role="button"
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
@@ -327,8 +301,7 @@ class ArticleCreation extends Component {
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
                 onClick={this.showImageUploader}
-                type="button"
-                role="button"
+                type="button" 
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
