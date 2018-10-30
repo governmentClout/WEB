@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
+import axios from "axios";
 
 class MakePost extends Component {
   constructor(props) {
@@ -45,7 +46,11 @@ class MakePost extends Component {
   }
   render() {
     return (
-      <div className={this.props.type !== "poll" ? "make-post": "make-post not-rounded"}>
+      <div
+        className={
+          this.props.type !== "poll" ? "make-post" : "make-post not-rounded"
+        }
+      >
         <div className="make-post-header d-flex">
           {this.props.type !== "poll" ? (
             <>
@@ -104,8 +109,89 @@ export default MakePost;
 class PostCreation extends Component {
   constructor(props) {
     super(props);
-    this.state = { wordCount: 0, post: "", uploadImages: false };
+
+    this.state = {
+      wordCount: 0,
+      post: "",
+      uploadImages: false
+    };
   }
+
+  dataChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  postData(ev) {
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+
+    console.log(id);
+    console.log(token);
+
+    ev.preventDefault();
+
+    const post = this.state.post;
+
+    const data = {
+      post
+    };
+
+    console.log(data);
+    console.log("lmao");
+
+    /*     const url = "http://api.gclout.com:3000/posts"; */
+
+    /* if(this.state.post){ */
+
+    // fetch('http://api.gclout.com:3000/posts', {
+    // method: "post",
+    // body: JSON.stringify({
+    //   post: this.state.post
+    //   }),
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   "token": token,
+    //   "uuid": id
+    // }
+    // }).then(function(response){
+    //   console.log(response);
+    // }).then(function(body){
+    //   console.log(body);
+    // });
+
+    const header = {
+
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+      token: token,
+      uuid: id
+
+    }
+
+    console.log(header);
+
+    axios({
+      method: "post",
+      url: "http://api.gclout.com:3000/posts",
+      data: data,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: token,
+        uuid: id
+      }
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => console.log(err));
+
+    /*       console.log(axios)
+ */
+    /* } */
+  }
+
   updateWordCount = event => {
     this.setState({ post: event.target.value });
     if (this.state.post === "") {
@@ -115,11 +201,13 @@ class PostCreation extends Component {
       this.setState({ wordCount: wordCount });
     }
   };
+
   showImageUploader = event => {
     event.preventDefault();
     let currentState = this.state.uploadImages;
     this.setState({ uploadImages: !currentState });
   };
+
   render() {
     return (
       <div
@@ -129,7 +217,7 @@ class PostCreation extends Component {
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>
-          <form>
+          <form onSubmit={this.postData.bind(this)}>
             <div className="form-group">
               <textarea
                 className={
@@ -141,6 +229,7 @@ class PostCreation extends Component {
                 name="new_post"
                 onChange={this.updateWordCount}
                 value={this.state.post}
+                onFormChange={this.dataChange.bind(this)}
                 placeholder="Type post here..."
               />
             </div>

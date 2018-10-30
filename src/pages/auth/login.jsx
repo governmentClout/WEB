@@ -1,4 +1,3 @@
-import { PostData } from "./../../services/PostData";
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
@@ -57,8 +56,12 @@ class Login extends Component {
           if (responseJSON.data) {
             /* console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token); */
-            console.log(responseJSON.data.user.uuid);
-            console.log(responseJSON.data.user.token);
+
+            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+            sessionStorage.setItem("token", responseJSON.data.user.token);
+
+            /*             console.log(sessionStorage.getItem("uuid"))
+            console.log(sessionStorage.getItem("token")) */
 
             localStorage.setItem("uuid", responseJSON.data.user.uuid);
             localStorage.setItem("token", responseJSON.data.user.token);
@@ -176,28 +179,6 @@ class Login extends Component {
       </div>
     );
   }
-
-  //   submit(e) {
-  //     e.preventDefault();
-
-  //     window.axios
-  //       .post("http://api.gclout.com:3000/login", {
-  //         name: this.state.email,
-  //         password: this.state.password
-  //       })
-  //       .then(response => {
-  //         console.log(response);
-
-  //         this.setState({
-  //           loggedIn: true
-  //         });
-
-  //         localStorage.setItem("token", response.data.access_token);
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //       });
-  //   }
 }
 
 export default Login;

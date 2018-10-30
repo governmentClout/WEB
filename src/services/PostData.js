@@ -1,6 +1,6 @@
 export function PostData(type, userData){
 
-    let baseUrl = 'http://api.staybusy.ng:3000/';
+    let baseUrl = 'http://api.gclout.com:3000/';
 
     return new Promise((resolve, reject) => {
 
