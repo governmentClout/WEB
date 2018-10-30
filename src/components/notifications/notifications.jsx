@@ -16,25 +16,25 @@ class Notifications extends Component {
           <ul className="notifications">
             <li className="notification-item">
             <div className="notification-image-wrapper">
-              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png" alt="lol" />
+              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
             </div>
              <p> <strong>Oreoluwa Ojo</strong> commented on your post. </p>
             </li>
             <li className="notification-item">
             <div className="notification-image-wrapper">
-              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png" alt="lol" />
+              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
             </div>
              <p> <strong>Oreoluwa Ojo</strong> commented on your post. </p>
             </li>
             <li className="notification-item">
             <div className="notification-image-wrapper">
-              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png" alt="lol" />
+              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
             </div>
              <p> <strong>Oreoluwa Ojo</strong> commented on your post. </p>
             </li>
             <li className="notification-item">
             <div className="notification-image-wrapper">
-              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png" alt="lol" />
+              <img className="notification-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
             </div>
              <p> <strong>Oreoluwa Ojo</strong> commented on your post. </p>
             </li>

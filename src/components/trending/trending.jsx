@@ -19,7 +19,7 @@ class Trending extends Component {
                 <img
                   className="trending-image"
                   alt="trending1"
-                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 />
               </div>
               <div className="trending-name">
@@ -56,7 +56,7 @@ class Trending extends Component {
                 <img
                   className="trending-image"
                   alt="trending2"
-                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 />
               </div>
               <div className="trending-name">
@@ -93,7 +93,7 @@ class Trending extends Component {
                 <img
                   className="trending-image"
                   alt="trending3"
-                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 />
               </div>
               <div className="trending-name">

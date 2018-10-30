@@ -55,7 +55,7 @@ class NavBarAuthenticated extends Component {
               <a href="/">Petition</a>
             </li>
             <li className="navigation-menu-item no-mobile">
-              <a href="/">Opinion poll</a>
+              <a href="/polls">Opinion poll</a>
             </li>
             <li className="navigation-menu-item only-mobile">
               <button className="navigation-menu-item navigation-menu-icon">
@@ -129,7 +129,7 @@ class NavBarAuthenticated extends Component {
                       <div className="navigation-profile-wrapper">
                         <img
                           className="navbar-profile-image"
-                          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                           alt="profile"
                         />
                       </div>

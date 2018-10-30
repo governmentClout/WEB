@@ -1,5 +1,5 @@
 .navigation {
-  width: 100vw;
+  width: calc(100vw 20px);
   height: 80px;
   padding: 10px;
   z-index: 700;
@@ -287,6 +287,7 @@
   background: transparent;
   border: none;
   padding: 0;
+  overflow: hidden;
 }
 .navigation-menu-item.centered {
   align-self: center;

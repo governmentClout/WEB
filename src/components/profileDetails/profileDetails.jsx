@@ -2,16 +2,33 @@ import React, { Component } from "react";
 import "./profileDetails.css";
 import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
+import axios from "axios"
 
 class ProfileDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      myProfile: ""
     };
   }
   handleToggleModal() {
     this.setState({ showModal: !this.state.showModal });
+  }
+  componentDidMount() {
+    if (this.state.myProfile === "") {
+      const uuid = sessionStorage.getItem("uuid");
+      axios({
+        method: "get",
+        url: `http://api.gclout.com:3000/profiles/${uuid}`,
+        headers: {
+          uuid: sessionStorage.getItem("uuid"),
+          token: sessionStorage.getItem("token")
+        }
+      })
+        .then(response => this.setstate({ myProfile: response.profile }))
+        .catch(err => this.setState({ redirect: true }));
+    }
   }
   render() {
     const { showModal } = this.state;
@@ -26,7 +43,10 @@ class ProfileDetails extends Component {
             />
           </div>
           <div className="container real-details-container">
-            <div className="top-details d-flex justify-content-end">
+            <div
+              className="top-details d-flex justify-content-end"
+              style={{ zIndex: 677 }}
+            >
               <button
                 className="btn btn-gclout-blue-outline align-self-center"
                 onClick={() => this.handleToggleModal()}
@@ -51,7 +71,7 @@ class ProfileDetails extends Component {
                 >
                   <img
                     className="lifted-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="profile7"
                   />
                 </div>
@@ -106,7 +126,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile"
                   />
                 </div>
@@ -117,7 +137,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile1"
                   />
                 </div>
@@ -128,7 +148,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile2"
                   />
                 </div>
@@ -139,7 +159,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile3"
                   />
                 </div>
@@ -150,7 +170,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile4"
                   />
                 </div>
@@ -161,7 +181,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile5"
                   />
                 </div>
@@ -172,7 +192,7 @@ class ProfileDetails extends Component {
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="friend profile6"
                   />
                 </div>

@@ -35,6 +35,7 @@
   border-radius: 50%;
   margin: auto;
   margin-bottom: 1em;
+  overflow: hidden;
 }
 .officer-profile-image {
   width: 100%;

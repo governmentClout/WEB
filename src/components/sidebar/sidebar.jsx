@@ -18,7 +18,7 @@ class Sidebar extends Component {
             <div className="sidebar-profile-image-wrapper">
               <img
                 className="sidebar-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 alt="profile"
               />
             </div>
@@ -42,7 +42,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile"
                     />
                   </div>
@@ -53,7 +53,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile2"
                     />
                   </div>
@@ -64,7 +64,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile3"
                     />
                   </div>
@@ -75,7 +75,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile4"
                     />
                   </div>
@@ -88,7 +88,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile5"
                     />
                   </div>
@@ -99,7 +99,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile6"
                     />
                   </div>
@@ -110,7 +110,7 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                       alt="friend profile7"
                     />
                   </div>

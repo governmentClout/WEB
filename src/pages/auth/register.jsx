@@ -78,11 +78,6 @@ class Register extends Component {
     });
   }
 
-  // toggleBox(){
-  //   this.setState({tosAgreement : !this.state.tosAgreement});
-  //   console.log(this.state.tosAgreement);
-  // }
-
   register(res, type) {
     if (type === "facebook" && res.email) {
       let postData = {

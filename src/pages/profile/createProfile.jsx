@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
+import { Redirect } from "react-router-dom"
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -16,7 +17,9 @@ class CreateProfile extends Component {
       nationality: "",
       state: "",
       lga: "",
-      photo: ""
+      photo: "",
+      loading: false,
+      redirect: false
     };
 
     this.onChange = this.onChange.bind(this);
@@ -38,6 +41,7 @@ class CreateProfile extends Component {
   };
 
   createProfile(e) {
+    this.setState({ loading: true });
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -51,7 +55,7 @@ class CreateProfile extends Component {
       nationality: this.state.nationality,
       state: this.state.state,
       lga: this.state.lga,
-      photo: "https://picsum.photos/200/300",
+      photo: "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
       firstName: this.state.fname,
       lastName: this.state.lname,
       token: sessionStorage.getItem("token")
@@ -70,9 +74,15 @@ class CreateProfile extends Component {
       }
     })
       .then(response => {
+        this.setState({ loading: false });
+
         console.log(response);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ loading: true });
+
+        console.log(err);
+      });
 
     console.log(data);
   }
@@ -82,8 +92,27 @@ class CreateProfile extends Component {
       [e.target.name]: e.target.value
     });
   }
+  componentDidMount() {
+    if(this.state.myProfile === "") {
+    const uuid = sessionStorage.getItem("uuid");
+    axios({
+      method: "get",
+      url: `http://api.gclout.com:3000/profiles/${uuid}`,
+      headers: {
+        uuid: sessionStorage.getItem("uuid"),
+        token: sessionStorage.getItem("token")
+      }
+    })
+      .then(response => this.setstate({ myProfile: response.profile }))
+      .catch(err => this.setState({ redirect: true }));
+  }
+  }
   render() {
-    return (
+    return !this.props.isLoggedIn ? (
+      <Redirect to="/login" />
+    ) : !this.state.redirect ? (
+      <Redirect to="/profile" />
+    ) : (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
@@ -115,7 +144,7 @@ class CreateProfile extends Component {
             <div className="lifted-profile-image-wrapper">
               <img
                 className="lifted-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 alt="profile"
               />
               <button
@@ -224,7 +253,11 @@ class CreateProfile extends Component {
                 </div>
                 <div className="d-flex">
                   <button className="btn btn-gclout-blue" type="submit">
-                    Create Profile
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Create Profile"
+                    )}{" "}
                   </button>
                 </div>
               </form>
@@ -236,7 +269,6 @@ class CreateProfile extends Component {
           handleClose={this.shouldHideModal}
           uploadType={this.state.uploadType}
         />
-        >
       </div>
     );
   }

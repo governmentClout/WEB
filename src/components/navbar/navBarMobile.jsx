@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default class NavBarMobile extends Component {
   render() {
     return (
-      <div className="navigation mobile">
+      <div className="navigation mobile --with-shadow">
         <div className="mobile-navigation-top">
           <a href="/" style={{ maxHeight: "60px" }}>
             <img
@@ -25,7 +25,7 @@ export default class NavBarMobile extends Component {
                 <button className=" image-wrapper">
                   <img
                     className="navbar-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                     alt="profile"
                   />
                 </button>

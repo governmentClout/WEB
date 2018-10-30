@@ -63,7 +63,7 @@ class EditProfile extends Component {
           <div className="lifted-profile-image-wrapper">
             <img
               className="lifted-profile-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
               alt="profile"
             />
             <button

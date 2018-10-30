@@ -19,7 +19,7 @@ export default class SinglePost extends Component {
           <div className="post-owner">
             <div className="post-owner-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 alt="lol"
                 className="post-owner-image"
               />

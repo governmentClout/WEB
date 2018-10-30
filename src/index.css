@@ -128,10 +128,11 @@ button:focus {
 .lifted-profile-image-wrapper {
   width: 160px;
   height: 160px;
-  border-radius: 50%;
+  border-radius: 80px;
   margin-bottom: 1em;
   margin-top: -80px;
   position: relative;
+  overflow: hidden;
 }
 .lifted-profile-image {
   height: 100%;

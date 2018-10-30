@@ -13,7 +13,7 @@ class Suggestions extends Component {
           <div className="single-suggestion dashed-border-bottom">
             <div className="suggestion-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 className="suggestion-image"
                 alt="suggested1"
               />
@@ -24,7 +24,7 @@ class Suggestions extends Component {
           <div className="single-suggestion dashed-border-bottom">
             <div className="suggestion-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 className="suggestion-image"
                 alt="suggested2"
               />
@@ -35,7 +35,7 @@ class Suggestions extends Component {
           <div className="single-suggestion">
             <div className="suggestion-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 className="suggestion-image"
                 alt="suggested3"
               />
