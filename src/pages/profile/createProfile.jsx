@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
+import axios from "axios";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -16,12 +17,12 @@ class CreateProfile extends Component {
       nationality: "",
       state: "",
       lga: "",
-      photo: "",
-      phone: ""
+      photo: ""
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.submit = this.submit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    // this.submit = this.submit.bind(this);
+    this.createProfile = this.createProfile.bind(this);
   }
 
   shouldShowModal = type => {
@@ -37,153 +38,51 @@ class CreateProfile extends Component {
     });
   };
 
-  dataChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    });
-  }
+  createProfile(e) {
+    const id = localStorage.getItem("uuid"),
+      token = localStorage.getItem("token");
 
-  /* postData(ev){
+    console.log(id);
+    console.log(token);
 
-    ev.preventDefault();
-
-    const id = localStorage.getItem('uuid');
-  
-    const uuid = id;
-    const nationality = this.state.nationality;
-      const state = this.state.state;
-      const lga = this.state.lga;
-    const photo = this.state.photo;
-      const firstName = this.state.fname;
-      const lastName = this.state.lname;
+    e.preventDefault();
 
     const data = {
+      uuid: localStorage.getItem("uuid"),
+      nationality: this.state.nationality,
+      state: this.state.state,
+      lga: this.state.lga,
+      photo: "https://picsum.photos/200/300",
+      firstName: this.state.fname,
+      lastName: this.state.lname,
+      token: localStorage.getItem("token")
+    };
 
-      uuid,
-      nationality,
-      state,
-      lga,
-      photo,
-      firstName,
-      lastName
-    
-    }
-
-    const url = "http://api.staybusy.ng:3000/profiles";
+    console.log(data);
 
     axios({
-
-      method: 'post',
-      url: url,
+      method: "post",
+      url: "http://api.gclout.com:3000/profiles",
       data: data,
       headers: {
-
-        'Content-Type': 'text/plain;charset=utf-8',
-
+        "Content-Type": "application/json;charset=utf-8",
+        token: token,
+        uuid: id
       }
-    }).then(response => {
-
-      console.log(response);
-
     })
-  
-  } */
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => console.log(err));
 
-  handleChange(event) {
-    event.preventDefault();
-
-    // console.log(event.target.value);
-    console.log(event);
-    let name = event.target.name;
-    let value = event.target.value;
-    console.log(name, value);
-
-    let data = {};
-    data[name] = value;
-
-    this.setState(data);
+    console.log(data);
   }
 
-  /* dataChange(ev) {
-
+  onChange(e) {
     this.setState({
-
-      [ev.targer.name]: ev.target.value
-
-    })
-
+      [e.target.name]: e.target.value
+    });
   }
-
-  postData(ev) {
-
-    ev.preventDefault();
-
-    const fname = this.state.fname, 
-          lname = this.state.lname, 
-          email = this.state.email, 
-          phone = this.state.phone, 
-          nationality = this.state.nationality, 
-          state = this.state.state, 
-          lga = this.state.lga, 
-          password = this.state.password, 
-          cPassword = this.state.cPassword
-
-  } */
-
-  /*componentDidMount() {
-
-      const uuid = localStorage.getItem('uuid'),
-            token = localStorage.getItem('token');
-
-    axios.get('http://api.staybusy.ng:3000/users')
-    .then(res => console.log(res));
-
-      /* axios({
-
-        method: 'get',
-        url: 'http://api.staybusy.ng:3000/users',
-        headers: {
-
-          uuid: '46b5a59b-b9bc-4df2-b49f-12786374bd71',
-          token: 'sdwus6Z2isARGUw6WFf8ZEijXsFyrlj5too0fj5qNITTp2Ts6STSk7mVoKQCTV1OuedmnGgoLV0cYreFDOWcmM3mmt1SwvGMYrtE'
-        
-          }
-
-      }).then(response => {
-
-              console.log(response);
-
-      }).then(error => {
-
-        console.log(error);
-
-      }) */
-
-  /* this.findUserById(this.props.params.uuid) 
-
-
-
-
-    this.findUserById(this.props.params.id) 
-
-  } */
-
-  /* editProfile(id){
-
-    this.setState({
-
-      editMode: true
-
-    })
-
-    const uuid = localStorage.getItem('uuid'),
-      token = localStorage.getItem('token');
-
-    let contactId = uuid;
-    alert(contactId);
-
-  } */
-
   render() {
     return (
       <div className="app-wrapper">
@@ -223,7 +122,7 @@ class CreateProfile extends Component {
               <button
                 className="floating-edit-button-wrapper --profile-picture"
                 onClick={() => this.shouldShowModal("Profile Photo")}
-                onChange={this.handleChange}
+                onChange={this.onChange}
                 name="photo"
                 value={this.state.photo}
               >
@@ -242,16 +141,16 @@ class CreateProfile extends Component {
               </button>
             </div>
             <div className="col-md-9 mx-auto">
-              <form onSubmit={this.submit}>
+              <form onSubmit={this.createProfile}>
                 <div className="form-row">
                   <div className="form-group col-md">
-                    <label htmlFor="Fname">First Name</label>
+                    <label htmlFor="fname">First Name</label>
                     <input
                       name="fname"
                       className="form-control"
                       type="text"
                       value={this.state.fname}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       placeholder="John"
                       required
                     />
@@ -264,7 +163,7 @@ class CreateProfile extends Component {
                       type="text"
                       placeholder="Doe"
                       value={this.state.lname}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       required
                     />
                   </div>
@@ -276,7 +175,7 @@ class CreateProfile extends Component {
                       name="phone"
                       className="form-control"
                       type="phone"
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       value={this.state.phone}
                       placeholder="+234 [0] 802 345 6789"
                       required
@@ -289,7 +188,7 @@ class CreateProfile extends Component {
                       className="form-control"
                       type="text"
                       value={this.state.nationality}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       placeholder="Nigerian"
                       required
                     />
@@ -303,7 +202,7 @@ class CreateProfile extends Component {
                       className="form-control"
                       defaultValue="lag"
                       value={this.state.state}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       required
                     >
                       <option value="lag">Lagos</option>
@@ -318,7 +217,7 @@ class CreateProfile extends Component {
                       className="form-control"
                       type="text"
                       value={this.state.lga}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       placeholder="Kosofe"
                       required
                     />
@@ -333,7 +232,6 @@ class CreateProfile extends Component {
             </div>
           </div>
         </div>
-        <Footer />
         <UploadModal
           show={this.state.showModal}
           handleClose={this.shouldHideModal}
@@ -344,75 +242,5 @@ class CreateProfile extends Component {
     );
   }
 }
-
-// submit(e) {
-//   e.preventDefault();
-
-//   const uuid = localStorage.getItem("uuid"),
-//     token = localStorage.getItem("token");
-
-//    console.log(uuid);
-
-/*  axios.put('http://api.staybusy.ng:3000/profiles', {
-
-    "uuid": uuid,
-    "nationality": this.state.nationality,
-    "state": this.state.state,
-    "lga": this.state.lga,
-    "photo": this.state.photo,
-    "firstName": this.state.fname,
-    "lastName": this.state.lname
-    
-  }).then(response => {
-
-    console.log(response);
-
-  }) */
-// const url = "http://api.staybusy.ng:3000/profiles/";
-
-// const data = {
-//   uuid: uuid,
-//   nationality: this.state.nationality,
-//   state: this.state.state,
-//   lga: this.state.lga,
-//   photo: "http://simpleicon.com/wp-content/uploads/user1.png",
-//   firstName: this.state.fname,
-//   lastName: this.state.lname
-// };
-
-// const userToken = {
-//   token: token
-// };
-
-// console.log(userToken);
-
-// console.log(data);
-
-/* axios({
-
-    method: 'put',
-    url: url,
-    data: data,
-    mode: 'no-cors', 
-    headers: {
-      
-      'token': token,
-      'uuid': uuid,
-      'Content-Type': 'text/plain;charset=utf-8;application/json',
-      'Accept': 'application/json; charset=utf-8'
-      
-    }
-
-  }).then(response => {
-
-    console.log(response);
-  
-  }).catch(error => {
-
-    console.log(error);
-
-  }) */
-//   }
-// }
 
 export default CreateProfile;

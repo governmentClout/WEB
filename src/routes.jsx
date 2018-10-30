@@ -55,7 +55,7 @@ const Routes = () => (
             path="/"
             render={props => <Home isLoggedIn={isLoggedIn} {...props} />}
           />
-          <Route exact path="/profile/create" components={ProfileCreate} />
+          <Route exact path="/profile/create" component={ProfileCreate} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/friends" component={FriendsPage} />
           <Route

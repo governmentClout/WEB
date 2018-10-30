@@ -34,7 +34,7 @@ class Login extends Component {
       password
     };
 
-    const url = "http://api.staybusy.ng:3000/login";
+    const url = "http://api.gclout.com:3000/login";
 
     if (this.state.email && this.state.password) {
       /* axios sraers here */
@@ -55,6 +55,8 @@ class Login extends Component {
           let responseJSON = response;
 
           if (responseJSON.data) {
+            /* console.log(responseJSON.data.user.uuid);
+            console.log(responseJSON.data.user.token); */
             console.log(responseJSON.data.user.uuid);
             console.log(responseJSON.data.user.token);
 
@@ -175,27 +177,27 @@ class Login extends Component {
     );
   }
 
-  submit(e) {
-    e.preventDefault();
+  //   submit(e) {
+  //     e.preventDefault();
 
-    window.axios
-      .post("http://api.staybusy.ng:3000/login", {
-        name: this.state.email,
-        password: this.state.password
-      })
-      .then(response => {
-        console.log(response);
+  //     window.axios
+  //       .post("http://api.gclout.com:3000/login", {
+  //         name: this.state.email,
+  //         password: this.state.password
+  //       })
+  //       .then(response => {
+  //         console.log(response);
 
-        this.setState({
-          loggedIn: true
-        });
+  //         this.setState({
+  //           loggedIn: true
+  //         });
 
-        localStorage.setItem("token", response.data.access_token);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  //         localStorage.setItem("token", response.data.access_token);
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  //   }
 }
 
 export default Login;
