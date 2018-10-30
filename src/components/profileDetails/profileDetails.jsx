@@ -16,7 +16,7 @@ class ProfileDetails extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
   componentDidMount() {
-    if (this.state.myProfile === "") {
+    
       const uuid = sessionStorage.getItem("uuid");
       axios({
         method: "get",
@@ -26,9 +26,11 @@ class ProfileDetails extends Component {
           token: sessionStorage.getItem("token")
         }
       })
-        .then(response => this.setstate({ myProfile: response.profile }))
+        .then(response =>{ console.log(response.data)
+           this.setState({ myProfile: response.data.profile[0] })}
+        )
         .catch(err => this.setState({ redirect: true }));
-    }
+
   }
   render() {
     const { showModal } = this.state;
@@ -75,7 +77,7 @@ class ProfileDetails extends Component {
                     alt="profile7"
                   />
                 </div>
-                <h5 className="text-center">James Adewale</h5>
+                <h5 className="text-center">{this.state.myProfile.firstName}{" "}{this.state.myProfile.lastName}</h5>
                 <div className="d-flex justify-content-between friends-details">
                   <div className="text-center col-6">
                     <p>Following</p>

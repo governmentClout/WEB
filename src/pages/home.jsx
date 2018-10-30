@@ -16,7 +16,7 @@ class Home extends Component {
           token: sessionStorage.getItem("token")
         }
       })
-        .then(response => this.setstate({ myProfile: response.profile }))
+        .then(response => this.setState({ myProfile: response.profile }))
         .catch(err => this.setState({ redirect: true }));
     }
   }
