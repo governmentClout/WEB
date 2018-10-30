@@ -43,30 +43,17 @@ class Login extends Component {
         method: "post",
         url: url,
         data: data,
-        /* mode: 'no-cors', */
         headers: {
           "Content-Type": "text/plain;charset=utf-8"
         }
       })
         .then(response => {
-          /*         localStorage.setItem(response.data.user[0].uuid) */
-
           let responseJSON = response;
 
           if (responseJSON.data) {
-            /* console.log(responseJSON.data.user.uuid);
-            console.log(responseJSON.data.user.token); */
-
             sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
             sessionStorage.setItem("token", responseJSON.data.user.token);
-
-            /*             console.log(sessionStorage.getItem("uuid"))
-            console.log(sessionStorage.getItem("token")) */
-
-            localStorage.setItem("uuid", responseJSON.data.user.uuid);
-            localStorage.setItem("token", responseJSON.data.user.token);
-
-            localStorage.setItem("data", JSON.stringify(responseJSON));
+            sessionStorage.setItem("data", JSON.stringify(responseJSON));
             this.props.login(responseJSON.data.user);
           } else {
             console.log("login error");
