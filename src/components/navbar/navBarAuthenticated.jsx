@@ -65,7 +65,7 @@ class NavBarAuthenticated extends Component {
             <li className="navigation-menu-item">
               <button
                 className="navigation-menu-item navigation-menu-icon"
-                data-badge="2"
+                // data-badge="2"
               >
                 <svg
                   width="20"
@@ -87,7 +87,7 @@ class NavBarAuthenticated extends Component {
                   {({ ref }) => (
                     <button
                       className="navigation-menu-item navigation-menu-icon"
-                      data-badge="9+"
+                      // data-badge="9+"
                       onClick={this.showNotifications}
                       ref={ref}
                     >

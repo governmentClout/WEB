@@ -6,7 +6,7 @@ import axios from "axios";
 class Home extends Component {
   state = { myProfile: "", redirect: false };
   componentDidMount() {
-    if (!this.state.myProfile) {
+    if (this.state.myProfile === "") {
       const uuid = sessionStorage.getItem("uuid");
       axios({
         method: "get",

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -55,7 +55,8 @@ class CreateProfile extends Component {
       nationality: this.state.nationality,
       state: this.state.state,
       lga: this.state.lga,
-      photo: "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
+      photo:
+        "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
       firstName: this.state.fname,
       lastName: this.state.lname,
       token: sessionStorage.getItem("token")
@@ -93,7 +94,6 @@ class CreateProfile extends Component {
     });
   }
   componentDidMount() {
-    if(this.state.myProfile === "") {
     const uuid = sessionStorage.getItem("uuid");
     axios({
       method: "get",
@@ -106,12 +106,9 @@ class CreateProfile extends Component {
       .then(response => this.setState({ myProfile: response.profile }))
       .catch(err => this.setState({ redirect: true }));
   }
-  }
   render() {
     return !this.props.isLoggedIn ? (
       <Redirect to="/login" />
-    ) : !this.state.redirect ? (
-      <Redirect to="/profile" />
     ) : (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
@@ -120,7 +117,7 @@ class CreateProfile extends Component {
             <div className="profile-cover-image-wrapper">
               <img
                 className="profile-cover-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
                 alt="cover"
               />
               <button
@@ -196,31 +193,17 @@ class CreateProfile extends Component {
                     />
                   </div>
                 </div>
-                <div className="form-row">
-                  <div className="form-group col-md">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input
-                      name="phone"
-                      className="form-control"
-                      type="phone"
-                      onChange={this.onChange}
-                      value={this.state.phone}
-                      placeholder="+234 [0] 802 345 6789"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md">
-                    <label htmlFor="nationality">Nationality</label>
-                    <input
-                      name="nationality"
-                      className="form-control"
-                      type="text"
-                      value={this.state.nationality}
-                      onChange={this.onChange}
-                      placeholder="Nigerian"
-                      required
-                    />
-                  </div>
+                <div className="form-group">
+                  <label htmlFor="nationality">Nationality</label>
+                  <input
+                    name="nationality"
+                    className="form-control"
+                    type="text"
+                    value={this.state.nationality}
+                    onChange={this.onChange}
+                    placeholder="Nigerian"
+                    required
+                  />
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md">

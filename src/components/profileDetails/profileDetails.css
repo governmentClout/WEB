@@ -7,6 +7,11 @@
 .friends-details {
   padding-top: 0.6em;
 }
+.officer,
+.office:hover {
+  color: #333333 !important;
+  text-decoration: none !important;
+}
 .friends-details p,
 .details-column p,
 .officer p {
@@ -24,6 +29,10 @@
 }
 .details-column .col-6 {
   padding: 0;
+}
+.profile-link, .profile-link:hover {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 .officer-details {
   background: #f2f2f2;

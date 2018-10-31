@@ -2,35 +2,43 @@ import React, { Component } from "react";
 import "./profileDetails.css";
 import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
-import axios from "axios"
+import axios from "axios";
+import {Link } from "react-router-dom";
+
+const moment = require('moment');
+
 
 class ProfileDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
-      myProfile: ""
+      myProfile: {},
+      myDetails: {}
     };
   }
   handleToggleModal() {
     this.setState({ showModal: !this.state.showModal });
   }
   componentDidMount() {
-    
-      const uuid = sessionStorage.getItem("uuid");
-      axios({
-        method: "get",
-        url: `http://api.gclout.com:3000/profiles/${uuid}`,
-        headers: {
-          uuid: sessionStorage.getItem("uuid"),
-          token: sessionStorage.getItem("token")
-        }
+    const uuid = sessionStorage.getItem("uuid");
+    axios({
+      method: "get",
+      url: `http://api.gclout.com:3000/profiles/${uuid}`,
+      headers: {
+        uuid: sessionStorage.getItem("uuid"),
+        token: sessionStorage.getItem("token")
+      }
+    })
+      .then(response => {
+        let data = JSON.parse(sessionStorage.getItem("data")).data.user;
+        console.log(response.data);
+        this.setState({
+          myProfile: response.data.profile[0],
+          myDetails: data
+        });
       })
-        .then(response =>{ console.log(response.data)
-           this.setState({ myProfile: response.data.profile[0] })}
-        )
-        .catch(err => this.setState({ redirect: true }));
-
+      .catch(err => this.setState({ redirect: true }));
   }
   render() {
     const { showModal } = this.state;
@@ -40,36 +48,16 @@ class ProfileDetails extends Component {
           <div className="profile-cover-image-wrapper">
             <img
               className="profile-cover-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
               alt="cover"
             />
           </div>
           <div className="container real-details-container">
-            <div
-              className="top-details d-flex justify-content-end"
-              style={{ zIndex: 677 }}
-            >
-              <button
-                className="btn btn-gclout-blue-outline align-self-center"
-                onClick={() => this.handleToggleModal()}
-              >
-                Edit Profile
-              </button>
-              {/* <button className="btn btn-gclout-blue mr-2">Message</button>
-              <button className="btn btn-gclout-blue-outline">
-                Add friend
-              </button> */}
-            </div>
-            {showModal && (
-              <Modal onCloseRequest={() => this.handleToggleModal()}>
-                <ProfileEdit />
-              </Modal>
-            )}
-            <div className="main-details d-md-flex justify-content-btween">
-              <div className="col-md-4 dashed-border-right details-column">
+            <div className="d-flex">
+              <div className="col-6">
                 <div
-                  className="lifted-profile-image-wrapper mx-auto"
-                  style={{ marginTop: "-160px" }}
+                  className="lifted-profile-image-wrapper"
+                  style={{ marginTop: "-80px" }}
                 >
                   <img
                     className="lifted-profile-image"
@@ -77,42 +65,63 @@ class ProfileDetails extends Component {
                     alt="profile7"
                   />
                 </div>
-                <h5 className="text-center">{this.state.myProfile.firstName}{" "}{this.state.myProfile.lastName}</h5>
+              </div>
+              <div className="top-details d-flex justify-content-end col-6">
+                <button
+                  className="btn btn-gclout-blue-outline align-self-center"
+                  onClick={() => this.handleToggleModal()}
+                >
+                  Edit Profile
+                </button>
+              </div>
+            </div>
+
+            {showModal && (
+              <Modal onCloseRequest={() => this.handleToggleModal()}>
+                <ProfileEdit />
+              </Modal>
+            )}
+            <div className="main-details d-md-flex justify-content-btween">
+              <div className="col-md-4 dashed-border-right details-column">
+                <h5 className="text-center">
+                  {this.state.myProfile.firstName}{" "}
+                  {this.state.myProfile.lastName}
+                </h5>
                 <div className="d-flex justify-content-between friends-details">
                   <div className="text-center col-6">
                     <p>Following</p>
                     <h5 className="text-gclout-blue">300</h5>
                   </div>
-                  <div className="text-center col-6">
+                  <Link to="/friends" className="profile-link text-center col-6">
                     <p>Friends</p>
                     <h5 className="text-gclout-blue">300</h5>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-4 dashed-border-right details-column mx-auto">
                 <p className="text-gclout-blue">Contact Information</p>
                 <p className="slightly-bold">Email Address</p>
-                <p>jamesadewale@gmail.com</p>
+                <p>{this.state.myDetails.email}</p>
                 <br />
                 <p className="slightly-bold">Phone Number</p>
-                <p>+234 [0] 802 345 6789</p>
+                <p>{this.state.myDetails.phone}</p>
               </div>
               <div className="col-md-4 details-column">
                 <p className="text-gclout-blue">Other Information</p>
                 <div className="d-flex justify-content-between">
                   <div className="col-6">
                     <p className="slightly-bold">Nationality</p>
-                    <p>Nigeria</p>
+                    <p>{this.state.myProfile.nationality}</p>
                     <br />
                     <p className="slightly-bold">L.G.A</p>
-                    <p>Ikeja</p>
+                    <p>{this.state.myProfile.lga}</p>
                   </div>
                   <div className="col-6">
                     <p className="slightly-bold">State</p>
-                    <p>Lagos State</p>
+                    <p>{this.state.myProfile.state} State</p>
                     <br />
                     <p className="slightly-bold">Date of birth</p>
-                    <p>23/07/1990</p>
+                    <p>{moment(this.state.myDetails.dob).format("l")}</p>
                   </div>
                 </div>
               </div>
@@ -124,7 +133,7 @@ class ProfileDetails extends Component {
               className="d-flex officers justify-content-between"
               style={{ overflow: "auto" }}
             >
-              <div className="officer">
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -134,8 +143,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>President</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -145,8 +154,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>Governor</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -156,8 +165,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>Senator</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -167,8 +176,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>Council chairman</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -178,8 +187,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>Federal rep.</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -189,8 +198,8 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>State rep.</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
@@ -200,7 +209,7 @@ class ProfileDetails extends Component {
                 </div>
                 <p>Marks Webber</p>
                 <small>Councilor</small>
-              </div>
+              </a>
             </div>
           </div>
         </div>

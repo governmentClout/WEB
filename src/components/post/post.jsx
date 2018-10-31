@@ -57,7 +57,7 @@ class PostMedia extends Component {
         <img
           className="post-image img-fluid"
           alt="post"
-          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
         />
       </div>
     );
