@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #333333;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+/* To be removed */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+/*end of code to be removed */
+.bg-white {
+  background: #ffffff !important;
+}
+.btn-gclout-blue,
+.btn-gclout-blue-outline:hover {
+  background: #00b0f0;
+  color: #ffffff;
+  border: 1px solid #00b0f0;
+  transition: all 0.5s;
+}
+.btn-gclout-blue-outline,
+.btn-gclout-blue:hover {
+  color: #00b0f0;
+  background: transparent;
+  transition: all 0.5s;
+  border: 1px solid #00b0f0;
+}
+.form-control {
+  border-radius: 4px;
+  padding: 1.3em;
+  border: 1px solid #bdbdbd;
+}
+.form-control:focus {
+  background-color: #fff;
+  border-color: #00b0f0;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+.btn {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.65em 1em;
+}
+.btn-gclout-dark {
+  background: #c4c4c4;
+  color: #ffffff;
+  transition: all 0.5s;
+}
+.btn-gclout-dark:hover {
+  background: #00b0f0;
+  transition: all 0.5s;
+}
+.react-date-picker__button {
+  border-radius: 4px;
+  padding: 0.45rem;
+  border-color: #bdbdbd !important;
+}
+.react-date-picker__button__input__input,
+.react-date-picker__button__icon,
+.react-date-picker__button__input__divider {
+  color: #495057;
+}
+.react-date-picker {
+  display: block !important;
+}
+.react-date-picker__calendar {
+  z-index: 9999 !important;
+}
+.app-wrapper {
+  background: #fafafa;
+  color: #333333;
+}
+.app-container {
+  padding: 2em 0;
+}
+.text-gclout-blue {
+  color: #00b0f0;
+}
+.app-content {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding-bottom: 100px;
+}
+button:focus {
+  outline: none;
+}
+.profile-cover-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: relative;
+}
+.profile-cover-image {
+  width: 100%;
+  height: auto;
+}
+.lifted-profile-image-wrapper {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-bottom: 1em;
+  margin-top: -80px;
+  position: relative;
+}
+.lifted-profile-image {
+  height: 100%;
+  width: 100%;
+}
+.border-red,
+.border-red:focus {
+  border-color: #f22f2f !important;
+}
+select.form-control {
+  padding: 0;
+  padding-left: 1.3em;
+}
