@@ -5,6 +5,7 @@ import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
 import SidebarFooter from "../../components/sidebar/sidebarFooter";
 import MakePost from "../../components/makePost/makePost";
+import SinglePost from "../../components/post/post";
 
 class ProfilePage extends Component {
   render() {
@@ -17,6 +18,9 @@ class ProfilePage extends Component {
               <SidebarFooter />
               <div className="flex-1">
                 <MakePost />
+                <SinglePost />
+                <SinglePost postType="sponsored" />
+                <SinglePost media />
               </div>
             </div>
           </div>

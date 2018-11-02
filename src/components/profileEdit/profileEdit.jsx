@@ -60,12 +60,14 @@ class EditProfile extends Component {
           </button>
         </div>
         <div className="col-md-9 offset-md-1">
+        <div>
           <div className="lifted-profile-image-wrapper">
             <img
               className="lifted-profile-image"
               src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
               alt="profile"
             />
+            </div>
             <button
               className="floating-edit-button-wrapper --profile-picture"
               onClick={() => this.shouldShowModal("Profile Photo")}
