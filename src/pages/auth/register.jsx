@@ -60,7 +60,7 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          localStorage.setItem("data", JSON.strigify(responseJson));
+          localStorage.setItem("data", JSON.stringify(responseJson));
 
           this.props.login(responseJson.data.user);
         }
