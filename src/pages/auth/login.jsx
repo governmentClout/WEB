@@ -3,6 +3,8 @@ import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class Login extends Component {
   constructor(props) {
@@ -49,7 +51,6 @@ class Login extends Component {
       })
         .then(response => {
           let responseJSON = response;
-
           if (responseJSON.data) {
             sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
             sessionStorage.setItem("token", responseJSON.data.user.token);
@@ -60,7 +61,7 @@ class Login extends Component {
           }
         })
         .catch(error => {
-          console.log(error);
+          this.notify(error);
           this.setState({ loading: false });
         });
 
@@ -69,6 +70,19 @@ class Login extends Component {
       console.log("noting here");
     }
   }
+  errorToast = null;
+  notify = error => {
+    if (this.errorToast) {
+      toast.dismiss(this.errorToast);
+    }
+    this.errorToast = toast.error(
+      "Login Failed: " + error.response.data.Error,
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
+  };
 
   render() {
     return this.props.isLoggedIn ? (
@@ -163,6 +177,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

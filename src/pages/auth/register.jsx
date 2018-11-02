@@ -6,6 +6,8 @@ import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class Register extends Component {
   constructor(props) {
@@ -67,7 +69,8 @@ class Register extends Component {
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
+        this.notify(error)
         this.setState({ loading: false });
       });
   }
@@ -101,6 +104,19 @@ class Register extends Component {
       console.log(postData);
     }
   }
+  errorToast = null;
+  notify = error => {
+    if (this.errorToast) {
+      toast.dismiss(this.errorToast);
+    }
+    this.errorToast = toast.error(
+      "Registration Failed: " + error.response.data.Error,
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
+  };
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
@@ -218,7 +234,7 @@ class Register extends Component {
                     autoLoad={true}
                     fields="name,email,picture"
                     callback={responseFacebook}
-                    cssclassName="social-button-facebook btn btn-block"
+                    cssClass="social-button-facebook btn btn-block"
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
@@ -256,6 +272,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }
