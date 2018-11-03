@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import React, {
   Component
 } from "react";
@@ -6,9 +7,6 @@ import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/profile.css";
 import axios from "axios";
-import {
-  PostData
-} from '../../services/PostData'
 
 class EditProfile extends Component {
 
@@ -25,7 +23,9 @@ class EditProfile extends Component {
       nationality: "",
       state: "",
       lga: "",
-      photo: ""
+      photo: "",
+      allStates: [],
+      toProfile: false
 
     };
 
@@ -49,9 +49,42 @@ class EditProfile extends Component {
   };
 
   dataChange(ev) {
+
     this.setState({
+
       [ev.target.name]: ev.target.value
+
     });
+
+  }
+  
+  componentDidMount(){
+
+    axios({
+      
+      method: 'get',
+      url: "http://locationsng-api.herokuapp.com/api/v1/states"
+
+    }).then(res => {
+
+      const states = res.data.map(state => state);
+
+      console.log(states);
+      
+      this.setState({
+
+        allStates: states
+
+      })
+
+    }).catch(err => {
+
+      console.log(err);
+
+    })
+
+
+
   }
 
   createProfile(e) {
@@ -63,10 +96,6 @@ class EditProfile extends Component {
           console.log(token);
 
           e.preventDefault();
-
-/*     const url = "http://localhost:3000/profiles"; */
-
-    const url = "http://api.staybusy.ng:3000/profiles";
 
     const data = {
 
@@ -83,24 +112,9 @@ class EditProfile extends Component {
 
     console.log(data);
 
-    /* const headerConfig = {
-
-      headers: {
-
-        "token": tk,
-        "uuid": id,
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-
-      }
-    }; */
-
-/*     axios.post(url, data, headerConfig).then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err)); */
 axios({
-      method: "post",
+
+  method: "post",
       url: "http://api.gclout.com:3000/profiles",
       data: data,
       headers: {
@@ -108,8 +122,20 @@ axios({
         token: token,
         uuid: id
       }
+
     })
       .then(response => {
+
+        if(response.data.Success){
+
+          this.setState({
+
+            toProfile: true
+
+          })
+
+        }
+
         console.log(response);
       })
       .catch(err => console.log(err));
@@ -131,8 +157,15 @@ axios({
   }
 
   render() {
-    return ( <
-      div className = "app-wrapper" >
+
+    if(this.state.toProfile === true) {
+
+      return <Redirect to="/profile" />
+
+    }
+
+    return ( 
+      <div className = "app-wrapper" >
       <
       NavBarAuthenticated / >
       <
@@ -268,25 +301,18 @@ axios({
       <
       div className = "form-group col-md" >
       <label htmlFor="state">State</label> 
-      <select name = "state"
-      className = "form-control"
-      defaultValue = "lag"
-      value = {
-        this.state.state
-      }
-      onChange = {
-        this.onChange
-      }
-      required >
-      <
-      option value = "lag" > Lagos < /option> <
-      option value = "ogun" > Ogun < /option> <
-      option value = "osun" > Osun < /option> <
-      /select> <
-      /div> <
-      div className = "form-group col-md" >
-      <
-      label htmlFor = "lga" > L.G.A < /label> <
+
+      <select 
+      onChange={this.onChange} 
+      name="state" 
+      className="form-control">
+      {this.state.allStates.map(state => {
+        return <option value={state.name}>{state.name}</option>
+      })}
+      </select>
+      </div> 
+      <div className = "form-group col-md" >
+      <label htmlFor = "lga" > L.G.A </label> <
       input name = "lga"
       className = "form-control"
       type = "text"
