@@ -305,7 +305,7 @@ axios({
       <select 
       onChange={this.onChange} 
       name="state" 
-      className="form-control">
+      >
       {this.state.allStates.map(state => {
         return <option value={state.name}>{state.name}</option>
       })}
