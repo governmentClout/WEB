@@ -85,7 +85,17 @@ class ProfileDetails extends Component {
             </div>
             {showModal && (
               <Modal onCloseRequest={() => this.handleToggleModal()}>
-                <ProfileEdit />
+              { this.state.profile.map(
+                (user) => (
+                  <ProfileEdit 
+                  userFirstName={user.firstName} 
+                  userLastName={user.lastName}
+                  nationality={user.nationality}
+                  state={user.state}
+                  lga={user.lga}
+                  />
+                )
+              )}
               </Modal>
             )}
 
