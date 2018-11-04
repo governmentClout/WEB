@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./post.css";
 import PostActions from "./postActions";
+import CommentInput from "./../comments/commentInput";
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -44,7 +45,14 @@ export default class SinglePost extends Component {
             {this.props.media ? <PostMedia /> : ""}
           </div>
         </div>
-        {this.props.postType !== "sponsored" ? <PostActions /> : ""}
+        {this.props.postType !== "sponsored" ? (
+          <>
+            {" "}
+            <PostActions /> <CommentInput />{" "}
+          </>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
