@@ -46,6 +46,7 @@ class CreateProfile extends Component {
   }
 
   createProfile(e) {
+    
     const id = sessionStorage.getItem("uuid"),
       tk = sessionStorage.getItem("token");
 

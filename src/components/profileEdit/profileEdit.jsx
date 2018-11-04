@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
 import "../../assets/css/profile.css";
+import axios from 'axios';
 
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      
       showModal: false,
       uploadType: "",
       fname: "",
@@ -15,10 +17,12 @@ class EditProfile extends Component {
       state: "",
       lga: "",
       photo: "",
-      phone: ""
+      allStates: []
+
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.editProfile = this.editProfile.bind(this);
   }
 
   handleChange(e) {
@@ -28,6 +32,73 @@ class EditProfile extends Component {
       [e.target.name]: e.target.value
 
     });
+  
+  }
+
+  editProfile(e){
+
+    e.preventDefault();
+
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+
+    const newProfile = {
+
+      nationality: this.state.nationality,
+      state: this.state.state,
+      lga: this.state.state,
+      photo: "https://picsum.photos/200/300",
+      firstName: this.state.fname,
+      lastName: this.state.lname
+
+    }
+
+    console.log(newProfile);
+
+    const url = "http://api.gclout.com:3000/profiles";
+    console.log(url);
+
+    axios({
+    
+      method: 'put',
+      url: url,
+      headers: {
+
+        token: token,
+        uuid: id,
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+
+      }
+    
+    }).then(response => {
+
+      console.log(response);
+
+    })
+
+
+  }
+
+  componentDidMount(){
+
+    axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+        .then(res => {
+
+          const states = res.data.map(state => state);
+
+          console.log(states);
+      
+          this.setState({
+
+            allStates: states
+
+          })
+        
+        }).catch(err => {
+
+          console.log(err);
+
+        })
   }
 
   shouldShowModal = type => {
@@ -100,7 +171,7 @@ class EditProfile extends Component {
           </div>
         </div>
         <div className="col-md-9 mx-auto">
-          <form onSubmit={this.submit}>
+          <form onSubmit={this.editProfile}>
             <div className="form-row">
               <div className="form-group col-md">
                 <label htmlFor="Fname">First Name</label>
@@ -128,7 +199,8 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className="form-row">
-              <div className="form-group col-md">
+            {
+              /* <div className="form-group col-md">
                 <label htmlFor="phone">Phone Number</label>
                 <input
                   name="phone"
@@ -139,7 +211,8 @@ class EditProfile extends Component {
                   placeholder="+234 [0] 802 345 6789"
                   required
                 />
-              </div>
+              </div> */
+            }
               <div className="form-group col-md">
                 <label htmlFor="nationality">Nationality</label>
                 <input
@@ -159,14 +232,18 @@ class EditProfile extends Component {
                 <select
                   name="state"
                   className="form-control"
-                  defaultValue="lag"
-                  value={this.state.state}
+                  defaultValue={this.props.state}
                   onChange={this.handleChange}
                   required
                 >
-                  <option value="lag">Lagos</option>
-                  <option value="ogun">Ogun</option>
-                  <option value="osun">Osun</option>
+                  {
+                    this.state.allStates.map(state => {
+                      
+                      return <option value={state.name}>{state.name}</option>
+                    
+                    })
+
+                  }
                 </select>
               </div>
               <div className="form-group col-md">

@@ -88,6 +88,7 @@ class ProfileDetails extends Component {
               { this.state.profile.map(
                 (user) => (
                   <ProfileEdit 
+                  key={user.uuid}
                   userFirstName={user.firstName} 
                   userLastName={user.lastName}
                   nationality={user.nationality}
