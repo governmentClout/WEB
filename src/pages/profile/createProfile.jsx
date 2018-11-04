@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UploadModal from "../../components/uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 

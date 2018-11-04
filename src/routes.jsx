@@ -14,6 +14,7 @@ import FriendsPage from "./pages/profile/friends";
 import SuggestedFriendsPage from "./pages/profile/suggestedFriends";
 import ActivityPage from "./pages/activity";
 import OpinionPollPage from "./pages/opinionPoll";
+import NotificationsPage from "./pages/notifications";
 import Error404 from "./pages/errors/404";
 import { AuthConsumer } from "./components/authcontext";
 
@@ -89,6 +90,13 @@ const Routes = () => (
             path="/polls"
             render={props => (
               <OpinionPollPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/notifications"
+            render={props => (
+              <NotificationsPage isLoggedIn={isLoggedIn} {...props} />
             )}
           />
           {/* The 404 page.. Dont Touch, lol */}

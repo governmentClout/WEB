@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
 
 class EditProfile extends Component {
   constructor(props) {
