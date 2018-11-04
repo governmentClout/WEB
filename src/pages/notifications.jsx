@@ -54,8 +54,8 @@ const Notification = props => (
         <strong>Michelle Heston</strong> {props.type === "comment" ? "commented on  your recent post" : "reshared a post:Vous êtes une société  Vous cherchez des jeunes passionnés par le domaine de la technologie? Rejoignez nous à DevFest " }  
       </p>
     </div>
-    <span className="text-muted">12h</span>
   </a>
+  <span className="text-muted">12h</span>
  </div>
 )
 export default NotificationsPage;
