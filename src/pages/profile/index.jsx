@@ -20,8 +20,6 @@ class ProfilePage extends Component {
               <div className="flex-1">
                 <MakePost />
                 <SinglePost />
-                <SinglePost postType="sponsored" />
-                <SinglePost media />
               </div>
             </div>
           </div>
