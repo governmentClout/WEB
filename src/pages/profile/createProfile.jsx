@@ -166,47 +166,34 @@ axios({
 
     return ( 
       <div className = "app-wrapper" >
-      <
-      NavBarAuthenticated / >
-      <
-      div className = "container app-container d-md-flex col-md-8 nx-auto" >
-      <
-      div className = "app-content" >
-      <
-      h4 className = "page-title" > Create your profile < /h4> <
-      div className = "profile-cover-image-wrapper" >
-      <
-      img className = "profile-cover-image"
+      <NavBarAuthenticated / >
+      <div className = "container app-container d-md-flex col-md-8 nx-auto" >
+      <div className = "app-content">
+      <h4 className = "page-title"> Create your profile </h4> 
+      <div className = "profile-cover-image-wrapper" >
+      <img className = "profile-cover-image"
       src = "https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
-      alt = "cover" /
-      >
-      <
-      button className = "floating-edit-button-wrapper"
+      alt = "cover" />
+      <button className = "floating-edit-button-wrapper"
       onClick = {
         () => this.shouldShowModal("Cover Photo")
       } >
-      <
-      svg width = "22"
+      <svg width = "22"
       height = "22"
       viewBox = "0 0 22 22"
       fill = "none"
       xmlns = "http://www.w3.org/2000/svg" >
-      <
-      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+      <path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
       fill = "white" /
       >
-      <
-      /svg> <
-      /button> <
-      /div> <
-      div className = "lifted-profile-image-wrapper" >
-      <
-      img className = "lifted-profile-image"
+      </svg> 
+      </button>
+      </div> 
+      <div className = "lifted-profile-image-wrapper" >
+      <  img className = "lifted-profile-image"
       src = "https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-      alt = "profile image" /
-      >
-      <
-      button className = "floating-edit-button-wrapper --profile-picture"
+      alt = "profile image" /      >
+      <      button className = "floating-edit-button-wrapper --profile-picture"
       onClick = {
         () => this.shouldShowModal("Profile Photo")
       }
@@ -217,30 +204,22 @@ axios({
       value = {
         this.state.photo
       } >
-      <
-      svg width = "22"
+      <      svg width = "22"
       height = "22"
       viewBox = "0 0 22 22"
       fill = "none"
       xmlns = "http://www.w3.org/2000/svg" >
-      <
-      path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-      fill = "white" /
-      >
-      <
-      /svg> <
-      /button> <
-      /div> <
-      div className = "col-md-9 mx-auto" >
-      <
-      form >
-      <
-      div className = "form-row" >
-      <
-      div className = "form-group col-md" >
-      <
-      label htmlFor = "Fname" > First Name < /label> <
-      input name = "fname"
+      < path d = "M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+      fill = "white" />
+      </svg>
+      </button>
+      </div> 
+      <  div className = "col-md-9 mx-auto" >
+      <      form >
+      <      div className = "form-row" >
+      <      div className = "form-group col-md" >
+      <      label htmlFor = "Fname" > First Name < /label> 
+      <      input name = "fname"
       className = "form-control"
       type = "text"
       value = {
@@ -250,14 +229,11 @@ axios({
         this.onChange
       }
       placeholder = "John"
-      required /
-      >
-      <
-      /div> <
-      div className = "form-group col-md" >
-      <
-      label htmlFor = "lname" > Last Name < /label> <
-      input name = "lname"
+      required /      >
+      <      /div>
+       <      div className = "form-group col-md" >
+      <      label htmlFor = "lname" > Last Name < /label> 
+      <      input name = "lname"
       className = "form-control"
       type = "text"
       placeholder = "Doe"
@@ -267,22 +243,16 @@ axios({
       onChange = {
         this.onChange
       }
-      required /
-      >
+      required / >
+      <      /div> 
       <
-      /div> <
       /div> 
 
 
       <div className = "form-row" >
       < div className = "form-group col-md" >
-      
-      </div> 
-      <
-      div className = "form-group col-md" >
-      <
-      label htmlFor = "nationality" > Nationality < /label> <
-      input name = "nationality"
+      <label htmlFor = "nationality" > Nationality < /label> 
+      <input name = "nationality"
       className = "form-control"
       type = "text"
       value = {
@@ -294,26 +264,26 @@ axios({
       placeholder = "Nigerian"
       required /
       >
-      <
-      /div> <
-      /div> <
-      div className = "form-row" >
-      <
-      div className = "form-group col-md" >
+      </div> 
+      <div className = "form-group col-md" >
       <label htmlFor="state">State</label> 
 
       <select 
       onChange={this.onChange} 
       name="state" 
+      className="form-control"
+      style={{ padding: "0.5rem 0.75rem" 
+    }}
       >
       {this.state.allStates.map(state => {
         return <option value={state.name}>{state.name}</option>
       })}
       </select>
       </div> 
-      <div className = "form-group col-md" >
-      <label htmlFor = "lga" > L.G.A </label> <
-      input name = "lga"
+      </div> < div className = "form-row" >
+      <      div className = "form-group col-md" >
+      <label htmlFor = "lga" > L.G.A </label>
+       <input name = "lga"
       className = "form-control"
       type = "text"
       value = {
@@ -323,28 +293,19 @@ axios({
         this.onChange
       }
       placeholder = "Kosofe"
-      required /
-      >
-      <
-      /div> <
-      /div> <
-      div className = "d-flex" >
-      <
-      button className = "btn btn-gclout-blue"
+      required /> 
+      </div>
+      </div> 
+      <div className = "d-flex" >
+      <button className = "btn btn-gclout-blue"
       onClick = {
         this.createProfile
       }
       type = "submit" >
-      Create Profile <
-      /button> <
-      /div> <
-      /form> <
-      /div> <
-      /div> <
-      /div> <
-      Footer / >
-      <
-      UploadModal show = {
+      Create Profile </button> 
+      </div> </form> </div> </div>
+       </div>
+      <UploadModal show = {
         this.state.showModal
       }
       handleClose = {
@@ -353,9 +314,8 @@ axios({
       uploadType = {
         this.state.uploadType
       }
-      /> >
-      <
-      /div>
+      />
+      </div>
     );
   }
 
