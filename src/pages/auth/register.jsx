@@ -15,16 +15,18 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      redirectToReferrer: false,
+      redirect: false,
       password: "",
       email: "",
       phone: "",
       date_of_birth: new Date(1980, 1, 1),
       tosAgreement: "",
-      provider: "email"
+      provider: "email",
+      user: null,
+      token: ''
     };
-    this.register = this.register.bind(this);
-    /*     this.signup = this.signup.bind(this); */
+    //this.register = this.register.bind(this);
+    this.signup = this.signup.bind(this); 
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,34 +88,98 @@ class Register extends Component {
   //   console.log(this.state.tosAgreement);
   // }
 
-  register(res, type) {
-    let postData;
+  signup(res, type) {
+    //let postData;
 
     if (type === "facebook" && res.email) {
-      postData = {
-        name: res.name,
+
+      const data = {
+
         provider: type,
         email: res.email,
-        provider_id: res.id,
-        token: res.accessToken
-      };
+        provider: type,
+        tosAgreement: true
+
+      }
+      
     }
 
     if (type === "google" && res.w3.U3) {
-      postData = {
+      
+      const data = {
+     
+        provider: type,
+        email: res.w3.U3,
+        tosAgreement: true 
+        
+      };
+
+      console.log(data);
+      const url = "http://api.gclout.com:3000/users";
+
+      axios({
+        method: "post",
+        url: url,
+        data: data,
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        }
+      }).then(res => {
+        console.log(res);
+/*         let responseJson = res;
+        sessionStorage.setItem("userData", responseJson);
+        this.setStata({
+
+          redirect: true
+
+        }) */
+      }).catch(err => {
+        console.log(err);
+      })
+    
+    }
+
+    if (type === "twitter" && res.w3.U3) {
+      
+      const data = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
-        provider_id: res.El,
-        token: res.Zi.access_token
+        tosAgreement: true 
+        
       };
+
+      console.log(data);
+
+      axios({
+        method: "post",
+        url: "http://api.gclout.com:3000/users",
+        data: data,
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        }
+      }).then(res => {
+        console.log(res);
+/*         let responseJson = res;
+        sessionStorage.setItem("userData", responseJson);
+        this.setStata({
+
+          redirect: true
+
+        }) */
+      }).catch(err => {
+        console.log(err);
+      })
+    
     }
+  
   }
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
-    if (this.state.redirectToReferrer || sessionStorage.getItem("data")) {
+    if (this.state.redirect || sessionStorage.getItem("data")) {
       return <Redirect to={"/profile/create"} />;
     }
 
@@ -126,6 +192,13 @@ class Register extends Component {
       console.log(response);
       this.signup(response, "google");
     };
+
+    const responseTwitter = response => {
+      console.log(response);
+      this.signup(response, "twitter");
+    };
+
+
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
     return (
@@ -229,10 +302,17 @@ class Register extends Component {
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
-                  <a href="#" className="social-button-twitter btn btn-block">
-                    <i className="fab fa-twitter" />
-                    Twitter
-                  </a>
+                  {
+                  /* <TwitterLogin 
+                  
+                  loginUrl="http://localhost:3000/login" 
+                   onSuccess={responseTwitter}
+                    onFailure={responseTwitter}
+                  className="social-button-twitter btn btn-block"
+                    
+                  
+                  /> */
+  }
                   <GoogleLogin
                     className="social-button-google btn btn-block"
                     clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"

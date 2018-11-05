@@ -21,6 +21,7 @@ class Home extends Component {
 
   componentWillMount() {
 
+    /* console.log(sessionStorage.getItem('userData')); */
     console.log(sessionStorage.getItem('uuid')); 
     console.log(sessionStorage.getItem('token'));
   
@@ -59,6 +60,10 @@ class Home extends Component {
       return (<Redirect to={'/login'}/>)
     
     }
+
+ /*    if(!sessionStorage.getItem('userData') || this.state.redirect){
+    return (<Redirect to={'/'}/>)
+} */
 
     return (
       <div>
