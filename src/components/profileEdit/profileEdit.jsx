@@ -62,6 +62,7 @@ class EditProfile extends Component {
     
       method: 'put',
       url: url,
+      mode: "no-cors",
       headers: {
 
         token: token,
