@@ -10,16 +10,16 @@ class Sidebar extends Component {
           <div className="sidebar-cover-image-wrapper">
             <img
               className="sidebar-cover-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
-              alt="cover image"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
+              alt="cover"
             />
           </div>
           <div className="sidebar-section --lift-up">
             <div className="sidebar-profile-image-wrapper">
               <img
                 className="sidebar-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                alt="profile image"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                alt="profile"
               />
             </div>
             <h5 className="text-center">James Adewale</h5>
@@ -42,8 +42,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -53,8 +53,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile2"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -64,8 +64,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile3"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -75,8 +75,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile4"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -88,8 +88,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile5"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -99,8 +99,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile6"
                     />
                   </div>
                   <p>Marks Webber</p>
@@ -110,8 +110,8 @@ class Sidebar extends Component {
                   <div className="politician-profile-image-wrapper">
                     <img
                       className="politician-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                      alt="friend profile image"
+                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      alt="friend profile7"
                     />
                   </div>
                   <p>Marks Webber</p>

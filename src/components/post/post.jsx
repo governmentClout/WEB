@@ -2,18 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./post.css";
 import PostActions from "./postActions";
-import axios from 'axios';
-
+import CommentInput from "./../comments/commentInput";
 
 export default class SinglePost extends Component {
-
-  constructor(props){
-    super();
-    this.state = {
-      posts: []
-    }  
-  }
-  
   static propTypes = {
     postType: PropTypes.string,
     media: PropTypes.bool
@@ -22,77 +13,40 @@ export default class SinglePost extends Component {
     postType: "simple-post",
     media: false
   };
-
-  componentDidMount() {
-        
-        const id = sessionStorage.getItem("uuid"),
-        token = sessionStorage.getItem("token");
-
-      console.log(id, token);
-      const url = "http://api.gclout.com:3000/posts?user="+id;
-      
-      console.log(url);
-
-      const header = {
-          token: token,
-          uuid: id
-        }
-
-      console.log(header);
-
-      axios({
-        
-        method: 'get',
-        url: url,
-        headers: header
-      
-      }).then(res => {
-
-        const posts = res.data.posts.map(post => post);
-        console.log(posts);
-
-        this.setState({
-
-          posts
-        
-        });
-        
-        console.log(res.data);
-      
-      }).catch(err => {
-
-        console.log(err);
-
-      })
-  }
   render() {
     return (
       <div style={{ marginBottom: "1em" }}>
-      {
-        this.state.posts.map(post => {
-          return         <div className="post-container">
+        <div className="post-container">
           <div className="post-owner">
-    
-             <div className="post-owner-image-wrapper">
+            <div className="post-owner-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                 alt="lol"
                 className="post-owner-image"
               />
-            </div> 
-  
+            </div>
+
             <div className="post-owner-details">
-              <p>{post.user}</p>
+              <p>{this.props.post.user}</p>
+              {this.props.postType === "sponsored" ? (
+                <p className="post-type">Sponsored</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="post-content">
-            <p>
-              {post.post}
-            </p>
+            <p>{this.props.post.post}</p>
           </div>
         </div>
-        })
-      }
+        {this.props.postType !== "sponsored" ? (
+          <>
+            {" "}
+            <PostActions /> <CommentInput />{" "}
+          </>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -104,7 +58,8 @@ class PostMedia extends Component {
       <div className="post-media-container">
         <img
           className="post-image img-fluid"
-          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+          alt="post"
+          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
         />
       </div>
     );

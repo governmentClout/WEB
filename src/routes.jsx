@@ -14,6 +14,7 @@ import FriendsPage from "./pages/profile/friends";
 import SuggestedFriendsPage from "./pages/profile/suggestedFriends";
 import ActivityPage from "./pages/activity";
 import OpinionPollPage from "./pages/opinionPoll";
+import NotificationsPage from "./pages/notifications";
 import Error404 from "./pages/errors/404";
 import { AuthConsumer } from "./components/authcontext";
 
@@ -53,18 +54,55 @@ const Routes = () => (
           <Route
             exact
             path="/"
-            render={props => <Home isLoggedIn={isLoggedIn} {...props} />}
+            render={props => (
+              <Home user={user} isLoggedIn={isLoggedIn} {...props} />
+            )}
           />
-          <Route exact path="/profile/create" components={ProfileCreate} />
-          <Route exact path="/profile" component={ProfilePage} />
-          <Route exact path="/friends" component={FriendsPage} />
+          <Route
+            exact
+            path="/profile/create"
+            render={props => (
+              <ProfileCreate isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={props => (
+              <ProfilePage user={user} isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/friends"
+            render={props => <FriendsPage isLoggedIn={isLoggedIn} {...props} />}
+          />
           <Route
             exact
             path="/friends/suggested"
             component={SuggestedFriendsPage}
           />
-          <Route exact path="/activity" component={ActivityPage} />
-          <Route exact path="/polls" component={OpinionPollPage} />
+          <Route
+            exact
+            path="/activity"
+            render={props => (
+              <ActivityPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/polls"
+            render={props => (
+              <OpinionPollPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/notifications"
+            render={props => (
+              <NotificationsPage isLoggedIn={isLoggedIn} {...props} />
+            )}
+          />
           {/* The 404 page.. Dont Touch, lol */}
           <Route component={Error404} />
         </Switch>

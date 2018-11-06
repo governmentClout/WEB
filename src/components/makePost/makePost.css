@@ -3,6 +3,7 @@
   background: #ffffff;
   flex: 1;
   align-self: flex-start;
+  margin-bottom: 1em;
 }
 .make-post.not-rounded > .make-post-header,
 .make-post.not-rounded {

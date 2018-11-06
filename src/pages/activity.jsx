@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../assets/css/profile.css";
+import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
@@ -14,7 +14,7 @@ class ActivityPage extends Component {
           <div className="col-md-9">
             <div className="d-flex">
               <Sidebar />
-              <div class="flex-1">
+              <div className="flex-1">
                 <MakePost />
                 <SinglePost />
                 <SinglePost postType="sponsored" />

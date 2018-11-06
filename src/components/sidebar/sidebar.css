@@ -44,6 +44,7 @@
   border-radius: 50%;
   margin: auto;
   margin-bottom: 1em;
+  overflow: hidden;
 }
 .sidebar-profile-image,
 .politician-profile-image {
@@ -65,6 +66,7 @@
   height: 70px;
   border-radius: 50%;
   margin: auto;
+  overflow: hidden;
 }
 .sidebar-politician {
   margin: 1em 0;

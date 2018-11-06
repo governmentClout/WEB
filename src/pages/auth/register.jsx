@@ -6,6 +6,8 @@ import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class Register extends Component {
   constructor(props) {
@@ -18,7 +20,8 @@ class Register extends Component {
       phone: "",
       date_of_birth: new Date(1980, 1, 1),
       tosAgreement: "",
-      provider: "email"
+      provider: "email",
+      loading: false
     };
     this.register = this.register.bind(this);
     /*     this.signup = this.signup.bind(this); */
@@ -28,6 +31,7 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ loading: true });
     e.preventDefault();
 
     const data = {
@@ -45,13 +49,12 @@ class Register extends Component {
 
     /* console.log(this.state); */
     axios({
-
       method: "post",
       url: url,
       data: data,
       /* mode: 'no-cors', */
       headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       }
     })
       .then(response => {
@@ -60,13 +63,15 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          localStorage.setItem("data", JSON.stringify(responseJson));
+          sessionStorage.setItem("data", JSON.stringify(responseJson));
 
           this.props.login(responseJson.data.user);
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
+        this.notify(error)
+        this.setState({ loading: false });
       });
   }
 
@@ -75,11 +80,6 @@ class Register extends Component {
       [key]: event.target.value
     });
   }
-
-  // toggleBox(){
-  //   this.setState({tosAgreement : !this.state.tosAgreement});
-  //   console.log(this.state.tosAgreement);
-  // }
 
   register(res, type) {
     if (type === "facebook" && res.email) {
@@ -90,6 +90,7 @@ class Register extends Component {
         provider_id: res.id,
         token: res.accessToken
       };
+      console.log(postData);
     }
 
     if (type === "google" && res.w3.U3) {
@@ -100,8 +101,22 @@ class Register extends Component {
         provider_id: res.El,
         token: res.Zi.access_token
       };
+      console.log(postData);
     }
   }
+  errorToast = null;
+  notify = error => {
+    if (this.errorToast) {
+      toast.dismiss(this.errorToast);
+    }
+    this.errorToast = toast.error(
+      "Registration Failed: " + error.response.data.Error,
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
+  };
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
@@ -116,18 +131,19 @@ class Register extends Component {
       this.signup(response, "google");
     };
 
-    const { password, email, phone, date_of_birth } = this.state;
-    return (
-      this.props.isLoggedIn ? <Redirect to="/" /> :
+    const { password, email, phone } = this.state;
+    return this.props.isLoggedIn ? (
+      <Redirect to="/" />
+    ) : (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
-          <div className="m-auto col-md-8 bg-white auth-page-card">
+          <div className="m-auto col-lg-8 col-md-10 bg-white auth-page-card">
             <h2 className="auth-card-title text-center mb-3">
               Create An Account
             </h2>
             <div className="row --with-divider">
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
@@ -171,7 +187,6 @@ class Register extends Component {
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
-                        name={date_of_birth}
                         value={this.state.date_of_birth}
                         Calendar={null}
                       />
@@ -198,16 +213,21 @@ class Register extends Component {
                       </label>
                     </div>
                   </div>
-                  <input
+                  <button
                     type="submit"
-                    value="Register"
                     className="btn btn-block btn-gclout-blue"
                     onClick={this.handleSubmit}
-                  />
+                  >
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Register"
+                    )}{" "}
+                  </button>
                 </form>
               </div>
               <div className="vertical-divider">OR</div>
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <div className="social-buttons">
                   <FacebookLogin
                     appId="2171139129879186"
@@ -218,7 +238,10 @@ class Register extends Component {
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
-                  <a href="#" className="social-button-twitter btn btn-block">
+                  <a
+                    href="/register"
+                    className="social-button-twitter btn btn-block"
+                  >
                     <i className="fab fa-twitter" />
                     Twitter
                   </a>
@@ -231,7 +254,10 @@ class Register extends Component {
                   >
                     <i className="fab fa-google" /> Google
                   </GoogleLogin>
-                  <a href="#" className="social-button-linkedin btn btn-block">
+                  <a
+                    href="/register"
+                    className="social-button-linkedin btn btn-block"
+                  >
                     <i className="fab fa-linkedin-in" />
                     Linkedin
                   </a>
@@ -246,6 +272,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

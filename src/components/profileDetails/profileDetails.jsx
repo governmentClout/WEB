@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import "./profileDetails.css";
 import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
-import axios from 'axios';
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const moment = require("moment");
 
 class ProfileDetails extends Component {
   constructor(props) {
@@ -66,23 +69,34 @@ class ProfileDetails extends Component {
           <div className="profile-cover-image-wrapper">
             <img
               className="profile-cover-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
               alt="cover"
             />
           </div>
           <div className="container real-details-container">
-            <div className="top-details d-flex justify-content-end">
-              <button
-                className="btn btn-gclout-blue-outline align-self-center"
-                onClick={() => this.handleToggleModal()}
-              >
-                Edit Profile
-              </button>
-              <button className="btn btn-gclout-blue mr-2">Message</button>
-              <button className="btn btn-gclout-blue-outline">
-                Add friend
-              </button>
+            <div className="d-flex">
+              <div className="col-6">
+                <div
+                  className="lifted-profile-image-wrapper"
+                  style={{ marginTop: "-80px" }}
+                >
+                  <img
+                    className="lifted-profile-image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="profile7"
+                  />
+                </div>
+              </div>
+              <div className="top-details d-flex justify-content-end col-6">
+                <button
+                  className="btn btn-gclout-blue-outline align-self-center"
+                  onClick={() => this.handleToggleModal()}
+                >
+                  Edit Profile
+                </button>
+              </div>
             </div>
+
             {showModal && (
               <Modal onCloseRequest={() => this.handleToggleModal()}>
               { this.state.profile.map(
@@ -105,42 +119,35 @@ class ProfileDetails extends Component {
 
             <div className="main-details d-md-flex justify-content-btween">
               <div className="col-md-4 dashed-border-right details-column">
-                <div
-                  className="lifted-profile-image-wrapper mx-auto"
-                  style={{ marginTop: "-160px" }}
-                >
-                  <img
-                    className="lifted-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="profile image"
-                  />
-                </div>
-                <h5 className="text-center">{user.firstName} {user.lastName}</h5>
+                <h5 className="text-center">{user.firstName} {" "} {user.lastName}</h5>
                 <div className="d-flex justify-content-between friends-details">
                   <div className="text-center col-6">
                     <p>Following</p>
                     <h5 className="text-gclout-blue">300</h5>
                   </div>
-                  <div className="text-center col-6">
+                  <Link
+                    to="/friends"
+                    className="profile-link text-center col-6"
+                  >
                     <p>Friends</p>
                     <h5 className="text-gclout-blue">300</h5>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-4 dashed-border-right details-column mx-auto">
                 <p className="text-gclout-blue">Contact Information</p>
                 <p className="slightly-bold">Email Address</p>
-                <p>jamesadewale@gmail.com</p>
+                <p>{this.props.user.email}</p>
                 <br />
                 <p className="slightly-bold">Phone Number</p>
-                <p>+234 [0] 802 345 6789</p>
+                <p>{this.props.user.phone}</p>
               </div>
               <div className="col-md-4 details-column">
                 <p className="text-gclout-blue">Other Information</p>
                 <div className="d-flex justify-content-between">
                   <div className="col-6">
                     <p className="slightly-bold">Nationality</p>
-                    <p>{user.nationality}</p>
+                    <p>{user.nationality_origin}</p>
                     <br />
                     <p className="slightly-bold">L.G.A</p>
                     <p>{user.lga}</p>
@@ -150,7 +157,7 @@ class ProfileDetails extends Component {
                     <p>{user.state} State</p>
                     <br />
                     <p className="slightly-bold">Date of birth</p>
-                    <p>23/07/1990</p>
+                    <p>{moment(this.props.user.dob).format("l")}</p>
                   </div>
                 </div>
               </div>
@@ -166,83 +173,83 @@ class ProfileDetails extends Component {
               className="d-flex officers justify-content-between"
               style={{ overflow: "auto" }}
             >
-              <div className="officer">
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>President</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile1"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>Governor</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile2"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>Senator</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile3"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>Council chairman</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile4"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>Federal rep.</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile5"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>State rep.</small>
-              </div>
-              <div className="officer">
+              </a>
+              <a href="/profile" className="officer">
                 <div className="officer-profile-image-wrapper">
                   <img
                     className="officer-profile-image"
-                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                    alt="friend profile image"
+                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                    alt="friend profile6"
                   />
                 </div>
                 <p>Marks Webber</p>
                 <small>Councilor</small>
-              </div>
+              </a>
             </div>
           </div>
         </div>

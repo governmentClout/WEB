@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class EditProfile extends Component {
         <div className="profile-cover-image-wrapper">
           <img
             className="profile-cover-image"
-            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
             alt="cover"
           />
           <button
@@ -71,12 +71,14 @@ class EditProfile extends Component {
           </button>
         </div>
         <div className="col-md-9 offset-md-1">
+        <div>
           <div className="lifted-profile-image-wrapper">
             <img
               className="lifted-profile-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-              alt="profile image"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+              alt="profile"
             />
+            </div>
             <button
               className="floating-edit-button-wrapper --profile-picture"
               onClick={() => this.shouldShowModal("Profile Photo")}
