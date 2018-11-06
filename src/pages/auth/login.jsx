@@ -55,7 +55,7 @@ class Login extends Component {
             sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
             sessionStorage.setItem("token", responseJSON.data.user.token);
             sessionStorage.setItem("data", JSON.stringify(responseJSON));
-            this.props.login(responseJSON.data.user);
+            this.props.login(responseJSON);
           } else {
             console.log("login error");
           }

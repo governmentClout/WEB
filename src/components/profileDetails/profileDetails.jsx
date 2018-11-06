@@ -32,7 +32,7 @@ class ProfileDetails extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          myProfile: response.data.profile[0]
+          myProfile: response.data.profile[1]
           // myDetails: this.props.user
         });
       })
