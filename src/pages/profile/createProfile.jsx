@@ -55,6 +55,25 @@ class CreateProfile extends Component {
     })
       .then(res => {
         const states = res.data.map(state => state);
+
+        console.log(states);
+
+        this.setState({
+          allStates: states
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  componentDidMount() {
+    axios({
+      method: "get",
+      url: "http://locationsng-api.herokuapp.com/api/v1/states"
+    })
+      .then(res => {
+        const states = res.data.map(state => state);
         console.log(states);
         this.setState({
           allStates: states
