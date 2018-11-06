@@ -10,33 +10,41 @@ const moment = require("moment");
 class ProfileDetails extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
-      myProfile: {},
-      myDetails: {}
+      profile: []
     };
+  }
+
+  componentDidMount() {
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+
+    const url = "http://api.gclout.com:3000/profiles/" + id;
+
+    //    console.log(id, token, url);
+
+    console.log(url);
+    console.log(id);
+    console.log(token);
+
+    axios({
+      method: "GET",
+      url: url,
+      headers: {
+        uuid: id,
+        token: token
+      }
+    }).then(res => {
+      console.log(res.data.profile);
+      this.setState({
+        profile: res.data.profile
+      });
+    });
   }
   handleToggleModal() {
     this.setState({ showModal: !this.state.showModal });
-  }
-  componentDidMount() {
-    const uuid = sessionStorage.getItem("uuid");
-    axios({
-      method: "get",
-      url: `http://api.gclout.com:3000/profiles/${uuid}`,
-      headers: {
-        uuid: sessionStorage.getItem("uuid"),
-        token: sessionStorage.getItem("token")
-      }
-    })
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          myProfile: response.data.profile[1]
-          // myDetails: this.props.user
-        });
-      })
-      .catch(err => this.setState({ redirect: true }));
   }
   render() {
     const { showModal } = this.state;
@@ -76,57 +84,67 @@ class ProfileDetails extends Component {
 
             {showModal && (
               <Modal onCloseRequest={() => this.handleToggleModal()}>
-                <ProfileEdit />
+                {this.state.profile.map(user => (
+                  <ProfileEdit
+                    userFirstName={user.firstName}
+                    userLastName={user.lastName}
+                    nationality={user.nationality}
+                    state={user.state}
+                    lga={user.lga}
+                  />
+                ))}
               </Modal>
             )}
-            <div className="main-details d-md-flex justify-content-btween">
-              <div className="col-md-4 dashed-border-right details-column">
-                <h5 className="text-center">
-                  {this.state.myProfile.firstName}{" "}
-                  {this.state.myProfile.lastName}
-                </h5>
-                <div className="d-flex justify-content-between friends-details">
-                  <div className="text-center col-6">
-                    <p>Following</p>
-                    <h5 className="text-gclout-blue">300</h5>
-                  </div>
-                  <Link
-                    to="/friends"
-                    className="profile-link text-center col-6"
-                  >
-                    <p>Friends</p>
-                    <h5 className="text-gclout-blue">300</h5>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 dashed-border-right details-column mx-auto">
-                <p className="text-gclout-blue">Contact Information</p>
-                <p className="slightly-bold">Email Address</p>
-                <p>{this.props.user.email}</p>
-                <br />
-                <p className="slightly-bold">Phone Number</p>
-                <p>{this.props.user.phone}</p>
-              </div>
-              <div className="col-md-4 details-column">
-                <p className="text-gclout-blue">Other Information</p>
-                <div className="d-flex justify-content-between">
-                  <div className="col-6">
-                    <p className="slightly-bold">Nationality</p>
-                    <p>{this.state.myProfile.nationality_origin}</p>
-                    <br />
-                    <p className="slightly-bold">L.G.A</p>
-                    <p>{this.state.myProfile.lga}</p>
-                  </div>
-                  <div className="col-6">
-                    <p className="slightly-bold">State</p>
-                    <p>{this.state.myProfile.state} State</p>
-                    <br />
-                    <p className="slightly-bold">Date of birth</p>
-                    <p>{moment(this.props.user.dob).format("l")}</p>
+
+            {this.state.profile.map(user => (
+              <div className="main-details d-md-flex justify-content-btween">
+                <div className="col-md-4 dashed-border-right details-column">
+                  <h5 className="text-center">
+                    {user.firstName} {user.lastName}
+                  </h5>
+                  <div className="d-flex justify-content-between friends-details">
+                    <div className="text-center col-6">
+                      <p>Following</p>
+                      <h5 className="text-gclout-blue">300</h5>
+                    </div>
+                    <Link
+                      to="/friends"
+                      className="profile-link text-center col-6"
+                    >
+                      <p>Friends</p>
+                      <h5 className="text-gclout-blue">300</h5>
+                    </Link>
                   </div>
                 </div>
+                <div className="col-md-4 dashed-border-right details-column mx-auto">
+                  <p className="text-gclout-blue">Contact Information</p>
+                  <p className="slightly-bold">Email Address</p>
+                  <p>{this.props.user.email}</p>
+                  <br />
+                  <p className="slightly-bold">Phone Number</p>
+                  <p>{this.props.user.phone}</p>
+                </div>
+                <div className="col-md-4 details-column">
+                  <p className="text-gclout-blue">Other Information</p>
+                  <div className="d-flex justify-content-between">
+                    <div className="col-6">
+                      <p className="slightly-bold">Nationality</p>
+                      <p>{user.nationality_origin}</p>
+                      <br />
+                      <p className="slightly-bold">L.G.A</p>
+                      <p>{user.lga}</p>
+                    </div>
+                    <div className="col-6">
+                      <p className="slightly-bold">State</p>
+                      <p>{user.state} State</p>
+                      <br />
+                      <p className="slightly-bold">Date of birth</p>
+                      <p>{moment(this.props.user.dob).format("l")}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
           <div className="officer-details">
             <p className="text-gclout-blue">Political Ofice Holders</p>

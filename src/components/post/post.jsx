@@ -25,8 +25,9 @@ export default class SinglePost extends Component {
                 className="post-owner-image"
               />
             </div>
+
             <div className="post-owner-details">
-              <p>Oreoluwa Ojo</p>
+              <p>{this.props.post.user}</p>
               {this.props.postType === "sponsored" ? (
                 <p className="post-type">Sponsored</p>
               ) : (
@@ -35,14 +36,7 @@ export default class SinglePost extends Component {
             </div>
           </div>
           <div className="post-content">
-            <p>
-              At Google, to encourage teamwork, we emphasize the product triad.
-              This triad consists of UX, PM and eng, and the reason why we
-              emphasize this triad is because it is essentially what leads to
-              the development of a product (done well when everyone works
-              together).
-            </p>
-            {this.props.media ? <PostMedia /> : ""}
+            <p>{this.props.post.post}</p>
           </div>
         </div>
         {this.props.postType !== "sponsored" ? (

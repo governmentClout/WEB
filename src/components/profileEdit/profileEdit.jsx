@@ -17,6 +17,17 @@ class EditProfile extends Component {
       photo: "",
       phone: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+
+    this.setState({
+
+      [e.target.name]: e.target.value
+
+    });
   }
 
   shouldShowModal = type => {
@@ -101,7 +112,7 @@ class EditProfile extends Component {
                   type="text"
                   value={this.state.fname}
                   onChange={this.handleChange}
-                  placeholder="John"
+                  placeholder={this.props.userFirstName}
                   required
                 />
               </div>
@@ -111,7 +122,7 @@ class EditProfile extends Component {
                   name="lname"
                   className="form-control"
                   type="text"
-                  placeholder="Doe"
+                  placeholder={this.props.userLastName}
                   value={this.state.lname}
                   onChange={this.handleChange}
                   required
@@ -139,7 +150,7 @@ class EditProfile extends Component {
                   type="text"
                   value={this.state.nationality}
                   onChange={this.handleChange}
-                  placeholder="Nigerian"
+                  placeholder={this.props.nationality}
                   required
                 />
               </div>
@@ -168,7 +179,7 @@ class EditProfile extends Component {
                   type="text"
                   value={this.state.lga}
                   onChange={this.handleChange}
-                  placeholder="Kosofe"
+                  placeholder={this.props.lga}
                   required
                 />
               </div>

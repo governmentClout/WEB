@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+
 
 class MakePost extends Component {
   constructor(props) {
@@ -107,25 +109,38 @@ class MakePost extends Component {
 export default MakePost;
 
 class PostCreation extends Component {
+  
   constructor(props) {
+    
     super(props);
 
     this.state = {
+      
       wordCount: 0,
       post: "",
       uploadImages: false,
+      toProfile: false,
       disable: false,
       loading: false
     };
+
+    this.updateWordCount= this.updateWordCount.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
   }
 
-  dataChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    });
-  }
+  // onChange(e) {
+    
+  //   this.setState({
+    
+  //     [e.target.name]: e.target.value
+    
+  //   });
+  // }
 
-  postData(ev) {
+  onSubmit(e) {
+
+  // postData(ev) {
     this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
@@ -133,26 +148,54 @@ class PostCreation extends Component {
     console.log(id);
     console.log(token);
 
-    ev.preventDefault();
-
-    const post = this.state.post;
+    e.preventDefault();
 
     const data = {
-      post
-    };
+
+      post: this.state.post
+    
+    }
+
+    console.log(data);
+    console.log("lmao");
+
     axios({
+    
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
       headers: {
+    
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
         uuid: id
+    
       }
+    
     })
       .then(response => {
         this.setState({loading: false, post: ""});
-        console.log(response);
+
+        if (response.data.Success) {
+
+          this.setState({
+
+            toProfile: true
+
+          });
+
+          console.log('success');
+
+          sessionStorage.setItem("message", response.data.Success)
+        
+        } else {
+
+          console.log("login error")
+        
+        }
+
+        console.log(response.data.Success);
+
       })
       .catch(err => {
         this.setState({loading: false, post: ""});
@@ -182,6 +225,13 @@ class PostCreation extends Component {
   };
 
   render() {
+
+    if(this.state.toProfile === true) {
+
+      return <Redirect to="/profile" />
+    
+    }
+
     return (
       <div
         className={
@@ -190,7 +240,7 @@ class PostCreation extends Component {
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>
-          <form onSubmit={this.postData.bind(this)}>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <textarea
                 className={
@@ -199,7 +249,7 @@ class PostCreation extends Component {
                     : "form-control border-red"
                 }
                 rows="4"
-                name="new_post"
+                name="post"
                 onChange={this.updateWordCount}
                 onCut={this.updateWordCount}
                 onPaste={this.updateWordCount}
