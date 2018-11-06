@@ -2,6 +2,25 @@ import React, { Component } from "react";
 import "./comments.css";
 
 class CommentInput extends Component {
+
+  constructor(){
+
+    super();
+
+    this.state ={
+
+      comment: ""
+    
+    }
+
+    this.onSubmit = this.onSubmit.bind(this);
+
+  }
+
+  onSubmit(e) {
+    
+    e.preventDefault();
+  }
   render() {
     return (
       <div className="comment-input-wrapper">
