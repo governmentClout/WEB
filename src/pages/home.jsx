@@ -7,13 +7,12 @@ class Home extends Component {
   state = { myProfile: "", redirect: false };
   componentDidMount() {
     if (this.state.myProfile === "") {
-      const uuid = sessionStorage.getItem("uuid");
       axios({
         method: "get",
-        url: `http://api.gclout.com:3000/profiles/${uuid}`,
+        url: `http://api.gclout.com:3000/profiles/${this.props.user.uuid}`,
         headers: {
-          uuid: sessionStorage.getItem("uuid"),
-          token: sessionStorage.getItem("token")
+          uuid: this.props.user.uuid,
+          token: this.props.user.token
         }
       })
         .then(response => this.setState({ myProfile: response.profile }))

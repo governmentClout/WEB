@@ -13,7 +13,7 @@ class ProfilePage extends Component {
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
-            <ProfileDetails />
+            <ProfileDetails user={this.props.user} />
             <div className="d-flex">
               <SidebarFooter />
               <div className="flex-1">

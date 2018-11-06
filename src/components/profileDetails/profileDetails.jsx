@@ -3,10 +3,9 @@ import "./profileDetails.css";
 import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
 import axios from "axios";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const moment = require('moment');
-
+const moment = require("moment");
 
 class ProfileDetails extends Component {
   constructor(props) {
@@ -31,11 +30,10 @@ class ProfileDetails extends Component {
       }
     })
       .then(response => {
-        let data = JSON.parse(sessionStorage.getItem("data")).data.user;
         console.log(response.data);
         this.setState({
-          myProfile: response.data.profile[0],
-          myDetails: data
+          myProfile: response.data.profile[0]
+          // myDetails: this.props.user
         });
       })
       .catch(err => this.setState({ redirect: true }));
@@ -92,7 +90,10 @@ class ProfileDetails extends Component {
                     <p>Following</p>
                     <h5 className="text-gclout-blue">300</h5>
                   </div>
-                  <Link to="/friends" className="profile-link text-center col-6">
+                  <Link
+                    to="/friends"
+                    className="profile-link text-center col-6"
+                  >
                     <p>Friends</p>
                     <h5 className="text-gclout-blue">300</h5>
                   </Link>
@@ -101,17 +102,17 @@ class ProfileDetails extends Component {
               <div className="col-md-4 dashed-border-right details-column mx-auto">
                 <p className="text-gclout-blue">Contact Information</p>
                 <p className="slightly-bold">Email Address</p>
-                <p>{this.state.myDetails.email}</p>
+                <p>{this.props.user.email}</p>
                 <br />
                 <p className="slightly-bold">Phone Number</p>
-                <p>{this.state.myDetails.phone}</p>
+                <p>{this.props.user.phone}</p>
               </div>
               <div className="col-md-4 details-column">
                 <p className="text-gclout-blue">Other Information</p>
                 <div className="d-flex justify-content-between">
                   <div className="col-6">
                     <p className="slightly-bold">Nationality</p>
-                    <p>{this.state.myProfile.nationality}</p>
+                    <p>{this.state.myProfile.nationality_origin}</p>
                     <br />
                     <p className="slightly-bold">L.G.A</p>
                     <p>{this.state.myProfile.lga}</p>
@@ -121,7 +122,7 @@ class ProfileDetails extends Component {
                     <p>{this.state.myProfile.state} State</p>
                     <br />
                     <p className="slightly-bold">Date of birth</p>
-                    <p>{moment(this.state.myDetails.dob).format("l")}</p>
+                    <p>{moment(this.props.user.dob).format("l")}</p>
                   </div>
                 </div>
               </div>

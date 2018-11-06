@@ -47,34 +47,37 @@ class CreateProfile extends Component {
       [ev.target.name]: ev.target.value
     });
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
     axios({
-      method: 'get',
+      method: "get",
       url: "http://locationsng-api.herokuapp.com/api/v1/states"
-    }).then(res => {
-      const states = res.data.map(state => state);
-      console.log(states);
-      this.setState({
-        allStates: states
-      })
-    }).catch(err => {
-      console.log(err);
     })
+      .then(res => {
+        const states = res.data.map(state => state);
+        console.log(states);
+        this.setState({
+          allStates: states
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   createProfile(e) {
     this.setState({ loading: true });
     e.preventDefault();
-        const id = sessionStorage.getItem("uuid"),
-          token = sessionStorage.getItem("token");
-          console.log(id);
-          console.log(token);
-          e.preventDefault();
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+    console.log(id);
+    console.log(token);
+    e.preventDefault();
 
     const data = {
       uuid: sessionStorage.getItem("uuid"),
-      nationality: this.state.nationality,
+      nationality_residence: this.state.nationality,
+      nationality_origin: this.state.nationality,
       state: this.state.state,
       lga: this.state.lga,
       photo:
@@ -86,9 +89,8 @@ class CreateProfile extends Component {
 
     console.log(data);
 
-
     axios({
-  method: "post",
+      method: "post",
       url: "http://api.gclout.com:3000/profiles",
       data: data,
       headers: {
@@ -96,14 +98,13 @@ class CreateProfile extends Component {
         token: token,
         uuid: id
       }
-
     })
       .then(response => {
         this.setState({ loading: false });
-        if(response.data.Success){
+        if (response.data.Success) {
           this.setState({
             toProfile: true
-          })
+          });
         }
         console.log(response);
       })
@@ -120,154 +121,160 @@ class CreateProfile extends Component {
     });
   }
   render() {
-    if(this.state.toProfile === true) {
-      return <Redirect to="/profile" />
+    if (this.state.toProfile === true) {
+      return <Redirect to="/profile" />;
     }
-    return ( 
+    return (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
             <h4 className="page-title">Create your profile</h4>
             <div className="profile-cover-image-wrapper">
-              <img 
+              <img
                 className="profile-cover-image"
                 src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
-                alt="cover" 
+                alt="cover"
               />
-              <button 
+              <button
                 className="floating-edit-button-wrapper"
                 onClick={() => this.shouldShowModal("Cover Photo")}
               >
-               <svg 
+                <svg
                   width="22"
                   height="22"
                   viewBox="0 0 22 22"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg" >
-                  <path 
-                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-                    fill="white" 
-                  />
-                </svg> 
-              </button> 
-            </div> 
-          <div className="lifted-profile-image-wrapper" >
-            <img 
-              className="lifted-profile-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-              alt="profile image" 
-            />
-            <button
-              className="floating-edit-button-wrapper --profile-picture"
-              onClick={() => this.shouldShowModal("Profile Photo")}
-              onChange={this.handleChange}
-              name="photo"
-              value={this.state.photo} 
-            >
-              <svg 
-                width="22"
-                height="22"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg" >
-                  <path 
-                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-                    fill="white" 
-                  />
-              </svg>
-            </button>
-          </div> 
-          <div className="col-md-9 mx-auto">
-            <form>
-              <div className="form-row">
-                <div className="form-group col-md">
-                  <label htmlFor="Fname">First Name</label>
-                  <input 
-                    name="fname"
-                    className="form-control" 
-                    type="text" 
-                    value={this.state.fname}
-                    onChange={this.onChange}
-                    placeholder="John"
-                    required 
-                  />
-                </div> 
-              <div className="form-group col-md">
-                <label htmlFor="lname">Last Name</label>
-                <input 
-                  name="lname"
-                  className="form-control"
-                  type="text"
-                  placeholder="Doe"
-                  value={this.state.lname}
-                  onChange={this.onChange}
-                  required 
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md">
-                <label htmlFor="nationality">Nationality</label>
-                <input
-                  name="nationality"
-                  className="form-control"
-                  type="text"
-                  value={this.state.nationality}
-                  onChange={this.onChange}
-                  placeholder="Nigerian"
-                  required 
-                />
-              </div>
-              <div className="form-group col-md">
-                <label htmlFor="state">State</label>
-                <select
-                  onChange={this.onChange} 
-                  name="state" 
-                  className="form-control"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  {this.state.allStates.map(state => {
-                    return <option value={state.name} key={state.name}>{state.name}</option>
-                  })}
-                </select>
-              </div>
+                  <path
+                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
-            <div className="form-group">
-              <label htmlFor="lga">L.G.A</label>
-              <input 
-                name="lga"
-                className="form-control"
-                type="text"
-                value={this.state.lga}
-                onChange={this.onChange}
-                placeholder="Kosofe"
-                required 
+            <div className="lifted-profile-image-wrapper">
+              <img
+                className="lifted-profile-image"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                alt="profile image"
               />
-            </div>
-            <div className="d-flex">
-              <button 
-                className="btn btn-gclout-blue"
-                onClick={this.createProfile}
-                type="submit" 
+              <button
+                className="floating-edit-button-wrapper --profile-picture"
+                onClick={() => this.shouldShowModal("Profile Photo")}
+                onChange={this.handleChange}
+                name="photo"
+                value={this.state.photo}
               >
-                {this.state.loading ? (
-                    <i className="fas fa-circle-notch fa-spin" />
-                  ) : (
-                    "Create Profile"
-                  )}
-              </button> 
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
-          </form> 
+            <div className="col-md-9 mx-auto">
+              <form>
+                <div className="form-row">
+                  <div className="form-group col-md">
+                    <label htmlFor="Fname">First Name</label>
+                    <input
+                      name="fname"
+                      className="form-control"
+                      type="text"
+                      value={this.state.fname}
+                      onChange={this.onChange}
+                      placeholder="John"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md">
+                    <label htmlFor="lname">Last Name</label>
+                    <input
+                      name="lname"
+                      className="form-control"
+                      type="text"
+                      placeholder="Doe"
+                      value={this.state.lname}
+                      onChange={this.onChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md">
+                    <label htmlFor="nationality">Nationality</label>
+                    <input
+                      name="nationality"
+                      className="form-control"
+                      type="text"
+                      value={this.state.nationality}
+                      onChange={this.onChange}
+                      placeholder="Nigerian"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md">
+                    <label htmlFor="state">State</label>
+                    <select
+                      onChange={this.onChange}
+                      name="state"
+                      className="form-control"
+                    >
+                      {this.state.allStates.map(state => {
+                        return (
+                          <option value={state.name} key={state.name}>
+                            {state.name}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lga">L.G.A</label>
+                  <input
+                    name="lga"
+                    className="form-control"
+                    type="text"
+                    value={this.state.lga}
+                    onChange={this.onChange}
+                    placeholder="Kosofe"
+                    required
+                  />
+                </div>
+                <div className="d-flex">
+                  <button
+                    className="btn btn-gclout-blue"
+                    onClick={this.createProfile}
+                    type="submit"
+                  >
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Create Profile"
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+        <UploadModal
+          show={this.state.showModal}
+          handleClose={this.shouldHideModal}
+          uploadType={this.state.uploadType}
+        />
       </div>
-    </div>
-    <UploadModal 
-      show={this.state.showModal}
-      handleClose={this.shouldHideModal} 
-      uploadType={this.state.uploadType}
-    />
-  </div>
-  )    
-}
+    );
+  }
 }
 
 export default CreateProfile;

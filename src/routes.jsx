@@ -54,7 +54,9 @@ const Routes = () => (
           <Route
             exact
             path="/"
-            render={props => <Home isLoggedIn={isLoggedIn} {...props} />}
+            render={props => (
+              <Home user={user} isLoggedIn={isLoggedIn} {...props} />
+            )}
           />
           <Route
             exact
@@ -66,7 +68,9 @@ const Routes = () => (
           <Route
             exact
             path="/profile"
-            render={props => <ProfilePage isLoggedIn={isLoggedIn} {...props} />}
+            render={props => (
+              <ProfilePage user={user} isLoggedIn={isLoggedIn} {...props} />
+            )}
           />
           <Route
             exact
