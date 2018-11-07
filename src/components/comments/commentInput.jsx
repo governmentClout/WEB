@@ -52,7 +52,7 @@ onKeyPress = (e) => {
       const data = {
       
         comment: this.state.comment,
-        ref: this.state.ref
+        ref: this.props.postID
       
       }
 
@@ -71,7 +71,7 @@ onKeyPress = (e) => {
         
         }
       
-      }).then(res => console.log(res))
+      }).then(res => console.log(res.data))
     }
   }
 
@@ -97,6 +97,7 @@ onKeyPress = (e) => {
           onClick={this.props.postID}
           ref={console.log(this.props.postID)}
         />
+{/*         <input value={this.props.postID} name="ref" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}/> */}
       </div>
     );
   }
