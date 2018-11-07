@@ -44,6 +44,7 @@ class EditProfile extends Component {
       token = sessionStorage.getItem("token");
 
     const newProfile = {
+
       nationality_residence: this.state.nationality_residence,
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
@@ -64,11 +65,12 @@ class EditProfile extends Component {
       method: 'put',
       url: url,
       mode: "no-cors",
+      data: newProfile,
       headers: {
 
         token: token,
         uuid: id,
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        "Content-Type": "application/json"
 
       }
     
