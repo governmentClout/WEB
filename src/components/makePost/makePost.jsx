@@ -350,7 +350,7 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
+            <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
                 type="text"
