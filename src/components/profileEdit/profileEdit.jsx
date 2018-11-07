@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
 import axios from 'axios';
 
 class EditProfile extends Component {
@@ -11,14 +11,15 @@ class EditProfile extends Component {
       
       showModal: false,
       uploadType: "",
-      fname: "",
-      lname: "",
-      nationality: "",
-      state: "",
-      lga: "",
+      fname: this.props.userFirstName,
+      lname: this.props.userLastName,
+      nationality_origin: this.props.nationalityOrigin,
+      nationality_residence: this.props.nationalityResidence,
+      state: this.props.state,
+      lga: this.props.lga,
       photo: "",
+      phone: this.props.phone,
       allStates: []
-
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,10 +44,10 @@ class EditProfile extends Component {
       token = sessionStorage.getItem("token");
 
     const newProfile = {
-
-      nationality: this.state.nationality,
+      nationality_residence: this.state.nationality_residence,
+      nationality_origin: this.state.nationality_origin,
       state: this.state.state,
-      lga: this.state.state,
+      lga: this.state.lga,
       photo: "https://picsum.photos/200/300",
       firstName: this.state.fname,
       lastName: this.state.lname
@@ -121,7 +122,7 @@ class EditProfile extends Component {
         <div className="profile-cover-image-wrapper">
           <img
             className="profile-cover-image"
-            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363181/gclout/Rectangle_2.1.png"
+            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
             alt="cover"
           />
           <button
@@ -143,12 +144,14 @@ class EditProfile extends Component {
           </button>
         </div>
         <div className="col-md-9 offset-md-1">
+        <div>
           <div className="lifted-profile-image-wrapper">
             <img
               className="lifted-profile-image"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-              alt="profile image"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+              alt="profile"
             />
+            </div>
             <button
               className="floating-edit-button-wrapper --profile-picture"
               onClick={() => this.shouldShowModal("Profile Photo")}
@@ -215,19 +218,31 @@ class EditProfile extends Component {
               </div> */
             }
               <div className="form-group col-md">
-                <label htmlFor="nationality">Nationality</label>
+                <label htmlFor="nationality">Country of Residence</label>
                 <input
-                  name="nationality"
+                  name="nationality_residence"
                   className="form-control"
                   type="text"
-                  value={this.state.nationality}
+                  value={this.state.nationality_residence}
                   onChange={this.handleChange}
-                  placeholder={this.props.nationality}
+                  placeholder={this.props.nationalityResidence}
                   required
                 />
               </div>
             </div>
             <div className="form-row">
+            <div className="form-group col-md">
+                <label htmlFor="nationality">Country of Origin</label>
+                <input
+                  name="nationality_origin"
+                  className="form-control"
+                  type="text"
+                  value={this.state.nationality_origin}
+                  onChange={this.handleChange}
+                  placeholder={this.props.nationalityOrigin}
+                  required
+                />
+              </div>
               <div className="form-group col-md">
                 <label htmlFor="state">State</label>
                 <select
@@ -247,6 +262,7 @@ class EditProfile extends Component {
                   }
                 </select>
               </div>
+              </div>
               <div className="form-group col-md">
                 <label htmlFor="lga">L.G.A</label>
                 <input
@@ -258,7 +274,6 @@ class EditProfile extends Component {
                   placeholder={this.props.lga}
                   required
                 />
-              </div>
             </div>
             <div className="d-flex">
               <button className="btn btn-gclout-blue" type="submit">

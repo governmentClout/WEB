@@ -11,8 +11,8 @@ class SidebarFooter extends Component {
             reserved
           </p>
           <p>
-            <a href="#">Help &FAQ</a> | <a href="#">Terms Of Use</a> |{" "}
-            <a href="#">Privacy Policy</a>
+            <a href="/faq">Help &FAQ</a> | <a href="/terms">Terms Of Use</a> |{" "}
+            <a href="/privacy">Privacy Policy</a>
           </p>
           <p className="smaller-margin">
             <strong>Contact Us</strong>
@@ -21,7 +21,7 @@ class SidebarFooter extends Component {
           <p className="smaller-margin">Phone: 080 3333 3333</p>
           <div className="advert-section">
             <p className="smaller-margin">
-              <a href="#" className="advert-link">
+              <a href="/advert" className="advert-link">
                 <span className="text-gclout-blue">
                   <i className="fas fa-external-link-alt" />
                 </span>{" "}

@@ -38,7 +38,6 @@ class PostMedia extends Component {
                 <div className="preview-overlay">
                 <button
                   type="button"
-                  role="button"
                   onClick={this.deletePicture()}
                   className="preview-delete"
                 >

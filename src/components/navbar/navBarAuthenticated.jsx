@@ -17,16 +17,16 @@ class NavBarAuthenticated extends Component {
   }
   showNotifications() {
     let currentState = this.state.showNotifications;
-    this.setState({ showNotifications: !currentState });
+    this.setState({ showNotifications: !currentState, showProfile: false });
   }
   showProfile() {
     let currentState = this.state.showProfile;
-    this.setState({ showProfile: !currentState })
+    this.setState({ showProfile: !currentState, showNotifications: false });
   }
 
   render() {
     return (
-      <div className="navigation --with-shadow">
+      <div className="navigation --with-shadow  no-mobile">
         <nav className="container d-flex justify-content-between">
           <div className="d-flex">
             <a href="/" style={{ maxHeight: "70px" }}>
@@ -52,10 +52,20 @@ class NavBarAuthenticated extends Component {
           </div>
           <ul className="navigation-menu">
             <li className="navigation-menu-item no-mobile">
-              <a href="/">Petition</a>
+              <a href="/">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM6 14H4V12H6V14ZM6 10H4V8H6V10ZM6 6H4V4H6V6ZM14 14H7V12H14V14ZM14 10H7V8H14V10ZM14 6H7V4H14V6Z" fill="#4F4F4F"/>
+                </svg>
+                {"  "}Petition
+              </a>
             </li>
             <li className="navigation-menu-item no-mobile">
-              <a href="/">Opinion poll</a>
+              <a href="/polls">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM16 7.2L10 14L6 10L2 14V11L6 7L10 11L16 4.2V7.2Z" fill="#4F4F4F"/>
+                </svg> {"  "}
+                Opinion poll
+              </a>
             </li>
             <li className="navigation-menu-item only-mobile">
               <button className="navigation-menu-item navigation-menu-icon">
@@ -65,7 +75,7 @@ class NavBarAuthenticated extends Component {
             <li className="navigation-menu-item">
               <button
                 className="navigation-menu-item navigation-menu-icon"
-                data-badge="2"
+                // data-badge="2"
               >
                 <svg
                   width="20"
@@ -79,6 +89,8 @@ class NavBarAuthenticated extends Component {
                     fill="#333333"
                   />
                 </svg>
+                {"  "}
+                Messages
               </button>
             </li>
             <li className="navigation-menu-item">
@@ -87,7 +99,7 @@ class NavBarAuthenticated extends Component {
                   {({ ref }) => (
                     <button
                       className="navigation-menu-item navigation-menu-icon"
-                      data-badge="9+"
+                      // data-badge="9+"
                       onClick={this.showNotifications}
                       ref={ref}
                     >
@@ -103,6 +115,7 @@ class NavBarAuthenticated extends Component {
                           fill="#333333"
                         />
                       </svg>
+                      {"  "} Notifications
                     </button>
                   )}
                 </Reference>
@@ -129,7 +142,7 @@ class NavBarAuthenticated extends Component {
                       <div className="navigation-profile-wrapper">
                         <img
                           className="navbar-profile-image"
-                          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+                          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                           alt="profile"
                         />
                       </div>
@@ -144,16 +157,25 @@ class NavBarAuthenticated extends Component {
                           this.state.showProfile
                             ? "profile-dropdown show"
                             : "profile-dropdown"
-                          }
-                        >
+                        }
+                      >
                         <ul className="profile-dropdown-list">
-                          <li className="profile-dropdown-list-item">
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
                             <Link to="/profile">Profile</Link>
                           </li>
-                          <li className="profile-dropdown-list-item">
-                            <a href="#">Settings</a>
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
+                            <Link to="/profile">Settings</Link>
                           </li>
-                          <li className="profile-dropdown-list-item">
+                          <li
+                            className="profile-dropdown-list-item"
+                            onClick={this.showProfile}
+                          >
                             <button
                               className="profile-dropdown-button"
                               onClick={this.props.logout}
@@ -171,7 +193,7 @@ class NavBarAuthenticated extends Component {
             </li>
           </ul>
         </nav>
-        </div> 
+      </div>
     );
   }
 }

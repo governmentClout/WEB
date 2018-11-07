@@ -73,3 +73,34 @@
 .friends-list {
   padding: 1em;
 }
+.notifications-container {
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 4px;
+  width: 100%;
+}
+.notifications-page-header {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #f1f1f1;
+}
+.single-notification {
+  display: flex;
+  padding: 1em 2em;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f1f1;
+}
+.notification-owner-wrapper {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.notification-owner {
+  width: 100%;
+  height: 100%;
+}
+.single-notification-link, .single-notification-link:hover, .single-notification-link:visited, .single-notification-link:active {
+  color: inherit !important;
+  display: flex;
+  text-decoration: none;
+}

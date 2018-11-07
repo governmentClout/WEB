@@ -19,8 +19,9 @@ class Friend extends Component {
         <div className="friend-details">
           <div className="friend-image-container  my-auto">
             <img
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
               className="friend-image"
+              alt="friend"
             />
           </div>
           <div className="deats  my-auto">

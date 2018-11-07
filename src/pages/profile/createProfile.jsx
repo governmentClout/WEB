@@ -1,9 +1,8 @@
-import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
 import React, { Component } from "react";
-import Footer from "../../components/footer/footer";
 import UploadModal from "../../components/uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -15,14 +14,19 @@ class CreateProfile extends Component {
       uploadType: "",
       fname: "",
       lname: "",
-      nationality: "",
+      nationality_origin: "",
+      nationality_residence: "",
       state: "",
       lga: "",
-      photo: ""
+      photo: "",
+      loading: false,
+      redirect: false,
+      allStates: [],
+      toProfile: false
     };
 
     this.onChange = this.onChange.bind(this);
-    this.submit = this.submit.bind(this);
+    // this.submit = this.submit.bind(this);
     this.createProfile = this.createProfile.bind(this);
   }
 
@@ -46,22 +50,22 @@ class CreateProfile extends Component {
   }
 
   createProfile(e) {
-    
-    const id = sessionStorage.getItem("uuid"),
-      tk = sessionStorage.getItem("token");
-
+    this.setState({ loading: true });
     e.preventDefault();
-
-    /*     const url = "http://localhost:3000/profiles"; */
-
-    const url = "http://api.gclout.com:3000/profiles";
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+    console.log(id);
+    console.log(token);
+    e.preventDefault();
 
     const data = {
       uuid: sessionStorage.getItem("uuid"),
-      nationality: this.state.nationality,
+      nationality_residence: this.state.nationality_residence,
+      nationality_origin: this.state.nationality_origin,
       state: this.state.state,
       lga: this.state.lga,
-      photo: "https://picsum.photos/200/300",
+      photo:
+        "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
       firstName: this.state.fname,
       lastName: this.state.lname,
       token: sessionStorage.getItem("token")
@@ -69,61 +73,41 @@ class CreateProfile extends Component {
 
     console.log(data);
 
-    /* const headerConfig = {
-
-      headers: {
-
-        "token": tk,
-        "uuid": id,
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-
-      }
-    }; */
-
-    /*     axios.post(url, data, headerConfig).then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err)); */
-
     axios({
       method: "post",
-      url: url,
+      url: "http://api.gclout.com:3000/profiles",
       data: data,
       headers: {
-        token: tk,
-        uuid: id,
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        Accept: "application/json",
-        "X-Requested-With": "application/xmlHTTPRequest"
+        "Content-Type": "application/json;charset=utf-8",
+        token: token,
+        uuid: id
       }
-
-      // /*        Authorization: {
-
-      //         "token": tk,
-      //         "uuid": id
-
-      //       }  */
     })
       .then(response => {
+        this.setState({ loading: false });
+        if (response.data.Success) {
+          this.setState({
+            toProfile: true
+          });
+        }
         console.log(response);
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(err => {
+        this.setState({ loading: false });
 
+        console.log(err);
+      });
     console.log(data);
   }
-
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
-
-    console.log(this.state);
   }
-
   render() {
+    if (this.state.toProfile === true) {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
@@ -153,14 +137,17 @@ class CreateProfile extends Component {
                 </svg>
               </button>
             </div>
-            <div className="lifted-profile-image-wrapper">
-              <img
-                className="lifted-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                alt="profile image"
-              />
+            <div style={{ width: "160px", height: "160px" }}>
+              <div className="lifted-profile-image-wrapper" style={{ marginTop: "-80px" }}>
+                <img
+                  className="lifted-profile-image"
+                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                  alt="profile image"
+                />
+              </div>
               <button
                 className="floating-edit-button-wrapper --profile-picture"
+                style={{ top: "28%", left: "26%" }}
                 onClick={() => this.shouldShowModal("Profile Photo")}
                 onChange={this.handleChange}
                 name="photo"
@@ -181,7 +168,7 @@ class CreateProfile extends Component {
               </button>
             </div>
             <div className="col-md-9 mx-auto">
-              <form onSubmit={this.submit}>
+              <form>
                 <div className="form-row">
                   <div className="form-group col-md">
                     <label htmlFor="Fname">First Name</label>
@@ -190,8 +177,8 @@ class CreateProfile extends Component {
                       className="form-control"
                       type="text"
                       value={this.state.fname}
-                      onChange={this.handleChange}
-                      placeholder="John"
+                      onChange={this.onChange}
+                      placeholder="First Name"
                       required
                     />
                   </div>
@@ -201,53 +188,55 @@ class CreateProfile extends Component {
                       name="lname"
                       className="form-control"
                       type="text"
-                      placeholder="Doe"
+                      placeholder="Last Name"
                       value={this.state.lname}
-                      onChange={this.handleChange}
+                      onChange={this.onChange}
                       required
                     />
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="nationality_residence">Country of Residence</label>
                     <input
-                      name="phone"
+                      name="nationality_residence"
                       className="form-control"
-                      type="phone"
-                      onChange={this.handleChange}
-                      value={this.state.phone}
-                      placeholder="+234 [0] 802 345 6789"
+                      type="text"
+                      value={this.state.nationality_residence}
+                      onChange={this.onChange}
+                      placeholder="Country of Residence"
                       required
                     />
                   </div>
                   <div className="form-group col-md">
-                    <label htmlFor="nationality">Nationality</label>
+                    <label htmlFor="nationality_residence">Country of Origin</label>
                     <input
-                      name="nationality"
+                      name="nationality_origin"
                       className="form-control"
                       type="text"
-                      value={this.state.nationality}
-                      onChange={this.handleChange}
-                      placeholder="Nigerian"
+                      value={this.state.nationality_origin}
+                      onChange={this.onChange}
+                      placeholder="Country of Origin"
                       required
                     />
                   </div>
+
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md">
                     <label htmlFor="state">State</label>
                     <select
+                      onChange={this.onChange}
                       name="state"
                       className="form-control"
-                      defaultValue="lag"
-                      value={this.state.state}
-                      onChange={this.handleChange}
-                      required
                     >
-                      <option value="lag">Lagos</option>
-                      <option value="ogun">Ogun</option>
-                      <option value="osun">Osun</option>
+                      {this.state.allStates.map(state => {
+                        return (
+                          <option value={state.name} key={state.name}>
+                            {state.name}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="form-group col-md">
@@ -257,101 +246,37 @@ class CreateProfile extends Component {
                       className="form-control"
                       type="text"
                       value={this.state.lga}
-                      onChange={this.handleChange}
-                      placeholder="Kosofe"
+                      onChange={this.onChange}
+                      placeholder="Local Government Area"
                       required
                     />
                   </div>
                 </div>
                 <div className="d-flex">
-                  <button className="btn btn-gclout-blue" type="submit">
-                    Create Profile
+                  <button
+                    className="btn btn-gclout-blue"
+                    onClick={this.createProfile}
+                    type="submit"
+                  >
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                        "Create Profile"
+                      )}
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <Footer />
         <UploadModal
           show={this.state.showModal}
           handleClose={this.shouldHideModal}
           uploadType={this.state.uploadType}
         />
-        >
       </div>
     );
   }
 }
-
-// submit(e) {
-//   e.preventDefault();
-
-//   const uuid = localStorage.getItem("uuid"),
-//     token = localStorage.getItem("token");
-
-//    console.log(uuid);
-
-/*  axios.put('http://api.gclout.com:3000/profiles', {
-
-    "uuid": uuid,
-    "nationality": this.state.nationality,
-    "state": this.state.state,
-    "lga": this.state.lga,
-    "photo": this.state.photo,
-    "firstName": this.state.fname,
-    "lastName": this.state.lname
-    
-  }).then(response => {
-
-    console.log(response);
-
-  }) */
-// const url = "http://api.gclout.com:3000/profiles/";
-
-// const data = {
-//   uuid: uuid,
-//   nationality: this.state.nationality,
-//   state: this.state.state,
-//   lga: this.state.lga,
-//   photo: "http://simpleicon.com/wp-content/uploads/user1.png",
-//   firstName: this.state.fname,
-//   lastName: this.state.lname
-// };
-
-// const userToken = {
-//   token: token
-// };
-
-// console.log(userToken);
-
-// console.log(data);
-
-/* axios({
-
-    method: 'put',
-    url: url,
-    data: data,
-    mode: 'no-cors', 
-    headers: {
-      
-      'token': token,
-      'uuid': uuid,
-      'Content-Type': 'text/plain;charset=utf-8;application/json',
-      'Accept': 'application/json; charset=utf-8'
-      
-    }
-
-  }).then(response => {
-
-    console.log(response);
-  
-  }).catch(error => {
-
-    console.log(error);
-
-  }) */
-//   }
-// }
 
 export default CreateProfile;

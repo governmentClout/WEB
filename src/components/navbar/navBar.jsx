@@ -30,7 +30,10 @@ class NavBar extends Component {
                 className="navigation-logo"
               />
             </a>
-            <form className="searchContainer" onSubmit={this.searchHandler}>
+            <form
+              className="searchContainer no-mobile"
+              onSubmit={this.searchHandler}
+            >
               <input
                 className="searchBox"
                 type="search"
@@ -62,7 +65,7 @@ class NavBar extends Component {
               <a href="/">Petition</a>
             </li>
             <li className="navigation-menu-item">
-              <a href="/">Opinion poll</a>
+              <a href="/polls">Opinion poll</a>
             </li>
             <li className="navigation-menu-item">
               <a href="/register" className="btn navigation-menu-button">
