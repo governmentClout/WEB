@@ -18,17 +18,10 @@ class ProfileDetails extends Component {
   }
 
   componentDidMount() {
+    if(this.state.profile !== []) {
     const id = sessionStorage.getItem("uuid"),
-      token = sessionStorage.getItem("token");
-
-    const url = "http://api.gclout.com:3000/profiles/" + id;
-
-    //    console.log(id, token, url);
-
-    console.log(url);
-    console.log(id);
-    console.log(token);
-
+         token = sessionStorage.getItem("token");
+    const url = `http://api.gclout.com:3000/profiles/${id}`
     axios({
       method: "GET",
       url: url,
@@ -37,11 +30,11 @@ class ProfileDetails extends Component {
         token: token
       }
     }).then(res => {
-      console.log(res.data.profile);
       this.setState({
-        profile: res.data.profile
+        profile: res.data.profile[0]
       });
     });
+  }
   }
   handleToggleModal() {
     this.setState({ showModal: !this.state.showModal });
@@ -96,11 +89,11 @@ class ProfileDetails extends Component {
               </Modal>
             )}
 
-            {this.state.profile.map(user => (
+            
               <div className="main-details d-md-flex justify-content-btween">
                 <div className="col-md-4 dashed-border-right details-column">
                   <h5 className="text-center">
-                    {user.firstName} {user.lastName}
+                    {this.state.profile.firstName} {this.state.profile.lastName}
                   </h5>
                   <div className="d-flex justify-content-between friends-details">
                     <div className="text-center col-6">
@@ -129,14 +122,14 @@ class ProfileDetails extends Component {
                   <div className="d-flex justify-content-between">
                     <div className="col-6">
                       <p className="slightly-bold">Nationality</p>
-                      <p>{user.nationality_origin}</p>
+                      <p>{this.state.profile.nationality_origin}</p>
                       <br />
                       <p className="slightly-bold">L.G.A</p>
-                      <p>{user.lga}</p>
+                      <p>{this.state.profile.lga}</p>
                     </div>
                     <div className="col-6">
                       <p className="slightly-bold">State</p>
-                      <p>{user.state} State</p>
+                      <p>{this.state.profile.state} State</p>
                       <br />
                       <p className="slightly-bold">Date of birth</p>
                       <p>{moment(this.props.user.dob).format("l")}</p>
@@ -144,7 +137,6 @@ class ProfileDetails extends Component {
                   </div>
                 </div>
               </div>
-            ))}
           </div>
           <div className="officer-details">
             <p className="text-gclout-blue">Political Ofice Holders</p>
