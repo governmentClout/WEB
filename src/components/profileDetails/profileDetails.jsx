@@ -52,6 +52,7 @@ class ProfileDetails extends Component {
             />
           </div>
           <div className="container real-details-container">
+
             <div className="main-details d-md-flex justify-content-btween">
               <div className="col-md-4 dashed-border-right details-column">
                 <div

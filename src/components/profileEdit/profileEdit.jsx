@@ -44,7 +44,6 @@ class EditProfile extends Component {
       token = sessionStorage.getItem("token");
 
     const newProfile = {
-
       nationality_residence: this.state.nationality_residence,
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
