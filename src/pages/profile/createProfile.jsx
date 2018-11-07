@@ -49,7 +49,8 @@ class CreateProfile extends Component {
     });
   }
 
-  componentDidMount() {
+  createProfile(e) {
+    
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
     axios({
