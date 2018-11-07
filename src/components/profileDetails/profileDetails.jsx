@@ -29,13 +29,6 @@ class ProfileDetails extends Component {
 
       const url = "http://api.gclout.com:3000/profiles/" + id
 
-//    console.log(id, token, url);
-
-    console.log(url);
-    console.log(id);
-    console.log(token);
-
-
     axios({
 
       method: 'GET',
@@ -48,7 +41,7 @@ class ProfileDetails extends Component {
 
     }).then(res => {
 
-      console.log(res.data.profile);
+      /* console.log(res.data.profile); */
       this.setState({
 
         profile: res.data.profile
