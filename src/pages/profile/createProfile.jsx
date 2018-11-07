@@ -14,7 +14,8 @@ class CreateProfile extends Component {
       uploadType: "",
       fname: "",
       lname: "",
-      nationality: "",
+      nationality_origin: "",
+      nationality_residence: "",
       state: "",
       lga: "",
       photo: "",
@@ -49,39 +50,37 @@ class CreateProfile extends Component {
   }
 
   componentDidMount() {
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
     axios({
       method: "get",
-      url: "http://locationsng-api.herokuapp.com/api/v1/states"
+      url: "http://api.gclout.com/profiles/" + id,
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        token: token,
+        uuid: id
+      }
     })
       .then(res => {
-        const states = res.data.map(state => state);
-
-        console.log(states);
-
-        this.setState({
-          allStates: states
-        });
+        console.log(res)
+        this.setState({ toProfile: true })
       })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  componentDidMount() {
-    axios({
-      method: "get",
-      url: "http://locationsng-api.herokuapp.com/api/v1/states"
-    })
-      .then(res => {
-        const states = res.data.map(state => state);
-        console.log(states);
-        this.setState({
-          allStates: states
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(
+        axios({
+          method: "get",
+          url: "http://locationsng-api.herokuapp.com/api/v1/states"
+        })
+          .then(res => {
+            const states = res.data.map(state => state);
+            console.log(states);
+            this.setState({
+              allStates: states
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      );
   }
 
   createProfile(e) {
@@ -95,8 +94,8 @@ class CreateProfile extends Component {
 
     const data = {
       uuid: sessionStorage.getItem("uuid"),
-      nationality_residence: this.state.nationality,
-      nationality_origin: this.state.nationality,
+      nationality_residence: this.state.nationality_residence,
+      nationality_origin: this.state.nationality_origin,
       state: this.state.state,
       lga: this.state.lga,
       photo:
@@ -172,14 +171,17 @@ class CreateProfile extends Component {
                 </svg>
               </button>
             </div>
-            <div className="lifted-profile-image-wrapper">
-              <img
-                className="lifted-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1539363398/gclout/Ellipse_1.png"
-                alt="profile image"
-              />
+            <div style={{ width: "160px", height: "160px" }}>
+              <div className="lifted-profile-image-wrapper" style={{ marginTop: "-80px" }}>
+                <img
+                  className="lifted-profile-image"
+                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                  alt="profile image"
+                />
+              </div>
               <button
                 className="floating-edit-button-wrapper --profile-picture"
+                style={{ top: "28%", left: "26%" }}
                 onClick={() => this.shouldShowModal("Profile Photo")}
                 onChange={this.handleChange}
                 name="photo"
@@ -210,7 +212,7 @@ class CreateProfile extends Component {
                       type="text"
                       value={this.state.fname}
                       onChange={this.onChange}
-                      placeholder="John"
+                      placeholder="First Name"
                       required
                     />
                   </div>
@@ -220,7 +222,7 @@ class CreateProfile extends Component {
                       name="lname"
                       className="form-control"
                       type="text"
-                      placeholder="Doe"
+                      placeholder="Last Name"
                       value={this.state.lname}
                       onChange={this.onChange}
                       required
@@ -229,17 +231,32 @@ class CreateProfile extends Component {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md">
-                    <label htmlFor="nationality">Nationality</label>
+                    <label htmlFor="nationality_residence">Country of Residence</label>
                     <input
-                      name="nationality"
+                      name="nationality_residence"
                       className="form-control"
                       type="text"
-                      value={this.state.nationality}
+                      value={this.state.nationality_residence}
                       onChange={this.onChange}
-                      placeholder="Nigerian"
+                      placeholder="Country of Residence"
                       required
                     />
                   </div>
+                  <div className="form-group col-md">
+                    <label htmlFor="nationality_residence">Country of Origin</label>
+                    <input
+                      name="nationality_origin"
+                      className="form-control"
+                      type="text"
+                      value={this.state.nationality_origin}
+                      onChange={this.onChange}
+                      placeholder="Country of Origin"
+                      required
+                    />
+                  </div>
+
+                </div>
+                <div className="form-row">
                   <div className="form-group col-md">
                     <label htmlFor="state">State</label>
                     <select
@@ -256,18 +273,18 @@ class CreateProfile extends Component {
                       })}
                     </select>
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lga">L.G.A</label>
-                  <input
-                    name="lga"
-                    className="form-control"
-                    type="text"
-                    value={this.state.lga}
-                    onChange={this.onChange}
-                    placeholder="Kosofe"
-                    required
-                  />
+                  <div className="form-group col-md">
+                    <label htmlFor="lga">L.G.A</label>
+                    <input
+                      name="lga"
+                      className="form-control"
+                      type="text"
+                      value={this.state.lga}
+                      onChange={this.onChange}
+                      placeholder="Local Government Area"
+                      required
+                    />
+                  </div>
                 </div>
                 <div className="d-flex">
                   <button
@@ -278,8 +295,8 @@ class CreateProfile extends Component {
                     {this.state.loading ? (
                       <i className="fas fa-circle-notch fa-spin" />
                     ) : (
-                      "Create Profile"
-                    )}
+                        "Create Profile"
+                      )}
                   </button>
                 </div>
               </form>

@@ -10,23 +10,23 @@ import axios from "axios";
 
 class ProfilePage extends Component {
   state = { posts: [] };
-  componentDidUpdate() {
+  componentDidMount() {
+    this.loadPosts();
+  }
+  loadNow = () => {
+    this.loadPosts()
+  }
+  loadPosts() {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    /* console.log(id, token); */
     const url = "http://api.gclout.com:3000/posts?user=" + id;
-
-    /* console.log(url); */
-
     const header = {
 
       token: token,
       uuid: id
 
     };
-
-   /*  console.log(header); */
 
     axios({
       method: "get",
@@ -35,7 +35,7 @@ class ProfilePage extends Component {
     })
       .then(res => {
         const posts = res.data.posts.map(post => post).reverse();
-          
+
         this.setState({
           
           posts
@@ -47,6 +47,7 @@ class ProfilePage extends Component {
         console.log(err);
       });
   }
+
   render() {
     return (
       <div className="app-wrapper">
@@ -56,7 +57,7 @@ class ProfilePage extends Component {
             <div className="d-flex">
               <SidebarFooter />
               <div className="flex-1">
-                <MakePost />
+                <MakePost updatePosts={this.loadNow} />
                 {this.state.posts.map(post => (
                   <SinglePost post={post} />
                 ))}

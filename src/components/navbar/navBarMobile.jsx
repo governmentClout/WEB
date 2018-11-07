@@ -72,7 +72,7 @@ export default class NavBarMobile extends Component {
               </Link>
             </li>
             <li className="mobile-navigation-menu-item">
-              <a href="/notifications">
+              <Link to="/notifications">
                 <svg
                   width="16"
                   height="20"
@@ -85,7 +85,7 @@ export default class NavBarMobile extends Component {
                     fill="#333333"
                   />
                 </svg>
-              </a>
+              </Link>
             </li>
             <li className="mobile-navigation-menu-item">
               <a href="/messages">

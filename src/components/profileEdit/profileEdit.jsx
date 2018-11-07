@@ -9,13 +9,14 @@ class EditProfile extends Component {
     this.state = {
       showModal: false,
       uploadType: "",
-      fname: "",
-      lname: "",
-      nationality: "",
-      state: "",
-      lga: "",
+      fname: this.props.userFirstName,
+      lname: this.props.userLastName,
+      nationality_origin: this.props.nationalityOrigin,
+      nationality_residence: this.props.nationalityResidence,
+      state: this.props.state,
+      lga: this.props.lga,
       photo: "",
-      phone: ""
+      phone: this.props.phone
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -143,19 +144,31 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group col-md">
-                <label htmlFor="nationality">Nationality</label>
+                <label htmlFor="nationality">Country of Residence</label>
                 <input
                   name="nationality"
                   className="form-control"
                   type="text"
-                  value={this.state.nationality}
+                  value={this.state.nationality_residence}
                   onChange={this.handleChange}
-                  placeholder={this.props.nationality}
+                  placeholder={this.props.nationalityResidence}
                   required
                 />
               </div>
             </div>
             <div className="form-row">
+            <div className="form-group col-md">
+                <label htmlFor="nationality">Country of Origin</label>
+                <input
+                  name="nationality"
+                  className="form-control"
+                  type="text"
+                  value={this.state.nationality_origin}
+                  onChange={this.handleChange}
+                  placeholder={this.props.nationalityOrigin}
+                  required
+                />
+              </div>
               <div className="form-group col-md">
                 <label htmlFor="state">State</label>
                 <select
@@ -171,6 +184,7 @@ class EditProfile extends Component {
                   <option value="osun">Osun</option>
                 </select>
               </div>
+              </div>
               <div className="form-group col-md">
                 <label htmlFor="lga">L.G.A</label>
                 <input
@@ -182,7 +196,6 @@ class EditProfile extends Component {
                   placeholder={this.props.lga}
                   required
                 />
-              </div>
             </div>
             <div className="d-flex">
               <button className="btn btn-gclout-blue" type="submit">

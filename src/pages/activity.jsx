@@ -16,9 +16,10 @@ class ActivityPage extends Component {
               <Sidebar />
               <div className="flex-1">
                 <MakePost />
-                <SinglePost />
+                <strong>this does not work yet</strong>
+                {/* <SinglePost />
                 <SinglePost postType="sponsored" />
-                <SinglePost media />
+                <SinglePost media /> */}
               </div>
             </div>
           </div>
