@@ -71,7 +71,8 @@
   border-radius: 4px;
   color: #ffffff;
   text-transform: uppercase;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
+  margin-top: 1em;
   text-align: left;
   padding: 0.65em 1em;
 }
@@ -79,7 +80,8 @@
   background: #45b0e4;
   border-radius: 4px;
   color: #ffffff;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
+  margin-top: 1em;
   text-align: left;
   text-transform: uppercase;
   padding: 0.65em 1em;
@@ -88,7 +90,8 @@
   background: #de4c33;
   border-radius: 4px;
   color: #ffffff;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
+  margin-top: 1em;
   text-align: left;
   text-transform: uppercase;
   padding: 0.65em 1em;
@@ -97,7 +100,8 @@
   background: #007aaa;
   border-radius: 4px;
   color: #ffffff;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
+  margin-top: 1em;
   text-align: left;
   text-transform: uppercase;
   padding: 0.65em 1em;
@@ -123,7 +127,7 @@
 @media screen and (max-width: 800px) {
   .auth-page-card {
     margin: 5em auto !important;
-    border-radius: 0;
+    overflow-x: hidden;
   }
   .vertical-divider {
     display: none;
