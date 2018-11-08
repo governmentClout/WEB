@@ -7,8 +7,8 @@ import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { Redirect } from "react-router-dom";
-import { PostData } from "../../services/PostData";
 import axios from "axios";
+import LinkedIn from "linkedin-login-for-react";
 
 class Register extends Component {
   constructor(props) {
@@ -87,7 +87,13 @@ class Register extends Component {
   //   this.setState({tosAgreement : !this.state.tosAgreement});
   //   console.log(this.state.tosAgreement);
   // }
+callbackLinkedIn = (error, code, redirectUri) => {
+      if(error){
+console.log('something jus happen rai now')
+      } else {
 
+      }
+};
   signup(res, type) {
     //let postData;
 
@@ -95,7 +101,6 @@ class Register extends Component {
 
       const data = {
 
-        provider: type,
         email: res.email,
         provider: type,
         tosAgreement: true
@@ -110,21 +115,22 @@ class Register extends Component {
      
         provider: type,
         email: res.w3.U3,
-        tosAgreement: true 
-        
+        tosAgreement: true
+
       };
 
       console.log(data);
       const url = "http://api.gclout.com:3000/users";
 
       axios({
+
         method: "post",
         url: url,
         data: data,
-        mode: "no-cors",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        }
+              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          }
+
       }).then(res => {
         console.log(res);
 /*         let responseJson = res;
@@ -192,6 +198,10 @@ class Register extends Component {
       console.log(response);
       this.signup(response, "google");
     };
+
+    const responseLinkedin = response => {
+        console.log(response);
+    }
 
     const responseTwitter = response => {
       console.log(response);
@@ -302,6 +312,15 @@ class Register extends Component {
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
+                    <a href="#" className="social-button-linkedin btn btn-block">
+                        <i className="fab fa-linkedin-in" />
+                        Linkedin
+                    </a>
+                    <LinkedIn
+                        clientId="77pb6qtint69q4"
+                        callback={this.callbackLinkedIn}
+                        text="Login With LinkedIn"
+                    />
                   {
                   /* <TwitterLogin 
                   
@@ -322,10 +341,10 @@ class Register extends Component {
                   >
                     <i className="fab fa-google" /> Google
                   </GoogleLogin>
-                  <a href="#" className="social-button-linkedin btn btn-block">
-                    <i className="fab fa-linkedin-in" />
-                    Linkedin
-                  </a>
+
+
+
+
                 </div>
                 <p className="text-center">
                   Already have an account?{" "}
