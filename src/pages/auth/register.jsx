@@ -9,6 +9,7 @@ import LinkedIn from "linkedin-login-for-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import TwitterLogin from 'react-twitter-auth/lib/react-twitter-auth-component.js';
 
 
 class Register extends Component {
@@ -34,7 +35,45 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+
+    componentDidMount(){
+        (function() {
+            var e = document.createElement("script");
+            e.type = "text/javascript";
+            e.authorize = true;
+            e.src = "http://platform.linkedin.com/in.js";
+            var t = document.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(e, t)
+        })();
+    }
+
+    //Trigger Login for LinkedIn
+    linkedinLogin = () => {
+        window.IN.init({
+            api_key : "77pb6qtint69q4"
+        });
+        setTimeout(function(){
+            this.getUserDetails()
+        }.bind(this),1000);
+        console.log( "Loaded" )
+    }
+
+    getUserDetails() {
+        window.IN.User.authorize( function(){
+            window.IN.API.Profile("me")
+                .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl"])
+                .result(function(result) {
+                    console.log(result);
+                    alert("Successfull login from linkedin : "+ result.values[0].firstName + " " + result.values[0].lastName);
+                })
+                .error(function(err) {
+                    console.log('Import error - Error occured while importing data')
+                });
+        });
+    }
+
+
+    handleSubmit(e) {
     this.setState({ loading: true });
     e.preventDefault();
 
@@ -89,13 +128,13 @@ class Register extends Component {
   //   this.setState({tosAgreement : !this.state.tosAgreement});
   //   console.log(this.state.tosAgreement);
   // }
-callbackLinkedIn = (error, code, redirectUri) => {
+/*callbackLinkedIn = (error, code, redirectUri) => {
       if(error){
 console.log('something jus happen rai now')
       } else {
 
       }
-};
+};*/
   signup(res, type) {
     //let postData;
 
@@ -159,7 +198,15 @@ console.log('something jus happen rai now')
     
     }
 
-    if (type === "twitter" && res.w3.U3) {
+    /*if(type = "linkedin") {
+        const data = {
+            provider: type,
+            email: "t@u.co"
+        };
+        console.log(data);
+    }*/
+
+    if (type === "twitter" && res.email) {
       
       const data = {
         name: res.w3.ig,
@@ -227,6 +274,7 @@ console.log('something jus happen rai now')
 
     const responseLinkedin = response => {
         console.log(response);
+        this.signup(response, "linkedin");
     }
 
     const responseTwitter = response => {
@@ -337,7 +385,29 @@ console.log('something jus happen rai now')
               <div className="vertical-divider">OR</div>
               <div className="col-md-12 col-lg-6 mx-auto">
                 <div className="social-buttons">
-                  <FacebookLogin
+
+                    <GoogleLogin
+                        className="social-button-google btn btn-block"
+                        clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                        buttonText="Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    >
+                        <i className="fab fa-google" /> Google
+                    </GoogleLogin>
+
+                    <TwitterLogin
+                       // loginUrl="http://localhost:3000/login/auth/twitter"
+                        /*onFailure={this.onFailed}*/
+                        /*onSuccess={this.onSuccess}*/
+                        loginUrl="http://localhost:3000/api/v1/auth/twitter"
+                        onSuccess={responseTwitter}
+                        onFailure={responseTwitter}
+                        requestTokenUrl="http://localhost:3000/api/v1/auth/twitter/reverse"
+                        //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
+                    />
+
+                    <FacebookLogin
                     appId="2171139129879186"
                     autoLoad={true}
                     fields="name,email,picture"
@@ -346,50 +416,33 @@ console.log('something jus happen rai now')
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
-                    <a href="#" className="social-button-linkedin btn btn-block">
-                        <i className="fab fa-linkedin-in" />
-                        Linkedin
-                    </a>
-                    <LinkedIn
+
+                    {/*<LinkedIn
                         clientId="77pb6qtint69q4"
                         callback={this.callbackLinkedIn}
                         text="Login With LinkedIn"
-                    />
-                  {
-                  /* <TwitterLogin 
-                  
-                  loginUrl="http://localhost:3000/login" 
-                   onSuccess={responseTwitter}
-                    onFailure={responseTwitter}
-                  className="social-button-twitter btn btn-block"
-                    
-                  
-                  /> */
-  }
-                  <a
-                    href="/register"
-                    className="social-button-twitter btn btn-block"
-                  >
-                    <i className="fab fa-twitter" />
-                    Twitter
-                  </a>
-                  <GoogleLogin
-                    className="social-button-google btn btn-block"
-                    clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                    buttonText="Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                  >
-                    <i className="fab fa-google" /> Google
-                  </GoogleLogin>
+                        onSuccess={responseLinkedin}
+                        onFailure={responseLinkedin}
+                    />*/}
+                    <button
+                        onClick={ () => this.linkedinLogin()}
+                        className="social-button-linkedin btn btn-block">
+                        <i className="fab fa-linkedin-in" />
+                        Linkedin
+                    </button>
 
-                  <a
-                    href="/register"
-                    className="social-button-linkedin btn btn-block"
-                  >
-                    <i className="fab fa-linkedin-in" />
-                    Linkedin
-                  </a>
+
+
+               {/*     <TwitterLogin
+
+                        loginUrl="http://localhost:3000/login"
+                        onSuccess={responseTwitter}
+                        onFailure={responseTwitter}
+                        className="social-button-twitter btn btn-block"
+
+
+                    />*/}
+
                 </div>
                 <p className="text-center">
                   Already have an account?{" "}
