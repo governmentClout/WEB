@@ -2,74 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63d7af7a-be8d-4a12-99b9-4e46a7a047c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/css/activity.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/css/opinion.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/css/pages.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/auth" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/authcontext.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/authenticationRoute.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/comments/commentInput.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/comments/comments.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/friend/friend.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/friend/friend.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/makePost/makePost.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/makePost/makePost.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/makePost/postMedia.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/modal/modal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/modal/modal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/modal/modalLauncher.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/navbar/navBarMobile.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/notifications/notifications.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/notifications/notifications.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/post/pollPost.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/post/post.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/post/post.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/post/postActions.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/profileDetails/profileDetails.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/profileDetails/profileDetails.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/profileEdit/profileEdit.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/protectedRoute.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/sidebarFooter.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/suggestions/suggestions.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/suggestions/suggestions.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/trending/trending.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/trending/trending.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/activity.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/notifications.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/opinionPoll.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/profile/friends.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/profile/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/profile/suggestedFriends.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/css/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/css/profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authBackground/authBackground.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authBackground/authBackground.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authBackground/authBackground.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authBackground/authBackground.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/navBar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/navBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navBarAuthenticated.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/navBarAuthenticated.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/forgotPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/forgotPassword.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/auth/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/passwordReset.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/passwordReset.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/errors/404.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/errors/404.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/createProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/createProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/PostData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PostData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -101,7 +35,7 @@
         <counts>
           <entry key="HTML" value="1" />
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="5" />
+          <entry key="JSX Harmony" value="7" />
           <entry key="JavaScript" value="2" />
         </counts>
       </usages-collector>
@@ -109,7 +43,7 @@
         <counts>
           <entry key="HTML" value="2" />
           <entry key="JSON" value="11" />
-          <entry key="JSX Harmony" value="510" />
+          <entry key="JSX Harmony" value="765" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -118,84 +52,107 @@
           <entry key="html" value="1" />
           <entry key="js" value="2" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="5" />
+          <entry key="jsx" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="2" />
           <entry key="json" value="11" />
-          <entry key="jsx" value="510" />
+          <entry key="jsx" value="765" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="155" column="14" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/profile/createProfile.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-448">
-              <caret line="49" column="3" selection-start-line="49" selection-start-column="3" selection-end-line="49" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="13" column="3" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="6126">
+                  <caret line="375" column="18" lean-forward="true" selection-start-line="375" selection-start-column="18" selection-end-line="383" selection-end-column="32" />
+                  <folding>
+                    <element signature="e#0#41#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/public/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="342">
+                  <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="67" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret lean-forward="true" />
+                  <folding>
+                    <element signature="e#0#41#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/pages/profile/createProfile.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-578">
+                  <caret line="49" column="3" selection-start-line="49" selection-start-column="3" selection-end-line="49" selection-end-column="3" />
+                  <folding>
+                    <element signature="e#0#41#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/package.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="138">
+                  <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="29" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="177">
+                  <caret line="13" column="3" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="3" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="184">
+                  <caret line="375" column="18" selection-start-line="375" selection-start-column="18" selection-end-line="383" selection-end-column="32" />
+                  <folding>
+                    <element signature="e#0#41#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -218,6 +175,10 @@
       <find>linked</find>
       <find>&lt;</find>
       <find>linke</find>
+      <find>import</find>
+      <find>login</find>
+      <find>signup</find>
+      <find>google</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -230,6 +191,7 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/pages/auth/register.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/auth/login.jsx" />
       </list>
     </option>
   </component>
@@ -318,12 +280,12 @@
       <workItem from="1541601132116" duration="390000" />
       <workItem from="1541601730373" duration="10366000" />
       <workItem from="1541633236768" duration="146000" />
-      <workItem from="1541679092662" duration="5397000" />
+      <workItem from="1541679092662" duration="7421000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16299000" />
+    <option name="totallyTimeSpent" value="18323000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -357,23 +319,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/pages/auth/SocialLogin.jsx" />
-    <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/profile/createProfile.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-448">
-          <caret line="49" column="3" selection-start-line="49" selection-start-column="3" selection-end-line="49" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -398,10 +343,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/profile/createProfile.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-578">
+          <caret line="49" column="3" selection-start-line="49" selection-start-column="3" selection-end-line="49" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="155" column="14" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
+        <state relative-caret-position="184">
+          <caret line="375" column="18" selection-start-line="375" selection-start-column="18" selection-end-line="383" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
