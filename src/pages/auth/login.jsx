@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import GoogleLogin from "react-google-login";
 
 class Login extends Component {
   constructor(props) {
@@ -22,6 +23,19 @@ class Login extends Component {
       [ev.target.name]: ev.target.value
     });
   }
+
+  /*signin(res, type) {
+
+      if(type === "google" && res.w3.u3){
+
+          console.log('nigga wanta ti use google');
+          axios({
+              method: 'get',
+              url: "http://api.gclout.com:3000/users/"
+          });
+
+      }
+  }*/
 
   postData(ev) {
     ev.preventDefault();
@@ -85,6 +99,11 @@ class Login extends Component {
   };
 
   render() {
+
+      const responseGoogle = response => {
+          console.log(response);
+          this.signin(response, "google");
+      };
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : (
@@ -159,10 +178,15 @@ class Login extends Component {
                   <i className="fab fa-twitter" />
                   Twitter
                 </button>
-                <button className="social-button-google btn btn-block">
-                  <i className="fab fa-google-plus-g" />
-                  Google
-                </button>
+                  <GoogleLogin
+                      className="social-button-google btn btn-block"
+                      clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                      buttonText="Google"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                  >
+                      <i className="fab fa-google" /> Google
+                  </GoogleLogin>
                 <button className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
