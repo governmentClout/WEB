@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import NavBar from "../../components/navbar/navBar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
 import LinkedIn from "linkedin-login-for-react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 
 class Register extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class Register extends Component {
       tosAgreement: "",
       provider: "email",
       user: null,
-      token: ''
+      token: '',
+      loading: false
     };
     //this.register = this.register.bind(this);
     this.signup = this.signup.bind(this); 
@@ -33,6 +35,7 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({ loading: true });
     e.preventDefault();
 
     const data = {
@@ -50,13 +53,12 @@ class Register extends Component {
 
     /* console.log(this.state); */
     axios({
-
       method: "post",
       url: url,
       data: data,
       /* mode: 'no-cors', */
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
       }
     })
       .then(response => {
@@ -65,15 +67,15 @@ class Register extends Component {
         let responseJson = response;
 
         if (responseJson.data) {
-          sessionStorage.setItem("data", responseJson);
+          sessionStorage.setItem("data", JSON.stringify(responseJson));
 
-          this.setState({
-            redirectToReferrer: true
-          });
+          this.props.login(responseJson.data.user);
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
+        this.notify(error)
+        this.setState({ loading: false });
       });
   }
 
@@ -106,13 +108,12 @@ console.log('something jus happen rai now')
         tosAgreement: true
 
       }
-      
     }
 
     if (type === "google" && res.w3.U3) {
-      
+
       const data = {
-     
+
         provider: type,
         email: res.w3.U3,
         tosAgreement: true
@@ -131,18 +132,30 @@ console.log('something jus happen rai now')
               "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
           }
 
-      }).then(res => {
-        console.log(res);
-/*         let responseJson = res;
-        sessionStorage.setItem("userData", responseJson);
-        this.setStata({
+      }).then(response => {
 
-          redirect: true
+              console.log(response);
+              let responseJson = response;
 
-        }) */
-      }).catch(err => {
-        console.log(err);
+              if (responseJson.data) {
+
+                  sessionStorage.setItem("data", JSON.stringify(responseJson));
+                  this.props.login(responseJson.data.user);
+
+              }
+
       })
+          .catch(error => {
+
+              console.log(error)
+              this.notify(error)
+              this.setState({
+
+                  loading: false
+
+              });
+
+          });
     
     }
 
@@ -181,6 +194,19 @@ console.log('something jus happen rai now')
     }
   
   }
+  errorToast = null;
+  notify = error => {
+    if (this.errorToast) {
+      toast.dismiss(this.errorToast);
+    }
+    this.errorToast = toast.error(
+      "Registration Failed: " + error.response.data.Error,
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
+  };
 
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
@@ -211,17 +237,21 @@ console.log('something jus happen rai now')
 
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
-    return (
+  /*  return (
+=======*/
+/*    const { password, email, phone } = this.state;*/
+    return this.props.isLoggedIn ? (
+      <Redirect to="/" />
+    ) : (
       <div>
-        <NavBar />
         <div className="auth-page d-flex">
           <AuthBackground />
-          <div className="m-auto col-md-8 bg-white auth-page-card">
+          <div className="m-auto col-lg-8 col-md-10 bg-white auth-page-card">
             <h2 className="auth-card-title text-center mb-3">
               Create An Account
             </h2>
             <div className="row --with-divider">
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
@@ -265,7 +295,6 @@ console.log('something jus happen rai now')
                       <DatePicker
                         className="form-date"
                         onChange={this.onDateChange}
-                        name={data_of_birth}
                         value={this.state.date_of_birth}
                         Calendar={null}
                       />
@@ -292,16 +321,21 @@ console.log('something jus happen rai now')
                       </label>
                     </div>
                   </div>
-                  <input
+                  <button
                     type="submit"
-                    value="Register"
                     className="btn btn-block btn-gclout-blue"
                     onClick={this.handleSubmit}
-                  />
+                  >
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Register"
+                    )}{" "}
+                  </button>
                 </form>
               </div>
               <div className="vertical-divider">OR</div>
-              <div className="col-md-6">
+              <div className="col-md-12 col-lg-6 mx-auto">
                 <div className="social-buttons">
                   <FacebookLogin
                     appId="2171139129879186"
@@ -332,6 +366,13 @@ console.log('something jus happen rai now')
                   
                   /> */
   }
+                  <a
+                    href="/register"
+                    className="social-button-twitter btn btn-block"
+                  >
+                    <i className="fab fa-twitter" />
+                    Twitter
+                  </a>
                   <GoogleLogin
                     className="social-button-google btn btn-block"
                     clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
@@ -342,9 +383,13 @@ console.log('something jus happen rai now')
                     <i className="fab fa-google" /> Google
                   </GoogleLogin>
 
-
-
-
+                  <a
+                    href="/register"
+                    className="social-button-linkedin btn btn-block"
+                  >
+                    <i className="fab fa-linkedin-in" />
+                    Linkedin
+                  </a>
                 </div>
                 <p className="text-center">
                   Already have an account?{" "}
@@ -356,6 +401,7 @@ console.log('something jus happen rai now')
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

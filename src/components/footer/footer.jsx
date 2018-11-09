@@ -16,13 +16,13 @@ class Footer extends Component {
             </div>
             <br />
             <div className="col-md-4 d-md-flex justify-content-between">
-              <a href="#" className="footer-link">
+              <a href="/faq" className="footer-link">
                 Help & FAQ
               </a>
-              <a href="#" className="footer-link">
+              <a href="/terms" className="footer-link">
                 Terms of Use
               </a>
-              <a href="#" className="footer-link">
+              <a href="/privacy" className="footer-link">
                 Privacy policy
               </a>
             </div>

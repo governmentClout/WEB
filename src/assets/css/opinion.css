@@ -1,0 +1,94 @@
+.tabs-header {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-tabs .btn-tabs {
+  background: transparent;
+  color: #333333;
+  margin: 0;
+  padding: 1em;
+  border: none !important;
+}
+.filter-tabs .btn-tabs.active,
+.filter-tabs .btn-tabs:hover {
+  color: #00b0f0;
+}
+.btn-tabs:focus,
+.btn-tabs:active,
+.btn-tabs:visited {
+  border: none;
+  box-shadow: none !important;
+}
+.filter-button {
+  background: transparent;
+  border: none;
+  padding: 1em;
+}
+.filter-button:hover {
+  cursor: pointer;
+}
+.filter-dropdown {
+  background: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.25);
+  min-width: 200px;
+  display: none;
+  margin-top: -10px;
+}
+.filter-dropdown.show {
+  display: block;
+}
+.filter-dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.filter-dropdown-button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0.6em 1em;
+}
+.filter-dropdown-button:hover {
+  color: #ffffff;
+  background: #00b0f0;
+  cursor: pointer;
+}
+.poll-form .form-check {
+  display: flex;
+}
+.poll-form .form-check-i {
+  opacity: 0;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  position: absolute;
+}
+.checkmark {
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #333333;
+}
+.poll-form label {
+  margin-left: 1em;
+}
+.container input:checked ~ .checkmark {
+  background-color: #00b0f0;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
