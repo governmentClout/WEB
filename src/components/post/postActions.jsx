@@ -97,7 +97,7 @@ export default class SinglePost extends Component {
         </button>
         <button className="post-action">
           {" "}
-          <i className="far fa-comment" /> 7 comments
+          <i className="far fa-comment"/> comments
         </button>
         <button className="post-action">
           {" "}

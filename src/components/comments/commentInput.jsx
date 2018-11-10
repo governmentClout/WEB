@@ -71,7 +71,16 @@ onKeyPress = (e) => {
         
         }
       
-      }).then(res => console.log(res.data))
+      }).then(res => {
+        console.log(res.data);
+
+          this.setState({
+
+              comment: '',
+              
+          });
+
+      })
     }
   }
 
