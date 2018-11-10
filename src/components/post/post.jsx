@@ -43,7 +43,9 @@ export default class SinglePost extends Component {
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PostActions /><CommentInput postID={this.props.post.uuid}/>
+            <PostActions postID={this.props.post.uuid} />
+
+              <CommentInput postID={this.props.post.uuid}/>
             {" "}
           </>
         ) : (
