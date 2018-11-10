@@ -1,22 +1,105 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
-import "../../assets/css/profile.css";
+import "../../assets/css/pages.css";
+import axios from 'axios';
 
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      
       showModal: false,
       uploadType: "",
-      fname: "",
-      lname: "",
-      nationality: "",
-      state: "",
-      lga: "",
+      fname: this.props.userFirstName,
+      lname: this.props.userLastName,
+      nationality_origin: this.props.nationalityOrigin,
+      nationality_residence: this.props.nationalityResidence,
+      state: this.props.state,
+      lga: this.props.lga,
       photo: "",
-      phone: ""
+      phone: this.props.phone,
+      allStates: []
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.editProfile = this.editProfile.bind(this);
+  }
+
+  handleChange(e) {
+
+    this.setState({
+
+      [e.target.name]: e.target.value
+
+    });
+  
+  }
+
+  editProfile(e){
+
+    e.preventDefault();
+
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+
+    const newProfile = {
+      nationality_residence: this.state.nationality_residence,
+      nationality_origin: this.state.nationality_origin,
+      state: this.state.state,
+      lga: this.state.lga,
+      photo: "https://picsum.photos/200/300",
+      firstName: this.state.fname,
+      lastName: this.state.lname
+
+    }
+
+    console.log(newProfile);
+
+    const url = "http://api.gclout.com:3000/profiles";
+    console.log(url);
+
+    axios({
+    
+      method: 'put',
+      url: url,
+      headers: {
+
+        token: token,
+        uuid: id,
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+
+      }
+    
+    }).then(response => {
+
+      console.log(response);
+
+    })
+
+
+  }
+
+  componentDidMount(){
+
+    axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+        .then(res => {
+
+          const states = res.data.map(state => state);
+
+          console.log(states);
+      
+          this.setState({
+
+            allStates: states
+
+          })
+        
+        }).catch(err => {
+
+          console.log(err);
+
+        })
   }
 
   shouldShowModal = type => {
@@ -91,7 +174,7 @@ class EditProfile extends Component {
           </div>
         </div>
         <div className="col-md-9 mx-auto">
-          <form onSubmit={this.submit}>
+          <form onSubmit={this.editProfile}>
             <div className="form-row">
               <div className="form-group col-md">
                 <label htmlFor="Fname">First Name</label>
@@ -101,7 +184,7 @@ class EditProfile extends Component {
                   type="text"
                   value={this.state.fname}
                   onChange={this.handleChange}
-                  placeholder="John"
+                  placeholder={this.props.userFirstName}
                   required
                 />
               </div>
@@ -111,7 +194,7 @@ class EditProfile extends Component {
                   name="lname"
                   className="form-control"
                   type="text"
-                  placeholder="Doe"
+                  placeholder={this.props.userLastName}
                   value={this.state.lname}
                   onChange={this.handleChange}
                   required
@@ -119,7 +202,8 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className="form-row">
-              <div className="form-group col-md">
+            {
+              /* <div className="form-group col-md">
                 <label htmlFor="phone">Phone Number</label>
                 <input
                   name="phone"
@@ -130,35 +214,53 @@ class EditProfile extends Component {
                   placeholder="+234 [0] 802 345 6789"
                   required
                 />
-              </div>
+              </div> */
+            }
               <div className="form-group col-md">
-                <label htmlFor="nationality">Nationality</label>
+                <label htmlFor="nationality">Country of Residence</label>
                 <input
-                  name="nationality"
+                  name="nationality_residence"
                   className="form-control"
                   type="text"
-                  value={this.state.nationality}
+                  value={this.state.nationality_residence}
                   onChange={this.handleChange}
-                  placeholder="Nigerian"
+                  placeholder={this.props.nationalityResidence}
                   required
                 />
               </div>
             </div>
             <div className="form-row">
+            <div className="form-group col-md">
+                <label htmlFor="nationality">Country of Origin</label>
+                <input
+                  name="nationality_origin"
+                  className="form-control"
+                  type="text"
+                  value={this.state.nationality_origin}
+                  onChange={this.handleChange}
+                  placeholder={this.props.nationalityOrigin}
+                  required
+                />
+              </div>
               <div className="form-group col-md">
                 <label htmlFor="state">State</label>
                 <select
                   name="state"
                   className="form-control"
-                  defaultValue="lag"
-                  value={this.state.state}
+                  defaultValue={this.props.state}
                   onChange={this.handleChange}
                   required
                 >
-                  <option value="lag">Lagos</option>
-                  <option value="ogun">Ogun</option>
-                  <option value="osun">Osun</option>
+                  {
+                    this.state.allStates.map(state => {
+                      
+                      return <option value={state.name}>{state.name}</option>
+                    
+                    })
+
+                  }
                 </select>
+              </div>
               </div>
               <div className="form-group col-md">
                 <label htmlFor="lga">L.G.A</label>
@@ -168,10 +270,9 @@ class EditProfile extends Component {
                   type="text"
                   value={this.state.lga}
                   onChange={this.handleChange}
-                  placeholder="Kosofe"
+                  placeholder={this.props.lga}
                   required
                 />
-              </div>
             </div>
             <div className="d-flex">
               <button className="btn btn-gclout-blue" type="submit">

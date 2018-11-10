@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+
 
 class MakePost extends Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class MakePost extends Component {
     let currentState = this.state.showNewArticle;
     this.setState({ showNewArticle: !currentState });
   }
+  updatePosts = () => this.props.updatePosts();
   closeAll() {
     this.setState({
       showNewPost: false,
@@ -93,8 +96,8 @@ class MakePost extends Component {
         </div>
         {this.props.type !== "poll" ? (
           <>
-            <PostCreation show={this.state.showNewPost} />
-            <ArticleCreation show={this.state.showNewArticle} />
+            <PostCreation updatePosts={this.updatePosts} show={this.state.showNewPost} />
+            <ArticleCreation updatePosts={this.updatePosts} show={this.state.showNewArticle} />
           </>
         ) : (
           <PollCreation show={this.state.showNewPoll} />
@@ -107,40 +110,36 @@ class MakePost extends Component {
 export default MakePost;
 
 class PostCreation extends Component {
+  
   constructor(props) {
     super(props);
-
     this.state = {
       wordCount: 0,
       post: "",
       uploadImages: false,
+      toProfile: false,
       disable: false,
       loading: false
     };
-  }
 
-  dataChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    });
+    this.updateWordCount= this.updateWordCount.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
   }
+  updatePostsNow = () => this.props.updatePosts()
+  onSubmit(e) {
 
-  postData(ev) {
+  // postData(ev) {
     this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
-
-    console.log(id);
-    console.log(token);
-
-    ev.preventDefault();
-
-    const post = this.state.post;
+    e.preventDefault();
 
     const data = {
-      post
-    };
+      post: this.state.post
+    }
+
     axios({
+    
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
@@ -152,7 +151,14 @@ class PostCreation extends Component {
     })
       .then(response => {
         this.setState({loading: false, post: ""});
-        console.log(response);
+        this.updatePostsNow();
+        if (response.data.Success) {
+          console.log('success');
+          sessionStorage.setItem("message", response.data.Success)
+        } else {
+          console.log("login error")
+        }
+        console.log(response.data.Success);
       })
       .catch(err => {
         this.setState({loading: false, post: ""});
@@ -190,7 +196,7 @@ class PostCreation extends Component {
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>
-          <form onSubmit={this.postData.bind(this)}>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <textarea
                 className={
@@ -199,9 +205,10 @@ class PostCreation extends Component {
                     : "form-control border-red"
                 }
                 rows="4"
-                name="new_post"
+                name="post"
                 onChange={this.updateWordCount}
                 onCut={this.updateWordCount}
+                onBlur={this.updateWordCount}
                 onPaste={this.updateWordCount}
                 value={this.state.post}
                 placeholder="Type post here..."
@@ -237,11 +244,23 @@ class PostCreation extends Component {
 }
 
 class ArticleCreation extends Component {
+  
   constructor(props) {
+  
     super(props);
-    this.state = { wordCount: 0, article: "", uploadImages: false };
+    this.state = { 
+        wordCount: 0, 
+        article: "", 
+        uploadImages: false,
+        toProfile: false 
+        
+      };
     this.updateWordCount = this.updateWordCount.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  
   }
+  updatePostsNow = () => this.props.updatePosts()
+  
   updateWordCount(event) {
     this.setState({ article: event.target.value });
     if (this.state.article === "") {
@@ -256,6 +275,71 @@ class ArticleCreation extends Component {
     let currentState = this.state.uploadImages;
     this.setState({ uploadImages: !currentState });
   };
+
+  onSubmit(e) {
+
+     this.setState({loading: true});
+    const id = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token");
+
+    console.log(id);
+    console.log(token);
+
+    e.preventDefault();
+
+    const data = {
+
+      post: this.state.article
+    
+    }
+
+    console.log(data);
+    console.log("lmao");
+
+    axios({
+    
+      method: "post",
+      url: "http://api.gclout.com:3000/posts",
+      data: data,
+      headers: {
+    
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: token,
+        uuid: id
+    
+      }
+    
+    })
+      .then(response => {
+        this.setState({loading: false, post: ""});
+        this.updatePostsNow();
+
+        if (response.data.Success) {
+
+          this.setState({
+
+            toProfile: true
+
+          });
+
+          console.log('success');
+
+          sessionStorage.setItem("message", response.data.Success)
+        
+        } else {
+
+          console.log("login error")
+        
+        }
+
+        console.log(response.data.Success);
+
+      })
+      .catch(err => {
+        this.setState({loading: false, post: ""});
+        console.log(err)
+      });
+  }
   render() {
     return (
       <div
@@ -265,7 +349,7 @@ class ArticleCreation extends Component {
       >
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
@@ -274,13 +358,13 @@ class ArticleCreation extends Component {
                 name="article-title"
                 placeholder="Title of article ..."
               />
-            </div>
+            </div> 
             <div className="form-group">
               <label htmlFor="new_article">Article</label>
               <textarea
                 className="form-control"
                 rows="4"
-                name="new_article"
+                name="article"
                 onChange={this.updateWordCount}
                 value={this.state.article}
                 placeholder="Type article here..."

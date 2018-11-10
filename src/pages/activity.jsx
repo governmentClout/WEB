@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../assets/css/profile.css";
+import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
@@ -16,9 +16,10 @@ class ActivityPage extends Component {
               <Sidebar />
               <div className="flex-1">
                 <MakePost />
-                <SinglePost />
+                <strong>this does not work yet</strong>
+                {/* <SinglePost />
                 <SinglePost postType="sponsored" />
-                <SinglePost media />
+                <SinglePost media /> */}
               </div>
             </div>
           </div>
