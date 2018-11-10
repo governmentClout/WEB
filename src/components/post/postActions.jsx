@@ -76,7 +76,9 @@ export default class SinglePost extends Component {
 
             }
 
-        }).then(res => console.log(res.data))
+        }).then(res => {
+            this.showLikesCount();
+        })
 
         /*const likes = this.state;
 
