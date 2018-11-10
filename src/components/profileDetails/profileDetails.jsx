@@ -19,9 +19,11 @@ class ProfileDetails extends Component {
 
   componentDidMount() {
     if(this.state.profile !== []) {
-    const id = sessionStorage.getItem("uuid"),
+
+      const id = sessionStorage.getItem("uuid"),
          token = sessionStorage.getItem("token");
     const url = `http://api.gclout.com:3000/profiles/${id}`
+    
     axios({
       method: "GET",
       url: url,
@@ -30,6 +32,7 @@ class ProfileDetails extends Component {
         token: token
       }
     }).then(res => {
+
       this.setState({
         profile: res.data.profile[0]
       });
