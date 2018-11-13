@@ -44,10 +44,10 @@
 .gclout-modal-close-btn {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 7em;
   background: #ffffff;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
   border: 0;
   cursor: pointer;
@@ -58,9 +58,9 @@
 .gclout-modal-close-btn:after {
   content: "";
   position: absolute;
-  top: 1.2rem;
+  top: 1rem;
   left: 0.25rem;
-  width: 2rem;
+  width: 1.4rem;
   height: 0.1rem;
   background-color: #888888;
 }
