@@ -17,16 +17,17 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      redirect: false,
-      password: "",
-      email: "",
-      phone: "",
-      date_of_birth: new Date(1980, 1, 1),
-      tosAgreement: "",
-      provider: "email",
-      user: null,
-      token: '',
-      loading: false
+        redirect: false,
+        password: "",
+        email: "",
+        phone: "",
+        date_of_birth: new Date(1980, 1, 1),
+        tosAgreement: "",
+        provider: "email",
+        user: null,
+        token: '',
+        loading: false,
+        isAuthenticated: false,
     };
     //this.register = this.register.bind(this);
     this.signup = this.signup.bind(this); 
@@ -35,31 +36,35 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
     componentDidMount(){
-        (function() {
-            var e = document.createElement("script");
+            const e = document.createElement("script");
             e.type = "text/javascript";
             e.authorize = true;
-            e.src = "http://platform.linkedin.com/in.js";
-            var t = document.getElementsByTagName("script")[0];
-            t.parentNode.insertBefore(e, t)
-        })();
+            e.src = "http://platform.linkedin.com/in.js?async=true";
+            /*const t = document.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(e, t)*/
+            e.api_key = "77pb6qtint69q4";
+            document.body.appendChild(e);
     }
 
-    //Trigger Login for LinkedIn
-    linkedinLogin = () => {
-        window.IN.init({
-            api_key : "77pb6qtint69q4"
-        });
+    linkedInLogin = () => {
         setTimeout(function(){
             this.getUserDetails()
         }.bind(this),1000);
         console.log( "Loaded" )
     }
 
+
+/*    linkedInLogin = () => {
+
+    this.getUserDetails();
+    console.log('clicked');
+
+    }*/
+
+
     getUserDetails() {
-        window.IN.User.authorize( function(){
+        window.IN.User.authorize(function(){
             window.IN.API.Profile("me")
                 .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl"])
                 .result(function(result) {
@@ -206,35 +211,25 @@ console.log('something jus happen rai now')
     }*/
 
     if (type === "twitter" && res.email) {
-      
-      const data = {
-        name: res.w3.ig,
+      console.log('twitter');
+     const data = {
+
         provider: type,
-        email: res.w3.U3,
-        tosAgreement: true 
-        
+        email: res.email,
+        tosAgreement: true
+
       };
 
       console.log(data);
 
-      axios({
-        method: "post",
-        url: "http://api.gclout.com:3000/users",
-        data: data,
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        }
-      }).then(res => {
-        console.log(res);
+
 /*         let responseJson = res;
         sessionStorage.setItem("userData", responseJson);
         this.setStata({
           redirect: true
         }) */
-      }).catch(err => {
-        console.log(err);
-      })
-    
+
+
     }
   
   }
@@ -264,27 +259,45 @@ console.log('something jus happen rai now')
       this.signup(response, "facebook");
     };
 
-    const responseGoogle = response => {
-      console.log(response);
-      this.signup(response, "google");
-    };
 
     const responseLinkedin = response => {
         console.log(response);
         this.signup(response, "linkedin");
     }
+    errorToast = null;
+    notify = error => {
+        if (this.errorToast) {
+            toast.dismiss(this.errorToast);
+        }
+        this.errorToast = toast.error(
+            "Registration Failed: " + error.response.data.Error,
+            {
+                position: toast.POSITION.TOP_LEFT,
+                autoClose: false
+            }
+        );
+        }
 
+    // const responseTwittrer = (response) => {
+    //     const token = response.headers.get('x-auth-token');
+    //     response.json().then(user => {
+    //         if (token) {
+    //             this.setState({isAuthenticated: true, user: user, token: token});
+    //         }
+    //     });
     const responseTwitter = response => {
       console.log(response);
       this.signup(response, "twitter");
     };
 
 
+        const responseGoogle = response => {
+            console.log(response);
+            this.signup(response, "google");
+        };
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
-  /*  return (
-=======*/
-/*    const { password, email, phone } = this.state;*/
+
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : (
@@ -397,10 +410,12 @@ console.log('something jus happen rai now')
                        // loginUrl="http://localhost:3000/login/auth/twitter"
                         /*onFailure={this.onFailed}*/
                         /*onSuccess={this.onSuccess}*/
-                        loginUrl="http://localhost:3000/api/v1/auth/twitter"
+                        loginUrl="http://api.gclout.com:3000/users"
                         onSuccess={responseTwitter}
                         onFailure={responseTwitter}
-                        requestTokenUrl="http://localhost:3000/api/v1/auth/twitter/reverse"
+                        forceLogin={true}
+                        clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
+                        requestTokenUrl="http://api.gclout.com:3000/users"
                         //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
                     />
 
@@ -414,15 +429,17 @@ console.log('something jus happen rai now')
                     textButton="Facebook"
                   />
 
-                    {/*<LinkedIn
+                    <LinkedIn
                         clientId="77pb6qtint69q4"
                         callback={this.callbackLinkedIn}
                         text="Login With LinkedIn"
                         onSuccess={responseLinkedin}
                         onFailure={responseLinkedin}
-                    />*/}
+                    />
                     <button
-                        onClick={ () => this.linkedinLogin()}
+                        onClick={this.linkedInLogin}
+                        onSuccess={responseLinkedin}
+                        onFailure={responseLinkedin}
                         className="social-button-linkedin btn btn-block">
                         <i className="fab fa-linkedin-in" />
                         Linkedin
@@ -452,6 +469,6 @@ console.log('something jus happen rai now')
       </div>
     );
   }
-}
+};
 
 export default Register;
