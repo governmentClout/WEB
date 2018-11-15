@@ -160,7 +160,8 @@ console.log('something jus happen rai now')
 
         provider: type,
         email: res.w3.U3,
-        tosAgreement: true
+        tosAgreement: true,
+        password: "password"
 
       };
 

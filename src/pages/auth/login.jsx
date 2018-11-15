@@ -16,6 +16,9 @@ class Login extends Component {
       password: "",
       loading: false
     };
+
+    this.signin = this.signin.bind(this);
+
   }
 
   dataChange(ev) {
@@ -24,29 +27,18 @@ class Login extends Component {
     });
   }
 
-  /*signin(res, type) {
-
-      if(type === "google" && res.w3.u3){
-
-          console.log('nigga wanta ti use google');
-          axios({
-              method: 'get',
-              url: "http://api.gclout.com:3000/users/"
-          });
-
-      }
-  }*/
-
   postData(ev) {
     ev.preventDefault();
     this.setState({ loading: true });
 
     const email = this.state.email;
     const password = this.state.password;
+    const provider = "email";
 
     const data = {
       email,
-      password
+      password,
+      provider
     };
 
     const url = "http://api.gclout.com:3000/login";
@@ -84,6 +76,58 @@ class Login extends Component {
       console.log("noting here");
     }
   }
+
+    signin(res, type) {
+
+        if (type === "google" && res.w3.U3) {
+
+            const data = {
+
+                provider: type,
+                email: res.w3.U3
+
+            };
+
+            console.log(data);
+            const url = "http://api.gclout.com:3000/login";
+
+            axios({
+
+                method: 'post',
+                url: url,
+                data: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                }
+
+            }).then(response => {
+                console.log(response);
+                let responseJson = response;
+
+                if (responseJson.data) {
+
+                    sessionStorage.setItem("data", JSON.stringify(responseJson));
+                    this.props.login(responseJson.data.user);
+
+                }
+
+            })
+                .catch(error => {
+
+                    console.log(error);
+                    this.notify(error);
+                    this.setState({
+
+                        loading: false
+
+                    });
+
+                });
+
+        }
+
+    }
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
