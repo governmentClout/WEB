@@ -233,6 +233,7 @@ console.log('something jus happen rai now')
     }
   
   }
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
