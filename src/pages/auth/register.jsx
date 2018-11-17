@@ -234,21 +234,24 @@ console.log('something jus happen rai now')
   
   }
 
+
+
+
+  onDateChange = date_of_birth => this.setState({ date_of_birth });
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Registration Failed: " + error.response.data.Error,
+      "Login Failed: " + error.response.data.Error,
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false
       }
     );
   };
-
-  onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
     if (this.state.redirect || sessionStorage.getItem("data")) {
@@ -265,19 +268,6 @@ console.log('something jus happen rai now')
         console.log(response);
         this.signup(response, "linkedin");
     }
-    errorToast = null;
-    notify = error => {
-        if (this.errorToast) {
-            toast.dismiss(this.errorToast);
-        }
-        this.errorToast = toast.error(
-            "Registration Failed: " + error.response.data.Error,
-            {
-                position: toast.POSITION.TOP_LEFT,
-                autoClose: false
-            }
-        );
-        }
 
     // const responseTwittrer = (response) => {
     //     const token = response.headers.get('x-auth-token');
