@@ -159,7 +159,8 @@ console.log('something jus happen rai now')
 
         provider: type,
         email: res.w3.U3,
-        tosAgreement: true
+        tosAgreement: true,
+        password: "password"
 
       };
 
@@ -262,26 +263,6 @@ console.log('something jus happen rai now')
       console.log(response);
       this.signup(response, "facebook");
     };
-
-
-    const responseLinkedin = response => {
-        console.log(response);
-        this.signup(response, "linkedin");
-    }
-
-    // const responseTwittrer = (response) => {
-    //     const token = response.headers.get('x-auth-token');
-    //     response.json().then(user => {
-    //         if (token) {
-    //             this.setState({isAuthenticated: true, user: user, token: token});
-    //         }
-    //     });
-    const responseTwitter = response => {
-      console.log(response);
-      this.signup(response, "twitter");
-    };
-
-
         const responseGoogle = response => {
             console.log(response);
             this.signup(response, "google");
@@ -289,6 +270,33 @@ console.log('something jus happen rai now')
 
     const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
+    const responseLinkedin = response => {
+        console.log(response);
+        this.signup(response, "linkedin");
+    }
+
+      const responseTwitter = response => {
+          console.log(response);
+          this.signup(response, "twitter");
+      };
+
+    const responseTwittrer = (response) => {
+        const token = response.headers.get('x-auth-token');
+        response.json().then(user => {
+            if (token) {
+                this.setState({isAuthenticated: true, user: user, token: token});
+            }
+        });
+    };
+
+
+
+
+
+    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+  /*  return (
+=======*/
+/*    const { password, email, phone } = this.state;*/
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : (
@@ -405,6 +413,7 @@ console.log('something jus happen rai now')
                         onSuccess={responseTwitter}
                         onFailure={responseTwitter}
                         forceLogin={true}
+                        className="social-button-twitter btn btn-block"
                         clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
                         requestTokenUrl="http://api.gclout.com:3000/users"
                         //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
@@ -426,6 +435,7 @@ console.log('something jus happen rai now')
                         text="Login With LinkedIn"
                         onSuccess={responseLinkedin}
                         onFailure={responseLinkedin}
+                        className="social-button-linkedin btn btn-block"
                     />
                     <button
                         onClick={this.linkedInLogin}
@@ -443,6 +453,8 @@ console.log('something jus happen rai now')
                         onSuccess={responseTwitter}
                         onFailure={responseTwitter}
                         className="social-button-twitter btn btn-block"
+
+
                     />*/}
 
                 </div>
