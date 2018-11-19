@@ -268,7 +268,7 @@ console.log('something jus happen rai now')
             this.signup(response, "google");
         };
 
-    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+    // const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
     const responseLinkedin = response => {
         console.log(response);
