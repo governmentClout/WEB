@@ -8,7 +8,7 @@ import axios from 'axios';
 
 window.axios=axios;
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <BrowserRouter>
     <Routes />
   </BrowserRouter>,

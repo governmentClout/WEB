@@ -1,5 +1,4 @@
 .navigation {
-    width: calc(100vw 20px);
     height: 80px;
     padding: 10px;
     z-index: 700;
@@ -232,13 +231,13 @@
     padding-left: 0;
 }
 .profile-dropdown-list-item {
-    padding: 0.5em;
     border-bottom: 1px solid #f0f0f0;
-}
-.profile-dropdown-list-item {
     padding: 0.5em;
     padding-left: 1.5em;
     width: 100%;
+}
+.profile-dropdown-list-item>a {
+    padding-right: 8em;
 }
 .profile-dropdown-list-item:hover {
     background: #00b0f0;

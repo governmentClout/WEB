@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import GoogleLogin from "react-google-login";
 
 class Login extends Component {
   constructor(props) {
@@ -15,6 +16,9 @@ class Login extends Component {
       password: "",
       loading: false
     };
+
+    this.signin = this.signin.bind(this);
+
   }
 
   dataChange(ev) {
@@ -29,10 +33,12 @@ class Login extends Component {
 
     const email = this.state.email;
     const password = this.state.password;
+    const provider = "email";
 
     const data = {
       email,
-      password
+      password,
+      provider
     };
 
     const url = "http://api.gclout.com:3000/login";
@@ -70,6 +76,58 @@ class Login extends Component {
       console.log("noting here");
     }
   }
+
+    signin(res, type) {
+
+        if (type === "google" && res.w3.U3) {
+
+            const data = {
+
+                provider: type,
+                email: res.w3.U3
+
+            };
+
+            console.log(data);
+            const url = "http://api.gclout.com:3000/login";
+
+            axios({
+
+                method: 'post',
+                url: url,
+                data: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                }
+
+            }).then(response => {
+                console.log(response);
+                let responseJson = response;
+
+                if (responseJson.data) {
+
+                    sessionStorage.setItem("data", JSON.stringify(responseJson));
+                    this.props.login(responseJson.data.user);
+
+                }
+
+            })
+                .catch(error => {
+
+                    console.log(error);
+                    this.notify(error);
+                    this.setState({
+
+                        loading: false
+
+                    });
+
+                });
+
+        }
+
+    }
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
@@ -85,6 +143,11 @@ class Login extends Component {
   };
 
   render() {
+
+      const responseGoogle = response => {
+          console.log(response);
+          this.signin(response, "google");
+      };
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : (
@@ -159,10 +222,15 @@ class Login extends Component {
                   <i className="fab fa-twitter" />
                   Twitter
                 </button>
-                <button className="social-button-google btn btn-block">
-                  <i className="fab fa-google-plus-g" />
-                  Google
-                </button>
+                  <GoogleLogin
+                      className="social-button-google btn btn-block"
+                      clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                      buttonText="Google"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                  >
+                      <i className="fab fa-google" /> Google
+                  </GoogleLogin>
                 <button className="social-button-linkedin btn btn-block">
                   <i className="fab fa-linkedin-in" />
                   Linkedin
