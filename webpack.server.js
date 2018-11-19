@@ -2,15 +2,18 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin
-= require('optimize-css-assets-webpack-plugin')
+= require('optimize-css-assets-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 module.exports = {
   entry: './server/index.js',
 
   target: 'node',
-
+  externals: [nodeExternals({
+    whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i],
+  })],
   output: {
     path: path.resolve('server-build'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   optimization: {
     minimizer: [
