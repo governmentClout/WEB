@@ -9,7 +9,7 @@ module.exports = {
 
   target: 'node',
   externals: [nodeExternals({
-    whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i],
+    whitelist: [/react/],
   })],
   output: {
     path: path.resolve('server-build'),

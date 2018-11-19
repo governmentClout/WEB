@@ -32,7 +32,10 @@
     "build": "react-scripts build",
     "dev:build-server": "cross-env NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
     "dev:start": "nodemon ./server-build/index.js",
-    "dev": "npm-run-all --parallel build dev:build-server dev:start"
+    "dev": "npm-run-all --parallel build dev:build-server dev:start",
+    "server:build":  "cross-env NODE_ENV=production webpack --config webpack.server.js --mode=production",
+    "server": "node ./server-build/index.js",
+    "start": "npm-run-all build server:build server"
   },
   "eslintConfig": {
     "extends": "react-app"
