@@ -14,6 +14,7 @@ export default class SinglePost extends Component {
     media: false
   };
   render() {
+
     return (
       <div style={{ marginBottom: "1em" }}>
         <div className="post-container">
@@ -42,7 +43,10 @@ export default class SinglePost extends Component {
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PostActions /> <CommentInput />{" "}
+            <PostActions postID={this.props.post.uuid} />
+
+              <CommentInput postID={this.props.post.uuid}/>
+            {" "}
           </>
         ) : (
           ""

@@ -140,7 +140,6 @@ class Register extends Component {
       if(error){
 console.log('something jus happen rai now')
       } else {
-
       }
 };*/
   signup(res, type) {
@@ -231,30 +230,32 @@ console.log('something jus happen rai now')
 /*         let responseJson = res;
         sessionStorage.setItem("userData", responseJson);
         this.setStata({
-
           redirect: true
-
         }) */
 
 
     }
   
   }
+
+
+
+
+  onDateChange = date_of_birth => this.setState({ date_of_birth });
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Registration Failed: " + error.response.data.Error,
+      "Login Failed: " + error.response.data.Error,
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false
       }
     );
   };
-
-  onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   render() {
     if (this.state.redirect || sessionStorage.getItem("data")) {
@@ -265,11 +266,12 @@ console.log('something jus happen rai now')
       console.log(response);
       this.signup(response, "facebook");
     };
+        const responseGoogle = response => {
+            console.log(response);
+            this.signup(response, "google");
+        };
 
-    const responseGoogle = response => {
-      console.log(response);
-      this.signup(response, "google");
-    };
+    // const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
     const responseLinkedin = response => {
         console.log(response);
@@ -414,6 +416,7 @@ console.log('something jus happen rai now')
                         onSuccess={responseTwitter}
                         onFailure={responseTwitter}
                         forceLogin={true}
+                        className="social-button-twitter btn btn-block"
                         clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
                         requestTokenUrl="http://api.gclout.com:3000/users"
                         //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
@@ -435,6 +438,7 @@ console.log('something jus happen rai now')
                         text="Login With LinkedIn"
                         onSuccess={responseLinkedin}
                         onFailure={responseLinkedin}
+                        className="social-button-linkedin btn btn-block"
                     />
                     <button
                         onClick={this.linkedInLogin}
@@ -448,7 +452,6 @@ console.log('something jus happen rai now')
 
 
                {/*     <TwitterLogin
-
                         loginUrl="http://localhost:3000/login"
                         onSuccess={responseTwitter}
                         onFailure={responseTwitter}
@@ -472,6 +475,6 @@ console.log('something jus happen rai now')
       </div>
     );
   }
-}
+};
 
 export default Register;

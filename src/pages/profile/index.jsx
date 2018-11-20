@@ -19,11 +19,15 @@ class ProfilePage extends Component {
   loadPosts() {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
+
     const url = "http://api.gclout.com:3000/posts?user=" + id;
     const header = {
+
       token: token,
       uuid: id
+
     };
+
     axios({
       method: "get",
       url: url,
@@ -31,14 +35,19 @@ class ProfilePage extends Component {
     })
       .then(res => {
         const posts = res.data.posts.map(post => post).reverse();
+
         this.setState({
+          
           posts
+        
         });
+
       })
       .catch(err => {
         console.log(err);
       });
   }
+
   render() {
     return (
       <div className="app-wrapper">
