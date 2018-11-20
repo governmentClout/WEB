@@ -29,11 +29,16 @@ class Login extends Component {
 
     const email = this.state.email;
     const password = this.state.password;
+    const provider = "email";
 
     const data = {
+
       email,
-      password
+      password,
+      provider
+
     };
+    console.log(data);
 
     const url = "http://api.gclout.com:3000/login";
 
