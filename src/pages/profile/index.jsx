@@ -36,9 +36,18 @@ class ProfilePage extends Component {
       headers: header
     })
       .then(res => {
-        console.log(res.data);
+          for(let i = 0; i < res.length ; i++){
+
+              console.log(res[i].post); //will give you posts
+              /*res[i].comments //will give you array of comments
+              res[i].user // details of user*/
+
+          }
+
+
+        //console.log(res.data.post);
         const posts = res.data.posts.map(post => post).reverse();
-        console.log(posts);
+        //console.log(posts);
 
         this.setState({
           
