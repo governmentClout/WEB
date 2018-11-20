@@ -52,7 +52,7 @@ class EditProfile extends Component {
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
       
-    }
+    };
 
     console.log(data);
 
@@ -64,8 +64,9 @@ class EditProfile extends Component {
       method: "put",
       url: "http://api.gclout.com:3000/profiles",
       data: data,
+      mode: 'no-cors',
       headers: {
-        "Content-Type": "charset=utf-8;application/json;application/x-www-form-urlencoded",
+        "Content-Type": "application/json;charset=utf-8",
         token: token,
         uuid: id,
 
