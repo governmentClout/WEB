@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./friend.css";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import { Manager, Reference, Popper } from "react-popper";
 
 class Friend extends Component {
@@ -80,8 +80,8 @@ class Friend extends Component {
 Friend.defaultProps = {
   type: "friend"
 };
-Friend.PropTypes = {
-  type: PropTypes.string
+Friend.propTypes = {
+  type: propTypes.string
 };
 
 export default Friend;
