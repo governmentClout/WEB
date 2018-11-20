@@ -36,11 +36,12 @@ class ProfilePage extends Component {
       headers: header
     })
       .then(res => {
-          for(let i = 0; i < res.length ; i++){
-
-              console.log(res[i].post); //will give you posts
-              /*res[i].comments //will give you array of comments
-              res[i].user // details of user*/
+        
+          for(let i = 0; i < res.data.length ; i++){
+              
+              console.log(res.data[i].post);  //for the post object
+              console.log(res.data[i].post.post);  //for the post content
+              console.log(res.data[i].comments);  //for the comments object
 
           }
 
