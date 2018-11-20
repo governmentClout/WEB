@@ -150,10 +150,22 @@ class PostCreation extends Component {
       }
     })
       .then(response => {
-        this.setState({loading: false, post: ""});
+
+        /*if(response.data.Success){
+
+          alert('djd');
+
+        }*/
+
+        this.setState({
+
+            loading: false,
+            post: ""
+
+        });
+
         this.updatePostsNow();
         if (response.data.Success) {
-          console.log('success');
           sessionStorage.setItem("message", response.data.Success)
         } else {
           console.log("login error")
@@ -212,6 +224,7 @@ class PostCreation extends Component {
                 onPaste={this.updateWordCount}
                 value={this.state.post}
                 placeholder="Type post here..."
+                required={true}
               />
             </div>
             <p className="text-right mb-0">
@@ -291,7 +304,7 @@ class ArticleCreation extends Component {
 
       post: this.state.article
     
-    }
+    };
 
     console.log(data);
     console.log("lmao");
@@ -311,6 +324,7 @@ class ArticleCreation extends Component {
     
     })
       .then(response => {
+        console.log(response.data);
         this.setState({loading: false, post: ""});
         this.updatePostsNow();
 
