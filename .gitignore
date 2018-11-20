@@ -26,7 +26,6 @@ yarn-error.log*
 #environment variables
 .env
 package-lock.json
-server-build
 package-lock.json
 yarn.lock
 .idea
