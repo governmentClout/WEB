@@ -55,8 +55,9 @@ class ProfileDetails extends Component {
             />
           </div>
           <div className="container real-details-container">
-            <div className="d-flex">
-              <div className="col-6">
+
+            <div className="main-details d-md-flex justify-content-btween">
+              <div className="col-md-4 dashed-border-right details-column">
                 <div
                   className="lifted-profile-image-wrapper"
                   style={{ marginTop: "-80px" }}

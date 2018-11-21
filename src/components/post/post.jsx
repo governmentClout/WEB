@@ -13,6 +13,13 @@ export default class SinglePost extends Component {
     postType: "simple-post",
     media: false
   };
+  state = { showComment: false }
+  showComment = () => {
+    const currentState = this.state.showComment
+    this.setState({
+      showComment: !currentState
+    })
+  }
   render() {
 
     return (
@@ -21,14 +28,14 @@ export default class SinglePost extends Component {
           <div className="post-owner">
             <div className="post-owner-image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                src={this.props.post.user[0].photo}
                 alt="lol"
-                className="post-owner-image"
+                className={this.props.post.user[0].firstName + ' display'}
               />
             </div>
 
             <div className="post-owner-details">
-              <p>{this.props.post.user}</p>
+              <p>{this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName}</p>
               {this.props.postType === "sponsored" ? (
                 <p className="post-type">Sponsored</p>
               ) : (
@@ -37,15 +44,15 @@ export default class SinglePost extends Component {
             </div>
           </div>
           <div className="post-content">
-            <p>{this.props.post.post}</p>
+            <p>{this.props.post.post.post}</p>
           </div>
         </div>
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PostActions postID={this.props.post.uuid} />
+            <PostActions showComment={this.showComment} postID={this.props.post.post.id} />
 
-              <CommentInput postID={this.props.post.uuid}/>
+              <CommentInput postID={this.props.post.uuid} show={this.state.showComment}/>
             {" "}
           </>
         ) : (

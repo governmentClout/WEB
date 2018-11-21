@@ -48,39 +48,15 @@ class CreateProfile extends Component {
       [ev.target.name]: ev.target.value
     });
   }
-
-  componentDidMount() {
-    const id = sessionStorage.getItem("uuid"),
-      token = sessionStorage.getItem("token");
-    axios({
-      method: "get",
-      url: "http://api.gclout.com/profiles/" + id,
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        token: token,
-        uuid: id
-      }
-    })
-      .then(res => {
-        console.log(res)
-        this.setState({ toProfile: true })
-      })
-      .catch(
-        axios({
-          method: "get",
-          url: "http://locationsng-api.herokuapp.com/api/v1/states"
+  componentWillMount() {
+    console.log('mounted')
+    axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+      .then(response => {
+        this.setState({
+          allStates: response.data
         })
-          .then(res => {
-            const states = res.data.map(state => state);
-            console.log(states);
-            this.setState({
-              allStates: states
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      );
+      })
+      .catch(err => console.log(err))
   }
 
   createProfile(e) {

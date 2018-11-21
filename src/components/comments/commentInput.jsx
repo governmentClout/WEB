@@ -86,7 +86,7 @@ onKeyPress = (e) => {
 
   render() {
     return (
-      <div className="comment-input-wrapper">
+      <div className={ this.props.show ? "comment-input-wrapper" : "comment-input-wrapper hidden" } >
         <div className="comment-owner-wrapper">
           <img
             className="comment-owner"

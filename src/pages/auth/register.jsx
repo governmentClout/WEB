@@ -5,32 +5,80 @@ import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import LinkedIn from "linkedin-login-for-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import TwitterLogin from 'react-twitter-auth/lib/react-twitter-auth-component.js';
+
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      redirectToReferrer: false,
-      password: "",
-      email: "",
-      phone: "",
-      date_of_birth: new Date(1980, 1, 1),
-      tosAgreement: "",
-      provider: "email",
-      loading: false
+        redirect: false,
+        password: "",
+        email: "",
+        phone: "",
+        date_of_birth: new Date(1980, 1, 1),
+        tosAgreement: "",
+        provider: "email",
+        user: null,
+        token: '',
+        loading: false,
+        isAuthenticated: false,
     };
-    this.register = this.register.bind(this);
-    /*     this.signup = this.signup.bind(this); */
+    //this.register = this.register.bind(this);
+    this.signup = this.signup.bind(this); 
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+    componentDidMount(){
+            const e = document.createElement("script");
+            e.type = "text/javascript";
+            e.authorize = true;
+            e.src = "http://platform.linkedin.com/in.js?async=true";
+            /*const t = document.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(e, t)*/
+            e.api_key = "77pb6qtint69q4";
+            document.body.appendChild(e);
+    }
+
+    linkedInLogin = () => {
+        setTimeout(function(){
+            this.getUserDetails()
+        }.bind(this),1000);
+        console.log( "Loaded" )
+    }
+
+
+/*    linkedInLogin = () => {
+
+    this.getUserDetails();
+    console.log('clicked');
+
+    }*/
+
+
+    getUserDetails() {
+        window.IN.User.authorize(function(){
+            window.IN.API.Profile("me")
+                .fields(["id", "firstName", "lastName", "pictureUrl", "publicProfileUrl"])
+                .result(function(result) {
+                    console.log(result);
+                    alert("Successfull login from linkedin : "+ result.values[0].firstName + " " + result.values[0].lastName);
+                })
+                .error(function(err) {
+                    console.log('Import error - Error occured while importing data')
+                });
+        });
+    }
+
+
+    handleSubmit(e) {
     this.setState({ loading: true });
     e.preventDefault();
 
@@ -81,36 +129,124 @@ class Register extends Component {
     });
   }
 
-  register(res, type) {
+  // toggleBox(){
+  //   this.setState({tosAgreement : !this.state.tosAgreement});
+  //   console.log(this.state.tosAgreement);
+  // }
+/*callbackLinkedIn = (error, code, redirectUri) => {
+      if(error){
+console.log('something jus happen rai now')
+      } else {
+      }
+};*/
+  signup(res, type) {
+    //let postData;
+
     if (type === "facebook" && res.email) {
-      let postData = {
-        name: res.name,
-        provider: type,
+
+      const data = {
+
         email: res.email,
-        provider_id: res.id,
-        token: res.accessToken
-      };
-      console.log(postData);
+        provider: type,
+        tosAgreement: true
+
+      }
     }
 
     if (type === "google" && res.w3.U3) {
-      let postData = {
-        name: res.w3.ig,
+
+      const data = {
+
         provider: type,
         email: res.w3.U3,
-        provider_id: res.El,
-        token: res.Zi.access_token
+        tosAgreement: true,
+        password: "password"
+
       };
-      console.log(postData);
+
+      console.log(data);
+      const url = "http://api.gclout.com:3000/users";
+
+      axios({
+
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          }
+
+      }).then(response => {
+
+              console.log(response);
+              let responseJson = response;
+
+              if (responseJson.data) {
+
+                  sessionStorage.setItem("data", JSON.stringify(responseJson));
+                  this.props.login(responseJson.data.user);
+
+              }
+
+      })
+          .catch(error => {
+
+              console.log(error)
+              this.notify(error)
+              this.setState({
+
+                  loading: false
+
+              });
+
+          });
+    
     }
+
+    /*if(type = "linkedin") {
+        const data = {
+            provider: type,
+            email: "t@u.co"
+        };
+        console.log(data);
+    }*/
+
+    if (type === "twitter" && res.email) {
+      console.log('twitter');
+     const data = {
+
+        provider: type,
+        email: res.email,
+        tosAgreement: true
+
+      };
+
+      console.log(data);
+
+
+/*         let responseJson = res;
+        sessionStorage.setItem("userData", responseJson);
+        this.setStata({
+          redirect: true
+        }) */
+
+
+    }
+  
   }
+
+
+
+
+  onDateChange = date_of_birth => this.setState({ date_of_birth });
+
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Registration Failed: " + error.response.data.Error,
+      "Login Failed: " + error.response.data.Error,
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false
@@ -118,20 +254,49 @@ class Register extends Component {
     );
   };
 
-  onDateChange = date_of_birth => this.setState({ date_of_birth });
-
   render() {
+    if (this.state.redirect || sessionStorage.getItem("data")) {
+      return <Redirect to={"/profile/create"} />;
+    }
+
     const responseFacebook = response => {
       console.log(response);
       this.signup(response, "facebook");
     };
+        const responseGoogle = response => {
+            console.log(response);
+            this.signup(response, "google");
+        };
 
-    const responseGoogle = response => {
-      console.log(response);
-      this.signup(response, "google");
+    // const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+
+    const responseLinkedin = response => {
+        console.log(response);
+        this.signup(response, "linkedin");
+    }
+
+      const responseTwitter = response => {
+          console.log(response);
+          this.signup(response, "twitter");
+      };
+
+    const responseTwittrer = (response) => {
+        const token = response.headers.get('x-auth-token');
+        response.json().then(user => {
+            if (token) {
+                this.setState({isAuthenticated: true, user: user, token: token});
+            }
+        });
     };
 
-    const { password, email, phone } = this.state;
+
+
+
+
+    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+  /*  return (
+=======*/
+/*    const { password, email, phone } = this.state;*/
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : (
@@ -229,7 +394,32 @@ class Register extends Component {
               <div className="vertical-divider">OR</div>
               <div className="col-md-12 col-lg-6 mx-auto">
                 <div className="social-buttons">
-                  <FacebookLogin
+
+                    <GoogleLogin
+                        className="social-button-google btn btn-block"
+                        clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                        buttonText="Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    >
+                        <i className="fab fa-google" /> Google
+                    </GoogleLogin>
+
+                    <TwitterLogin
+                       // loginUrl="http://localhost:3000/login/auth/twitter"
+                        /*onFailure={this.onFailed}*/
+                        /*onSuccess={this.onSuccess}*/
+                        loginUrl="http://api.gclout.com:3000/users"
+                        onSuccess={responseTwitter}
+                        onFailure={responseTwitter}
+                        forceLogin={true}
+                        className="social-button-twitter btn btn-block"
+                        clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
+                        requestTokenUrl="http://api.gclout.com:3000/users"
+                        //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
+                    />
+
+                    <FacebookLogin
                     appId="2171139129879186"
                     autoLoad={true}
                     fields="name,email,picture"
@@ -238,29 +428,35 @@ class Register extends Component {
                     icon="fa-facebook"
                     textButton="Facebook"
                   />
-                  <a
-                    href="/register"
-                    className="social-button-twitter btn btn-block"
-                  >
-                    <i className="fab fa-twitter" />
-                    Twitter
-                  </a>
-                  <GoogleLogin
-                    className="social-button-google btn btn-block"
-                    clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                    buttonText="Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                  >
-                    <i className="fab fa-google" /> Google
-                  </GoogleLogin>
-                  <a
-                    href="/register"
-                    className="social-button-linkedin btn btn-block"
-                  >
-                    <i className="fab fa-linkedin-in" />
-                    Linkedin
-                  </a>
+
+                    <LinkedIn
+                        clientId="77pb6qtint69q4"
+                        callback={this.callbackLinkedIn}
+                        text="Login With LinkedIn"
+                        onSuccess={responseLinkedin}
+                        onFailure={responseLinkedin}
+                        className="social-button-linkedin btn btn-block"
+                    />
+                    <button
+                        onClick={this.linkedInLogin}
+                        onSuccess={responseLinkedin}
+                        onFailure={responseLinkedin}
+                        className="social-button-linkedin btn btn-block">
+                        <i className="fab fa-linkedin-in" />
+                        Linkedin
+                    </button>
+
+
+
+               {/*     <TwitterLogin
+                        loginUrl="http://localhost:3000/login"
+                        onSuccess={responseTwitter}
+                        onFailure={responseTwitter}
+                        className="social-button-twitter btn btn-block"
+
+
+                    />*/}
+
                 </div>
                 <p className="text-center">
                   Already have an account?{" "}
@@ -276,6 +472,6 @@ class Register extends Component {
       </div>
     );
   }
-}
+};
 
 export default Register;

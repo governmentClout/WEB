@@ -50,24 +50,33 @@ export default class SinglePost extends Component {
         });
     }
 
+    showComment = () => {
+        this.props.showComment();
+    }
+
 
     likePost = () => {
-        console.log('clicked');
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
+        console.log(token, uuid);
+
+        const id = this.props.postID;
+        //console.log(id);
 
         const data = {
 
             post: this.props.postID
 
         };
-        const url = 'http://api.gclout.com:3000/reactions/' +this.props.postID;
-        console.log(url);
+        //console.log(data);
+        const url = 'http://api.gclout.com:3000/reactions/' +id;
+        //console.log(url);
         axios({
 
             method: 'post',
             url: url,
             data: data,
+            mode: 'no-cors',
             headers: {
 
                 "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -92,12 +101,17 @@ export default class SinglePost extends Component {
 
     return (
       <div className="post-actions-container">
-        <button className="post-action"
+        {/*<button className="post-action"
         onClick={this.likePost.bind(this)}>
-                {/*onClick={() => console.log(this.props.postID)}>*/}
+                onClick={() => console.log(this.props.postID)}>
           <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
+        </button>*/}
+        <button className="post-action"
+                onClick={() => this.likePost(this.props.postID)}
+        >
+            <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
         </button>
-        <button className="post-action">
+        <button className="post-action" onClick={this.showComment}>
           {" "}
           <i className="far fa-comment"/> comments
         </button>
