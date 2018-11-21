@@ -50,6 +50,10 @@ export default class SinglePost extends Component {
         });
     }
 
+    showComment = () => {
+        this.props.showComment();
+    }
+
 
     likePost = () => {
         console.log('clicked');
@@ -97,7 +101,7 @@ export default class SinglePost extends Component {
                 {/*onClick={() => console.log(this.props.postID)}>*/}
           <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
         </button>
-        <button className="post-action">
+        <button className="post-action" onClick={this.showComment}>
           {" "}
           <i className="far fa-comment"/> comments
         </button>

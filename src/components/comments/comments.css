@@ -4,6 +4,9 @@
   display: flex;
   align-content: center;
 }
+.comment-input-wrapper.hidden {
+  display: none !important;
+}
 .comment-owner-wrapper {
   width: 40px !important;
   height: 40px !important;
