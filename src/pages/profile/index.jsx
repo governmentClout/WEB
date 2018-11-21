@@ -15,7 +15,8 @@ class ProfilePage extends Component {
   }
   loadNow = () => {
     this.loadPosts()
-  }
+  };
+
   loadPosts() {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
@@ -27,6 +28,7 @@ class ProfilePage extends Component {
       uuid: id
 
     };
+    console.log(header);
 
     axios({
       method: "get",
@@ -34,13 +36,25 @@ class ProfilePage extends Component {
       headers: header
     })
       .then(res => {
-        const posts = res.data.posts.map(post => post).reverse();
+        
+          // for(let i = 0; i < res.data.length ; i++){
+              
+          //     console.log(res.data[i].post);  //for the post object
+          //     console.log(res.data[i].post.post);  //for the post content
+          //     console.log(res.data[i].comments);  //for the comments object
+
+          // }
+
+
+        //console.log(res.data.post);
+        const posts = res.data.reverse();
 
         this.setState({
           
           posts
         
         });
+        console.log(res.data.reverse());
 
       })
       .catch(err => {
@@ -59,7 +73,7 @@ class ProfilePage extends Component {
               <div className="flex-1">
                 <MakePost updatePosts={this.loadNow} />
                 {this.state.posts.map(post => (
-                  <SinglePost post={post} />
+                  <SinglePost key={post.post.id.toString()} post={post} />
                 ))}
                 {/* <SinglePost postType="sponsored" />
                 <SinglePost media /> */}
