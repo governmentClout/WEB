@@ -166,6 +166,7 @@ class PostCreation extends Component {
 
         this.updatePostsNow();
         if (response.data.Success) {
+          console.log('success');
           sessionStorage.setItem("message", response.data.Success)
         } else {
           console.log("login error")
@@ -261,9 +262,11 @@ class ArticleCreation extends Component {
   constructor(props) {
   
     super(props);
-    this.state = { 
+
+    this.state = {
         wordCount: 0, 
-        article: "", 
+        article: "",
+        title: "",
         uploadImages: false,
         toProfile: false 
         
@@ -272,7 +275,7 @@ class ArticleCreation extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   
   }
-  updatePostsNow = () => this.props.updatePosts()
+  updatePostsNow = () => this.props.updatePosts();
   
   updateWordCount(event) {
     this.setState({ article: event.target.value });
@@ -302,7 +305,8 @@ class ArticleCreation extends Component {
 
     const data = {
 
-      post: this.state.article
+      post: this.state.article,
+        
     
     };
 
@@ -332,7 +336,9 @@ class ArticleCreation extends Component {
 
           this.setState({
 
-            toProfile: true
+            toProfile: true,
+            article: "",
+            title: ""
 
           });
 
@@ -369,8 +375,9 @@ class ArticleCreation extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="article-title"
+                name="title"
                 placeholder="Title of article ..."
+                value={this.state.tile}
               />
             </div> 
             <div className="form-group">

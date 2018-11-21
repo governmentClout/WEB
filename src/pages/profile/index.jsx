@@ -9,15 +9,32 @@ import SinglePost from "../../components/post/post";
 import axios from "axios";
 
 class ProfilePage extends Component {
-  state = { posts: [] };
-  componentDidMount() {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+          posts: []
+
+        }
+
+    }
+
+    componentDidMount() {
+
     this.loadPosts();
-  }
+
+    }
+
   loadNow = () => {
+
     this.loadPosts()
+
   };
 
   loadPosts() {
+
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -31,6 +48,7 @@ class ProfilePage extends Component {
     console.log(header);
 
     axios({
+
       method: "get",
       url: url,
       headers: header
@@ -39,22 +57,43 @@ class ProfilePage extends Component {
         
           for(let i = 0; i < res.data.length ; i++){
               
-              console.log(res.data[i].post);  //for the post object
-              console.log(res.data[i].post.post);  //for the post content
-              console.log(res.data[i].comments);  //for the comments object
+              //console.log(res.data[i].post);  //for the post object
+             // console.log(res.data[i].post.post);  //for the post content
+              //console.log(res.data[i].comments);  //for the comments object
+
+/*
+
+              this.setState({
+
+                  posts: posts
+
+              });
+              console.log(this.state.posts);*/
+              const posts = res.data[i].post;
+              console.log(posts);
+/*              this.setState({
+                  posts: posts
+
+              })*/
+
+
+              /*this.setState({
+
+                  posts
+
+              });*/
 
           }
 
-
-        //console.log(res.data.post);
+/*
         const posts = res.data.posts.map(post => post).reverse();
-        //console.log(posts);
+*/
 
-        this.setState({
+/*        this.setState({
           
           posts
         
-        });
+        });*/
 
       })
       .catch(err => {
