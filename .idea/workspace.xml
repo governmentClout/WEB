@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63d7af7a-be8d-4a12-99b9-4e46a7a047c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/comments/commentInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/commentInput.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/post/post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/post/post.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/post/postActions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/post/postActions.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,7 +46,7 @@
           <entry key="CSS" value="1" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="16" />
+          <entry key="JSX Harmony" value="18" />
           <entry key="JavaScript" value="3" />
         </counts>
       </usages-collector>
@@ -53,7 +54,7 @@
         <counts>
           <entry key="HTML" value="2" />
           <entry key="JSON" value="11" />
-          <entry key="JSX Harmony" value="3953" />
+          <entry key="JSX Harmony" value="4125" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -63,14 +64,14 @@
           <entry key="html" value="1" />
           <entry key="js" value="3" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="16" />
+          <entry key="jsx" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="2" />
           <entry key="json" value="11" />
-          <entry key="jsx" value="3953" />
+          <entry key="jsx" value="4125" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.actions" />
@@ -82,23 +83,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="52" column="89" selection-start-line="52" selection-start-column="89" selection-end-line="52" selection-end-column="89" />
+            <state relative-caret-position="253">
+              <caret line="151" column="14" lean-forward="true" selection-start-line="151" selection-start-column="14" selection-end-line="151" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -107,13 +96,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/makePost/makePost.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6946">
-              <caret line="306" selection-start-line="306" selection-end-line="306" />
+            <state relative-caret-position="161">
+              <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/comments/commentInput.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
             </state>
           </provider>
         </entry>
@@ -200,12 +198,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>impo</find>
-      <find>link</find>
-      <find>imp</find>
-      <find>googl</find>
-      <find>responseLinkedin</find>
-      <find>react</find>
       <find>axios</find>
       <find>red</find>
       <find>linke</find>
@@ -230,6 +222,12 @@
       <find>post</find>
       <find>updateWordCount</find>
       <find>error</find>
+      <find>showComment</find>
+      <find>showli</find>
+      <find>showcom</find>
+      <find>showLikesCount</find>
+      <find>console</find>
+      <find>showCommentsCount</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -242,12 +240,12 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/pages/auth/register.jsx" />
-        <option value="$PROJECT_DIR$/src/components/comments/commentInput.jsx" />
         <option value="$PROJECT_DIR$/src/pages/auth/login.jsx" />
         <option value="$PROJECT_DIR$/src/components/makePost/makePost.jsx" />
         <option value="$PROJECT_DIR$/src/pages/profile/index.jsx" />
-        <option value="$PROJECT_DIR$/src/components/post/postActions.jsx" />
+        <option value="$PROJECT_DIR$/src/components/comments/commentInput.jsx" />
         <option value="$PROJECT_DIR$/src/components/post/post.jsx" />
+        <option value="$PROJECT_DIR$/src/components/post/postActions.jsx" />
       </list>
     </option>
   </component>
@@ -283,41 +281,10 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="WEB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WEB" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WEB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WEB" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WEB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WEB" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WEB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WEB" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="post&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/post/post.jsx&#10;PostD&#9;FILE&#9;file://C:/laragon/www/WEB/src/services/PostData.js&#10;pr/in&#9;FILE&#9;file://C:/laragon/www/WEB/src/pages/profile/index.jsx&#10;prof/i&#9;FILE&#9;file://C:/laragon/www/WEB/src/pages/profile/index.jsx&#10;comm&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/comments/commentInput.jsx&#10;actio&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/post/postActions.jsx&#10;inde&#9;FILE&#9;file://C:/laragon/www/WEB/public/index.html&#10;pack&#9;FILE&#9;file://C:/laragon/www/WEB/package.json&#10;logi&#9;null&#9;null&#10;register&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/comments/commentInput.jsx&#10;post&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/post/post.jsx&#10;PostD&#9;FILE&#9;file://C:/laragon/www/WEB/src/services/PostData.js&#10;pr/in&#9;FILE&#9;file://C:/laragon/www/WEB/src/pages/profile/index.jsx&#10;prof/i&#9;FILE&#9;file://C:/laragon/www/WEB/src/pages/profile/index.jsx&#10;comm&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/comments/commentInput.jsx&#10;actio&#9;FILE&#9;file://C:/laragon/www/WEB/src/components/post/postActions.jsx&#10;inde&#9;FILE&#9;file://C:/laragon/www/WEB/public/index.html&#10;pack&#9;FILE&#9;file://C:/laragon/www/WEB/package.json&#10;logi&#9;null&#9;null&#10;register&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../fullstack-reactnode-devconnector" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -364,12 +331,12 @@
       <workItem from="1542787664093" duration="56000" />
       <workItem from="1542826118960" duration="1532000" />
       <workItem from="1542840889422" duration="2854000" />
-      <workItem from="1542910013666" duration="660000" />
+      <workItem from="1542910013666" duration="5180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65568000" />
+    <option name="totallyTimeSpent" value="70088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -450,13 +417,6 @@
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/comments/commentInput.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/routes.jsx" />
     <entry file="file://$PROJECT_DIR$/src/components/makePost/makePost.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -525,20 +485,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/comments/commentInput.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+        <state relative-caret-position="250">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="52" column="89" selection-start-line="52" selection-start-column="89" selection-end-line="52" selection-end-column="89" />
+        <state relative-caret-position="253">
+          <caret line="151" column="14" lean-forward="true" selection-start-line="151" selection-start-column="14" selection-end-line="151" selection-end-column="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

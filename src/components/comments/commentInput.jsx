@@ -54,7 +54,7 @@ onKeyPress = (e) => {
         comment: this.state.comment,
         ref: this.props.postID
       
-      }
+      };
 
       console.log(data);
 
@@ -82,7 +82,7 @@ onKeyPress = (e) => {
 
       })
     }
-  }
+  };
 
   render() {
     return (
