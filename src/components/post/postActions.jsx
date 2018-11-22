@@ -29,7 +29,6 @@ export default class SinglePost extends Component {
             token = sessionStorage.getItem("token");
 
         const url = "http://api.gclout.com:3000/reactions/" + this.props.postID;
-        console.log(url);
 
         axios({
 
@@ -45,7 +44,6 @@ export default class SinglePost extends Component {
 
         }).then(res => {
 
-            console.log(res.data[0].reactions);
 
             this.setState ({
 
@@ -60,7 +58,6 @@ export default class SinglePost extends Component {
             token = sessionStorage.getItem("token");
 
         const url = "http://api.gclout.com:3000/comments/" + this.props.postID;
-        console.log(url);
 
         axios({
 
@@ -75,13 +72,12 @@ export default class SinglePost extends Component {
             }
 
         }).then(res => {
-            console.log(res.data.comment.length);
 
             this.setState ({
 
                 comments: res.data.comment.length
 
-            })
+            });
         });
     }
 
@@ -93,19 +89,15 @@ export default class SinglePost extends Component {
     likePost = () => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-        console.log(token, uuid);
 
         const id = this.props.postID;
-        //console.log(id);
 
         const data = {
 
             post: this.props.postID
 
         };
-        //console.log(data);
         const url = 'http://api.gclout.com:3000/reactions/' +id;
-        //console.log(url);
         axios({
 
             method: 'post',
@@ -133,7 +125,6 @@ export default class SinglePost extends Component {
   render() {
 
       const { likes, comments } = this.state;
-      console.log(comments);
 
     return (
       <div className="post-actions-container">
