@@ -13,7 +13,7 @@ export default class SinglePost extends Component {
     postType: "simple-post",
     media: false
   };
-  state = { showComment: false }
+  state = { showComment: false };
   showComment = () => {
     const currentState = this.state.showComment
     this.setState({
@@ -50,7 +50,7 @@ export default class SinglePost extends Component {
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PostActions showComment={this.showComment} postID={this.props.post.post.id} />
+            <PostActions showComment={this.showComment} postID={this.props.post.post.uuid} />
 
               <CommentInput postID={this.props.post.uuid} show={this.state.showComment}/>
             {" "}

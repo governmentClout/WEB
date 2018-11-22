@@ -2,43 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63d7af7a-be8d-4a12-99b9-4e46a7a047c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-build/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-build/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-build/static/media/logo.3000b6e6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpack.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/WEB.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/commentInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/commentInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/comments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/comments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/friend/friend.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/friend/friend.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modal/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal/modal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/navBar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/post/post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/post/post.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/post/postActions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/post/postActions.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profileDetails/profileDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profileDetails/profileDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profileEdit/profileEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profileEdit/profileEdit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/createProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/createProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,16 +27,17 @@
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.48" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="ESLintLanguageService" value="11" />
+          <entry key="ESLintLanguageService" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -87,7 +53,7 @@
         <counts>
           <entry key="HTML" value="2" />
           <entry key="JSON" value="11" />
-          <entry key="JSX Harmony" value="3897" />
+          <entry key="JSX Harmony" value="3953" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -104,7 +70,7 @@
         <counts>
           <entry key="html" value="2" />
           <entry key="json" value="11" />
-          <entry key="jsx" value="3897" />
+          <entry key="jsx" value="3953" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.actions" />
@@ -116,11 +82,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="71" column="64" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
+            <state relative-caret-position="457">
+              <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -128,11 +94,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="392">
-              <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+              <caret line="52" column="89" selection-start-line="52" selection-start-column="89" selection-end-line="52" selection-end-column="89" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,7 +121,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state relative-caret-position="5497">
               <caret line="250" column="32" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
             </state>
           </provider>
@@ -161,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/profile/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
+            <state relative-caret-position="943">
               <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -191,7 +160,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
+            <state relative-caret-position="759">
               <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -203,7 +172,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/profileEdit/profileEdit.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3082">
+            <state relative-caret-position="3059">
               <caret line="136" column="13" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
             </state>
           </provider>
@@ -277,8 +246,8 @@
         <option value="$PROJECT_DIR$/src/pages/auth/login.jsx" />
         <option value="$PROJECT_DIR$/src/components/makePost/makePost.jsx" />
         <option value="$PROJECT_DIR$/src/pages/profile/index.jsx" />
-        <option value="$PROJECT_DIR$/src/components/post/post.jsx" />
         <option value="$PROJECT_DIR$/src/components/post/postActions.jsx" />
+        <option value="$PROJECT_DIR$/src/components/post/post.jsx" />
       </list>
     </option>
   </component>
@@ -394,12 +363,13 @@
       <workItem from="1542476726498" duration="1348000" />
       <workItem from="1542787664093" duration="56000" />
       <workItem from="1542826118960" duration="1532000" />
-      <workItem from="1542840889422" duration="2553000" />
+      <workItem from="1542840889422" duration="2854000" />
+      <workItem from="1542910013666" duration="660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64607000" />
+    <option name="totallyTimeSpent" value="65568000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -487,6 +457,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.jsx" />
     <entry file="file://$PROJECT_DIR$/src/components/makePost/makePost.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6946">
@@ -494,6 +465,30 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5497">
+          <caret line="250" column="32" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/profile/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="943">
+          <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/PostData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -506,7 +501,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/auth/login.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
+        <state relative-caret-position="759">
           <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -514,19 +509,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="10" column="56" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/profileEdit/profileEdit.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3082">
+        <state relative-caret-position="3059">
           <caret line="136" column="13" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
         </state>
       </provider>
@@ -540,24 +525,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/auth/register.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="250" column="32" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/PostData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/profile/index.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+        <state relative-caret-position="457">
+          <caret line="116" column="17" lean-forward="true" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -567,14 +538,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/post/post.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
-          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/post/postActions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="71" column="64" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
+          <caret line="52" column="89" selection-start-line="52" selection-start-column="89" selection-end-line="52" selection-end-column="89" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
