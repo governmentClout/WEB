@@ -87,7 +87,6 @@ class ProfileDetails extends Component {
             />
           </div>
           <div className="container real-details-container">
-
             <div className="main-details d-md-flex justify-content-btween">
               <div className="col-md-4 details-column">
                 <div
@@ -101,7 +100,7 @@ class ProfileDetails extends Component {
                   />
                 </div>
               </div>
-              {this.props.userId === '' || null ? <div className="top-details d-flex justify-content-end col-8">
+              {!this.props.userId ? <div className="top-details d-flex justify-content-end col-8">
                 <button className="btn btn-gclout-blue align-self-center" onClick={() => this.toggleUpgrade()}> 
                   Upgrade
                 </button>
@@ -186,11 +185,12 @@ class ProfileDetails extends Component {
                   <h5 className="text-center">
                     {this.state.profile.firstName} {this.state.profile.lastName}
                   </h5>
-                  {this.props.userId !== 'executive' ? 
+                  {this.props.userId ? 
+                    (this.props.userId == 'executive' ?
+                    <p className="text-muted text-center">President</p> :
                     <div className="d-flex justify-content-between friend-actions">
                       <a href="#" className="btn btn-gclout-blue">Message</a>
-                      { this.props.userId !== 'friend' ? 
-                      <button className="btn btn-gclout-blue-outline">Add Friend</button> :
+                      {this.props.userId == 'friend' ? 
                       <Manager>
                         <Reference>
                           {({ ref }) => (
@@ -234,9 +234,10 @@ class ProfileDetails extends Component {
                             </div>
                           )}
                         </Popper>
-                      </Manager> }
-                    </div> : 
-                    <p className="text-muted text-center">President</p> }
+                      </Manager> 
+                      : <button className="btn btn-gclout-blue-outline">Add Friend</button>
+                    }
+                    </div> ) : " "}
                   <div className="d-flex justify-content-between friends-details">
                     <div className="text-center col-6">
                       <p>Following</p>

@@ -142,7 +142,7 @@ class EditProfile extends Component {
             </svg>
           </button>
         </div>
-        <div className="col-md-9 offset-md-1">
+        <div className="col-md-9 offset-md-1" >
         <div>
           <div className="lifted-profile-image-wrapper">
             <img
@@ -202,20 +202,6 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className="form-row">
-            {
-              /* <div className="form-group col-md">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  name="phone"
-                  className="form-control"
-                  type="phone"
-                  onChange={this.handleChange}
-                  value={this.state.phone}
-                  placeholder="+234 [0] 802 345 6789"
-                  required
-                />
-              </div> */
-            }
               <div className="form-group col-md">
                 <label htmlFor="nationality">Country of Residence</label>
                 <input
