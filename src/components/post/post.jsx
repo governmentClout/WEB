@@ -30,7 +30,7 @@ export default class SinglePost extends Component {
               <img
                 src={this.props.post.user[0].photo}
                 alt="lol"
-                className={this.props.post.user[0].firstName + ' display'}
+                className="post-owner-image"
               />
             </div>
 

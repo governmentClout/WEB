@@ -9,8 +9,12 @@ import SinglePost from "../../components/post/post";
 import axios from "axios";
 
 class ProfilePage extends Component {
-  state = { posts: [] };
+  state = { posts: [], userId: '' };
   componentDidMount() {
+    let userId = this.props.match.params
+    this.setState({
+      userId
+    })
     this.loadPosts();
   }
   loadNow = () => {
@@ -67,7 +71,7 @@ class ProfilePage extends Component {
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
-            <ProfileDetails user={this.props.user} />
+            <ProfileDetails userId={this.state.userId.id} user={this.props.user} />
             <div className="d-flex">
               <SidebarFooter />
               <div className="flex-1">

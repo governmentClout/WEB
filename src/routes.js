@@ -67,7 +67,7 @@ const Routes = () => (
                     />
                     <Route
                         exact
-                        path="/profile"
+                        path="/profile/:id?"
                         render={props => (
                             <ProfilePage user={user} isLoggedIn={isLoggedIn} {...props} />
                         )}
