@@ -83,10 +83,10 @@
   color: #ffffff;
   text-align: left;
 }
-[data-placement] {
+/*[data-placement] {
   top: -10px !important;
   left: -140px !important;
-}
+}*/
 @media screen and (max-width: 768px) {
   .dashed-border-right {
     border-right: none;

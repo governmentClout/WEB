@@ -129,9 +129,9 @@
   color: #ffffff;
   text-align: left;
 }
-[data-placement] {
+/*[data-placement] {
   left: -175px !important;
-}
+}*/
 .btn-white {
   margin: 0;
   background: #ffffff;

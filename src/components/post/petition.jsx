@@ -40,6 +40,7 @@ export default class SinglePetition extends Component {
 
             <div className="post-owner-details">
               <p>Ogbeni Ore</p>
+              <span>Whatever works</span>
             </div>
           </div>
           <div className="post-content">
