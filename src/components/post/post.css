@@ -67,3 +67,11 @@
   text-decoration: none;
   color: #333333;
 }
+.styled-text {
+  margin-bottom: 0;
+  padding: 0;
+  align-self: center;
+}
+.post-actions-container .btn {
+  margin: 0;
+}
