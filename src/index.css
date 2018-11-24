@@ -156,3 +156,6 @@ select.form-control {
     padding: 0;
     padding-left: 1.3em;
 }
+[data-placement] {
+    z-index: 999;
+}

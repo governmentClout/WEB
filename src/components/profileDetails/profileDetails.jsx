@@ -3,6 +3,7 @@ import "./profileDetails.css";
 import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
 import axios from "axios";
+import { Manager, Reference, Popper } from "react-popper";
 import { Link } from "react-router-dom";
 
 const moment = require("moment");
@@ -13,16 +14,34 @@ class ProfileDetails extends Component {
 
     this.state = {
       showModal: false,
-      profile: []
+      showUpgradeModal: false,
+      profile: [],
+      showMore: false,
+      office: '',
+      tosAgreement: false
     };
+  }
+  showMore = () => {
+    let currentState =  this.state.showMore;
+    this.setState({showMore: !currentState})
   }
 
   componentDidMount() {
+    const id =  sessionStorage.getItem("uuid");
+    const token  = sessionStorage.getItem("token");
+
+    // if(this.props.match.params.id) {
+    //   id = this.props.match.params.id
+      console.log(this.props.userId)
+    // } else {
+      // id = sessionStorage.getItem("uuid");
+    // }
+
     if(this.state.profile !== []) {
 
-      const id = sessionStorage.getItem("uuid"),
-         token = sessionStorage.getItem("token");
-    const url = `http://api.gclout.com:3000/profiles/${id}`
+    //   id = sessionStorage.getItem("uuid"),
+    //   token = sessionStorage.getItem("token");
+    const url = `http://api.gclout.com:3000/profiles/${id}`;
     
     axios({
       method: "GET",
@@ -42,8 +61,21 @@ class ProfileDetails extends Component {
   handleToggleModal() {
     this.setState({ showModal: !this.state.showModal });
   }
+  toggleUpgrade() {
+    this.setState({ showUpgradeModal: !this.state.showUpgradeModal });
+  }
+  // handleChange(e) {
+
+  //   this.setState({
+
+  //     [e.target.name]: e.target.value
+
+  //   });
+  
+  // }
+
   render() {
-    const { showModal } = this.state;
+    const { showModal, showUpgradeModal } = this.state;
     return (
       <React.Fragment>
         <div className="profile-details-container">
@@ -55,9 +87,8 @@ class ProfileDetails extends Component {
             />
           </div>
           <div className="container real-details-container">
-
             <div className="main-details d-md-flex justify-content-btween">
-              <div className="col-md-4 dashed-border-right details-column">
+              <div className="col-md-4 details-column">
                 <div
                   className="lifted-profile-image-wrapper"
                   style={{ marginTop: "-80px" }}
@@ -69,19 +100,23 @@ class ProfileDetails extends Component {
                   />
                 </div>
               </div>
-              <div className="top-details d-flex justify-content-end col-6">
+              {!this.props.userId ? <div className="top-details d-flex justify-content-end col-8">
+                <button className="btn btn-gclout-blue align-self-center" onClick={() => this.toggleUpgrade()}> 
+                  Upgrade
+                </button>
                 <button
-                  className="btn btn-gclout-blue-outline align-self-center"
+                  className="ml-4 btn btn-gclout-blue-outline align-self-center"
                   onClick={() => this.handleToggleModal()}
                 >
                   Edit Profile
                 </button>
               </div>
+              : <div /> }
             </div>
 
             {showModal && (
               <Modal onCloseRequest={() => this.handleToggleModal()}>
-                  <ProfileEdit
+                  <ProfileEdit  
                     userFirstName={this.state.profile.firstName}
                     userLastName={this.state.profile.lastName}
                     nationalityOrigin={this.state.profile.nationality_origin}
@@ -92,6 +127,57 @@ class ProfileDetails extends Component {
                   />
               </Modal>
             )}
+            {showUpgradeModal && (
+              <Modal className="rounded-small" onCloseRequest={() => this.toggleUpgrade()}>
+                  <div className="upgrade-modal-wrapper d-flex justify-content-center p-4" style={{backgroundColor: 'transparent'}}>
+                    <div className="text-center p-4 mx-auto  col-md-7">
+                      <h5><strong>Request Upgrade</strong></h5>
+                      <br />
+                      <form>
+                        <div className="form-group">
+                          <label>Select political office</label>
+                          <select
+                            name="office"
+                            className="form-control"
+                            onChange={this.handleChange}
+                            required
+                          >
+                            <option value="president">President</option>
+                            <option value="governor">Governor</option>
+                            <option value="senator">Senator</option>
+                            <option value="council_chairman">Council Chairman</option>
+                            <option value="federal_rep">Federal Rep.</option>
+                            <option value="state_rep">State Rep</option>
+                            <option value="councilor">Councilor</option>
+                          </select>
+                        </div>
+                          <div className="form-group">
+                            <div className="form-check d-flex">
+                              <input
+                                className="mr-2"
+                                type="checkbox"
+                                ref="check_me"
+                                value={this.state.tosAgreement}
+                                onChange={e => {
+                                  this.setState({ tosAgreement: e.target.checked });
+                                }}
+                                required
+                              />
+                              <label
+                                htmlFor="agreement"
+                                className="form-check-label"
+                                name="tosAgreement"
+                              >
+                                By clicking submit, I agree with terms and conditions
+                              </label>
+                            </div>
+                          </div>
+                          <button className="btn btn-block btn-gclout-blue">SUBMIT</button>
+                      </form>
+                    </div>
+                  </div>
+              </Modal>
+            )}
 
             
               <div className="main-details d-md-flex justify-content-btween">
@@ -99,6 +185,59 @@ class ProfileDetails extends Component {
                   <h5 className="text-center">
                     {this.state.profile.firstName} {this.state.profile.lastName}
                   </h5>
+                  {this.props.userId ? 
+                    (this.props.userId == 'executive' ?
+                    <p className="text-muted text-center">President</p> :
+                    <div className="d-flex justify-content-between friend-actions">
+                      <a href="#" className="btn btn-gclout-blue">Message</a>
+                      {this.props.userId == 'friend' ? 
+                      <Manager>
+                        <Reference>
+                          {({ ref }) => (
+                            <button
+                              type="button"
+                              ref={ref}
+                              onClick={this.showMore}
+                              className="btn btn-gclout-blue-outline px-4"
+                            >
+                              More... {"  "}
+                              <i className="fa fa-caret-down"></i>
+                            </button>
+                          )}
+                        </Reference>
+                        <Popper placement="bottom">
+                          {({ ref, style, placement, arrowProps }) => (
+                            <div ref={ref} style={style} data-placement={placement}>
+                              <div
+                                className={
+                                  this.state.showMore
+                                    ? "button-dropdown show"
+                                    : "button-dropdown"
+                                }
+                              >
+                                <ul className="button-dropdown-list">
+                                  <li
+                                    className="profile-dropdown-list-item"
+                                    onClick={this.showMore}
+                                  >
+                                    <button className="button-dropdown-list-button">Remove</button>
+                                  </li>
+                                  <li
+                                    className="profile-dropdown-list-item"
+                                    onClick={this.showMore}
+                                  >
+                                    <button className="button-dropdown-list-button">Block</button>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div ref={arrowProps.ref} style={arrowProps.style} />
+                            </div>
+                          )}
+                        </Popper>
+                      </Manager> 
+                      : <button className="btn btn-gclout-blue-outline">Add Friend</button>
+                    }
+                    </div> ) : " "}
                   <div className="d-flex justify-content-between friends-details">
                     <div className="text-center col-6">
                       <p>Following</p>
@@ -113,7 +252,7 @@ class ProfileDetails extends Component {
                     </Link>
                   </div>
                 </div>
-                <div className="col-md-4 dashed-border-right details-column mx-auto">
+                <div className="col-md-3 dashed-border-right details-column mx-auto">
                   <p className="text-gclout-blue">Contact Information</p>
                   <p className="slightly-bold">Email Address</p>
                   <p>{this.props.user.email}</p>
@@ -121,7 +260,7 @@ class ProfileDetails extends Component {
                   <p className="slightly-bold">Phone Number</p>
                   <p>{this.props.user.phone}</p>
                 </div>
-                <div className="col-md-4 details-column">
+                <div className="col-md-5 details-column">
                   <p className="text-gclout-blue">Other Information</p>
                   <div className="d-flex justify-content-between">
                     <div className="col-6">

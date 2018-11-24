@@ -31,9 +31,11 @@
 }
 
 .gclout-modal {
-  width: 70%;
+  max-width: 70%; 
+  min-width: 60%;
   background-color: #ffffff;
   box-shadow: 0, 0, 0.625rem, rgba(0, 0, 0, 0.2);
+  margin-top: 120px;
 }
 @media (max-width: 576px) {
   .gclout-modal {
