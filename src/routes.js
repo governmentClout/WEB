@@ -16,6 +16,7 @@ import ActivityPage from "./pages/activity";
 import OpinionPollPage from "./pages/opinionPoll";
 import NotificationsPage from "./pages/notifications";
 import Error404 from "./pages/errors/404";
+import PetitionPage from "./pages/petition";
 import { AuthConsumer } from "./components/authcontext";
 
 const Routes = () => (
@@ -101,6 +102,13 @@ const Routes = () => (
                         path="/notifications"
                         render={props => (
                             <NotificationsPage isLoggedIn={isLoggedIn} {...props} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/petition"
+                        render={props => (
+                            <PetitionPage isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
                     {/* The 404 page.. Dont Touch, lol */}
