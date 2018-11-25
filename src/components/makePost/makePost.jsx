@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-
 
 class MakePost extends Component {
   constructor(props) {
@@ -413,9 +411,79 @@ class ArticleCreation extends Component {
 }
 
 class PollCreation extends Component {
+
   constructor(props) {
     super(props);
-    this.state = { wordCount: 0, poll: "", sector: "" };
+
+    this.state = {
+
+      wordCount: 0,
+        opinion: "",
+        sector: ""
+
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+  }
+
+  onChange(e){
+
+    this.setState({
+
+        [e.target.name]: e.target.value
+
+    })
+
+  }
+
+  onSubmit(e){
+
+    e.preventDefault();
+
+    const data = {
+
+      opinion : this.state.opinion,
+      sector: this.state.sector
+
+    };
+
+    console.log(data);
+
+    const id = sessionStorage.getItem("uuid"),
+    token = sessionStorage.getItem("token");
+
+    console.log(id, token);
+
+    axios({
+
+        method: 'post',
+        url: `http://api.gclout.com:3000/polls`,
+        data: data,
+        headers: {
+
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            token: token,
+            uuid: id
+
+        }
+
+    }).then(res => {
+
+      console.log(res.data);
+
+      this.setState({
+
+          opinion: ""
+
+      });
+
+    }).catch(err => {
+
+      console.log(err)
+
+    });
+
   }
   render() {
     return (
@@ -425,14 +493,14 @@ class PollCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Sector</label>
               <select
-                name="poll_sector"
+                name="sector"
                 className="form-control"
-                value={this.state.sector}
-                onChange={this.handleChange}
+                /*value={this.state.sector}*/
+                onChange={this.onChange}
                 required
               >
                 <option value="economy">Economy</option>
@@ -449,8 +517,9 @@ class PollCreation extends Component {
               <textarea
                 className="form-control"
                 rows="4"
-                name="new_poll"
-                value={this.state.poll}
+                name="opinion"
+                value={this.state.opinion}
+                onChange={this.onChange}
                 placeholder="Type opinion here..."
               />
             </div>
