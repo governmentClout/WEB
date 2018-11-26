@@ -48,6 +48,16 @@ class CreateProfile extends Component {
       [ev.target.name]: ev.target.value
     });
   }
+  componentWillMount() {
+    console.log('mounted')
+    axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+      .then(response => {
+        this.setState({
+          allStates: response.data
+        })
+      })
+      .catch(err => console.log(err))
+  }
 
   createProfile(e) {
     this.setState({ loading: true });
