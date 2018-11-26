@@ -1,9 +1,63 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
 
 class ForgotPassword extends Component {
+
+  constructor(){
+    super();
+
+    this.state = {
+
+      email: ""
+
+    };
+
+      this.onChange = this.onChange.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+
+  }
+
+    onChange(e) {
+
+        this.setState({
+
+            [e.target.name]: e.target.value
+
+        });
+
+    }
+
+  onSubmit(e){
+    e.preventDefault();
+
+    const data = {
+
+      email : this.state.email
+
+    };
+
+    console.log(data);
+
+    axios({
+
+        method: 'post',
+        url: `http://api.gclout.com:3000/resets`,
+        data: data
+
+    }).then(res => {
+
+      console.log(res.data)
+
+    }).catch(err => {
+
+      console.log(err);
+
+    })
+
+  }
   render() {
     return (
       this.props.isLoggedIn ? <Redirect to="/" /> :
@@ -19,7 +73,7 @@ class ForgotPassword extends Component {
               an email with a link to reset your password.
             </p>
             <div className="col-md-8 offset-md-2 mb-4">
-              <form className="auth-form my-4">
+              <form className="auth-form my-4" onSubmit={this.onSubmit}>
                 <div className="form-group my-4">
                   <label htmlFor="email">Email address</label>
                   <input
@@ -27,6 +81,8 @@ class ForgotPassword extends Component {
                     type="email"
                     placeholder="Enter your email"
                     name="email"
+                    onChange={this.onChange}
+                    value={this.state.email}
                     required
                   />
                 </div>
