@@ -39,7 +39,9 @@
 }
 @media (max-width: 576px) {
   .gclout-modal {
-    width: 32rem;
+        width: 90%;
+    max-width: 90%;
+    min-width: 90%;
   }
 }
 

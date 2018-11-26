@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
 import "../../assets/css/pages.css";
+import "./profileEdit.css"
 import axios from 'axios';
 
 class EditProfile extends Component {
@@ -118,7 +119,7 @@ class EditProfile extends Component {
   render() {
     return (
       <>
-        <div className="profile-cover-image-wrapper">
+        <div className="profile-cover-image-wrapper edit">
           <img
             className="profile-cover-image"
             src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
@@ -144,7 +145,7 @@ class EditProfile extends Component {
         </div>
         <div className="col-md-9 offset-md-1" >
         <div>
-          <div className="lifted-profile-image-wrapper">
+          <div className="lifted-profile-image-wrapper edit">
             <img
               className="lifted-profile-image"
               src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
@@ -248,7 +249,7 @@ class EditProfile extends Component {
                 </select>
               </div>
               </div>
-              <div className="form-group col-md">
+              <div className="form-group">
                 <label htmlFor="lga">L.G.A</label>
                 <input
                   name="lga"
