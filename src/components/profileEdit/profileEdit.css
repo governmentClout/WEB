@@ -1,0 +1,10 @@
+@media (max-width: 600px) {
+.lifted-profile-image-wrapper.edit {
+	margin-top: -80px !important;
+	margin-right: auto;
+	margin-left: auto;
+}	
+.profile-cover-image-wrapper.edit {
+	margin-top: 10em;
+}
+}
