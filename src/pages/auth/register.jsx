@@ -5,7 +5,10 @@ import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+/*
 import LinkedIn from "linkedin-login-for-react";
+*/
+/*import LinkedIn from 'react-linkedin-login'*/
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -89,7 +92,7 @@ class Register extends Component {
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
       provider: "email",
-      redirectToReferrer: false
+      //redirectToReferrer: false
     };
 
     const url = "http://api.gclout.com:3000/users";
@@ -429,7 +432,7 @@ console.log('something jus happen rai now')
                     textButton="Facebook"
                   />
 
-                    <LinkedIn
+                    {/*<LinkedIn
                         clientId="77pb6qtint69q4"
                         callback={this.callbackLinkedIn}
                         text="Login With LinkedIn"
@@ -444,7 +447,7 @@ console.log('something jus happen rai now')
                         className="social-button-linkedin btn btn-block">
                         <i className="fab fa-linkedin-in" />
                         Linkedin
-                    </button>
+                    </button>*/}
 
 
 
