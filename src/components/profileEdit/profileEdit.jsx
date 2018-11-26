@@ -44,37 +44,42 @@ class EditProfile extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    const newProfile = {
+      console.log(id);
+      console.log(token);
+
+    const data = {
+
       nationality_residence: this.state.nationality_residence,
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
-      lga: this.state.lga,
-      photo: "https://picsum.photos/200/300",
-      firstName: this.state.fname,
-      lastName: this.state.lname
+      
+    };
 
-    }
-
-    console.log(newProfile);
+    console.log(data);
 
     const url = "http://api.gclout.com:3000/profiles";
     console.log(url);
 
     axios({
     
-      method: 'put',
-      url: url,
+      method: "put",
+      url: "http://api.gclout.com:3000/profiles",
+      data: data,
+      mode: 'no-cors',
       headers: {
-
+        "Content-Type": "application/json;charset=utf-8",
         token: token,
         uuid: id,
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
 
       }
     
     }).then(response => {
 
       console.log(response);
+
+    }).catch(err => {
+
+      console.log(err);
 
     })
 

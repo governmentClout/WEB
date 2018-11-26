@@ -30,6 +30,28 @@ class CreateProfile extends Component {
     this.createProfile = this.createProfile.bind(this);
   }
 
+  componentDidMount(){
+
+        axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+            .then(res => {
+
+                const states = res.data.map(state => state);
+
+                console.log(states);
+
+                this.setState({
+
+                    allStates: states
+
+                })
+
+            }).catch(err => {
+
+            console.log(err);
+
+        })
+    }
+
   shouldShowModal = type => {
     this.setState({
       showModal: true,
@@ -114,6 +136,7 @@ class CreateProfile extends Component {
       [e.target.name]: e.target.value
     });
   }
+
   render() {
     if (this.state.toProfile === true) {
       return <Redirect to="/profile" />;
