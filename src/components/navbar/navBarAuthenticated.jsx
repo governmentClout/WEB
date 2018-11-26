@@ -29,7 +29,7 @@ class NavBarAuthenticated extends Component {
       <div className="navigation --with-shadow  no-mobile">
         <nav className="container d-flex justify-content-between">
           <div className="d-flex">
-            <a href="/" style={{ maxHeight: "70px" }}>
+            <a href="/activity" style={{ maxHeight: "70px" }}>
               <img
                 src="../logo.png"
                 alt="gclout logo"
@@ -52,7 +52,7 @@ class NavBarAuthenticated extends Component {
           </div>
           <ul className="navigation-menu">
             <li className="navigation-menu-item no-mobile">
-              <a href="/">
+              <a href="/petition">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM6 14H4V12H6V14ZM6 10H4V8H6V10ZM6 6H4V4H6V6ZM14 14H7V12H14V14ZM14 10H7V8H14V10ZM14 6H7V4H14V6Z" fill="#4F4F4F"/>
                 </svg>

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-
 
 class MakePost extends Component {
   constructor(props) {
@@ -150,7 +148,20 @@ class PostCreation extends Component {
       }
     })
       .then(response => {
-        this.setState({loading: false, post: ""});
+
+        /*if(response.data.Success){
+
+          alert('djd');
+
+        }*/
+
+        this.setState({
+
+            loading: false,
+            post: ""
+
+        });
+
         this.updatePostsNow();
         if (response.data.Success) {
           console.log('success');
@@ -212,6 +223,7 @@ class PostCreation extends Component {
                 onPaste={this.updateWordCount}
                 value={this.state.post}
                 placeholder="Type post here..."
+                required={true}
               />
             </div>
             <p className="text-right mb-0">
@@ -248,20 +260,40 @@ class ArticleCreation extends Component {
   constructor(props) {
   
     super(props);
-    this.state = { 
+
+    this.state = {
         wordCount: 0, 
-        article: "", 
+        article: "",
+        title: "",
         uploadImages: false,
-        toProfile: false 
+        toProfile: false,
+        selectedFile: null
         
       };
     this.updateWordCount = this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  
+    this.onImageChange = this.onImageChange.bind(this);
+
+
+
   }
-  updatePostsNow = () => this.props.updatePosts()
-  
-  updateWordCount(event) {
+  updatePostsNow = () => this.props.updatePosts();
+
+  onImageChange = event => {
+    console.log(event);
+
+/*    const file = e.target.files[0];
+    console.log(file);
+
+    this.setState({
+
+        selectedFile: e.target.files[0]
+
+    })*/
+
+  };
+
+    updateWordCount(event) {
     this.setState({ article: event.target.value });
     if (this.state.article === "") {
       this.setState({ wordCount: 0 });
@@ -270,6 +302,7 @@ class ArticleCreation extends Component {
       this.setState({ wordCount: wordCount });
     }
   }
+
   showImageUploader = event => {
     event.preventDefault();
     let currentState = this.state.uploadImages;
@@ -289,9 +322,11 @@ class ArticleCreation extends Component {
 
     const data = {
 
-      post: this.state.article
+      post: this.state.article,
+      attachment: this.state.selectedFile
+        
     
-    }
+    };
 
     console.log(data);
     console.log("lmao");
@@ -311,6 +346,7 @@ class ArticleCreation extends Component {
     
     })
       .then(response => {
+        console.log(response.data);
         this.setState({loading: false, post: ""});
         this.updatePostsNow();
 
@@ -318,7 +354,9 @@ class ArticleCreation extends Component {
 
           this.setState({
 
-            toProfile: true
+            toProfile: true,
+            article: "",
+            title: ""
 
           });
 
@@ -355,8 +393,9 @@ class ArticleCreation extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="article-title"
+                name="title"
                 placeholder="Title of article ..."
+                value={this.state.tile}
               />
             </div> 
             <div className="form-group">
@@ -373,7 +412,9 @@ class ArticleCreation extends Component {
             <p className="text-right mb-0">
               {this.state.wordCount} {""} words
             </p>
-            <PostMedia showUploader={this.state.uploadImages} />
+
+{/*            <PostMedia type="file" showUploader={this.state.uploadImages} />*/}
+
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
@@ -385,7 +426,6 @@ class ArticleCreation extends Component {
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
                 onClick={this.showImageUploader}
-                type="button" 
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
@@ -399,9 +439,79 @@ class ArticleCreation extends Component {
 }
 
 class PollCreation extends Component {
+
   constructor(props) {
     super(props);
-    this.state = { wordCount: 0, poll: "", sector: "" };
+
+    this.state = {
+
+      wordCount: 0,
+        opinion: "",
+        sector: ""
+
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+  }
+
+  onChange(e){
+
+    this.setState({
+
+        [e.target.name]: e.target.value
+
+    })
+
+  }
+
+  onSubmit(e){
+
+    e.preventDefault();
+
+    const data = {
+
+      opinion : this.state.opinion,
+      sector: this.state.sector
+
+    };
+
+    console.log(data);
+
+    const id = sessionStorage.getItem("uuid"),
+    token = sessionStorage.getItem("token");
+
+    console.log(id, token);
+
+    axios({
+
+        method: 'post',
+        url: `http://api.gclout.com:3000/polls`,
+        data: data,
+        headers: {
+
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            token: token,
+            uuid: id
+
+        }
+
+    }).then(res => {
+
+      console.log(res.data);
+
+      this.setState({
+
+          opinion: ""
+
+      });
+
+    }).catch(err => {
+
+      console.log(err)
+
+    });
+
   }
   render() {
     return (
@@ -411,14 +521,14 @@ class PollCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Sector</label>
               <select
-                name="poll_sector"
+                name="sector"
                 className="form-control"
-                value={this.state.sector}
-                onChange={this.handleChange}
+                /*value={this.state.sector}*/
+                onChange={this.onChange}
                 required
               >
                 <option value="economy">Economy</option>
@@ -435,8 +545,9 @@ class PollCreation extends Component {
               <textarea
                 className="form-control"
                 rows="4"
-                name="new_poll"
-                value={this.state.poll}
+                name="opinion"
+                value={this.state.opinion}
+                onChange={this.onChange}
                 placeholder="Type opinion here..."
               />
             </div>
