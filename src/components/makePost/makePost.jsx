@@ -164,6 +164,7 @@ class PostCreation extends Component {
 
         this.updatePostsNow();
         if (response.data.Success) {
+          console.log('success');
           sessionStorage.setItem("message", response.data.Success)
         } else {
           console.log("login error")
@@ -259,20 +260,40 @@ class ArticleCreation extends Component {
   constructor(props) {
   
     super(props);
-    this.state = { 
+
+    this.state = {
         wordCount: 0, 
-        article: "", 
+        article: "",
+        title: "",
         uploadImages: false,
-        toProfile: false 
+        toProfile: false,
+        selectedFile: null
         
       };
     this.updateWordCount = this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  
+    this.onImageChange = this.onImageChange.bind(this);
+
+
+
   }
-  updatePostsNow = () => this.props.updatePosts()
-  
-  updateWordCount(event) {
+  updatePostsNow = () => this.props.updatePosts();
+
+  onImageChange = event => {
+    console.log(event);
+
+/*    const file = e.target.files[0];
+    console.log(file);
+
+    this.setState({
+
+        selectedFile: e.target.files[0]
+
+    })*/
+
+  };
+
+    updateWordCount(event) {
     this.setState({ article: event.target.value });
     if (this.state.article === "") {
       this.setState({ wordCount: 0 });
@@ -281,6 +302,7 @@ class ArticleCreation extends Component {
       this.setState({ wordCount: wordCount });
     }
   }
+
   showImageUploader = event => {
     event.preventDefault();
     let currentState = this.state.uploadImages;
@@ -300,7 +322,9 @@ class ArticleCreation extends Component {
 
     const data = {
 
-      post: this.state.article
+      post: this.state.article,
+      attachment: this.state.selectedFile
+        
     
     };
 
@@ -330,7 +354,9 @@ class ArticleCreation extends Component {
 
           this.setState({
 
-            toProfile: true
+            toProfile: true,
+            article: "",
+            title: ""
 
           });
 
@@ -367,8 +393,9 @@ class ArticleCreation extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="article-title"
+                name="title"
                 placeholder="Title of article ..."
+                value={this.state.tile}
               />
             </div> 
             <div className="form-group">
@@ -385,7 +412,9 @@ class ArticleCreation extends Component {
             <p className="text-right mb-0">
               {this.state.wordCount} {""} words
             </p>
-            <PostMedia showUploader={this.state.uploadImages} />
+
+{/*            <PostMedia type="file" showUploader={this.state.uploadImages} />*/}
+
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
@@ -397,7 +426,6 @@ class ArticleCreation extends Component {
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
                 onClick={this.showImageUploader}
-                type="button" 
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
