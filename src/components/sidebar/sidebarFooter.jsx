@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./sidebar.css";
+import { Link } from "react-router-dom";
 
 class SidebarFooter extends Component {
   render() {
@@ -11,8 +12,8 @@ class SidebarFooter extends Component {
             reserved
           </p>
           <p>
-            <a href="/faq">Help &FAQ</a> | <a href="/terms">Terms Of Use</a> |{" "}
-            <a href="/privacy">Privacy Policy</a>
+            <Link to="/faq">Help &FAQ</Link> | <Link to="/terms">Terms Of Use</Link> |{" "}
+            <Link to="/privacy">Privacy Policy</Link>
           </p>
           <p className="smaller-margin">
             <strong>Contact Us</strong>
@@ -21,12 +22,12 @@ class SidebarFooter extends Component {
           <p className="smaller-margin">Phone: 080 3333 3333</p>
           <div className="advert-section">
             <p className="smaller-margin">
-              <a href="/advert" className="advert-link">
+              <Link to="/advert" className="advert-link">
                 <span className="text-gclout-blue">
                   <i className="fas fa-external-link-alt" />
                 </span>{" "}
                 Advertise with GClout
-              </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -63,16 +63,16 @@ export default class SinglePost extends Component {
   }
 }
 
-class PostMedia extends Component {
-  render() {
-    return (
-      <div className="post-media-container">
-        <img
-          className="post-image img-fluid"
-          alt="post"
-          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
-        />
-      </div>
-    );
-  }
-}
+// class PostMedia extends Component {
+//   render() {
+//     return (
+//       <div className="post-media-container">
+//         <img
+//           className="post-image img-fluid"
+//           alt="post"
+//           src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
+//         />
+//       </div>
+//     );
+//   }
+// }

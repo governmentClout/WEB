@@ -21,7 +21,7 @@ export default class NavBarMobile extends Component {
               </button>
             </li>
             <li className="navigation-menu-item">
-              <a href="/profile">
+              <Link to="/profile">
                 <button className=" image-wrapper">
                   <img
                     className="navbar-profile-image"
@@ -29,7 +29,7 @@ export default class NavBarMobile extends Component {
                     alt="profile"
                   />
                 </button>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

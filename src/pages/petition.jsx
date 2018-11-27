@@ -7,6 +7,7 @@ import Sidebar from "../components/sidebar/sidebar";
 import MakePetition from "../components/makePost/makePetition";
 import { Manager, Reference, Popper } from "react-popper";
 import SinglePetition from "../components/post/petition";
+import { Redirect } from "react-router-dom"
 
 class PetitionPage extends Component {
   state = {showFilters: false}
@@ -15,7 +16,9 @@ class PetitionPage extends Component {
     this.setState({showFilters: !currentState })
   }
   render() {
-    return (
+    return !this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

@@ -36,6 +36,9 @@ class Register extends Component {
     this.signup = this.signup.bind(this); 
 
     this.onChange = this.onChange.bind(this);
+    // this.responseLinkedin = this.responseLinkedin.bind(this);
+    // this.responseTwittrer = this.responseTwittrer.bind(this);
+    this.responseTwitter = this.responseTwitter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -154,6 +157,7 @@ console.log('something jus happen rai now')
         tosAgreement: true
 
       }
+      return data;
     }
 
     if (type === "google" && res.w3.U3) {
@@ -273,30 +277,30 @@ console.log('something jus happen rai now')
 
     // const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
-    const responseLinkedin = response => {
-        console.log(response);
-        this.signup(response, "linkedin");
-    }
+    // function responseLinkedin(response) {
+    //     console.log(response);
+    //     this.signup(response, "linkedin");
+    // }
 
-      const responseTwitter = response => {
+    function responseTwitter(response) {
           console.log(response);
           this.signup(response, "twitter");
       };
 
-    const responseTwittrer = (response) => {
-        const token = response.headers.get('x-auth-token');
-        response.json().then(user => {
-            if (token) {
-                this.setState({isAuthenticated: true, user: user, token: token});
-            }
-        });
-    };
+    // function responseTwittrer(response) {
+    //     const token = response.headers.get('x-auth-token');
+    //     response.json().then(user => {
+    //         if (token) {
+    //             this.setState({isAuthenticated: true, user: user, token: token});
+    //         }
+    //     });
+    // };
 
 
 
 
 
-    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+    const { password, email, phone, tosAgreement } = this.state;
   /*  return (
 =======*/
 /*    const { password, email, phone } = this.state;*/
@@ -366,7 +370,7 @@ console.log('something jus happen rai now')
                         className="mr-2"
                         type="checkbox"
                         ref="check_me"
-                        value={this.state.tosAgreement}
+                        value={tosAgreement}
                         onChange={e => {
                           this.setState({ tosAgreement: e.target.checked });
                         }}

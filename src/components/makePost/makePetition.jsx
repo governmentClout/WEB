@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
-import { Manager, Reference, Popper } from "react-popper";
+// import { Manager, Reference, Popper } from "react-popper";
 
 class MakePetition extends Component {
   constructor(props) {

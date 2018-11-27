@@ -6,15 +6,27 @@ import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
 import MakePost from "../components/makePost/makePost";
 import SinglePoll from "../components/post/pollPost"
+import { Redirect } from "react-router-dom"
 
 class OpinionPage extends Component {
-  state = {showFilters: false}
+  state = {
+
+    showFilters: false
+
+  };
+
   showFilters = () => {
+
     let currentState = this.state.showFilters
     this.setState({showFilters: !currentState })
-  }
+
+  };
+
   render() {
-    return (
+
+    return !this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

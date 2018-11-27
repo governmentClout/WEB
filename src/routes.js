@@ -19,6 +19,7 @@ import Error404 from "./pages/errors/404";
 import PetitionPage from "./pages/petition";
 import PrivacyPage from "./pages/privacy";
 import { AuthConsumer } from "./components/authcontext";
+import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 
 const Routes = () => (
     <App>
@@ -111,6 +112,11 @@ const Routes = () => (
                         render={props => (
                             <PetitionPage isLoggedIn={isLoggedIn} {...props} />
                         )}
+                    />
+                    <Route
+                        exact
+                        path="/reset-password/code"
+                        component={ResetPasswordCode}
                     />
                     <Route path="/privacy" component={PrivacyPage} />
                     {/* The 404 page.. Dont Touch, lol */}

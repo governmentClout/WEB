@@ -5,6 +5,12 @@
 .sidebar p {
   font-size: 14px;
 }
+.sidebar a,
+.sidebar-section a,
+.sidebar-section a:hover {
+  color: #333;
+  text-decoration: none !important;
+}
 .sidebar-top {
   background: #ffffff;
   border-radius: 4px;

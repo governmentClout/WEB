@@ -190,11 +190,11 @@ class ProfileDetails extends Component {
                       {this.state.profile.firstName} {this.state.profile.lastName}
                     </h5>
                     {this.props.userId ? 
-                      (this.props.userId == 'executive' ?
+                      (this.props.userId === 'executive' ?
                       <p className="text-muted text-center">President</p> :
                       <div className="d-flex justify-content-between friend-actions">
-                        <a href="#" className="btn btn-gclout-blue">Message</a>
-                        {this.props.userId == 'friend' ? 
+                        <Link to="/" className="btn btn-gclout-blue">Message</Link>
+                        {this.props.userId === 'friend' ? 
                         <Manager>
                           <Reference>
                             {({ ref }) => (
@@ -290,7 +290,7 @@ class ProfileDetails extends Component {
               <div
                 className="d-flex officers justify-content-between flex-wrap"
               >
-                <a href="/profile" className="officer">
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -300,8 +300,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>President</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -311,8 +311,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>Governor</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -322,8 +322,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>Senator</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -333,8 +333,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>Council chairman</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -344,8 +344,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>Federal rep.</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -355,8 +355,8 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>State rep.</small>
-                </a>
-                <a href="/profile" className="officer">
+                </Link>
+                <Link to="/profile/executive" className="officer">
                   <div className="officer-profile-image-wrapper">
                     <img
                       className="officer-profile-image"
@@ -366,7 +366,7 @@ class ProfileDetails extends Component {
                   </div>
                   <p>Marks Webber</p>
                   <small>Councilor</small>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

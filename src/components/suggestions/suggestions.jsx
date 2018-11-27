@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./suggestions.css";
 
 class Suggestions extends Component {
@@ -45,9 +46,9 @@ class Suggestions extends Component {
           </div>
         </div>
         <div className="suggestion-footer">
-          <a href="/friends" className="suggestion-footer-link">
+          <Link to="/friends" className="suggestion-footer-link">
             View More
-          </a>
+          </Link>
         </div>
       </div>
     );

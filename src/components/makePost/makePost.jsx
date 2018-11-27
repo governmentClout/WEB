@@ -133,8 +133,11 @@ class PostCreation extends Component {
     e.preventDefault();
 
     const data = {
+
       post: this.state.post
-    }
+
+    };
+    console.log(data);
 
     axios({
     
