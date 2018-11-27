@@ -73,9 +73,11 @@ export default class SinglePost extends Component {
 
         }).then(res => {
 
+            console.log(res.data);
+
             this.setState ({
 
-                comments: res.data.comment.length
+                comments: res.data.comment
 
             });
         });
