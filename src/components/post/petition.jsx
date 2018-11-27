@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./post.css";
-import PollActions from "./petitionActions";
+import PetitionActions from "./petitionActions";
 import CommentInput from "./../comments/commentInput";
+import { Link } from "react-router-dom";
 
 export default class SinglePetition extends Component {
   static propTypes = {
@@ -26,7 +27,7 @@ export default class SinglePetition extends Component {
       <div style={{ marginBottom: "1em" }}>
         <div className="petition-header">
           <p>Petition to president Theresa May</p>
-          <a href="#">Economy</a>
+          <Link to="/polls">Economy</Link>
         </div>
         <div className="post-container">
           <div className="post-owner">
@@ -50,7 +51,7 @@ export default class SinglePetition extends Component {
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PollActions showComment={this.showComment} postID='209-283-23' />
+            <PetitionActions showComment={this.showComment} postID='209-283-23' />
 
               <CommentInput postID='209-283-23' show={this.state.showComment}/>
             {" "}
@@ -64,16 +65,16 @@ export default class SinglePetition extends Component {
 }
 
 
-class PostMedia extends Component {
-  render() {
-    return (
-      <div className="post-media-container">
-        <img
-          className="post-image img-fluid"
-          alt="post"
-          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
-        />
-      </div>
-    );
-  }
-}
+// class PostMedia extends Component {
+//   render() {
+//     return (
+//       <div className="post-media-container">
+//         <img
+//           className="post-image img-fluid"
+//           alt="post"
+//           src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
+//         />
+//       </div>
+//     );
+//   }
+// }

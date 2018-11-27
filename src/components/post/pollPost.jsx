@@ -3,10 +3,16 @@ import "./post.css";
 import PostActions from "./postActions";
 
 class SinglePoll extends Component {
-  state = { selectedOption: "yes" };
+  state = { selectedOption: "yes", showComment: false  };
   getInitialState = () => {
     return this.state.selectedOption;
   };
+  showComment = () => {
+    const currentState = this.state.showComment
+    this.setState({
+      showComment: !currentState
+    })
+  }
   handleOptionChange = changeEvent => {
     this.setState({
       selectedOption: changeEvent.target.value
@@ -79,7 +85,7 @@ class SinglePoll extends Component {
             </form>
           </div>
         </div>
-        <PostActions />
+        <PostActions showComment={this.showComment} />
       </div>
     );
   }

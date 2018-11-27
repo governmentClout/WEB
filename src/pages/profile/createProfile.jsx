@@ -141,7 +141,9 @@ class CreateProfile extends Component {
     if (this.state.toProfile === true) {
       return <Redirect to="/profile" />;
     }
-    return (
+    return !this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
@@ -175,7 +177,7 @@ class CreateProfile extends Component {
                 <img
                   className="lifted-profile-image"
                   src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                  alt="profile image"
+                  alt="profile"
                 />
               </div>
               <button

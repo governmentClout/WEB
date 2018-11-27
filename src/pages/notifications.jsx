@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
+import { Redirect, Link } from "react-router-dom"
 
 class NotificationsPage extends Component {
   render() {
-    return (
+    return!this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
@@ -45,7 +48,7 @@ class NotificationsPage extends Component {
 
 const Notification = props => (
  <div className="single-notification">
-  <a className="single-notification-link" href="#">
+  <Link className="single-notification-link" to="#">
     <div className="d-flex align-content-center">
       <div className="notification-owner-wrapper mr-3">
         <img className="notification-owner" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="notifiction-owner" />
@@ -54,7 +57,7 @@ const Notification = props => (
         <strong>Michelle Heston</strong> {props.type === "comment" ? "commented on  your recent post" : "reshared a post:Vous êtes une société  Vous cherchez des jeunes passionnés par le domaine de la technologie? Rejoignez nous à DevFest " }  
       </p>
     </div>
-  </a>
+  </Link>
   <span className="text-muted">12h</span>
  </div>
 )

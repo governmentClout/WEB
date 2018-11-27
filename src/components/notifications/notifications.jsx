@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./notifications.css";
+import {Link} from "react-router-dom";
 
 class Notifications extends Component {
   render() {
@@ -40,7 +41,7 @@ class Notifications extends Component {
             </li>
           </ul>
           <div className="notification-dropdown-footer text-center">
-            <a href="/notifications">View more</a>
+            <Link to="/notifications">View more</Link>
           </div>
         </div>
       </React.Fragment>

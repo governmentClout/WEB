@@ -10,7 +10,7 @@ export default class SinglePost extends Component {
         this.state = {
             like: "",
             likes: [],
-            comments: []
+            comments: 0
         };
 
     }
@@ -75,7 +75,7 @@ export default class SinglePost extends Component {
 
             this.setState ({
 
-                comments: res.data.comment.length
+                comments: res.data[0].comment.length
 
             });
         });
@@ -136,12 +136,12 @@ export default class SinglePost extends Component {
         <button className="post-action"
                 onClick={() => this.likePost(this.props.postID)}
         >
-            <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
+            <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}  like{likes === 1 ? '' : 's'}
         </button>
         <button className="post-action" onLoad={this.showCommentsCount.bind(this, this.props.postID)} onClick={this.showComment}>
           {" "}
-          <i className="far fa-comment"/> {comments} comment
-        </button>
+          <i className="far fa-comment"/> {comments} comment{comments === 1 ? '' : 's'}
+       </button>
         <button className="post-action">
           {" "}
           <i className="fas fa-share" /> Share

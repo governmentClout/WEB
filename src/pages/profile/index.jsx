@@ -7,6 +7,7 @@ import SidebarFooter from "../../components/sidebar/sidebarFooter";
 import MakePost from "../../components/makePost/makePost";
 import MakeExecutivePost from "../../components/makePost/makeExecutivePost";
 import SinglePost from "../../components/post/post";
+import { Redirect } from "react-router-dom"
 import axios from "axios";
 
 class ProfilePage extends Component {
@@ -76,7 +77,9 @@ class ProfilePage extends Component {
   }
 
   render() {
-    return (
+    return !this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

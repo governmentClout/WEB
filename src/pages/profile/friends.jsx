@@ -4,13 +4,16 @@ import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
 import Sidebar from "../../components/sidebar/sidebar";
 import Friend from "../../components/friend/friend"
+import { Redirect } from "react-router-dom"
 
 class FriendsPage extends Component {
   searchHandler(e) {
     e.preventDefault();
   }
   render() {
-    return  (
+    return !this.props.isLoggedIn ? (
+            <Redirect to="/login" />
+        ) : (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
