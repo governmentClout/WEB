@@ -12,7 +12,8 @@ class ResetPasswordCode extends Component {
 
         this.state = {
 
-            code: ""
+            code: "",
+            redirect: false
 
         };
 
@@ -52,8 +53,18 @@ class ResetPasswordCode extends Component {
 
             console.log(res.data);
             if(res.data.uuid){
-                swal('Operations Successful!');
+                
+                swal('Operation Successful!');
+                sessionStorage.setItem("resetuuid", res.data.uuid);
+            
             }
+            
+            this.setState({
+                
+                code: "",
+                redirect: true
+            
+            })
 
         }).catch(err => {
 
@@ -63,8 +74,15 @@ class ResetPasswordCode extends Component {
 
     }
     render() {
+        
+        const { redirect } = this.state;
+
+        if(redirect){
+            return (
+                <Redirect to={'/password-reset'}/>
+            )
+        }
         return (
-            this.props.isLoggedIn ? <Redirect to="/" /> :
                 <div>
                     <div className="auth-page d-flex">
                         <AuthBackground />
