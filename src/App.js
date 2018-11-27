@@ -6,35 +6,35 @@ import NavBarMobile from "./components/navbar/navBarMobile";
 import Footer from "./components/footer/footer";
 
 class App extends Component {
-  render() {
-    return (
-      <AuthProvider>
-        <AuthConsumer>
-          {({ isLoggedIn, logout }) =>
-            isLoggedIn ? (
-              <>
-                <NavBarAuthenticated logout={logout} /> <NavBarMobile />
-              </>
-            ) : (
-              <NavBar />
-            )
-          }
-        </AuthConsumer>
-        {this.props.children}
-        <AuthConsumer>
-          {({ isLoggedIn }) =>
-            isLoggedIn ? (
-              <>
-                <Footer />
-              </>
-            ) : (
-              ""
-            )
-          }
-        </AuthConsumer>
-      </AuthProvider>
-    );
-  }
+    render() {
+        return (
+            <AuthProvider>
+                <AuthConsumer>
+                    {({ isLoggedIn, logout }) =>
+                        isLoggedIn ? (
+                            <>
+                                <NavBarAuthenticated logout={logout} /> <NavBarMobile />
+                            </>
+                        ) : (
+                            <NavBar />
+                        )
+                    }
+                </AuthConsumer>
+                {this.props.children}
+                <AuthConsumer>
+                    {({ isLoggedIn }) =>
+                        isLoggedIn ? (
+                            <>
+                                <Footer />
+                            </>
+                        ) : (
+                            ""
+                        )
+                    }
+                </AuthConsumer>
+            </AuthProvider>
+        );
+    }
 }
 
 export default App;

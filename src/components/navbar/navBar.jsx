@@ -62,7 +62,7 @@ class NavBar extends Component {
               <a href="/">About us</a>
             </li>
             <li className="navigation-menu-item">
-              <a href="/">Petition</a>
+              <a href="/petition">Petition</a>
             </li>
             <li className="navigation-menu-item">
               <a href="/polls">Opinion poll</a>
