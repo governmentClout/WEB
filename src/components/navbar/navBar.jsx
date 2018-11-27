@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./navBar.css";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   constructor(props) {
@@ -62,15 +63,15 @@ class NavBar extends Component {
               <a href="/">About us</a>
             </li>
             <li className="navigation-menu-item">
-              <a href="/">Petition</a>
+              <Link to="/petition">Petition</Link>
             </li>
             <li className="navigation-menu-item">
-              <a href="/polls">Opinion poll</a>
+              <Link to="/polls">Opinion poll</Link>
             </li>
             <li className="navigation-menu-item">
-              <a href="/register" className="btn navigation-menu-button">
+              <Link to="/register" className="btn navigation-menu-button">
                 GET STARTED
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -86,10 +87,10 @@ class NavBar extends Component {
               <a href="/">About us</a>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
-              <a href="/">Petition</a>
+              <Link to="/petition">Petition</Link>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
-              <a href="/">Opinion poll</a>
+              <Link to="/polls">Opinion poll</Link>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
               <a href="/register" className="btn navigation-menu-button">

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UploadModal from "../uploadModal/uploadModal";
 import "../../assets/css/pages.css";
+import "./profileEdit.css"
 import axios from 'axios';
 
 class EditProfile extends Component {
@@ -43,37 +44,42 @@ class EditProfile extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    const newProfile = {
+      console.log(id);
+      console.log(token);
+
+    const data = {
+
       nationality_residence: this.state.nationality_residence,
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
-      lga: this.state.lga,
-      photo: "https://picsum.photos/200/300",
-      firstName: this.state.fname,
-      lastName: this.state.lname
+      
+    };
 
-    }
-
-    console.log(newProfile);
+    console.log(data);
 
     const url = "http://api.gclout.com:3000/profiles";
     console.log(url);
 
     axios({
     
-      method: 'put',
-      url: url,
+      method: "put",
+      url: "http://api.gclout.com:3000/profiles",
+      data: data,
+      mode: 'no-cors',
       headers: {
-
+        "Content-Type": "application/json;charset=utf-8",
         token: token,
         uuid: id,
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
 
       }
     
     }).then(response => {
 
       console.log(response);
+
+    }).catch(err => {
+
+      console.log(err);
 
     })
 
@@ -118,7 +124,7 @@ class EditProfile extends Component {
   render() {
     return (
       <>
-        <div className="profile-cover-image-wrapper">
+        <div className="profile-cover-image-wrapper edit">
           <img
             className="profile-cover-image"
             src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
@@ -142,9 +148,9 @@ class EditProfile extends Component {
             </svg>
           </button>
         </div>
-        <div className="col-md-9 offset-md-1">
+        <div className="col-md-9 offset-md-1" >
         <div>
-          <div className="lifted-profile-image-wrapper">
+          <div className="lifted-profile-image-wrapper edit">
             <img
               className="lifted-profile-image"
               src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
@@ -202,20 +208,6 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className="form-row">
-            {
-              /* <div className="form-group col-md">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  name="phone"
-                  className="form-control"
-                  type="phone"
-                  onChange={this.handleChange}
-                  value={this.state.phone}
-                  placeholder="+234 [0] 802 345 6789"
-                  required
-                />
-              </div> */
-            }
               <div className="form-group col-md">
                 <label htmlFor="nationality">Country of Residence</label>
                 <input
@@ -262,7 +254,7 @@ class EditProfile extends Component {
                 </select>
               </div>
               </div>
-              <div className="form-group col-md">
+              <div className="form-group">
                 <label htmlFor="lga">L.G.A</label>
                 <input
                   name="lga"

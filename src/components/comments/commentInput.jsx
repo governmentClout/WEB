@@ -54,9 +54,9 @@ onKeyPress = (e) => {
         comment: this.state.comment,
         ref: this.props.postID
       
-      }
+      };
 
-      console.log(data);
+      //console.log(data);
 
       axios({
 
@@ -72,7 +72,7 @@ onKeyPress = (e) => {
         }
       
       }).then(res => {
-        console.log(res.data);
+        //console.log(res.data);
 
           this.setState({
 
@@ -82,11 +82,11 @@ onKeyPress = (e) => {
 
       })
     }
-  }
+  };
 
   render() {
     return (
-      <div className="comment-input-wrapper">
+      <div className={ this.props.show ? "comment-input-wrapper" : "comment-input-wrapper hidden" } >
         <div className="comment-owner-wrapper">
           <img
             className="comment-owner"

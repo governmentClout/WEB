@@ -54,3 +54,24 @@
 .post-image {
   width: 100% !important;
 }
+.petition-header {
+  background: #ffffff;
+  border-bottom: 1px solid #cfcfcf;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+}
+.petition-header p , .petition-header a{
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-decoration: none;
+  color: #333333;
+}
+.styled-text {
+  margin-bottom: 0;
+  padding: 0;
+  align-self: center;
+}
+.post-actions-container .btn {
+  margin: 0;
+}

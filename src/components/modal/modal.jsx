@@ -47,7 +47,7 @@ class Modal extends Component {
   }
 
   render() {
-    const { onCloseRequest, children } = this.props;
+    const { children } = this.props;
 
     return (
       <div className="gclout-modal-overlay">
@@ -55,11 +55,11 @@ class Modal extends Component {
           <div className="gclout-modal-content">{children}</div>
         </div>
 
-        <button
+         {/* <button
           type="button"
           className="gclout-modal-close-btn"
           onClick={onCloseRequest}
-        />
+        /> */}
       </div>
     );
   }

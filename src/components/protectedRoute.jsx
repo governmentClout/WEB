@@ -5,11 +5,7 @@ import { AuthConsumer } from "./authcontext";
 const ProtectedRoute = ({ component: Component, ...rest }) => (
   <AuthConsumer>
     {({ isLoggedIn }) =>
-      isLoggedIn ? (
-        <Route exact={true} component={Component} {...rest} />
-      ) : (
-        <Redirect to="/login" />
-      )
+        <Route render={props => isLoggedIn ? <Component {...props} /> : <Redirect to="/login" />} {...rest} />
     }
   </AuthConsumer>
 );

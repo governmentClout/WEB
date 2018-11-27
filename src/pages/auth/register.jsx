@@ -5,7 +5,10 @@ import { Link, Redirect } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+/*
 import LinkedIn from "linkedin-login-for-react";
+*/
+/*import LinkedIn from 'react-linkedin-login'*/
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -33,6 +36,9 @@ class Register extends Component {
     this.signup = this.signup.bind(this); 
 
     this.onChange = this.onChange.bind(this);
+    // this.responseLinkedin = this.responseLinkedin.bind(this);
+    // this.responseTwittrer = this.responseTwittrer.bind(this);
+    this.responseTwitter = this.responseTwitter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -89,7 +95,7 @@ class Register extends Component {
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
       provider: "email",
-      redirectToReferrer: false
+      //redirectToReferrer: false
     };
 
     const url = "http://api.gclout.com:3000/users";
@@ -151,6 +157,7 @@ console.log('something jus happen rai now')
         tosAgreement: true
 
       }
+      return data;
     }
 
     if (type === "google" && res.w3.U3) {
@@ -270,30 +277,30 @@ console.log('something jus happen rai now')
 
     // const { password, email, phone, tosAgreement, data_of_birth } = this.state;
 
-    const responseLinkedin = response => {
-        console.log(response);
-        this.signup(response, "linkedin");
-    }
+    // function responseLinkedin(response) {
+    //     console.log(response);
+    //     this.signup(response, "linkedin");
+    // }
 
-      const responseTwitter = response => {
+    function responseTwitter(response) {
           console.log(response);
           this.signup(response, "twitter");
       };
 
-    const responseTwittrer = (response) => {
-        const token = response.headers.get('x-auth-token');
-        response.json().then(user => {
-            if (token) {
-                this.setState({isAuthenticated: true, user: user, token: token});
-            }
-        });
-    };
+    // function responseTwittrer(response) {
+    //     const token = response.headers.get('x-auth-token');
+    //     response.json().then(user => {
+    //         if (token) {
+    //             this.setState({isAuthenticated: true, user: user, token: token});
+    //         }
+    //     });
+    // };
 
 
 
 
 
-    const { password, email, phone, tosAgreement, data_of_birth } = this.state;
+    const { password, email, phone, tosAgreement } = this.state;
   /*  return (
 =======*/
 /*    const { password, email, phone } = this.state;*/
@@ -363,7 +370,7 @@ console.log('something jus happen rai now')
                         className="mr-2"
                         type="checkbox"
                         ref="check_me"
-                        value={this.state.tosAgreement}
+                        value={tosAgreement}
                         onChange={e => {
                           this.setState({ tosAgreement: e.target.checked });
                         }}
@@ -429,7 +436,7 @@ console.log('something jus happen rai now')
                     textButton="Facebook"
                   />
 
-                    <LinkedIn
+                    {/*<LinkedIn
                         clientId="77pb6qtint69q4"
                         callback={this.callbackLinkedIn}
                         text="Login With LinkedIn"
@@ -444,7 +451,7 @@ console.log('something jus happen rai now')
                         className="social-button-linkedin btn btn-block">
                         <i className="fab fa-linkedin-in" />
                         Linkedin
-                    </button>
+                    </button>*/}
 
 
 

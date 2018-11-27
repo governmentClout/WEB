@@ -36,10 +36,12 @@ class Login extends Component {
     const provider = "email";
 
     const data = {
+
       email,
       password,
       provider
     };
+    console.log(data);
 
     const url = "http://api.gclout.com:3000/login";
 
