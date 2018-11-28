@@ -48,11 +48,11 @@ class PasswordReset extends Component {
     axios({
 
         method: 'put',
+        url: `http://api.gclout.com:3000/resets`,
         data: data,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8;application/json",
-        },
-        url: `http://api.gclout.com:3000/resets`
+        }
 
     }).then(res => {
 

@@ -51,8 +51,7 @@ class ProfilePage extends Component {
       .then(res => {
         
           // for(let i = 0; i < res.data.length ; i++){
-              
-// {/*<<<<<<< HEAD
+
 //               //console.log(res.data[i].post);  //for the post object
 //              // console.log(res.data[i].post.post);  //for the post content
 //               //console.log(res.data[i].comments);  //for the comments object
@@ -68,7 +67,7 @@ class ProfilePage extends Component {
         
         });
 
-        console.log(res.data.reverse());
+//        console.log(res.data.reverse());
 
       })
       .catch(err => {
