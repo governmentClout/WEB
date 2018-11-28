@@ -8,6 +8,7 @@ import Register from "./pages/auth/register";
 import LoginPage from "./pages/auth/login";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import PasswordReset from "./pages/auth/passwordReset";
+import PasswordCode from "./pages/auth/code";
 import ProfileCreate from "./pages/profile/createProfile";
 import ProfilePage from "./pages/profile/index";
 import FriendsPage from "./pages/profile/friends";
@@ -53,6 +54,13 @@ const Routes = () => (
                         path="/password-reset"
                         render={props => (
                             <PasswordReset isLoggedIn={isLoggedIn} {...props} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/password-reset-code"
+                        render={props => (
+                            <PasswordCode isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
                     <Route
