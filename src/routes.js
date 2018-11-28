@@ -8,6 +8,7 @@ import Register from "./pages/auth/register";
 import LoginPage from "./pages/auth/login";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import PasswordReset from "./pages/auth/passwordReset";
+import PasswordCode from "./pages/auth/code";
 import ProfileCreate from "./pages/profile/createProfile";
 import ProfilePage from "./pages/profile/index";
 import FriendsPage from "./pages/profile/friends";
@@ -18,6 +19,8 @@ import NotificationsPage from "./pages/notifications";
 import Error404 from "./pages/errors/404";
 import PetitionPage from "./pages/petition";
 import PrivacyPage from "./pages/privacy";
+import HelpPage from "./pages/faq";
+import TermsPage from "./pages/terms";
 import { AuthConsumer } from "./components/authcontext";
 
 const Routes = () => (
@@ -51,6 +54,13 @@ const Routes = () => (
                         path="/password-reset"
                         render={props => (
                             <PasswordReset isLoggedIn={isLoggedIn} {...props} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/password-reset-code"
+                        render={props => (
+                            <PasswordCode isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
                     <Route
@@ -113,6 +123,8 @@ const Routes = () => (
                         )}
                     />
                     <Route path="/privacy" component={PrivacyPage} />
+                    <Route path="/faq" component={HelpPage} />
+                    <Route path="/terms" component={TermsPage} />
                     {/* The 404 page.. Dont Touch, lol */}
                     <Route component={Error404} />
                 </Switch>

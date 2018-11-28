@@ -16,3 +16,8 @@
 		padding: 0;
 	}
 }
+.external-content {
+	background: #fafafa;
+	color: #333;
+	min-height: 97vh;
+}

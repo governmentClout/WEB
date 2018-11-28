@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "../assets/css/external.css";
 
 
-class PrivacyPage extends Component {
+class TermsPage extends Component {
   render() {
     return (
       <div className="external-content">
         <div className="page-title">
-          <h1 className="text-center">Privacy Policy</h1>
+          <h1 className="text-center">Terms of Service</h1>
         </div>
         <div className="body-text container">
           <p>
@@ -62,4 +62,4 @@ class PrivacyPage extends Component {
   }
 }
 
-export default PrivacyPage;
+export default TermsPage;
