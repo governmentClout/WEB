@@ -38,7 +38,7 @@ class Register extends Component {
     this.onChange = this.onChange.bind(this);
     // this.responseLinkedin = this.responseLinkedin.bind(this);
     // this.responseTwittrer = this.responseTwittrer.bind(this);
-    this.responseTwitter = this.responseTwitter.bind(this);
+    // this.responseTwitter = this.responseTwitter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
