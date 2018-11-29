@@ -42,6 +42,8 @@ class Suggestions extends Component {
       }).then(response => {
 
         console.log(response.data);
+
+
         this.setState({
 
             friends: response.data
@@ -68,7 +70,7 @@ class Suggestions extends Component {
                 alt="suggested1"
               />
             </div>
-            <span className="suggested-name">Mark Anthony</span>{" "}
+            <span className="suggested-name">Markus Anthony</span>{" "}
             <button className="btn btn-gclout-blue-outline">Add Friend</button>
           </div>
         </div>
