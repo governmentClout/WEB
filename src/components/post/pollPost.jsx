@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./post.css";
-import PostActions from "./postActions";
 import axios from 'axios';
 import PollActions from "./pollActions";
+import PollCommentInput from "../comments/PollCommentInput";
 
 class SinglePoll extends Component {
 
@@ -13,11 +14,16 @@ class SinglePoll extends Component {
 
             selectedOption: "yes",
             showComment: false,
-            polls: []
+            polls: [],
 
         };
 
     }
+
+    static propTypes = {
+        postType: PropTypes.string,
+        media: PropTypes.bool
+    };
 
     getInitialState = () => {
 
@@ -104,6 +110,8 @@ class SinglePoll extends Component {
                           </p>
                       </div>
                       <PollActions showComment={this.showComment} />
+                      <PollCommentInput pollID={poll.polls.uuid} show={this.state.showComment}/>
+
                   </div>
               )
           )}
