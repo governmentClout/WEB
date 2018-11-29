@@ -109,8 +109,10 @@ class SinglePoll extends Component {
                               {poll.polls.opinion}
                           </p>
                       </div>
-                      <PollActions showComment={this.showComment} />
+                     {/* <PollActions showComment={this.showComment} />*/}
+{/*
                       <PollCommentInput pollID={poll.polls.uuid} show={this.state.showComment}/>
+*/}
 
                   </div>
               )
