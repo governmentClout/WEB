@@ -4,16 +4,68 @@ import Suggestions from "../../components/suggestions/suggestions";
 import Trending from "../../components/trending/trending";
 import Sidebar from "../../components/sidebar/sidebar";
 import Friend from "../../components/friend/friend";
-import { Redirect } from "react-router-dom"
+import axios from 'axios';
 
 class SuggestedFriendsPage extends Component {
-  searchHandler(e) {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+          suggesteds: []
+
+        }
+
+    }
+
+    componentWillMount() {
+
+      this.fetchSuggestedFriends();
+
+    }
+
+    fetchSuggestedFriends(){
+
+        const uuid = sessionStorage.getItem("uuid"),
+            token = sessionStorage.getItem("token");
+
+        console.log(uuid, token);
+
+      axios({
+
+          method: 'post',
+          url: `http://api.gclout.com:3000/users`,
+          headers: {
+
+              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+              token: token,
+              uuid: uuid
+
+          }
+
+      }).then(res => {
+
+        console.log(res.data);
+
+        this.setState({
+
+            suggesteds: []
+
+        })
+
+      })
+    }
+
+
+    searchHandler(e) {
     e.preventDefault();
   }
   render() {
-    return !this.props.isLoggedIn ? (
+    return(
+    /*return !this.props.isLoggedIn ? (
             <Redirect to="/login" />
-        ) : (
+        ) : (*/
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

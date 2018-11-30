@@ -78,7 +78,9 @@ const Routes = () => (
                     <Route
                         exact
                         path="/friends"
-                        render={props => <FriendsPage isLoggedIn={isLoggedIn} {...props} />}
+                        render={props => (
+                            <FriendsPage isLoggedIn={isLoggedIn} {...props} />
+                        )}
                     />
                     <Route
                         exact
