@@ -66,7 +66,7 @@ class NavBar extends Component {
               <Link to="/petition">Petition</Link>
             </li>
             <li className="navigation-menu-item">
-              <Link to="/polls">Opinion poll</Link>
+              <Link to="/polls">Polls</Link>
             </li>
             <li className="navigation-menu-item">
               <Link to="/register" className="btn navigation-menu-button">
@@ -90,7 +90,7 @@ class NavBar extends Component {
               <Link to="/petition">Petition</Link>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
-              <Link to="/polls">Opinion poll</Link>
+              <Link to="/polls">Polls</Link>
             </li>
             <li onClick={this.openNav} className="navigation-menu-item">
               <a href="/register" className="btn navigation-menu-button">

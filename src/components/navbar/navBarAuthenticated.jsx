@@ -64,7 +64,7 @@ class NavBarAuthenticated extends Component {
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM16 7.2L10 14L6 10L2 14V11L6 7L10 11L16 4.2V7.2Z" fill="#4F4F4F"/>
                 </svg> {"  "}
-                Opinion poll
+                Polls
               </Link>
             </li>
             <li className="navigation-menu-item only-mobile">

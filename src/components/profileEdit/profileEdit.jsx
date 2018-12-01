@@ -119,6 +119,7 @@ class EditProfile extends Component {
     this.setState({
       showModal: false
     });
+
   };
 
   render() {
