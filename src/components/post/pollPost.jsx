@@ -108,6 +108,50 @@ class SinglePoll extends Component {
                           <p>
                               {poll.polls.opinion}
                           </p>
+                          <form className="poll-form">
+              <div className="form-check">
+                <input
+                  className="form-check-i"
+                  type="radio"
+                  name="pollOptions"
+                  value="yes"
+                  checked={this.state.selectedOption === "yes"}
+                  onChange={this.handleOptionChange}
+                />
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
+                  Yes/Agree/True
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-i"
+                  type="radio"
+                  name="pollOptions"
+                  value="no"
+                  checked={this.state.selectedOption === "no"}
+                  onChange={this.handleOptionChange}
+                />
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
+                  No/Disagree/False
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-i"
+                  type="radio"
+                  name="pollOptions"
+                  value="maybe"
+                  checked={this.state.selectedOption === "maybe"}
+                  onChange={this.handleOptionChange}
+                />
+                <span className="checkmark" />
+                <label className="form-check-label" htmlFor="pollOptions">
+                  Undecided/Ambiguos
+                </label>
+              </div>
+            </form>
                       </div>
                      {/* <PollActions showComment={this.showComment} />*/}
 {/*
