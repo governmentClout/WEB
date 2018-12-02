@@ -20,7 +20,9 @@ class EditProfile extends Component {
       lga: this.props.lga,
       photo: "",
       phone: this.props.phone,
-      allStates: []
+      allStates: [],
+        countries: []
+
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -88,6 +90,8 @@ class EditProfile extends Component {
 
   componentDidMount(){
 
+    this.getCountries();
+
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
         .then(res => {
 
@@ -108,6 +112,20 @@ class EditProfile extends Component {
         })
   }
 
+  getCountries(){
+
+    axios({
+        method: 'get',
+        url: `https://restcountries.eu/rest/v2/all`
+    }).then(res => {
+      console.log(res.data.name);
+      console.log(res.data);
+      this.setState({
+          countries: res.data.name
+      })
+    })
+  }
+
   shouldShowModal = type => {
     this.setState({
       showModal: true,
@@ -122,6 +140,8 @@ class EditProfile extends Component {
   };
 
   render() {
+    const { countries } = this.state;
+    console.log(countries);
     return (
       <>
         <div className="profile-cover-image-wrapper edit">
@@ -210,6 +230,7 @@ class EditProfile extends Component {
             <div className="form-row">
               <div className="form-group col-md">
                 <label htmlFor="nationality">Country of Residence</label>
+
                 <input
                   name="nationality_residence"
                   className="form-control"

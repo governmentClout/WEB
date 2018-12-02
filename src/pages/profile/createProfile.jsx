@@ -17,12 +17,14 @@ class CreateProfile extends Component {
       nationality_origin: "",
       nationality_residence: "",
       state: "",
+        lgas: [],
       lga: "",
       photo: "",
       loading: false,
       redirect: false,
       allStates: [],
-      toProfile: false
+      toProfile: false,
+        countries: []
     };
 
     this.onChange = this.onChange.bind(this);
@@ -70,15 +72,46 @@ class CreateProfile extends Component {
       [ev.target.name]: ev.target.value
     });
   }
+
   componentWillMount() {
-    console.log('mounted')
+
+      this.getCountries();
+      this.getStates();
+
+  }
+
+  getStates(){
+
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
-      .then(response => {
-        this.setState({
-          allStates: response.data
-        })
+          .then(response => {
+              this.setState({
+                  allStates: response.data
+              })
+          })
+          .catch(err => console.log(err))
+
+  }
+
+  getCountries(){
+
+    axios({
+
+        method: 'get',
+        url: "https://restcountries.eu/rest/v2/all"
+
+    }).then(res => {
+      console.log(res.data);
+      this.setState({
+
+          countries: res.data
+
       })
-      .catch(err => console.log(err))
+
+    }).catch(err => {
+
+      console.log(err);
+
+    })
   }
 
   createProfile(e) {
@@ -137,10 +170,67 @@ class CreateProfile extends Component {
     });
   }
 
+  displayLga() {
+      const state = this.state.state;
+      axios({
+          method: 'get',
+          url: `http://locationsng-api.herokuapp.com/api/v1/states/${state}/lgas`
+      }).then(res => {
+//        console.log(res.data);
+        this.setState({
+            lgas: res.data
+        })
+      }).catch(err => console.log(err));
+      return(
+          <div className="form-group col-md">
+              <label htmlFor="state">LGA</label>
+              <select
+                  onChange={this.onChange}
+                  name="lga"
+                  className="form-control"
+              >
+                  {this.state.lgas.map(lga => {
+                      return (
+                          <option value={lga} key={lga}>
+                              {lga}
+                          </option>
+                      );
+                  })}
+              </select>
+          </div>
+      )
+
+  }
+
+  displayState(){
+    if(this.state.nationality_residence === "Nigeria"){
+        return(
+            <div className="form-group col-md">
+                <label htmlFor="state">State</label>
+                <select
+                    onChange={this.onChange}
+                    name="state"
+                    className="form-control"
+                >
+                    {this.state.allStates.map(state => {
+                        return (
+                            <option value={state.name} key={state.name}>
+                                {state.name}
+                            </option>
+                        );
+                    })}
+                </select>
+            </div>
+        )
+    }
+}
+
   render() {
     if (this.state.toProfile === true) {
       return <Redirect to="/profile" />;
     }
+    const { lgas } = this.state;
+
     return !this.props.isLoggedIn ? (
             <Redirect to="/login" />
         ) : (
@@ -231,60 +321,61 @@ class CreateProfile extends Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md">
-                    <label htmlFor="nationality_residence">Country of Residence</label>
-                    <input
-                      name="nationality_residence"
-                      className="form-control"
-                      type="text"
-                      value={this.state.nationality_residence}
-                      onChange={this.onChange}
-                      placeholder="Country of Residence"
-                      required
-                    />
-                  </div>
+                    <div className="form-group col-md">
+                        <label htmlFor="nationality_residence">Country of Residence</label>
+                        <select
+                            name="nationality_residence"
+                            className="form-control"
+                            value={this.state.nationality_residence}
+                            onChange={this.onChange}
+                            required
+                        >
+                            {this.state.countries.map(country => {
+                                return (
+                                    <option value={country.name} key={country.name}>{country.name}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
                   <div className="form-group col-md">
                     <label htmlFor="nationality_residence">Country of Origin</label>
-                    <input
+                      <select
                       name="nationality_origin"
                       className="form-control"
-                      type="text"
                       value={this.state.nationality_origin}
                       onChange={this.onChange}
-                      placeholder="Country of Origin"
                       required
-                    />
+                      >
+                          {this.state.countries.map(country => {
+                            return (
+                                <option value={country.name} key={country.name}>{country.name}</option>
+                            )
+                          })}
+                      </select>
                   </div>
 
                 </div>
                 <div className="form-row">
+                    {this.displayState()}
+
                   <div className="form-group col-md">
-                    <label htmlFor="state">State</label>
-                    <select
-                      onChange={this.onChange}
-                      name="state"
-                      className="form-control"
-                    >
-                      {this.state.allStates.map(state => {
+                      {this.displayLga()}
+
+                    {/* {this.displayLga()}*/}
+                {/*<select
+                    onChange={this.onChange}
+                    name="state"
+                    className="form-control"
+                >
+                    {lgas.map(lga => {
                         return (
-                          <option value={state.name} key={state.name}>
-                            {state.name}
-                          </option>
+                            <option value={lga} key={lga}>
+                                {lga}
+                            </option>
                         );
-                      })}
-                    </select>
-                  </div>
-                  <div className="form-group col-md">
-                    <label htmlFor="lga">L.G.A</label>
-                    <input
-                      name="lga"
-                      className="form-control"
-                      type="text"
-                      value={this.state.lga}
-                      onChange={this.onChange}
-                      placeholder="Local Government Area"
-                      required
-                    />
+                    })}
+                </select>*/}
+
                   </div>
                 </div>
                 <div className="d-flex">

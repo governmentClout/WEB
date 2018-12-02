@@ -6,6 +6,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import GoogleLogin from "react-google-login";
+import { API_URL } from "../../components/config";
 
 class Login extends Component {
   constructor(props) {
@@ -43,7 +44,11 @@ class Login extends Component {
     };
     console.log(data);
 
+/*
     const url = "http://api.gclout.com:3000/login";
+*/
+    const url = `${API_URL}/login`;
+    console.log(url);
 
     if (this.state.email && this.state.password) {
       /* axios sraers here */
@@ -69,7 +74,7 @@ class Login extends Component {
           }
         })
         .catch(error => {
-          this.notify(error);
+//          this.notify(error);
           this.setState({ loading: false });
         });
 
@@ -135,13 +140,16 @@ class Login extends Component {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
-    this.errorToast = toast.error(
-      "Login Failed: " + error.response.data.Error,
-      {
-        position: toast.POSITION.TOP_LEFT,
-        autoClose: false
-      }
-    );
+    // this.errorToast = toast.error(
+    //   "Login Failed: " + error.response.data.Error,
+    //   {
+    //     position: toast.POSITION.TOP_LEFT,
+    //     autoClose: false
+    //   }
+    // );
+      this.errorToast = toast.error(
+          "Login Failed: "
+      );
   };
 
   render() {
