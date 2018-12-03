@@ -3,6 +3,7 @@ import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
+import toastr from 'toastr';
 
 class ForgotPassword extends Component {
 
@@ -39,8 +40,6 @@ class ForgotPassword extends Component {
 
     };
 
-    console.log(data);
-
     axios({
 
         method: 'post',
@@ -49,7 +48,22 @@ class ForgotPassword extends Component {
 
     }).then(res => {
 
-      console.log(res.data)
+      console.log(res.data);
+      
+      if(res.data.Success){
+
+        this.setState({
+      
+          email: ""
+      
+        });
+
+        toastr.success("Please Check your email for your rest code");
+
+      } else {
+
+        toastr.info("Something went wrong")
+      }
 
     }).catch(err => {
 
@@ -58,6 +72,7 @@ class ForgotPassword extends Component {
     })
 
   }
+
   render() {
     return (
       this.props.isLoggedIn ? <Redirect to="/" /> :
