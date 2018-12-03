@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
+import {API_URL} from "../config";
 
 class MakePost extends Component {
   constructor(props) {
@@ -117,33 +118,52 @@ class PostCreation extends Component {
       uploadImages: false,
       toProfile: false,
       disable: false,
-      loading: false
+      loading: false,
+        selectedFile: null
     };
 
     this.updateWordCount= this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
   }
-  updatePostsNow = () => this.props.updatePosts()
-  onSubmit(e) {
+
+  updatePostsNow = () => this.props.updatePosts();
+
+  fileSelected = (e) => {
+    console.log(e.target.files[0]);
+    this.setState({
+        selectedFile: e.target.files[0]
+    })
+
+  };
+
+    onSubmit(e) {
 
   // postData(ev) {
     this.setState({loading: true});
+
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
+
     e.preventDefault();
+
+    const fd = new FormData();
+    fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
 
     const data = {
 
-      post: this.state.post
+      post: this.state.post,
+      attachment: fd
 
     };
     console.log(data);
+    const url = `${API_URL}/posts`;
+    console.log(url);
 
     axios({
     
       method: "post",
-      url: "http://api.gclout.com:3000/posts",
-      data: data,
+      url: url,
+      data: fd,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
@@ -151,12 +171,6 @@ class PostCreation extends Component {
       }
     })
       .then(response => {
-
-        /*if(response.data.Success){
-
-          alert('djd');
-
-        }*/
 
         this.setState({
 
@@ -232,7 +246,8 @@ class PostCreation extends Component {
             <p className="text-right mb-0">
               {100 - this.state.wordCount} {""} words left
             </p>
-            <PostMedia showUploader={this.state.uploadImages} />
+            {/*<PostMedia showUploader={this.state.uploadImages} />*/}
+            <input type="file" onChange={this.fileSelected} />
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
