@@ -8,7 +8,7 @@ class Friend extends Component {
         super(props);
         this.state = {
             showMenu: false,
-            friends: []
+            // friends: []
         };
         this.showMenu = this.showMenu.bind(this);
     }
@@ -16,50 +16,46 @@ class Friend extends Component {
         let currentState = this.state.showMenu;
         this.setState({ showMenu: !currentState });
     }
-    componentDidMount() {
-        this.fetchFriends();
-    }
-    fetchFriends(){
-        const uuid = sessionStorage.getItem("uuid"),
-            token = sessionStorage.getItem("token");
-        axios({
-            method: 'get',
-            url: `http://api.gclout.com:3000/users`,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                token: token,
-                uuid: uuid
-            }
-        }).then(response => {
-            console.log(response.data);
-            this.setState({
-                friends: response.data
-            })
-        })
-    }
+    // componentDidMount() {
+    //     this.fetchFriends();
+    // }
+    // fetchFriends(){
+    //     const uuid = sessionStorage.getItem("uuid"),
+    //         token = sessionStorage.getItem("token");
+    //     axios({
+    //         method: 'get',
+    //         url: `http://api.gclout.com:3000/users`,
+    //         headers: {
+    //             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+    //             token: token,
+    //             uuid: uuid
+    //         }
+    //     }).then(response => {
+    //         console.log(response.data);
+    //         this.setState({
+    //             friends: response.data
+    //         })
+    //     })
+    // }
 
     render() {
         const { friends } = this.state;
         console.log(friends);
         return (
             <div className="friend-details-container">
-                { friends.map(
-                    (friend) => (
-                        <div className="friend-details">
-                            <div className="friend-image-container  my-auto">
-                                <img
-                                    src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                                    className="friend-image"
-                                    alt="friend"
-                                />
-                            </div>
-                            <div className="deats  my-auto">
-                                <h5>{friend.firstName}</h5>
-                                <p>Lagos, Nigeria</p>
-                            </div>
-                        </div>
-                    )
-                )}
+                <div className="friend-details">
+                    <div className="friend-image-container  my-auto">
+                        <img
+                            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                            className="friend-image"
+                            alt="friend"
+                        />
+                    </div>
+                    <div className="deats  my-auto">
+                        <h5>{this.props.friend.firstName + " " + this.props.friend.lastName}</h5>
+                        <p>Lagos, Nigeria</p>
+                    </div>
+                </div>
                 <div className="friend-action">
                     {this.props.type !== "suggested" ? (
                         <>

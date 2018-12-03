@@ -3,7 +3,7 @@ import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
-import toastr from 'toastr';
+// import toastr from 'toastr';
 
 class ForgotPassword extends Component {
 

@@ -21,41 +21,59 @@ class SuggestedFriendsPage extends Component {
 
     componentWillMount() {
 
-      this.fetchSuggestedFriends();
+      this.fetchFriends();
 
     }
-
-    fetchSuggestedFriends(){
-
+    fetchFriends(){
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-
-        console.log(uuid, token);
-
-      axios({
-
-          method: 'post',
-          url: `http://api.gclout.com:3000/users`,
-          headers: {
-
-              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-              token: token,
-              uuid: uuid
-
-          }
-
-      }).then(res => {
-
-        console.log(res.data);
-
-        this.setState({
-
-            suggesteds: []
-
+        axios({
+            method: 'get',
+            url: `http://api.gclout.com:3000/users`,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                token: token,
+                uuid: uuid
+            }
+        }).then(response => {
+            console.log(response.data);
+            this.setState({
+                suggesteds: response.data
+            })
         })
-
-      })
     }
+
+    // fetchSuggestedFriends(){
+
+    //     const uuid = sessionStorage.getItem("uuid"),
+    //         token = sessionStorage.getItem("token");
+
+    //     console.log(uuid, token);
+
+    //   axios({
+
+    //       method: 'post',
+    //       url: `http://api.gclout.com:3000/users`,
+    //       headers: {
+
+    //           "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+    //           token: token,
+    //           uuid: uuid
+
+    //       }
+
+    //   }).then(res => {
+
+    //     console.log(res.data);
+
+    //     this.setState({
+
+    //         suggesteds: []
+
+    //     })
+
+    //   })
+    // }
 
 
     searchHandler(e) {
@@ -92,7 +110,7 @@ class SuggestedFriendsPage extends Component {
                   </form>
                 </div>
                 <div className="friends-list">
-                  <Friend type="suggested" />
+                  {this.state.suggesteds.map((suggestedFriend) => (<Friend friend={suggestedFriend} type="suggested" />))}
                 </div>
               </div>
             </div>
