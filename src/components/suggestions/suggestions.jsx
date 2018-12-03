@@ -40,14 +40,9 @@ class Suggestions extends Component {
           }
 
       }).then(response => {
-
-        console.log(response.data);
-
-
+       // console.log(response.data);
         this.setState({
-
             friends: response.data
-
         })
 
       })

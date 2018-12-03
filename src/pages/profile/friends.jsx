@@ -30,30 +30,19 @@ class FriendsPage extends Component {
 
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-
         axios({
-
             method: 'get',
             url: `http://api.gclout.com:3000/users`,
             headers: {
-
                 "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
                 token: token,
                 uuid: uuid
-
             }
-
         }).then(response => {
-
-            console.log(response.data);
             this.setState({
-
                 friends: response.data
-
             })
-
         })
-
     }
 
   searchHandler(e) {

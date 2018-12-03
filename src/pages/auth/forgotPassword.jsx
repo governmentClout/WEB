@@ -58,11 +58,7 @@ class ForgotPassword extends Component {
       
         });
 
-        toastr.success("Please Check your email for your rest code");
 
-      } else {
-
-        toastr.info("Something went wrong")
       }
 
     }).catch(err => {
