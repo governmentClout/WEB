@@ -310,167 +310,169 @@ console.log('something jus happen rai now')
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
-          <div className="m-auto col-lg-8 col-md-10 bg-white auth-page-card">
-            <h2 className="auth-card-title text-center mb-3">
-              Create An Account
-            </h2>
-            <div className="row --with-divider">
-              <div className="col-md-12 col-lg-6 mx-auto">
-                <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="email">Email address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      onChange={ev => this.onChange("email", ev)}
-                      value={email}
-                      placeholder="Email address"
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="password"
-                      placeholder="Password"
-                      onChange={ev => this.onChange("password", ev)}
-                      value={password}
-                      required
-                    />
-                  </div>
-                  <div className="form-row">
-                    <div className="col-md" style={{ marginRight: "5px" }}>
-                      <label htmlFor="phone">Phone number</label>
+          <div className="authy">
+            <div className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
+              <h2 className="auth-card-title text-center mb-3">
+                Create An Account
+              </h2>
+              <div className="row --with-divider">
+                <div className="col-md-12 col-lg-6 mx-auto">
+                  <form className="auth-form mb-4" onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="email">Email address</label>
                       <input
-                        type="phone"
+                        type="email"
                         className="form-control"
-                        name="phone"
-                        placeholder="Phone number"
-                        onChange={ev => this.onChange("phone", ev)}
-                        value={phone}
+                        name="email"
+                        onChange={ev => this.onChange("email", ev)}
+                        value={email}
+                        placeholder="Email address"
                         required
                       />
                     </div>
-                    <div className="col-md ml-2" style={{ marginLeft: "5px" }}>
-                      <label>Date of birth</label>
-                      <DatePicker
-                        className="form-date"
-                        onChange={this.onDateChange}
-                        value={this.state.date_of_birth}
-                        Calendar={null}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group mt-2">
-                    <div className="form-check">
+                    <div className="form-group">
+                      <label htmlFor="password">Password</label>
                       <input
-                        className="mr-2"
-                        type="checkbox"
-                        ref="check_me"
-                        value={tosAgreement}
-                        onChange={e => {
-                          this.setState({ tosAgreement: e.target.checked });
-                        }}
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        placeholder="Password"
+                        onChange={ev => this.onChange("password", ev)}
+                        value={password}
                         required
                       />
-                      <label
-                        htmlFor="agreement"
-                        className="form-check-label"
-                        name="tosAgreement"
-                      >
-                        I agree with terms and conditions
-                      </label>
                     </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-block btn-gclout-blue"
-                    onClick={this.handleSubmit}
-                  >
-                    {this.state.loading ? (
-                      <i className="fas fa-circle-notch fa-spin" />
-                    ) : (
-                      "Register"
-                    )}{" "}
-                  </button>
-                </form>
-              </div>
-              <div className="vertical-divider">OR</div>
-              <div className="col-md-12 col-lg-6 mx-auto">
-                <div className="social-buttons">
-
-                    <GoogleLogin
-                        className="social-button-google btn btn-block"
-                        clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                        buttonText="Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                    >
-                        <i className="fab fa-google" /> Google
-                    </GoogleLogin>
-
-                    <TwitterLogin
-                       // loginUrl="http://localhost:3000/login/auth/twitter"
-                        /*onFailure={this.onFailed}*/
-                        /*onSuccess={this.onSuccess}*/
-                        loginUrl="http://api.gclout.com:3000/users"
-                        onSuccess={responseTwitter}
-                        onFailure={responseTwitter}
-                        forceLogin={true}
-                        className="social-button-twitter btn btn-block"
-                        clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
-                        requestTokenUrl="http://api.gclout.com:3000/users"
-                        //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
-                    />
-
-                    <FacebookLogin
-                    appId="2171139129879186"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={responseFacebook}
-                    cssClass="social-button-facebook btn btn-block"
-                    icon="fa-facebook"
-                    textButton="Facebook"
-                  />
-
-                    {/*<LinkedIn
-                        clientId="77pb6qtint69q4"
-                        callback={this.callbackLinkedIn}
-                        text="Login With LinkedIn"
-                        onSuccess={responseLinkedin}
-                        onFailure={responseLinkedin}
-                        className="social-button-linkedin btn btn-block"
-                    />
+                    <div className="form-row">
+                      <div className="col-md" style={{ marginRight: "5px" }}>
+                        <label htmlFor="phone">Phone number</label>
+                        <input
+                          type="phone"
+                          className="form-control"
+                          name="phone"
+                          placeholder="Phone number"
+                          onChange={ev => this.onChange("phone", ev)}
+                          value={phone}
+                          required
+                        />
+                      </div>
+                      <div className="col-md ml-2" style={{ marginLeft: "5px" }}>
+                        <label>Date of birth</label>
+                        <DatePicker
+                          className="form-date"
+                          onChange={this.onDateChange}
+                          value={this.state.date_of_birth}
+                          Calendar={null}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group mt-2">
+                      <div className="form-check">
+                        <input
+                          className="mr-2"
+                          type="checkbox"
+                          ref="check_me"
+                          value={tosAgreement}
+                          onChange={e => {
+                            this.setState({ tosAgreement: e.target.checked });
+                          }}
+                          required
+                        />
+                        <label
+                          htmlFor="agreement"
+                          className="form-check-label"
+                          name="tosAgreement"
+                        >
+                          I agree with terms and conditions
+                        </label>
+                      </div>
+                    </div>
                     <button
-                        onClick={this.linkedInLogin}
-                        onSuccess={responseLinkedin}
-                        onFailure={responseLinkedin}
-                        className="social-button-linkedin btn btn-block">
-                        <i className="fab fa-linkedin-in" />
-                        Linkedin
-                    </button>*/}
-
-
-
-               {/*     <TwitterLogin
-                        loginUrl="http://localhost:3000/login"
-                        onSuccess={responseTwitter}
-                        onFailure={responseTwitter}
-                        className="social-button-twitter btn btn-block"
-
-
-                    />*/}
-
+                      type="submit"
+                      className="btn btn-block btn-gclout-blue"
+                      onClick={this.handleSubmit}
+                    >
+                      {this.state.loading ? (
+                        <i className="fas fa-circle-notch fa-spin" />
+                      ) : (
+                        "Register"
+                      )}{" "}
+                    </button>
+                  </form>
                 </div>
-                <p className="text-center">
-                  Already have an account?{" "}
-                  <Link className="auth-page-link" to="/login">
-                    Sign in
-                  </Link>{" "}
-                </p>
+                <div className="vertical-divider">OR</div>
+                <div className="col-md-12 col-lg-6 mx-auto">
+                  <div className="social-buttons">
+
+                      <GoogleLogin
+                          className="social-button-google btn btn-block"
+                          clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                          buttonText="Google"
+                          onSuccess={responseGoogle}
+                          onFailure={responseGoogle}
+                      >
+                          <i className="fab fa-google" /> Google
+                      </GoogleLogin>
+
+                      <TwitterLogin
+                         // loginUrl="http://localhost:3000/login/auth/twitter"
+                          /*onFailure={this.onFailed}*/
+                          /*onSuccess={this.onSuccess}*/
+                          loginUrl="http://api.gclout.com:3000/users"
+                          onSuccess={responseTwitter}
+                          onFailure={responseTwitter}
+                          forceLogin={true}
+                          className="social-button-twitter btn btn-block"
+                          clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
+                          requestTokenUrl="http://api.gclout.com:3000/users"
+                          //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
+                      />
+
+                      <FacebookLogin
+                      appId="2171139129879186"
+                      autoLoad={true}
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                      cssClass="social-button-facebook btn btn-block"
+                      icon="fa-facebook"
+                      textButton="Facebook"
+                    />
+
+                      {/*<LinkedIn
+                          clientId="77pb6qtint69q4"
+                          callback={this.callbackLinkedIn}
+                          text="Login With LinkedIn"
+                          onSuccess={responseLinkedin}
+                          onFailure={responseLinkedin}
+                          className="social-button-linkedin btn btn-block"
+                      />
+                      <button
+                          onClick={this.linkedInLogin}
+                          onSuccess={responseLinkedin}
+                          onFailure={responseLinkedin}
+                          className="social-button-linkedin btn btn-block">
+                          <i className="fab fa-linkedin-in" />
+                          Linkedin
+                      </button>*/}
+
+
+
+                 {/*     <TwitterLogin
+                          loginUrl="http://localhost:3000/login"
+                          onSuccess={responseTwitter}
+                          onFailure={responseTwitter}
+                          className="social-button-twitter btn btn-block"
+
+
+                      />*/}
+
+                  </div>
+                  <p className="text-center">
+                    Already have an account?{" "}
+                    <Link className="auth-page-link" to="/login">
+                      Sign in
+                    </Link>{" "}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

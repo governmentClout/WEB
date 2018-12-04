@@ -16,7 +16,7 @@ class App extends Component {
                                 <NavBarAuthenticated logout={logout} /> <NavBarMobile />
                             </>
                         ) : (
-                            <NavBar />
+                            ""
                         )
                     }
                 </AuthConsumer>

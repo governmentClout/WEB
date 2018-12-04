@@ -73,52 +73,54 @@ class PasswordReset extends Component {
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
-          <div className="m-auto col-md-6 bg-white auth-page-card">
-            <h2 className="auth-card-title text-center mb-3">
-              Your password canceled!
-            </h2>
-            <div className="col-md-8 offset-md-2 mb-4">
-              <form className="auth-form my-4" onSubmit={this.onSubmit}>
+          <div className="authy">
+            <div className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
+              <h2 className="auth-card-title text-center mb-3">
+                Your password canceled!
+              </h2>
+              <div className="col-md-8 offset-md-2 mb-4">
+                <form className="auth-form my-4" onSubmit={this.onSubmit}>
+                    <div className="form-group mt-4">
+                        <label htmlFor="email">code</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            placeholder="code sent to your mail"
+                            name="code"
+                            onChange={this.onChange}
+                            value={this.state.code}
+                            required
+                        />
+                    </div>
                   <div className="form-group mt-4">
-                      <label htmlFor="email">code</label>
-                      <input
-                          className="form-control"
-                          type="text"
-                          placeholder="code sent to your mail"
-                          name="code"
-                          onChange={this.onChange}
-                          value={this.state.code}
-                          required
-                      />
+                    <label htmlFor="email">New password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      placeholder="New password"
+                      name="password"
+                      onChange={this.onChange}
+                      value={this.state.password}
+                      required
+                    />
                   </div>
-                <div className="form-group mt-4">
-                  <label htmlFor="email">New password</label>
-                  <input
-                    className="form-control"
-                    type="password"
-                    placeholder="New password"
-                    name="password"
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    required
-                  />
-                </div>
-                <div className="form-group mb-4">
-                  <label htmlFor="email">Confirm password</label>
-                  <input
-                    className="form-control"
-                    type="password"
-                    placeholder="Re-enter password"
-                    name="confirm_password"
-                    onChange={this.onChange}
-                    value={this.state.confirm_password}
-                    required
-                  />
-                </div>
-                <button className="btn btn-block btn-gclout-blue mb-3">
-                  CHANGE PASSWORD
-                </button>
-              </form>
+                  <div className="form-group mb-4">
+                    <label htmlFor="email">Confirm password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      placeholder="Re-enter password"
+                      name="confirm_password"
+                      onChange={this.onChange}
+                      value={this.state.confirm_password}
+                      required
+                    />
+                  </div>
+                  <button className="btn btn-block btn-gclout-blue mb-3">
+                    CHANGE PASSWORD
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

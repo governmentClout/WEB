@@ -163,95 +163,97 @@ class Login extends Component {
     ) : (
       <div className="auth-page d-flex">
         <AuthBackground />
-        <div className="m-auto col-md-8 bg-white auth-page-card">
-          <h2 className="auth-card-title text-center mb-3">
-            Sign Into Your Account
-          </h2>
-          <div className="row --with-divider">
-            <div className="col-md-6">
-              <form
-                className="auth-form mb-4"
-                onSubmit={this.postData.bind(this)}
-              >
-                <div className="form-group">
-                  <label htmlFor="email">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="Email address"
-                    onChange={this.dataChange.bind(this)}
-                    value={this.state.email}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    onChange={this.dataChange.bind(this)}
-                    value={this.state.password}
-                    placeholder="Password"
-                    required
-                  />
-                </div>
-                <button className="btn btn-block btn-gclout-blue">
-                  {this.state.loading ? (
-                    <i className="fas fa-circle-notch fa-spin" />
-                  ) : (
-                    "Sign in"
-                  )}
-                </button>
-                <div className="form-group mt-2 d-flex">
-                  <div className="form-check">
-                    <input className="mr-2" type="checkbox" />
-                    <label htmlFor="remember" className="form-check-label">
-                      Remember me
-                    </label>
+        <div className="authy">
+          <div  className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
+            <h2 className="auth-card-title text-center mb-3">
+              Sign Into Your Account
+            </h2>
+            <div className="row --with-divider">
+              <div className="col-md-6">
+                <form
+                  className="auth-form mb-4"
+                  onSubmit={this.postData.bind(this)}
+                >
+                  <div className="form-group">
+                    <label htmlFor="email">Email address</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      placeholder="Email address"
+                      onChange={this.dataChange.bind(this)}
+                      value={this.state.email}
+                      required
+                    />
                   </div>
-                  <Link
-                    to="/forgot-password"
-                    className="auth-page-link text-right"
-                    style={{ width: "55%" }}
-                  >
-                    Forgot password
-                  </Link>
-                </div>
-              </form>
-            </div>
-            <div className="vertical-divider">OR</div>
-            <div className="col-md-6">
-              <div className="social-buttons">
-                <button className="social-button-facebook btn btn-block">
-                  <i className="fab fa-facebook-f" />
-                  Facebook
-                </button>
-                <button className="social-button-twitter btn btn-block">
-                  <i className="fab fa-twitter" />
-                  Twitter
-                </button>
-                  <GoogleLogin
-                      className="social-button-google btn btn-block"
-                      clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                      buttonText="Google"
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                  >
-                      <i className="fab fa-google" /> Google
-                  </GoogleLogin>
-                <button className="social-button-linkedin btn btn-block">
-                  <i className="fab fa-linkedin-in" />
-                  Linkedin
-                </button>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      onChange={this.dataChange.bind(this)}
+                      value={this.state.password}
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
+                  <button className="btn btn-block btn-gclout-blue">
+                    {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Sign in"
+                    )}
+                  </button>
+                  <div className="form-group mt-2 d-flex">
+                    <div className="form-check">
+                      <input className="mr-2" type="checkbox" />
+                      <label htmlFor="remember" className="form-check-label">
+                        Remember me
+                      </label>
+                    </div>
+                    <Link
+                      to="/forgot-password"
+                      className="auth-page-link text-right"
+                      style={{ width: "55%" }}
+                    >
+                      Forgot password
+                    </Link>
+                  </div>
+                </form>
               </div>
-              <p className="text-center">
-                Dont have an account?{" "}
-                <Link className="auth-page-link" to="/register">
-                  Sign up
-                </Link>{" "}
-              </p>
+              <div className="vertical-divider">OR</div>
+              <div className="col-md-6">
+                <div className="social-buttons">
+                  <button className="social-button-facebook btn btn-block">
+                    <i className="fab fa-facebook-f" />
+                    Facebook
+                  </button>
+                  <button className="social-button-twitter btn btn-block">
+                    <i className="fab fa-twitter" />
+                    Twitter
+                  </button>
+                    <GoogleLogin
+                        className="social-button-google btn btn-block"
+                        clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                        buttonText="Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    >
+                        <i className="fab fa-google" /> Google
+                    </GoogleLogin>
+                  <button className="social-button-linkedin btn btn-block">
+                    <i className="fab fa-linkedin-in" />
+                    Linkedin
+                  </button>
+                </div>
+                <p className="text-center">
+                  Dont have an account?{" "}
+                  <Link className="auth-page-link" to="/register">
+                    Sign up
+                  </Link>{" "}
+                </p>
+              </div>
             </div>
           </div>
         </div>

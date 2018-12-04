@@ -86,31 +86,33 @@ class ResetPasswordCode extends Component {
                 <div>
                     <div className="auth-page d-flex">
                         <AuthBackground />
-                        <div className="m-auto col-md-6 bg-white auth-page-card">
-                            <h2 className="auth-card-title text-center mb-3">
-                                Forgot Your Password
-                            </h2>
-                            <p className="auth-card-subtitle mb-3 text-center col-12 col-md-8 offset-md-2">
-                                Enter the code to rset the password
-                            </p>
-                            <div className="col-md-8 offset-md-2 mb-4">
-                                <form className="auth-form my-4" onSubmit={this.onSubmit}>
-                                    <div className="form-group my-4">
-                                        <label htmlFor="email">CODE</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            placeholder="Enter your code"
-                                            name="code"
-                                            onChange={this.onChange}
-                                            value={this.state.code}
-                                            required
-                                        />
-                                    </div>
-                                    <button className="btn btn-block btn-gclout-blue mb-3">
-                                        RESET
-                                    </button>
-                                </form>
+                        <div className="authy">
+                            <div className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
+                                <h2 className="auth-card-title text-center mb-3">
+                                    Forgot Your Password
+                                </h2>
+                                <p className="auth-card-subtitle mb-3 text-center col-12 col-md-8 offset-md-2">
+                                    Enter the code to rset the password
+                                </p>
+                                <div className="col-md-8 offset-md-2 mb-4">
+                                    <form className="auth-form my-4" onSubmit={this.onSubmit}>
+                                        <div className="form-group my-4">
+                                            <label htmlFor="email">CODE</label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                placeholder="Enter your code"
+                                                name="code"
+                                                onChange={this.onChange}
+                                                value={this.state.code}
+                                                required
+                                            />
+                                        </div>
+                                        <button className="btn btn-block btn-gclout-blue mb-3">
+                                            RESET
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

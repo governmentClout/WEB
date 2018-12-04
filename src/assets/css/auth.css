@@ -4,6 +4,8 @@
 .auth-page-card {
   padding: 2em;
   border-radius: 8px;
+  padding-top: 4em;
+  padding-bottom: 4em;
 }
 .auth-card-title {
   font-weight: 600;
@@ -124,10 +126,14 @@
   color: #333333;
   text-decoration: none;
 }
+.authy {
+  min-height: 100vh;
+  display: flex;
+  width: 100vw;
+}
 @media screen and (max-width: 800px) {
   .auth-page-card {
-    margin: 5em auto !important;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
   }
   .vertical-divider {
     display: none;
@@ -137,5 +143,10 @@
   }
   .auth-card-title {
     font-size: 1.8rem;
+  }
+}
+@media (max-width:900px) and (min-width:400px) {
+  .auth-page-card {
+    margin: 0 1em !important;
   }
 }
