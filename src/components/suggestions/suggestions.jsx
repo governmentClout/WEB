@@ -70,7 +70,7 @@ class Suggestions extends Component {
           </div>
         </div>
         <div className="suggestion-footer">
-          <Link to="/friends" className="suggestion-footer-link">
+          <Link to="/friends/suggested" className="suggestion-footer-link">
             View More
           </Link>
         </div>
