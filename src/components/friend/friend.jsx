@@ -36,7 +36,7 @@ class Friend extends Component {
                     </div>
                 </div>
                 <div className="friend-action">
-                    {this.props.type !== "suggested" ? (
+                    {/*{this.props.type !== "suggested" ? (
                         <>
                             <button className="btn btn-gclout-blue-outline">Message</button>
                             <Manager>
@@ -74,9 +74,12 @@ class Friend extends Component {
                                 </Popper>
                             </Manager>
                         </>
-                    ) : (
-                        <button className="btn btn-gclout-blue-outline">Add Friend</button>
-                    )}
+                    ) : (*/}
+                        <button
+                            className="btn btn-gclout-blue-outline"
+                            onClick={() => alert(this.props.friend.email)}
+                        >Add Friend</button>
+                    {/*)}*/}
                 </div>
             </div>
         );
