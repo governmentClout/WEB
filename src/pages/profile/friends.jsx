@@ -73,7 +73,7 @@ class FriendsPage extends Component {
                   </form>
                 </div>
                 <div className="friends-list">
-                  <Friend />
+                  {this.state.friends.map((friend) => (<Friend friend={friend}/>))}
                 </div>
               </div>
             </div>
