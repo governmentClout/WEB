@@ -2,9 +2,52 @@ import React, { Component } from "react";
 import "./sidebar.css";
 import SidebarFooter from "./sidebarFooter";
 import { Link } from"react-router-dom";
+import axios from 'axios';
 
 class Sidebar extends Component {
-  render() {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            profile: []
+        }
+    }
+
+    componentWillMount() {
+
+        const id =  sessionStorage.getItem("uuid");
+        const token  = sessionStorage.getItem("token");
+
+        if(this.state.profile !== []) {
+
+            //   id = sessionStorage.getItem("uuid"),
+            //   token = sessionStorage.getItem("token");
+            const url = `http://api.gclout.com:3000/profiles/${id}`;
+
+            axios({
+                method: "GET",
+                url: url,
+                headers: {
+                    uuid: id,
+                    token: token
+                }
+            }).then(res => {
+
+                this.setState({
+                    profile: res.data.profile[0],
+                    loading: false
+                });
+            });
+        }
+
+    }
+
+
+    render() {
+
+      const { profile } = this.state;
+      console.log(profile);
     return (
       <div className="sidebar  d-none d-md-block">
         <div className="sidebar-top">
@@ -24,7 +67,7 @@ class Sidebar extends Component {
               />
             </div>
             <Link to="/profile">
-              <h5 className="text-center">James Adewale</h5>
+              <h5 className="text-center">{profile.firstName} {profile.lastName}</h5>
             </Link>
             <div className="d-flex justify-content-between friends-details">
               <div className="text-center col-6">
