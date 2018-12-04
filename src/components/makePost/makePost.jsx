@@ -465,7 +465,8 @@ class PollCreation extends Component {
 
       wordCount: 0,
         opinion: "",
-        sector: ""
+        sector: "",
+        expiry: ""
 
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -490,7 +491,8 @@ class PollCreation extends Component {
     const data = {
 
       opinion : this.state.opinion,
-      sector: this.state.sector
+      sector: this.state.sector,
+      expire_at: this.state.expiry
 
     };
 
@@ -520,7 +522,9 @@ class PollCreation extends Component {
 
       this.setState({
 
-          opinion: ""
+          opinion: "",
+          date: "",
+          sector: ""
 
       });
 
@@ -557,6 +561,16 @@ class PollCreation extends Component {
                 <option value="agriculture">Agriculture</option>
                 <option value="technology">Technology</option>
               </select>
+            </div>
+            <div className="form-group">
+              <label>Date</label>
+                <input
+                    type="date"
+                    className="form-control"
+                    name="expiry"
+                    value={this.state.expiry}
+                    onChange={this.onChange}
+                />
             </div>
             <div className="form-group">
               <label>Opininion</label>
