@@ -6,6 +6,7 @@ import axios from "axios";
 import { Manager, Reference, Popper } from "react-popper";
 import { Link } from "react-router-dom";
 import ProfileDetailsLoader from "../loaders/profileDeails"
+import {API_URL} from "../config";
 
 const moment = require("moment");
 
@@ -14,20 +15,87 @@ class ProfileDetails extends Component {
     super(props);
 
     this.state = {
+
       showModal: false,
       showUpgradeModal: false,
       profile: [],
       showMore: false,
       office: '',
       party: '',
-      tosAgreement: false,
-      loading: true
+      loading: true,
+      about: '',
+        position: ''
+
     };
+
+      this.handleChange = this.handleChange.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+
   }
+
+  handleChange(e) {
+      this.setState({
+          [e.target.name]: e.target.value
+      });
+  }
+
+  onSubmit(e){
+      e.preventDefault();
+      const data = {
+
+            party: this.state.party,
+            about_you: this.state.about,
+            about_party: this.state.party,
+            office: this.state.office
+
+        };
+
+      console.log(data);
+
+      const id = sessionStorage.getItem("uuid"),
+          token = sessionStorage.getItem("token");
+
+  /*    console.log(id, token);*/
+
+      const header = {
+
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          token: token,
+          uuid: id
+
+      };
+/*      console.log(header);*/
+
+      axios({
+
+          method: 'post',
+          url: `${API_URL}/executives`,
+          data: data,
+          headers: header
+
+        }).then(res => {
+            console.log(res.data);
+            if(res.data.Success){
+                this.setState({
+
+                    office: '',
+                    party: '',
+                    about: '',
+                    position: '',
+                    showUpgradeModal: false
+
+                });
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+  }
+
   showMore = () => {
     let currentState =  this.state.showMore;
     this.setState({showMore: !currentState})
-  }
+
+  };
 
   componentDidMount() {
     const id =  sessionStorage.getItem("uuid");
@@ -138,7 +206,7 @@ class ProfileDetails extends Component {
                       <div className=" py-2 px-1 mx-auto  col-md-6">
                         <h5 className="text-center"><strong>Request Upgrade</strong></h5>
                         <br />
-                        <form>
+                        <form onSubmit={this.onSubmit}>
                           <div className="form-row">
                             <div className="form-group col-md">
                               <label>Select political office</label>
@@ -176,9 +244,9 @@ class ProfileDetails extends Component {
                               <textarea
                                 className="form-control"
                                 rows="3"
-                                name="about_me"
+                                name="about"
                                 onChange={this.handleChange}
-                                value={this.state.about_me}
+                                value={this.state.about}
                                 placeholder="Type text here..."
                                 required={true}
                               />
@@ -188,14 +256,14 @@ class ProfileDetails extends Component {
                               <textarea
                                 className="form-control"
                                 rows="3"
-                                name="about_position"
+                                name="position"
                                 onChange={this.handleChange}
-                                value={this.state.about_me}
+                                value={this.state.position}
                                 placeholder="Type text here..."
                                 required={true}
                               />
                             </div>
-                            <div className="form-group">
+                            {/*<div className="form-group">
                               <div className="form-check d-flex">
                                 <input
                                   className="mr-2"
@@ -215,7 +283,7 @@ class ProfileDetails extends Component {
                                   By clicking submit, I agree with terms and conditions
                                 </label>
                               </div>
-                            </div>
+                            </div>*/}
                             <button className="btn btn-block btn-gclout-blue">SUBMIT</button>
                         </form>
                       </div>
