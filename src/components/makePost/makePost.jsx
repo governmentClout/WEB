@@ -146,13 +146,13 @@ class PostCreation extends Component {
 
     e.preventDefault();
 
-    const fd = new FormData();
-    fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+/*    const fd = new FormData();
+    fd.append('image', this.state.selectedFile, this.state.selectedFile.name);*/
 
     const data = {
 
       post: this.state.post,
-      attachment: fd
+/*      attachment: fd*/
 
     };
     console.log(data);
@@ -163,7 +163,7 @@ class PostCreation extends Component {
     
       method: "post",
       url: url,
-      data: fd,
+      data: data,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
@@ -179,9 +179,8 @@ class PostCreation extends Component {
 
         });
 
-        this.updatePostsNow();
         if (response.data.Success) {
-          console.log('success');
+            this.updatePostsNow();
           sessionStorage.setItem("message", response.data.Success)
         } else {
           console.log("login error")
