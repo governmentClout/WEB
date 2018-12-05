@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./post.css";
 import axios from 'axios';
+import {API_URL} from "../config";
 
 export default class SinglePost extends Component {
 
@@ -16,7 +17,7 @@ export default class SinglePost extends Component {
     }
 
 
-    componentDidMount() {
+    componentWillMount() {
 
         this.showLikesCount();
         this.showCommentsCount();
@@ -57,29 +58,22 @@ export default class SinglePost extends Component {
         const id = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
 
-        const url = "http://api.gclout.com:3000/comments/" + this.props.postID;
-
+        const url = `${API_URL}/comments/` + this.props.postID;
         axios({
-
             method: 'get',
             url: url,
             headers: {
-
                 "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
                 token: token,
                 uuid: id
-
             }
-
         }).then(res => {
-
-            //console.log(res.data);
-
+            console.log(res.data[0].length);
+            console.log(res.data)
+            console.log(res.data[0].comment)
+            console.log(res.data[0].comment.length);
             this.setState ({
-
-
                 comments: res.data[0].comment.length
-
             });
         });
     }

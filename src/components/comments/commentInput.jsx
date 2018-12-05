@@ -103,7 +103,7 @@ onKeyPress = (e) => {
           placeholder="write a comment here..."
           value={this.state.comment}
           onChange={this.onChange}
-          onClick={this.props.postID}
+          onClick={() => this.props.postID}
           /*ref={console.log(this.props.postID)}*/
         />
 {/*         <input value={this.props.postID} name="ref" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}/> */}

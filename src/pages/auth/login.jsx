@@ -159,7 +159,7 @@ class Login extends Component {
           this.signin(response, "google");
       };
     return this.props.isLoggedIn ? (
-      <Redirect to="/" />
+      <Redirect to="/activity" />
     ) : (
       <div className="auth-page d-flex">
         <AuthBackground />
