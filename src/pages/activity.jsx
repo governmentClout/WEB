@@ -4,11 +4,90 @@ import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
 import MakePost from "../components/makePost/makePost";
-// import SinglePost from "../components/post/post";
 import { Redirect } from "react-router-dom"
+import SinglePost from "../components/post/post";
+import axios from "axios";
+import MakeExecutivePost from "../components/makePost/makeExecutivePost";
 
 class ActivityPage extends Component {
-  render() {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+          posts: [],
+            userId: ''
+
+        }
+    }
+
+    componentDidMount() {
+        let userId = this.props.match.params
+        this.setState({
+            userId
+        });
+
+    }
+
+    componentWillMount() {
+        this.loadPosts();
+
+    }
+
+
+    loadNow = () => {
+
+        this.loadPosts()
+
+    };
+
+    loadPosts() {
+
+        const id = sessionStorage.getItem("uuid"),
+            token = sessionStorage.getItem("token");
+
+        const url = "http://api.gclout.com:3000/posts";
+        const header = {
+
+            token: token,
+            uuid: id
+
+        };
+        console.log(header);
+
+        axios({
+
+            method: "get",
+            url: url,
+            headers: header
+        })
+            .then(res => {
+
+                // for(let i = 0; i < res.data.length ; i++){
+
+//               //console.log(res.data[i].post);  //for the post object
+//              // console.log(res.data[i].post.post);  //for the post content
+//               //console.log(res.data[i].comments);  //for the comments object
+//
+// /*}
+
+console.log(res.data);
+                const posts = res.data.reverse();
+
+                this.setState({
+
+                    posts
+
+                });
+
+//        console.log(res.data.reverse());
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    render() {
     return!this.props.isLoggedIn ? (
             <Redirect to="/login" />
         ) : (
@@ -18,10 +97,11 @@ class ActivityPage extends Component {
             <div className="d-flex">
               <Sidebar />
               <div className="flex-1">
-                <MakePost />
-                <strong>this does not work yet</strong>
-                {/* <SinglePost />
-                <SinglePost postType="sponsored" />
+                  {this.state.userId.id === 'executive' ? <MakeExecutivePost updatePosts={this.loadNow} /> : <MakePost updatePosts={this.loadNow} />}
+                {this.state.posts.map(post => (
+                      <SinglePost key={post.post.id.toString()} post={post} />
+                  ))}
+                  {/*<SinglePost postType="sponsored" />
                 <SinglePost media /> */}
               </div>
             </div>
