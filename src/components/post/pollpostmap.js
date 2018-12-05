@@ -52,43 +52,31 @@ class SinglePoll extends Component {
             token = sessionStorage.getItem("token");
 
         axios({
-
             method: 'get',
             url: `http://api.gclout.com:3000/polls`,
             headers: {
-
                 "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
                 token: token,
                 uuid: id
-
             }
-
         }).then(res => {
-
             console.log(res.data);
-
             this.setState({
-
                 polls: res.data
-
             });
-
         })
 
     }
 
     render() {
-
         const { polls } = this.state;
         console.log(polls);
-
         return (
             <div style={{ marginBottom: "1em" }}>
                 <div className="post-container">
                     { polls.map(
                         (poll, index) => (
                             <div className="post-owner">
-
                                 <div className="post-owner-image-wrapper">
                                     <img
                                         src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
@@ -100,11 +88,8 @@ class SinglePoll extends Component {
                                     <p>Oreoluwa Ojo</p>
                                     <p className="post-type">{poll.polls.sector}</p>
                                 </div>
-
                             </div>
-
                         )
-
                     )}
                     <hr/>
 
