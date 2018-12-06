@@ -5,7 +5,7 @@ import axios from 'axios';
 import PollActions from "./pollActions";
 import PollCommentInput from "../comments/PollCommentInput";
 import {API_URL} from "../config";
-import toastr from 'toastr';
+// import toastr from 'toastr';
 
 class SinglePoll extends Component {
 
@@ -76,7 +76,8 @@ class SinglePoll extends Component {
                     option: ''
                 })
             } else {
-                toastr.error('please select something');
+                // toastr.error('please select something');
+                console.log("lol")
             }
         })
 

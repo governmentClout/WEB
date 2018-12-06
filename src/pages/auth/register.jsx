@@ -313,7 +313,7 @@ console.log('something jus happen rai now')
           <div className="authy">
             <div className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
               <h2 className="auth-card-title text-center mb-3">
-                Create An Account
+                Create A GCLout Account
               </h2>
               <div className="row --with-divider">
                 <div className="col-md-12 col-lg-6 mx-auto">

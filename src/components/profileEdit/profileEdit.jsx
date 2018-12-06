@@ -21,7 +21,8 @@ class EditProfile extends Component {
       photo: "",
       phone: this.props.phone,
       allStates: [],
-        countries: []
+      countries: [],
+      loading: false
 
     };
 
@@ -42,6 +43,9 @@ class EditProfile extends Component {
   editProfile(e){
 
     e.preventDefault();
+    this.setState({
+      loading: true
+    })
 
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
@@ -78,10 +82,16 @@ class EditProfile extends Component {
     }).then(response => {
 
       console.log(response);
+      this.setState({
+        loading: false
+      })
 
     }).catch(err => {
 
       console.log(err);
+      this.setState({
+        loading: false
+      })
 
     })
 
@@ -169,7 +179,7 @@ class EditProfile extends Component {
             </svg>
           </button>
         </div>
-        <div className="col-md-9 offset-md-1" >
+        <div className="col-md-3 offset-md-1" >
         <div>
           <div className="lifted-profile-image-wrapper edit">
             <img
@@ -268,7 +278,7 @@ class EditProfile extends Component {
                   {
                     this.state.allStates.map(state => {
                       
-                      return <option value={state.name}>{state.name}</option>
+                      return <option key={state.name} value={state.name}>{state.name}</option>
                     
                     })
 
@@ -290,7 +300,11 @@ class EditProfile extends Component {
             </div>
             <div className="d-flex">
               <button className="btn btn-gclout-blue" type="submit">
-                Update Profile
+                {this.state.loading ? (
+                      <i className="fas fa-circle-notch fa-spin" />
+                    ) : (
+                      "Update Profile"
+                    )}
               </button>
             </div>
           </form>

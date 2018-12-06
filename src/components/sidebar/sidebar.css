@@ -24,7 +24,7 @@
 }
 .sidebar-cover-image-wrapper {
   width: 100%;
-  height: 200px;
+  height: 130px;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -46,8 +46,8 @@
   border: none;
 }
 .sidebar-profile-image-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   margin: auto;
   margin-bottom: 1em;
@@ -69,8 +69,8 @@
 }
 
 .politician-profile-image-wrapper {
-  width: 70px;
-  height: 70px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   margin: auto;
   overflow: hidden;

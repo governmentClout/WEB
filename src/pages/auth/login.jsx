@@ -166,7 +166,7 @@ class Login extends Component {
         <div className="authy">
           <div  className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
             <h2 className="auth-card-title text-center mb-3">
-              Sign Into Your Account
+              Sign Into Your GClout Account
             </h2>
             <div className="row --with-divider">
               <div className="col-md-6">
