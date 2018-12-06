@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./friend.css";
 import propTypes from "prop-types";
 import { Manager, Reference, Popper } from "react-popper";
-import axios from "axios";
+import MoreVert from "@material-ui/icons/MoreVert";
 class Friend extends Component {
     constructor(props) {
         super(props);
@@ -47,7 +47,7 @@ class Friend extends Component {
                                             ref={ref}
                                             onClick={this.showMenu}
                                         >
-                                            <i className="fas fa-ellipsis-v" />
+                                            <MoreVert />
                                         </button>
                                     )}
                                 </Reference>

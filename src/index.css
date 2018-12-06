@@ -102,6 +102,11 @@ code {
 }
 .text-gclout-blue {
     color: #00b0f0;
+    fill: #00b0f0;
+}
+.btn-gclout-blue-outline:hover  .text-gclout-blue {
+    color: #fff;
+    fill: #fff;
 }
 .app-content {
     flex: 1;
