@@ -3,6 +3,7 @@ import UploadModal from "../../components/uploadModal/uploadModal";
 import "../../assets/css/pages.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -295,7 +296,16 @@ class CreateProfile extends Component {
             <div className="col-md-9 mx-auto">
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md">
+
+                    <CloudinaryContext cloudName="demo">
+                        <div>
+                            <Image publicId="sample" width="50" />
+                        </div>
+                        <Image publicId="sample" width="0.5" />
+                    </CloudinaryContext>
+
+
+                    <div className="form-group col-md">
                     <label htmlFor="Fname">First Name</label>
                     <input
                       name="fname"

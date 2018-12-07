@@ -3,6 +3,10 @@ import "./friend.css";
 import propTypes from "prop-types";
 import { Manager, Reference, Popper } from "react-popper";
 import axios from "axios";
+import {API_URL} from "../config";
+import {ToastContainer} from "react-toastify";
+import toastr from 'toastr';
+
 class Friend extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +19,34 @@ class Friend extends Component {
     showMenu() {
         let currentState = this.state.showMenu;
         this.setState({ showMenu: !currentState });
+    }
+
+    sendRequest(id){
+        const userid = id;
+        //alert(userid);
+
+        const data = {
+            friend: id
+
+        };
+
+        axios({
+
+            method: 'post',
+            url: `${API_URL}/friends/request`,
+            headers: {
+
+                uuid: sessionStorage.getItem('uuid'),
+                token: sessionStorage.getItem('token')
+
+            },
+            data: data
+        }).then(res => {
+            console.log(res.data);
+            if(res.data.Success === "Request Sent"){
+                toastr.success("Friend Request Sent");
+            }
+        })
     }
 
     render() {
@@ -32,11 +64,11 @@ class Friend extends Component {
                     </div>
                     <div className="deats  my-auto">
                         <h5>{this.props.friend.firstName + " " + this.props.friend.lastName}</h5>
-                        <p>Lagos, Nigeria</p>
+                        <p>Togo</p>
                     </div>
                 </div>
                 <div className="friend-action">
-                    {/*{this.props.type !== "suggested" ? (
+                    {this.props.type !== "suggested" ? (
                         <>
                             <button className="btn btn-gclout-blue-outline">Message</button>
                             <Manager>
@@ -74,13 +106,14 @@ class Friend extends Component {
                                 </Popper>
                             </Manager>
                         </>
-                    ) : (*/}
+                    ) : (
                         <button
                             className="btn btn-gclout-blue-outline"
-                            onClick={() => alert(this.props.friend.email)}
+                            onClick={(id) => this.sendRequest(this.props.friend.uuid)}
                         >Add Friend</button>
-                    {/*)}*/}
+                    )}
                 </div>
+                <ToastContainer />
             </div>
         );
     }
