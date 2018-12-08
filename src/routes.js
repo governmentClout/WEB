@@ -23,6 +23,7 @@ import HelpPage from "./pages/faq";
 import TermsPage from "./pages/terms";
 import { AuthConsumer } from "./components/authcontext";
 import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
+import ChatPage from "./pages/chat.jsx";
 
 const Routes = () => (
     <App>
@@ -123,6 +124,13 @@ const Routes = () => (
                         path="/petition"
                         render={props => (
                             <PetitionPage isLoggedIn={isLoggedIn} {...props} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/messages"
+                        render={props => (
+                            <ChatPage isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
                     <Route
