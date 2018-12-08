@@ -3,6 +3,7 @@ import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Clear from "@material-ui/icons/Clear";
+import ChatInterface from "../components/chatInterface";
 
 
 class ChatPage extends Component {
@@ -164,14 +165,7 @@ class ChatPage extends Component {
                     </div>
                     <button className="close-chat"><Clear /></button>
                   </div>
-                  <div className="chat-interface">
-                    <OtherChat />
-                    <OwnerChat />
-                    <OtherChat />
-                    <OwnerChat />
-                    <OtherChat />
-                    <OwnerChat />
-                  </div>
+                  <ChatInterface />
                 </div>
               </div>
             </div>
@@ -191,33 +185,3 @@ class ChatPage extends Component {
 
 export default ChatPage;
 
-class OtherChat extends Component {
-  render() {
-    return (
-      <div className="chat-message-wrapper">
-        <div className="message-owner">
-          <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="chat head" />
-        </div>
-        <div className="message-wrapper">
-          <p className="other-chat-message">Lorem ipsum dolor sit amet</p>
-          <p>1 day ago</p>
-        </div>
-      </div>
-    )
-  }
-}
-class OwnerChat extends Component {
-  render() {
-    return (
-      <div className="chat-message-wrapper owner">
-        <div className="message-wrapper">
-          <p className="owner-chat-message">Lorem ipsum dolor sit amet, consectetuer fid adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet do</p>
-          <p className="message-time">1 day ago</p>
-        </div>
-        <div className="message-owner">
-          <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="chat head" />
-        </div>
-      </div>
-    )
-  }
-}

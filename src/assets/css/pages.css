@@ -188,8 +188,8 @@
   padding: 16px;
   flex: 1;
   overflow: auto;
-  display: flex;
   flex-direction: column;
+  padding-bottom: 0;
 }
 .chat-message-wrapper {
   display: flex;
@@ -233,4 +233,20 @@
 }
 .message-time {
   text-align: right;
+}
+.chat-input-wrapper {
+  padding: 1em;
+  background: #fafafa;
+  margin: 0 -16px;
+  display: flex;
+  position: sticky;
+  bottom: 0;
+}
+.chat-input-wrapper .form-control {
+  flex: 1;
+}
+.chat-input-wrapper .btn {
+  margin: 0;
+  padding: 0.5em 1em;
+  margin-left: 1em;
 }
