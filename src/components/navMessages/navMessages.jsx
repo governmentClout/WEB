@@ -27,9 +27,31 @@ class navMessagees extends Component {
                <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
               </div>
             </li>
+            <li className="navMessage">
+            <div className="navMessage-image-wrapper">
+              <img className="navMessage-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
+            </div>
+              <div className="navMessage-content-wrapper">
+                <p> <strong>Oreoluwa Ojo</strong>
+                <span>11:20pm</span>
+              </p>
+               <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
+              </div>
+            </li>
+            <li className="navMessage">
+            <div className="navMessage-image-wrapper">
+              <img className="navMessage-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
+            </div>
+              <div className="navMessage-content-wrapper">
+                <p> <strong>Oreoluwa Ojo</strong>
+                <span>11:20pm</span>
+              </p>
+               <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
+              </div>
+            </li>
           </ul>
           <div className="navMessages-footer text-center">
-            <Link to="/messages">View more</Link>
+            <Link to="/messages" onClick={this.props.close}>View more</Link>
           </div>
         </div>
       </React.Fragment>

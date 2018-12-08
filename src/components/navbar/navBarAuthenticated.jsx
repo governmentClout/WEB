@@ -111,7 +111,7 @@ class NavBarAuthenticated extends Component {
                 <Popper placement="bottom">
                   {({ ref, style, placement, arrowProps }) => (
                     <div ref={ref} style={style} data-placement={placement}>
-                      <NavMessages show={this.state.showMessages} />
+                      <NavMessages close={this.closeAll} show={this.state.showMessages} />
                       <div ref={arrowProps.ref} style={arrowProps.style} />
                     </div>
                   )}
@@ -147,7 +147,7 @@ class NavBarAuthenticated extends Component {
                 <Popper placement="bottom">
                   {({ ref, style, placement, arrowProps }) => (
                     <div ref={ref} style={style} data-placement={placement}>
-                      <Notifications show={this.state.showNotifications} />
+                      <Notifications close={this.closeAll} show={this.state.showNotifications} />
                       <div ref={arrowProps.ref} style={arrowProps.style} />
                     </div>
                   )}

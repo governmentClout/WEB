@@ -41,7 +41,7 @@ class Notifications extends Component {
             </li>
           </ul>
           <div className="notification-dropdown-footer text-center">
-            <Link to="/notifications">View more</Link>
+            <Link to="/notifications" onClick={this.props.close}>View more</Link>
           </div>
         </div>
       </React.Fragment>
