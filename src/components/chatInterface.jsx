@@ -32,7 +32,7 @@ const OtherChat = () => (
 const OwnerChat = () => (
     <div className="chat-message-wrapper owner">
         <div className="message-wrapper">
-            <p className="owner-chat-message">Lorem ipsum dolor sit amet, consectetuer fid adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet do</p>
+            <p className="owner-chat-message">{this.props.message ? this.props.message : "Lorem ipsum dolor sit amet, consectetuer fid adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet do"}</p>
             <p className="message-time">1 day ago</p>
         </div>
         <div className="message-owner">

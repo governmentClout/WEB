@@ -7,6 +7,7 @@ import MakePost from "../components/makePost/makePost";
 import { Redirect } from "react-router-dom"
 import SinglePost from "../components/post/post";
 import axios from "axios";
+import LoadingPost from "../components/loaders/posts";
 import MakeExecutivePost from "../components/makePost/makeExecutivePost";
 
 class ActivityPage extends Component {
@@ -15,7 +16,8 @@ class ActivityPage extends Component {
 
         this.state = {
           posts: [],
-            userId: ''
+            userId: '',
+            loading: true
 
         }
     }
@@ -75,7 +77,8 @@ console.log(res.data);
 
                 this.setState({
 
-                    posts
+                    posts,
+                    loading: false
 
                 });
 
@@ -98,9 +101,13 @@ console.log(res.data);
               <Sidebar />
               <div className="flex-1">
                   {this.state.userId.id === 'executive' ? <MakeExecutivePost updatePosts={this.loadNow} /> : <MakePost updatePosts={this.loadNow} />}
-                {this.state.posts.map(post => (
-                      <SinglePost key={post.post.id.toString()} post={post} />
-                  ))}
+                {this.state.loading ?  <>
+                    <LoadingPost />
+                    <LoadingPost />
+                    <LoadingPost />
+                    </> : 
+                    (this.state.posts.map(post => <SinglePost key={post.post.id.toString()} post={post} />))
+                }
                   {/*<SinglePost postType="sponsored" />
                 <SinglePost media /> */}
               </div>
