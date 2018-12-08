@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./post.css";
 import PostActions from "./postActions";
 import CommentInput from "./../comments/commentInput";
+import {Link} from 'react-router-dom';
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -44,7 +45,7 @@ export default class SinglePost extends Component {
             </div>
           </div>
           <div className="post-content">
-            <p>{this.props.post.post.post}</p>
+              <Link to={`/activity/${this.props.post.post.uuid}`}><p>{this.props.post.post.post}</p></Link>
           </div>
         </div>
         {this.props.postType !== "sponsored" ? (
