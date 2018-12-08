@@ -25,6 +25,7 @@ import { AuthConsumer } from "./components/authcontext";
 import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 import SinglePost from "./components/post/post";
 import OnePost from "./components/post/OnePost";
+import ChatPage from "./pages/chat.jsx";
 
 const Routes = () => (
     <App>
@@ -126,6 +127,13 @@ const Routes = () => (
                         path="/petition"
                         render={props => (
                             <PetitionPage isLoggedIn={isLoggedIn} {...props} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/messages"
+                        render={props => (
+                            <ChatPage isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
                     <Route

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { Manager, Reference, Popper } from "react-popper";
 import Notifications from "../notifications/notifications";
+import NavMessages from "../navMessages/navMessages";
 import "./navBar.css";
 import { Link } from "react-router-dom";
 
 class NavBarAuthenticated extends Component {
   constructor(props) {
     super(props);
-    this.state = { showNotifications: false, showProfile: false };
+    this.state = { showNotifications: false, showProfile: false, showMessages: false };
     this.showNotifications = this.showNotifications.bind(this);
+    this.showMessages = this.showMessages.bind(this);
     this.showProfile = this.showProfile.bind(this);
   }
 
@@ -17,11 +19,18 @@ class NavBarAuthenticated extends Component {
   }
   showNotifications() {
     let currentState = this.state.showNotifications;
-    this.setState({ showNotifications: !currentState, showProfile: false });
+    this.setState({ showNotifications: !currentState, showProfile: false, showMessages: false });
+  }
+  showMessages() {
+    let currentState = this.state.showMessages;
+    this.setState({ showMessages: !currentState, showProfile: false, showNotifications: false });
   }
   showProfile() {
     let currentState = this.state.showProfile;
-    this.setState({ showProfile: !currentState, showNotifications: false });
+    this.setState({ showProfile: !currentState, showNotifications: false, showMessages: false });
+  }
+  closeAll = () => {
+    this.setState({ showProfile: false, showNotifications: false, showMessages: false });
   }
 
   render() {
@@ -51,7 +60,7 @@ class NavBarAuthenticated extends Component {
             </form>
           </div>
           <ul className="navigation-menu">
-            <li className="navigation-menu-item no-mobile">
+            <li className="navigation-menu-item no-mobile" onClick={this.closeAll}>
               <Link to="/petition">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM6 14H4V12H6V14ZM6 10H4V8H6V10ZM6 6H4V4H6V6ZM14 14H7V12H14V14ZM14 10H7V8H14V10ZM14 6H7V4H14V6Z" fill="#4F4F4F"/>
@@ -59,7 +68,7 @@ class NavBarAuthenticated extends Component {
                 {"  "}Petition
               </Link>
             </li>
-            <li className="navigation-menu-item no-mobile">
+            <li className="navigation-menu-item no-mobile" onClick={this.closeAll}>
               <Link to="/polls">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M16 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V2C18 0.9 17.1 0 16 0ZM16 7.2L10 14L6 10L2 14V11L6 7L10 11L16 4.2V7.2Z" fill="#4F4F4F"/>
@@ -73,25 +82,41 @@ class NavBarAuthenticated extends Component {
               </button>
             </li>
             <li className="navigation-menu-item">
-              <button
-                className="navigation-menu-item navigation-menu-icon"
-                // data-badge="2"
-              >
-                <svg
-                  width="20"
-                  height="16"
-                  viewBox="0 0 20 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 0H2C0.9 0 0.00999999 0.9 0.00999999 2L0 14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0ZM18 4L10 9L2 4V2L10 7L18 2V4Z"
-                    fill="#333333"
-                  />
-                </svg>
-                {"  "}
-                Messages
-              </button>
+            <Manager>
+                <Reference>
+                  {({ ref }) => (
+                    <button
+                      className="navigation-menu-item navigation-menu-icon"
+                      // data-badge="9+"
+                      onClick={this.showMessages}
+                      ref={ref}
+                    >
+                      <svg
+                        width="20"
+                        height="16"
+                        viewBox="0 0 20 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18 0H2C0.9 0 0.00999999 0.9 0.00999999 2L0 14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0ZM18 4L10 9L2 4V2L10 7L18 2V4Z"
+                          fill="#333333"
+                        />
+                      </svg>
+                      {"  "}
+                      Messages
+                    </button>
+                  )}
+                </Reference>
+                <Popper placement="bottom">
+                  {({ ref, style, placement, arrowProps }) => (
+                    <div ref={ref} style={style} data-placement={placement}>
+                      <NavMessages show={this.state.showMessages} />
+                      <div ref={arrowProps.ref} style={arrowProps.style} />
+                    </div>
+                  )}
+                </Popper>
+              </Manager>
             </li>
             <li className="navigation-menu-item">
               <Manager>
@@ -165,12 +190,6 @@ class NavBarAuthenticated extends Component {
                             onClick={this.showProfile}
                           >
                             <Link to="/profile">Profile</Link>
-                          </li>
-                          <li
-                            className="profile-dropdown-list-item"
-                            onClick={this.showProfile}
-                          >
-                            <Link to="/profile">Settings</Link>
                           </li>
                           <li
                             className="profile-dropdown-list-item"

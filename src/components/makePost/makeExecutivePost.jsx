@@ -3,6 +3,10 @@ import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
 import { Manager, Reference, Popper } from "react-popper";
+import InsertDriveFile from "@material-ui/icons/InsertDriveFile"
+import FilterList from "@material-ui/icons/FilterList"
+import CameraAlt from "@material-ui/icons/CameraAlt"
+
 
 class MakeExecutivePost extends Component {
   constructor(props) {
@@ -27,10 +31,7 @@ class MakeExecutivePost extends Component {
       <div className="make-post">
         <div className="make-post-header d-flex">
           <button className="btn btn-tab" onClick={this.newPostToggle}>
-            <i
-              className="fas fa-file text-gclout-blue"
-              style={{ marginRight: "10px" }}
-            />
+            <InsertDriveFile  className="text-gclout-blue"/>
             Post
           </button>
           <div className="ml-auto align-self-center">
@@ -43,9 +44,8 @@ class MakeExecutivePost extends Component {
                     onClick={this.showFilters}
                     className="btn btn-white"
                   >
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 12H8C7.45 12 7 11.55 7 11C7 10.45 7.45 10 8 10H10C10.55 10 11 10.45 11 11C11 11.55 10.55 12 10 12ZM18 1C18 1.55 17.55 2 17 2H1C0.450001 2 0 1.55 0 1C0 0.45 0.450001 0 1 0H17C17.55 0 18 0.45 18 1ZM14 7H4C3.45 7 3 6.55 3 6C3 5.45 3.45 5 4 5H14C14.55 5 15 5.45 15 6C15 6.55 14.55 7 14 7Z" fill="#333333"/>
-                  </svg> {" "}
+                  <FilterList />
+                  {" "}
                     Filters
                   </button>
                 )}
@@ -280,7 +280,7 @@ class PostCreation extends Component {
                 onClick={this.showImageUploader}
                 type="button"
               >
-                <i className="fas fa-camera mr-2" />
+                <CameraAlt className="text-gclout-blue" />
                 Photo & Video
               </button>
             </div>

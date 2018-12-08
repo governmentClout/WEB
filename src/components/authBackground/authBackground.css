@@ -16,6 +16,13 @@
   z-index: 0;
 }
 
-/*.authBg {
-  height: 25vh !important;
-}*/
+.authBg {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.authBg img {
+  margin: auto;
+  width: auto;
+  height: 100%;
+}

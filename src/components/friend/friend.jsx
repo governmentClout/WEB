@@ -6,6 +6,7 @@ import axios from "axios";
 import {API_URL} from "../config";
 import {ToastContainer} from "react-toastify";
 import toastr from 'toastr';
+import MoreVert from "@material-ui/icons/MoreVert";
 
 class Friend extends Component {
     constructor(props) {
@@ -79,7 +80,7 @@ class Friend extends Component {
                                             ref={ref}
                                             onClick={this.showMenu}
                                         >
-                                            <i className="fas fa-ellipsis-v" />
+                                            <MoreVert />
                                         </button>
                                     )}
                                 </Reference>

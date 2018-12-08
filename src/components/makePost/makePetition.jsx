@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
+import InsertDriveFile from "@material-ui/icons/InsertDriveFile"
+import CameraAlt from "@material-ui/icons/CameraAlt"
 // import { Manager, Reference, Popper } from "react-popper";
 
 class MakePetition extends Component {
@@ -27,10 +29,7 @@ class MakePetition extends Component {
       <div className="make-post">
         <div className="make-post-header d-flex">
           <button className="btn btn-tab" onClick={this.newPostToggle}>
-            <i
-              className="fas fa-file text-gclout-blue"
-              style={{ marginRight: "10px" }}
-            />
+            <InsertDriveFile className="text-gclout-blue" />
             Create Petition
           </button>
         </div>
@@ -216,7 +215,7 @@ class PostCreation extends Component {
                 onClick={this.showImageUploader}
                 type="button"
               >
-                <i className="fas fa-camera mr-2" />
+                <CameraAlt className="text-gclout-blue" />
                 Photo & Video
               </button>
             </div>
