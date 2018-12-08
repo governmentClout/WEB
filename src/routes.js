@@ -23,6 +23,8 @@ import HelpPage from "./pages/faq";
 import TermsPage from "./pages/terms";
 import { AuthConsumer } from "./components/authcontext";
 import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
+import SinglePost from "./components/post/post";
+import OnePost from "./components/post/OnePost";
 import ChatPage from "./pages/chat.jsx";
 
 const Routes = () => (
@@ -105,6 +107,7 @@ const Routes = () => (
                             <ActivityPage isLoggedIn={isLoggedIn} {...props} />
                         )}
                     />
+                    <Route exact path="/activity/:id" component={OnePost}/>
                     <Route
                         exact
                         path="/polls"

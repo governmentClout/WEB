@@ -2,6 +2,44 @@ import React, { Component } from "react";
 import "./post.css";
 import axios from 'axios';
 import {API_URL} from "../config";
+import { Link } from 'react-router-dom';
+import {
+    FacebookShareButton,
+    GooglePlusShareButton,
+    LinkedinShareButton,
+    TwitterShareButton,
+    TelegramShareButton,
+    WhatsappShareButton,
+    PinterestShareButton,
+    VKShareButton,
+    OKShareButton,
+    RedditShareButton,
+    TumblrShareButton,
+    LivejournalShareButton,
+    MailruShareButton,
+    ViberShareButton,
+    WorkplaceShareButton,
+    LineShareButton,
+    EmailShareButton,
+
+    FacebookIcon,
+    TwitterIcon,
+    GooglePlusIcon,
+    LinkedinIcon,
+    PinterestIcon,
+    VKIcon,
+    OKIcon,
+    TelegramIcon,
+    WhatsappIcon,
+    RedditIcon,
+    TumblrIcon,
+    MailruIcon,
+    EmailIcon,
+    LivejournalIcon,
+    ViberIcon,
+    WorkplaceIcon,
+    LineIcon,
+} from 'react-share';
 
 export default class SinglePost extends Component {
 
@@ -11,7 +49,8 @@ export default class SinglePost extends Component {
         this.state = {
             like: "",
             likes: [],
-            comments: 0
+            comments: 0,
+            comment: []
         };
 
     }
@@ -73,7 +112,7 @@ export default class SinglePost extends Component {
             console.log(res.data[0].comment)
             console.log(res.data[0].comment.length);
             this.setState ({
-                comments: res.data[0].comment.length
+                comment: res.data[0].comment.length
             });
         });
     }
@@ -121,7 +160,7 @@ export default class SinglePost extends Component {
 
   render() {
 
-      const { likes, comments } = this.state;
+      const { likes, comment } = this.state;
 
     return (
       <div className="post-actions-container">
@@ -138,12 +177,30 @@ export default class SinglePost extends Component {
         </button>
         <button className="post-action" onLoad={this.showCommentsCount.bind(this, this.props.postID)} onClick={this.showComment}>
           {" "}
-          <i className="far fa-comment"/> {comments} comment{comments === 1 ? '' : 's'}
+          <i className="far fa-comment"/> {comment} comment{comment === 1 ? '' : 's'}
        </button>
         <button className="post-action">
           {" "}
-          <i className="fas fa-share" /> Share
+            <i className="fas fa-share" /><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity">Share</a>
         </button>
+          <FacebookShareButton
+              url="dev.gclout.com"
+              quote="d"
+              className="Demo__some-network__share-button">
+              <FacebookIcon
+                  size={32}
+                  round />
+          </FacebookShareButton>
+          <LinkedinShareButton
+              url="dev.gclout.com"
+              title="dk"
+              windowWidth={750}
+              windowHeight={600}
+              className="Demo__some-network__share-button">
+              <LinkedinIcon
+                  size={32}
+                  round />
+          </LinkedinShareButton>
       </div>
     );
   }

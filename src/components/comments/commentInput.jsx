@@ -56,7 +56,7 @@ onKeyPress = (e) => {
       
       };
 
-      //console.log(data);
+      console.log(data);
 
       axios({
 
@@ -64,7 +64,6 @@ onKeyPress = (e) => {
         url: "http://api.gclout.com:3000/comments",
         data: data,
         headers: {
-
           "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
           token: token,
           uuid: uuid
@@ -72,7 +71,7 @@ onKeyPress = (e) => {
         }
       
       }).then(res => {
-        //console.log(res.data);
+        console.log(res.data);
 
           this.setState({
 
