@@ -4,7 +4,7 @@ import React from "react"
 const ProfileDetailsLoader = props => (
   <ContentLoader 
     rtl
-    speed={1}
+    speed={3}
     height={500}
     width={800}
     primaryColor="#f3f3f3"

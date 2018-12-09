@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
+import Clear from "@material-ui/icons/Clear";
+import ChatInterface from "../components/chatInterface";
 
 
 class ChatPage extends Component {
@@ -13,7 +15,7 @@ class ChatPage extends Component {
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
             <div className="d-flex">
-              <div className="sidebar">
+              <div className="sidebar mr-0 ">
                 <div className="friends-list-container">
                   <div className="friends-list-header d-flex">
                     <h5>Messages</h5>
@@ -31,7 +33,7 @@ class ChatPage extends Component {
                     </form>
                   </div>
                   <div className="chat-list">
-                    <div className="chat-head">
+                    <div className="chat-head chat-head-active">
                       <div className="chat-head-photo">
                         <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="chat head" />
                       </div>
@@ -40,9 +42,12 @@ class ChatPage extends Component {
                           <strong>Oreoluwa Ojo</strong>
                           <span>11:20pm</span>
                         </p>
-                        <p className="previous-chat">
-                          Lorem ipsum hello, this shoyl be long
-                        </p>
+                        <div className="d-flex justify-content-between">
+                          <p className="previous-chat">
+                            Lorem ipsum hello, this shoyl be long
+                          </p>
+                          <p className="message-count">2</p>
+                        </div>
                       </div>
                     </div>
                     <div className="chat-head">
@@ -147,7 +152,21 @@ class ChatPage extends Component {
                 </div>
               </div>
               <div className="flex-1">
-              the real chat interface
+                <div className="main-chat-container">
+                  <div className="chat-header">
+                    <div className="chat-head-photo">
+                      <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="chat head" />
+                    </div>
+                    <div className="chat-head-content">
+                      <p className="chat-head-user-and-time mb-0">
+                        <strong>Oreoluwa Ojo</strong>
+                      </p>
+                        <span>online</span>
+                    </div>
+                    <button className="close-chat"><Clear /></button>
+                  </div>
+                  <ChatInterface />
+                </div>
               </div>
             </div>
           </div>
@@ -165,3 +184,4 @@ class ChatPage extends Component {
 }
 
 export default ChatPage;
+
