@@ -3,8 +3,9 @@
 	margin-top: -80px !important;
 	margin-right: auto;
 	margin-left: auto;
-}	
-.profile-cover-image-wrapper.edit {
-	margin-top: 10em;
+}
+.floating-edit-button-wrapper.--profile-picture {
+    top: 80%;
+    left: 60%;
 }
 }

@@ -3,6 +3,7 @@ import UploadModal from "../uploadModal/uploadModal";
 import "../../assets/css/pages.css";
 import "./profileEdit.css"
 import axios from 'axios';
+import { stat } from "fs";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -155,6 +156,9 @@ class EditProfile extends Component {
     console.log(countries);
     return (
       <>
+      <div className="modal-header">
+        <h4 className="mb-0 pl-3">Edit Profile</h4>
+      </div>
         <div className="profile-cover-image-wrapper edit">
           <img
             className="profile-cover-image"
@@ -252,9 +256,7 @@ class EditProfile extends Component {
                   required
                 />
               </div>
-            </div>
-            <div className="form-row">
-            <div className="form-group col-md">
+              <div className="form-group col-md">
                 <label htmlFor="nationality">Country of Origin</label>
                 <input
                   name="nationality_origin"
@@ -266,6 +268,8 @@ class EditProfile extends Component {
                   required
                 />
               </div>
+            </div>
+            <div className="form-row">
               <div className="form-group col-md">
                 <label htmlFor="state">State</label>
                 <select
@@ -278,15 +282,14 @@ class EditProfile extends Component {
                   {
                     this.state.allStates.map(state => {
                       
-                      return <option key={state.name} value={state.name}>{state.name}</option>
+                      return <option key={state.name} value={state.name} selected={this.state.state === state.name ? true : false}>{state.name}</option>
                     
                     })
 
                   }
                 </select>
               </div>
-              </div>
-              <div className="form-group">
+              <div className="form-group col-md">
                 <label htmlFor="lga">L.G.A</label>
                 <input
                   name="lga"
@@ -298,7 +301,8 @@ class EditProfile extends Component {
                   required
                 />
             </div>
-            <div className="d-flex">
+            </div>
+            <div className="d-flex mb-4">
               <button className="btn btn-gclout-blue" type="submit">
                 {this.state.loading ? (
                       <i className="fas fa-circle-notch fa-spin" />
