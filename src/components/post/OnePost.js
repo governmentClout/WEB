@@ -69,6 +69,42 @@ class OnePost extends Component {
 
     };
 
+    registerShare(){
+        const pid = this.state.postId;
+        const url = `${API_URL}/shares/${pid}`;
+        const data = {
+
+            post: pid
+
+        };
+
+        const uuid = sessionStorage.getItem('uuid');
+        const token = sessionStorage.getItem('token');
+
+        const header = {
+
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            token: token,
+            uuid: uuid
+
+        };
+
+        axios({
+
+            method: 'post',
+            url: url,
+            data: data,
+            mode: "no-cors",
+            headers: header
+
+        }).then(res => {
+
+            console.log(res.data);
+
+        })
+
+    }
+
     displayLike(){
         const authid = sessionStorage.getItem('uuid');
         const token = sessionStorage.getItem('token');
@@ -303,18 +339,22 @@ class OnePost extends Component {
 
                                 {likes}  like{likes === 1 ? '' : 's'}
                             </button>
-                            <button className="post-action">
+                            <button className="post-action" onClick={() => this.registerShare(postId)}>
                                 {" "}
                                 <i className="far fa-comment"/> {comments} comment{comments === 1 ? '' : 's'}
                             </button>
-                            <button className="post-action">
+                            <button className="post-action" onClick={() => this.registerShare(postId)}>
                                 {" "}
-                                <i className="fas fa-share" /><a href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${postId}`}>Fcaebook</a>
-                                <i className="fas fa-share"/><a className="twitter-share-button"
+                                <i className="fas fa-share" /><a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${postId}`}>Fcaebook</a>
+                            </button>
+                                <button className="post-action" onClick={() => this.registerShare(postId)}>
+                                <i className="fas fa-share"/><a target="_blank" className="twitter-share-button"
                                    href={`https://twitter.com/intent/tweet?text=${post}&url=https://www.dev.gclout.com/activity/${postId}`}>
                                     Tweet</a>
+                                </button>
                                 {/*<i className="fas fa-share" /><a href={`https://twitter.com/intent/tweet?text=${post}&url=http://www.dev.gclout.com/activity/${parameter?parameter:''}`}>Twitter</a>*/}
-                                <i className="fas fa-share" /><a href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${postId}&title=${post}`}>Linkedin</a>
+                                <button onClick={() => this.registerShare(postId)} className="post-action">
+                                <i className="fas fa-share"/><a target="_blank" href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${postId}&title=${post}`}>Linkedin</a>
                                 {/*<i className="fas fa-share" /><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity">Share</a>*/}
                             </button>
                         </div>
