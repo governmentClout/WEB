@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {API_URL} from "../config";
 import axios from 'axios';
-import PostActions from "./postActions";
 import CommentInput from "../comments/commentInput";
 import "./post.css";
 import PropTypes from "prop-types";
-import {FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton} from "react-share";
-import {Link} from 'react-router-dom';
 
 class OnePost extends Component {
 
@@ -25,9 +22,14 @@ class OnePost extends Component {
             likes: '',
             comments: '',
             uuid: '',
-            icon: ''
+            icon: '',
+            comment: "",
+            ref: ""
 
-        }
+        };
+
+        this.onChange = this.onChange.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
 
     };
 
@@ -68,8 +70,44 @@ class OnePost extends Component {
     };
 
     displayLike(){
-        console.log(this.state.uuid);
-        console.log(sessionStorage.getItem("uuid"));
+        const authid = sessionStorage.getItem('uuid');
+        const token = sessionStorage.getItem('token');
+        const user = this.state.uuid;
+        const pid = this.state.postId;
+        const url = `${API_URL}/reactions/${pid}`;
+        const data = {
+            post: this.state.postId
+        };
+        console.log(data);
+        console.log(pid);
+        console.log(url);
+        /*const reactid = this.state.*/
+        console.log(authid);
+        console.log(user);
+        console.log(token);
+        if(authid !== user){
+            console.log('you never like am')
+            //like it here
+            axios({
+                method: 'post',
+                url: url,
+                data: data,
+                mode: 'no-cors',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: user
+                }
+            }).then(res => {
+                console.log(res.data);
+            })
+        } else {
+            alert("you don like am")
+        }
+
+        /*if(this.state.uuid === ){
+            axios.delete(`http://api.gclout.com:3000/reactions/${this.state.postId}`).then(res => {console.log(res.data)});
+        }*/
 
     }
 
@@ -126,8 +164,7 @@ class OnePost extends Component {
         })
     }
 
-
-    componentDidMount() {
+    async componentDidMount() {
         const { id } = this.props.match.params;
         /*alert(id);*/
         const url = `${API_URL}/posts/${id}`;
@@ -137,7 +174,7 @@ class OnePost extends Component {
 
         });
 
-        axios({
+        const res = await axios({
 
             method: 'get',
             url: url,
@@ -146,7 +183,7 @@ class OnePost extends Component {
                 uuid: sessionStorage.getItem('uuid')
             }
 
-        }).then( res => {
+        });
 
             console.log(res.data);
             console.log(res.data[0].user[0].uuid);
@@ -160,18 +197,64 @@ class OnePost extends Component {
                 postId: res.data[0].post.uuid,
                 likes: res.data[0].reactions.length,
                 comments: res.data[0].comments.length,
-                uuid: res.data[0].user[0].uuid
+                uuid: res.data[0].post.user
                 /*comments: res.data[0].co.uuid*/
             })
-        });
+    }
+
+    onKeyPress = (e) => {
+
+        if(e.which === 13) {
+
+            const uuid = sessionStorage.getItem("uuid"),
+                token = sessionStorage.getItem("token");
+
+            const data = {
+
+                comment: this.state.comment,
+                ref: this.props.postID
+
+            };
+
+            console.log(data);
+
+            axios({
+
+                method: "POST",
+                url: "http://api.gclout.com:3000/comments",
+                data: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: uuid
+
+                }
+
+            }).then(res => {
+                console.log(res.data);
+
+                this.setState({
+
+                    comment: '',
+
+                });
+
+
+            })
+        }
+    };
+
+    onChange(ev){
+        this.setState({
+
+            [ev.target.name]: ev.target.value
+
+        })
     }
 
     render() {
         const { post, likes, photo, uuid, postId, loading, firstName, lastName, comments } = this.state;
-        /*if(uuid){
-            alert('bros you don like this post');
-        }*/
-        console.log(uuid);
+
         if(loading){
             return <i className="fas fa-spinner"></i>
         }
@@ -212,11 +295,11 @@ class OnePost extends Component {
                         {/*<PostActions showComment={this.showComment} postID={postId} />*/}
                         <div className="post-actions-container">
                             <button className="post-action"
-                                    onClick={(id) => this.likePost(postId)}
+                                    /*onClick={(id) => this.likePost(postId)}*/
+                                    onClick={() => this.displayLike()}
                             >
                                 {/*<i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, postId)}/>*/}
                                 {/*<i className="far fa-thumbs-up"/>*/}
-                                {this.displayLike()}
 
                                 {likes}  like{likes === 1 ? '' : 's'}
                             </button>
@@ -236,7 +319,7 @@ class OnePost extends Component {
                             </button>
                         </div>
 
-                        <CommentInput postID={postId} show={this.state.showComment}/>
+                        <CommentInput onClick={() => console.log(postId)} postID={postId} show={this.state.showComment}/>
                         {" "}
                     </>
                 ) : (

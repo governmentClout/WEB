@@ -4,6 +4,7 @@ import "./post.css";
 import PostActions from "./postActions";
 import CommentInput from "./../comments/commentInput";
 import {Link} from 'react-router-dom';
+import OnePost from "./OnePost";
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -51,7 +52,8 @@ export default class SinglePost extends Component {
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
-            <PostActions showComment={this.showComment} postID={this.props.post.post.uuid} />
+            <PostActions showComment={this.showComment} post={this.props.post.post.post} postID={this.props.post.post.uuid} />
+
 
               <CommentInput postID={this.props.post.post.uuid} show={this.state.showComment}/>
             {" "}

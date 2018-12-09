@@ -181,26 +181,14 @@ export default class SinglePost extends Component {
        </button>
         <button className="post-action">
           {" "}
-            <i className="fas fa-share" /><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity">Share</a>
+            <i className="fas fa-share" /><a href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${this.props.postID}`}>Fcaebook</a>
+            <i className="fas fa-share"/><a className="twitter-share-button"
+                                            href={`https://twitter.com/intent/tweet?text=${this.props.post}&url=https://www.dev.gclout.com/activity/${this.props.postID}`}>
+            Tweet</a>
+            {/*<i className="fas fa-share" /><a href={`https://twitter.com/intent/tweet?text=${post}&url=http://www.dev.gclout.com/activity/${parameter?parameter:''}`}>Twitter</a>*/}
+            <i className="fas fa-share" /><a href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${this.props.postID}&title=${this.props.post}`}>Linkedin</a>
+
         </button>
-          <FacebookShareButton
-              url="dev.gclout.com"
-              quote="d"
-              className="Demo__some-network__share-button">
-              <FacebookIcon
-                  size={32}
-                  round />
-          </FacebookShareButton>
-          <LinkedinShareButton
-              url="dev.gclout.com"
-              title="dk"
-              windowWidth={750}
-              windowHeight={600}
-              className="Demo__some-network__share-button">
-              <LinkedinIcon
-                  size={32}
-                  round />
-          </LinkedinShareButton>
       </div>
     );
   }
