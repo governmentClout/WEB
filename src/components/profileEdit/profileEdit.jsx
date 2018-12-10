@@ -155,7 +155,7 @@ class EditProfile extends Component {
     const { countries } = this.state;
     console.log(countries);
     return (
-      <>
+      <div className="bg-white">
       <div className="modal-header">
         <h4 className="mb-0 pl-3">Edit Profile</h4>
       </div>
@@ -303,7 +303,7 @@ class EditProfile extends Component {
             </div>
             </div>
             <div className="d-flex mb-4">
-              <button className="btn btn-gclout-blue" type="submit">
+              <button className="btn btn-gclout-blue mb-4" type="submit">
                 {this.state.loading ? (
                       <i className="fas fa-circle-notch fa-spin" />
                     ) : (
@@ -318,7 +318,7 @@ class EditProfile extends Component {
           handleClose={this.shouldHideModal}
           uploadType={this.state.uploadType}
         />
-      </>
+      </div>
     );
   }
 }

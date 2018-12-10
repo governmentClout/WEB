@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./profileDetails.css";
-import Modal from "../modal/modal";
 import ProfileEdit from "../profileEdit/profileEdit";
 import axios from "axios";
 import { Manager, Reference, Popper } from "react-popper";
 import { Link } from "react-router-dom";
 import ProfileDetailsLoader from "../loaders/profileDeails"
 import {API_URL} from "../config";
+import Modal from "../modal/modal";
+import UpgradeModal from "../upgrade/upgrade";
 
 const moment = require("moment");
 
@@ -23,9 +24,6 @@ class ProfileDetails extends Component {
       office: '',
       party: '',
       loading: true,
-      about: '',
-        position: ''
-
     };
 
       this.handleChange = this.handleChange.bind(this);
@@ -201,93 +199,8 @@ class ProfileDetails extends Component {
                 </Modal>
               )}
               {showUpgradeModal && (
-                <Modal className="rounded-small" onCloseRequest={() => this.toggleUpgrade()}>
-                    <div className="upgrade-modal-wrapper d-flex justify-content-center p-4" style={{backgroundColor: 'transparent'}}>
-                      <div className=" py-2 px-1 mx-auto  col-md-6">
-                        <h5 className="text-center"><strong>Request Upgrade</strong></h5>
-                        <br />
-                        <form onSubmit={this.onSubmit}>
-                          <div className="form-row">
-                            <div className="form-group col-md">
-                              <label>Select political office</label>
-                              <select
-                                name="office"
-                                className="form-control"
-                                onChange={this.handleChange}
-                                required
-                              >
-                                <option value="president">President</option>
-                                <option value="governor">Governor</option>
-                                <option value="senator">Senator</option>
-                                <option value="council_chairman">Council Chairman</option>
-                                <option value="federal_rep">Federal Rep.</option>
-                                <option value="state_rep">State Rep</option>
-                                <option value="councilor">Councilor</option>
-                              </select>
-                            </div>
-                            <div className="form-group col-md">
-                              <label>Select political party</label>
-                              <select
-                                name="party"
-                                className="form-control"
-                                onChange={this.handleChange}
-                                required
-                              >
-                                <option value="apc">APC</option>
-                                <option value="pdp">PDP</option>
-                                <option value="apga">APGA</option>
-                              </select>
-                            </div>
-                            </div>
-                            <div className="form-group">
-                              <label htmlFor="about_me">Tell us about yourself</label>
-                              <textarea
-                                className="form-control"
-                                rows="3"
-                                name="about"
-                                onChange={this.handleChange}
-                                value={this.state.about}
-                                placeholder="Type text here..."
-                                required={true}
-                              />
-                            </div>
-                            <div className="form-group">
-                              <label htmlFor="about_position"> Tell us about your position </label>
-                              <textarea
-                                className="form-control"
-                                rows="3"
-                                name="position"
-                                onChange={this.handleChange}
-                                value={this.state.position}
-                                placeholder="Type text here..."
-                                required={true}
-                              />
-                            </div>
-                            {/*<div className="form-group">
-                              <div className="form-check d-flex">
-                                <input
-                                  className="mr-2"
-                                  type="checkbox"
-                                  ref="check_me"
-                                  value={this.state.tosAgreement}
-                                  onChange={e => {
-                                    this.setState({ tosAgreement: e.target.checked });
-                                  }}
-                                  required
-                                />
-                                <label
-                                  htmlFor="agreement"
-                                  className="form-check-label"
-                                  name="tosAgreement"
-                                >
-                                  By clicking submit, I agree with terms and conditions
-                                </label>
-                              </div>
-                            </div>*/}
-                            <button className="btn btn-block btn-gclout-blue">SUBMIT</button>
-                        </form>
-                      </div>
-                    </div>
+                <Modal onCloseRequest={() => this.toggleUpgrade()}>
+                  <UpgradeModal />
                 </Modal>
               )}
 

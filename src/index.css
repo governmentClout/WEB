@@ -38,6 +38,10 @@ code {
 .bg-white {
     background: #ffffff !important;
 }
+.bg-gclout-blue {
+    background-color: #00b0f0;
+    color: #fff;
+}
 .btn-gclout-blue,
 .btn-gclout-blue-outline:hover {
     background: #00b0f0;

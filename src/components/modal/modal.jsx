@@ -51,8 +51,8 @@ class Modal extends Component {
 
     return (
       <div className="gclout-modal-overlay">
-        <div className="gclout-modal" ref={node => (this.modal = node)}>
-          <div className="gclout-modal-content col-md-6 col-lg-8 mx-auto">{children}</div>
+        <div className="gclout-modal">
+          <div className="gclout-modal-content col-md-6 col-lg-7 mx-auto"  ref={node => (this.modal = node)}>{children}</div>
         </div>
 
          <button
