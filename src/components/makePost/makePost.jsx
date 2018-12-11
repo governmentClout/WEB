@@ -109,7 +109,7 @@ class MakePost extends Component {
 export default MakePost;
 
 class PostCreation extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -119,7 +119,7 @@ class PostCreation extends Component {
       toProfile: false,
       disable: false,
       loading: false,
-        selectedFile: null
+        selectedFile: ''
     };
 
     this.updateWordCount= this.updateWordCount.bind(this);
@@ -128,13 +128,13 @@ class PostCreation extends Component {
 
   updatePostsNow = () => this.props.updatePosts();
 
-  fileSelected = (e) => {
-    console.log(e.target.files[0]);
-    this.setState({
-        selectedFile: e.target.files[0]
-    })
-
-  };
+  // fileSelected = (e) => {
+  //   console.log(e.target.files[0]);
+  //   this.setState({
+  //       selectedFile: e.target.files[0]
+  //   })
+  //
+  // };
 
     onSubmit(e) {
 
@@ -149,21 +149,24 @@ class PostCreation extends Component {
 /*    const fd = new FormData();
     fd.append('image', this.state.selectedFile, this.state.selectedFile.name);*/
 
-    const data = {
+//     const data = {
+//
+//       post: this.state.post,
+// /*      attachment: fd*/
+//
+//     };
+    const { post, selectedFile } = this.state;
+    let formData = new FormData();
+    formData.append('post', post);
+    formData.append('selectedFile', selectedFile);
+    console.log(formData);
 
-      post: this.state.post,
-/*      attachment: fd*/
-
-    };
-    console.log(data);
     const url = `${API_URL}/posts`;
-    console.log(url);
-
     axios({
-    
+
       method: "post",
       url: url,
-      data: data,
+      data: formData,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
@@ -214,6 +217,16 @@ class PostCreation extends Component {
     this.setState({ uploadImages: !currentState });
   };
 
+  onChange = (e) => {
+      switch (e.target.name) {
+        case 'selectedFile':
+          this.setState({ selectedFile: e.target.files[0] });
+          break;
+        default:
+          this.setState({ [e.target.name]: e.target.value });
+      }
+    }
+
   render() {
     return (
       <div
@@ -233,6 +246,7 @@ class PostCreation extends Component {
                 }
                 rows="4"
                 name="post"
+                // onChange={this.updateWordCount}
                 onChange={this.updateWordCount}
                 onCut={this.updateWordCount}
                 onBlur={this.updateWordCount}
@@ -246,14 +260,14 @@ class PostCreation extends Component {
               {100 - this.state.wordCount} {""} words left
             </p>
             {/*<PostMedia showUploader={this.state.uploadImages} />*/}
-            <input type="file" onChange={this.fileSelected} />
+            <input type="file" onChange={this.onChange} name="selectedFile" />
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
                 style={{ marginBottom: "0" }}
                 disabled={!this.state.disable}
               >
-                {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"} 
+                {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"}
               </button>
               <button
                 className="btn btn-gclout-blue-outline"
@@ -273,19 +287,19 @@ class PostCreation extends Component {
 }
 
 class ArticleCreation extends Component {
-  
+
   constructor(props) {
-  
+
     super(props);
 
     this.state = {
-        wordCount: 0, 
+        wordCount: 0,
         article: "",
         title: "",
         uploadImages: false,
         toProfile: false,
         selectedFile: null
-        
+
       };
     this.updateWordCount = this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -341,26 +355,26 @@ class ArticleCreation extends Component {
 
       post: this.state.article,
       attachment: this.state.selectedFile
-        
-    
+
+
     };
 
     console.log(data);
     console.log("lmao");
 
     axios({
-    
+
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
       headers: {
-    
+
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
         uuid: id
-    
+
       }
-    
+
     })
       .then(response => {
         console.log(response.data);
@@ -380,11 +394,11 @@ class ArticleCreation extends Component {
           console.log('success');
 
           sessionStorage.setItem("message", response.data.Success)
-        
+
         } else {
 
           console.log("login error")
-        
+
         }
 
         console.log(response.data.Success);
@@ -414,7 +428,7 @@ class ArticleCreation extends Component {
                 placeholder="Title of article ..."
                 value={this.state.tile}
               />
-            </div> 
+            </div>
             <div className="form-group">
               <label htmlFor="new_article">Article</label>
               <textarea

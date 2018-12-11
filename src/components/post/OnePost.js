@@ -24,7 +24,8 @@ class OnePost extends Component {
             uuid: '',
             icon: '',
             comment: "",
-            ref: ""
+            ref: "",
+            reactionid: ''
 
         };
 
@@ -138,7 +139,16 @@ class OnePost extends Component {
                 console.log(res.data);
             })
         } else {
-            alert("you don like am")
+          const headers =  {
+            'crossDomain': true,
+              token: token,
+              uuid: user
+          };
+
+            axios.delete(`${API_URL}/reactions/${this.state.reactionid}`, {headers})
+            .then(res => {
+                console.log(res.data);
+            })
         }
 
         /*if(this.state.uuid === ){
@@ -200,9 +210,46 @@ class OnePost extends Component {
         })
     }
 
-    async componentDidMount() {
+
+
+    componentDidMount() {
+
+        this.fetchPost();
+        this.registerView()
+    }
+
+    registerView(){
+
+        const {id} = this.props.match.params;
+        const url = `${API_URL}/views/${id}`;
+
+        const data = {
+            "post": id
+        };
+
+
+        axios({
+
+            method: "post",
+            url: url,
+            data: data,
+            headers: {
+
+                token: sessionStorage.getItem('token'),
+                uuid: sessionStorage.getItem('uuid')
+
+            }
+
+        }).then(res => {
+            console.log(res.data);
+        })
+
+    }
+
+    fetchPost(){
         const { id } = this.props.match.params;
-        /*alert(id);*/
+        const pid = this.props.pid;
+        console.log(pid);
         const url = `${API_URL}/posts/${id}`;
         //alert(url)
         this.setState({
@@ -210,7 +257,7 @@ class OnePost extends Component {
 
         });
 
-        const res = await axios({
+        axios({
 
             method: 'get',
             url: url,
@@ -219,11 +266,11 @@ class OnePost extends Component {
                 uuid: sessionStorage.getItem('uuid')
             }
 
-        });
-
+        }).then(res => {
             console.log(res.data);
             console.log(res.data[0].user[0].uuid);
             console.log(res.data[0].reactions.length);
+            console.log(res.data[0].reactions[0].uuid);
             this.setState({
                 loading: false,
                 post: res.data[0].post.post,
@@ -236,6 +283,7 @@ class OnePost extends Component {
                 uuid: res.data[0].post.user
                 /*comments: res.data[0].co.uuid*/
             })
+        })
     }
 
     onKeyPress = (e) => {

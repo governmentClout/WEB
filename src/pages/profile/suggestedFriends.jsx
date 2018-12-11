@@ -13,7 +13,9 @@ class SuggestedFriendsPage extends Component {
 
         this.state = {
 
-          suggesteds: []
+          suggesteds: [],
+            filtered: [],
+            keyword: ''
 
         }
 
@@ -24,6 +26,7 @@ class SuggestedFriendsPage extends Component {
       this.fetchFriends();
 
     }
+
     fetchFriends(){
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
@@ -38,47 +41,39 @@ class SuggestedFriendsPage extends Component {
         }).then(response => {
             console.log(response.data);
             this.setState({
-                suggesteds: response.data
+                suggesteds: response.data,
+                filtered: response.data
             })
         })
     }
 
-    // fetchSuggestedFriends(){
+    searchUser = (e) => {
+        const keyword = e.target.value;
 
-    //     const uuid = sessionStorage.getItem("uuid"),
-    //         token = sessionStorage.getItem("token");
+        if(keyword !== ''){
 
-    //     console.log(uuid, token);
+            const list = this.state.suggesteds.filter((friend) => {
+                if(friend.lastName.indexOf(keyword) !== -1){
+                    return friend;
+                }
+            });
+            this.setState({
+                filtered: list
+            })
 
-    //   axios({
+        } else {
 
-    //       method: 'post',
-    //       url: `http://api.gclout.com:3000/users`,
-    //       headers: {
+            this.setState({
 
-    //           "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-    //           token: token,
-    //           uuid: uuid
+                filtered: this.state.suggesteds,
+                keyword
 
-    //       }
+            });
 
-    //   }).then(res => {
+        }
 
-    //     console.log(res.data);
+    };
 
-    //     this.setState({
-
-    //         suggesteds: []
-
-    //     })
-
-    //   })
-    // }
-
-
-    searchHandler(e) {
-    e.preventDefault();
-  }
   render() {
     return(
     /*return !this.props.isLoggedIn ? (
@@ -95,22 +90,24 @@ class SuggestedFriendsPage extends Component {
                   <p>These are people you may know</p>
                 </div>
                 <div className="friends-search-container">
-                  <form
+                  {/*<form
                     className="searchContainer"
                     onSubmit={this.searchHandler}
-                  >
+                  >*/}
                     <input
                       className="searchBox"
-                      type="search"
+                      type="text"
+                      value={this.state.keyword}
                       placeholder="Type in to search..."
+                      onChange={e => this.searchUser(e)}
                     />
                     <span className="searchIconContainer">
                       <i className="fas fa-search searchIcon" />
                     </span>
-                  </form>
+                  {/*</form>*/}
                 </div>
                 <div className="friends-list">
-                  {this.state.suggesteds.map((suggestedFriend) => (<Friend friend={suggestedFriend} type="suggested" />))}
+                  {this.state.filtered.map((suggestedFriend) => (<Friend friend={suggestedFriend} type="suggested" />))}
                 </div>
               </div>
             </div>
