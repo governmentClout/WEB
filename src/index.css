@@ -38,6 +38,10 @@ code {
 .bg-white {
     background: #ffffff !important;
 }
+.bg-gclout-blue {
+    background-color: #00b0f0;
+    color: #fff;
+}
 .btn-gclout-blue,
 .btn-gclout-blue-outline:hover {
     background: #00b0f0;
@@ -122,8 +126,6 @@ button:focus {
     width: 100%;
     height: 220px;
     overflow: hidden;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
     position: relative;
 }
 .profile-cover-image {
