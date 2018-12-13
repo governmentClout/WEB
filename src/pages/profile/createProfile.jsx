@@ -238,7 +238,7 @@ class CreateProfile extends Component {
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">
-            <h4 className="page-title">Create your profile</h4>
+            <h4>Create your profile</h4>
             <div className="profile-cover-image-wrapper">
               <img
                 className="profile-cover-image"
