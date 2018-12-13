@@ -4,6 +4,8 @@ import "../../assets/css/pages.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -51,6 +53,7 @@ class CreateProfile extends Component {
             }).catch(err => {
 
             console.log(err);
+            
 
         })
     }
@@ -80,7 +83,19 @@ class CreateProfile extends Component {
       this.getStates();
 
   }
-
+  errorToast = null;
+  notify = error => {
+    if (this.errorToast) {
+      toast.dismiss(this.errorToast);
+    }
+    this.errorToast = toast.error(
+      "Profile Creation Failed: " + error.response.data.Error,
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
+  };
   getStates(){
 
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
@@ -162,6 +177,12 @@ class CreateProfile extends Component {
         this.setState({ loading: false });
 
         console.log(err);
+        this.notify(err);
+            this.setState({
+
+                loading: false
+
+            });
       });
     console.log(data);
   }
@@ -410,6 +431,7 @@ class CreateProfile extends Component {
           handleClose={this.shouldHideModal}
           uploadType={this.state.uploadType}
         />
+        <ToastContainer />
       </div>
     );
   }
