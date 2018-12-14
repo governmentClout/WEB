@@ -40,7 +40,7 @@ class CreateProfile extends Component {
 
                 const states = res.data.map(state => state);
 
-                console.log(states);
+                //console.log(states);
 
                 this.setState({
 
@@ -101,7 +101,7 @@ class CreateProfile extends Component {
         url: "https://restcountries.eu/rest/v2/all"
 
     }).then(res => {
-      console.log(res.data);
+    //  console.log(res.data);
       this.setState({
 
           countries: res.data
@@ -172,7 +172,9 @@ class CreateProfile extends Component {
   }
 
   displayLga() {
+    if(this.state.nationality_residence === "Nigeria"){
       const state = this.state.state;
+    //  console.log(state);
       axios({
           method: 'get',
           url: `http://locationsng-api.herokuapp.com/api/v1/states/${state}/lgas`
@@ -203,8 +205,11 @@ class CreateProfile extends Component {
 
   }
 
+}
+
   displayState(){
     if(this.state.nationality_residence === "Nigeria"){
+    //  console.log(this.state.nationality_residence);
         return(
             <div className="form-group col-md">
                 <label htmlFor="state">State</label>
@@ -331,22 +336,6 @@ class CreateProfile extends Component {
                   </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md">
-                        <label htmlFor="nationality_residence">Country of Residence</label>
-                        <select
-                            name="nationality_residence"
-                            className="form-control"
-                            value={this.state.nationality_residence}
-                            onChange={this.onChange}
-                            required
-                        >
-                            {this.state.countries.map(country => {
-                                return (
-                                    <option value={country.name} key={country.name}>{country.name}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
                   <div className="form-group col-md">
                     <label htmlFor="nationality_residence">Country of Origin</label>
                       <select
@@ -360,6 +349,23 @@ class CreateProfile extends Component {
                             return (
                                 <option value={country.name} key={country.name}>{country.name}</option>
                             )
+                          })}
+                      </select>
+                  </div>
+
+                  <div className="form-group col-md">
+                      <label htmlFor="nationality_residence">Country of Residence</label>
+                      <select
+                          name="nationality_residence"
+                          className="form-control"
+                          value={this.state.nationality_residence}
+                          onChange={this.onChange}
+                          required
+                      >
+                          {this.state.countries.map(country => {
+                              return (
+                                  <option value={country.name} key={country.name}>{country.name}</option>
+                              )
                           })}
                       </select>
                   </div>

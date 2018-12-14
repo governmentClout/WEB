@@ -33,7 +33,7 @@ class Register extends Component {
         isAuthenticated: false,
     };
     //this.register = this.register.bind(this);
-    this.signup = this.signup.bind(this); 
+    this.signup = this.signup.bind(this);
 
     this.onChange = this.onChange.bind(this);
     // this.responseLinkedin = this.responseLinkedin.bind(this);
@@ -115,6 +115,8 @@ class Register extends Component {
         console.log(response);
 
         let responseJson = response;
+
+        // if(Login Failed: User Not created, Phone number already in use)
 
         if (responseJson.data) {
           sessionStorage.setItem("data", JSON.stringify(responseJson));
@@ -207,7 +209,7 @@ console.log('something jus happen rai now')
               });
 
           });
-    
+
     }
 
     /*if(type = "linkedin") {
@@ -239,7 +241,7 @@ console.log('something jus happen rai now')
 
 
     }
-  
+
   }
 
 

@@ -4,32 +4,69 @@ import "../../assets/css/pages.css";
 import "./profileEdit.css"
 import axios from 'axios';
 import { stat } from "fs";
+import {API_URL} from "../config";
 
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      
+
       showModal: false,
       uploadType: "",
       fname: this.props.userFirstName,
       lname: this.props.userLastName,
-      nationality_origin: this.props.nationalityOrigin,
-      nationality_residence: this.props.nationalityResidence,
-      state: this.props.state,
-      lga: this.props.lga,
+      // nationality_origin: this.props.nationalityOrigin,
+        nationality_origin: '',
+      // nationality_residence: this.props.nationalityResidence,
+        nationality_residence: "",
+        // state: this.props.state,
+        state: '',
+        lgas: [],
+      // lga: this.props.lga,
+        lga: '',
       photo: "",
       phone: this.props.phone,
       allStates: [],
-      countries: [],
-      loading: false
+      loading: false,
+        countries: []
 
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+    // this.handleChange = this.handleChange.bind(this);
     this.editProfile = this.editProfile.bind(this);
+
   }
+
+    componentDidMount(){
+
+        axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+            .then(res => {
+
+                const states = res.data.map(state => state);
+
+                console.log(states);
+
+                this.setState({
+
+                    allStates: states
+
+                })
+
+            }).catch(err => {
+
+            console.log(err);
+
+        })
+    }
+
+    onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
 
   handleChange(e) {
 
@@ -38,8 +75,49 @@ class EditProfile extends Component {
       [e.target.name]: e.target.value
 
     });
-  
+
   }
+
+    componentWillMount() {
+
+        this.getCountries();
+        this.getStates();
+
+    }
+
+    getStates(){
+
+        axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
+            .then(response => {
+                this.setState({
+                    allStates: response.data
+                })
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    getCountries(){
+
+        axios({
+
+            method: 'get',
+            url: "https://restcountries.eu/rest/v2/all"
+
+        }).then(res => {
+            console.log(res.data);
+            this.setState({
+
+                countries: res.data
+
+            })
+
+        }).catch(err => {
+
+            console.log(err);
+
+        })
+    }
 
   editProfile(e){
 
@@ -59,18 +137,15 @@ class EditProfile extends Component {
       nationality_residence: this.state.nationality_residence,
       nationality_origin: this.state.nationality_origin,
       state: this.state.state,
-      
+
     };
 
     console.log(data);
 
-    const url = "http://api.gclout.com:3000/profiles";
-    console.log(url);
-
     axios({
-    
+
       method: "put",
-      url: "http://api.gclout.com:3000/profiles",
+      url: `${API_URL}/profiles`,
       data: data,
       mode: 'no-cors',
       headers: {
@@ -79,7 +154,7 @@ class EditProfile extends Component {
         uuid: id,
 
       }
-    
+
     }).then(response => {
 
       console.log(response);
@@ -99,44 +174,6 @@ class EditProfile extends Component {
 
   }
 
-  componentDidMount(){
-
-    this.getCountries();
-
-    axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
-        .then(res => {
-
-          const states = res.data.map(state => state);
-
-          console.log(states);
-      
-          this.setState({
-
-            allStates: states
-
-          })
-        
-        }).catch(err => {
-
-          console.log(err);
-
-        })
-  }
-
-  getCountries(){
-
-    axios({
-        method: 'get',
-        url: `https://restcountries.eu/rest/v2/all`
-    }).then(res => {
-      console.log(res.data.name);
-      console.log(res.data);
-      this.setState({
-          countries: res.data.name
-      })
-    })
-  }
-
   shouldShowModal = type => {
     this.setState({
       showModal: true,
@@ -151,9 +188,63 @@ class EditProfile extends Component {
 
   };
 
+    displayLga() {
+        const state = this.state.state;
+        axios({
+            method: 'get',
+            url: `http://locationsng-api.herokuapp.com/api/v1/states/${state}/lgas`
+        }).then(res => {
+//        console.log(res.data);
+            this.setState({
+                lgas: res.data
+            })
+        }).catch(err => console.log(err));
+        return(
+            <div className="form-group col-md">
+                <label htmlFor="state">LGA</label>
+                <select
+                    onChange={this.onChange}
+                    name="lga"
+                    className="form-control"
+                >
+                    {this.state.lgas.map(lga => {
+                        return (
+                            <option value={lga} key={lga}>
+                                {lga}
+                            </option>
+                        );
+                    })}
+                </select>
+            </div>
+        )
+
+    }
+
+    displayState(){
+        if(this.state.nationality_residence === "Nigeria"){
+            return(
+                <div className="form-group col-md">
+                    <label htmlFor="state">State</label>
+                    <select
+                        onChange={this.onChange}
+                        name="state"
+                        className="form-control"
+                    >
+                        {this.state.allStates.map(state => {
+                            return (
+                                <option value={state.name} key={state.name}>
+                                    {state.name}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+            )
+        }
+    }
+
   render() {
-    const { countries } = this.state;
-    console.log(countries);
+
     return (
       <div className="bg-white">
       <div className="modal-header">
@@ -195,7 +286,7 @@ class EditProfile extends Component {
             <button
               className="floating-edit-button-wrapper --profile-picture"
               onClick={() => this.shouldShowModal("Profile Photo")}
-              onChange={this.handleChange}
+              onChange={this.onChange}
               name="photo"
               value={this.state.photo}
             >
@@ -224,7 +315,7 @@ class EditProfile extends Component {
                   className="form-control"
                   type="text"
                   value={this.state.fname}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   placeholder={this.props.userFirstName}
                   required
                 />
@@ -237,71 +328,56 @@ class EditProfile extends Component {
                   type="text"
                   placeholder={this.props.userLastName}
                   value={this.state.lname}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   required
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group col-md">
-                <label htmlFor="nationality">Country of Residence</label>
 
-                <input
-                  name="nationality_residence"
-                  className="form-control"
-                  type="text"
-                  value={this.state.nationality_residence}
-                  onChange={this.handleChange}
-                  placeholder={this.props.nationalityResidence}
-                  required
-                />
-              </div>
-              <div className="form-group col-md">
-                <label htmlFor="nationality">Country of Origin</label>
-                <input
-                  name="nationality_origin"
-                  className="form-control"
-                  type="text"
-                  value={this.state.nationality_origin}
-                  onChange={this.handleChange}
-                  placeholder={this.props.nationalityOrigin}
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md">
-                <label htmlFor="state">State</label>
-                <select
-                  name="state"
-                  className="form-control"
-                  defaultValue={this.props.state}
-                  onChange={this.handleChange}
-                  required
-                >
-                  {
-                    this.state.allStates.map(state => {
-                      
-                      return <option key={state.name} value={state.name} selected={this.state.state === state.name ? true : false}>{state.name}</option>
-                    
-                    })
+              <div className="form-row">
+                  <dziv className="form-group col-md">
+                      <label htmlFor="nationality_residence">Country of Residence</label>
+                      <select
+                          name="nationality_residence"
+                          className="form-control"
+                          value={this.state.nationality_residence}
+                          onChange={this.onChange}
+                          required
+                      >
+                          {this.state.countries.map(country => {
+                              return (
+                                  <option value={country.name} key={country.name}>{country.name}</option>
+                              )
+                          })}
+                      </select>
+                  </dziv>
+                  <div className="form-group col-md">
+                      <label htmlFor="nationality_residence">Country of Origin</label>
+                      <select
+                          name="nationality_origin"
+                          className="form-control"
+                          value={this.state.nationality_origin}
+                          onChange={this.onChange}
+                          required
+                      >
+                          {this.state.countries.map(country => {
+                              return (
+                                  <option value={country.name} key={country.name}>{country.name}</option>
+                              )
+                          })}
+                      </select>
+                  </div>
 
-                  }
-                </select>
               </div>
-              <div className="form-group col-md">
-                <label htmlFor="lga">L.G.A</label>
-                <input
-                  name="lga"
-                  className="form-control"
-                  type="text"
-                  value={this.state.lga}
-                  onChange={this.handleChange}
-                  placeholder={this.props.lga}
-                  required
-                />
-            </div>
-            </div>
+              <div className="form-row">
+                  {this.displayState()}
+
+                  <div className="form-group col-md">
+                      {this.displayLga()}
+
+                  </div>
+              </div>
+
             <div className="d-flex mb-4">
               <button className="btn btn-gclout-blue mb-4" type="submit">
                 {this.state.loading ? (

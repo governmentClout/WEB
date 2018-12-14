@@ -23,6 +23,8 @@ export default class SinglePost extends Component {
     })
   }
   render() {
+    const { uuid } = this.props.post.post;
+    console.log(uuid);
 
     return (
       <div style={{ marginBottom: "1em" }}>
@@ -46,7 +48,7 @@ export default class SinglePost extends Component {
             </div>
           </div>
           <div className="post-content">
-              <Link to={`/activity/${this.props.post.post.uuid}`}><p>{this.props.post.post.post}</p></Link>
+              <Link to={`/activity/${uuid}`}><p>{this.props.post.post.post}</p></Link>
           </div>
         </div>
         {this.props.postType !== "sponsored" ? (
