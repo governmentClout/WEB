@@ -1,6 +1,17 @@
+.post-link,
+.post-link:hover,
+.post-link:focus,
+.post-link:visited,
+.post-link:active {
+  color: #333333;
+  text-decoration: none;
+}
 .post-container {
   background: #ffffff;
   padding: 1em 2em;
+}
+.post-container:hover {
+  background: #fdfdfd;
 }
 .post-owner {
   display: flex;

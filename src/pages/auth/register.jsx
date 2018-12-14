@@ -345,7 +345,7 @@ console.log('something jus happen rai now')
                       />
                     </div>
                     <div className="form-row">
-                      <div className="col-md" style={{ marginRight: "5px" }}>
+                      <div className="col-md left">
                         <label htmlFor="phone">Phone number</label>
                         <input
                           type="phone"
@@ -357,7 +357,7 @@ console.log('something jus happen rai now')
                           required
                         />
                       </div>
-                      <div className="col-md ml-2" style={{ marginLeft: "5px" }}>
+                      <div className="col-md right">
                         <label>Date of birth</label>
                         <DatePicker
                           className="form-date"
@@ -427,7 +427,9 @@ console.log('something jus happen rai now')
                           clientKey="JNjAaqePXPy5cXMjdlPYXuMWf"
                           requestTokenUrl="http://api.gclout.com:3000/users"
                           //requestTokenUrl="http://localhost:3000/login/auth/twitter/reverse"
-                      />
+                      >
+                        <i className="fab fa-twitter" /> Twitter
+                      </TwitterLogin>
 
                       <FacebookLogin
                       appId="2171139129879186"
@@ -439,33 +441,20 @@ console.log('something jus happen rai now')
                       textButton="Facebook"
                     />
 
-                      {/*<LinkedIn
+                      {/* <LinkedIn
                           clientId="77pb6qtint69q4"
                           callback={this.callbackLinkedIn}
                           text="Login With LinkedIn"
                           onSuccess={responseLinkedin}
                           onFailure={responseLinkedin}
                           className="social-button-linkedin btn btn-block"
-                      />
+                      /> */}
                       <button
-                          onClick={this.linkedInLogin}
-                          onSuccess={responseLinkedin}
-                          onFailure={responseLinkedin}
-                          className="social-button-linkedin btn btn-block">
-                          <i className="fab fa-linkedin-in" />
-                          Linkedin
-                      </button>*/}
-
-
-
-                 {/*     <TwitterLogin
-                          loginUrl="http://localhost:3000/login"
-                          onSuccess={responseTwitter}
-                          onFailure={responseTwitter}
-                          className="social-button-twitter btn btn-block"
-
-
-                      />*/}
+                        disabled
+                        className="social-button-linkedin btn btn-block">
+                        <i className="fab fa-linkedin-in" />
+                        Linkedin
+                      </button>
 
                   </div>
                   <p className="text-center">

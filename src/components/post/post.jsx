@@ -28,29 +28,31 @@ export default class SinglePost extends Component {
 
     return (
       <div style={{ marginBottom: "1em" }}>
-        <div className="post-container">
-          <div className="post-owner">
-            <div className="post-owner-image-wrapper">
-              <img
-                src={this.props.post.user[0].photo}
-                alt="lol"
-                className="post-owner-image"
-              />
-            </div>
+        <Link to={`/activity/${this.props.post.post.uuid}`} className="post-link">
+          <div className="post-container">
+            <div className="post-owner">
+              <div className="post-owner-image-wrapper">
+                <img
+                  src={this.props.post.user[0].photo}
+                  alt="lol"
+                  className="post-owner-image"
+                />
+              </div>
 
-            <div className="post-owner-details">
-              <p>{this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName}</p>
-              {this.props.postType === "sponsored" ? (
-                <p className="post-type">Sponsored</p>
-              ) : (
-                ""
-              )}
+              <div className="post-owner-details">
+                <p>{this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName}</p>
+                {this.props.postType === "sponsored" ? (
+                  <p className="post-type">Sponsored</p>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+            <div className="post-content">
+                <p>{this.props.post.post.post}</p>
             </div>
           </div>
-          <div className="post-content">
-              <Link to={`/activity/${uuid}`}><p>{this.props.post.post.post}</p></Link>
-          </div>
-        </div>
+        </Link>
         {this.props.postType !== "sponsored" ? (
           <>
             {" "}
@@ -67,4 +69,3 @@ export default class SinglePost extends Component {
     );
   }
 }
-

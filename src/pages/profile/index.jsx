@@ -9,6 +9,7 @@ import MakeExecutivePost from "../../components/makePost/makeExecutivePost";
 import SinglePost from "../../components/post/post";
 import { Redirect } from "react-router-dom"
 import axios from "axios";
+import Countdown from "../../components/countdown";
 
 class ProfilePage extends Component {
 
@@ -100,10 +101,7 @@ class ProfilePage extends Component {
             className="col-md-3 d-none d-md-block"
             style={{ padding: "0px" }}
           >
-            <div className="bg-gclout-blue mb-4 p-4 text-center countdown">
-                <h3>82 Days</h3>
-                <p className="mb-0 pb-0">to the general elections</p>
-            </div>
+            <Countdown />
             <Suggestions />
             <Trending />
           </div>

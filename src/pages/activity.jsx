@@ -9,6 +9,7 @@ import SinglePost from "../components/post/post";
 import axios from "axios";
 import LoadingPost from "../components/loaders/posts";
 import MakeExecutivePost from "../components/makePost/makeExecutivePost";
+import Countdown from "../components/countdown";
 
 class ActivityPage extends Component {
     constructor(props) {
@@ -17,17 +18,16 @@ class ActivityPage extends Component {
         this.state = {
           posts: [],
             userId: '',
-            loading: true
-
+            loading: true,
+            days: 0
         }
     }
 
     componentDidMount() {
-        let userId = this.props.match.params
+        let userId = this.props.match.params;
         this.setState({
-            userId
-        });
-
+            userId,
+        })
     }
 
     componentWillMount() {
@@ -117,10 +117,7 @@ console.log(res.data);
             className="col-md-3 d-none d-md-block"
             style={{ padding: "0px" }}
           >
-            <div className="bg-gclout-blue mb-4 p-4 text-center countdown">
-                <h3>82 Days</h3>
-                <p className="mb-0 pb-0">to the general elections</p>
-            </div>
+            <Countdown />
             <Suggestions />
             <Trending />
           </div>
