@@ -53,7 +53,7 @@ class CreateProfile extends Component {
             }).catch(err => {
 
             console.log(err);
-            
+
 
         })
     }
@@ -138,6 +138,17 @@ class CreateProfile extends Component {
     console.log(id);
     console.log(token);
     e.preventDefault();
+    if(this.state.lga === ""){
+
+      this.state.lga = "N/A";
+
+    }
+
+    if(this.state.state === ""){
+
+      this.state.state = "N/A";
+
+    }
 
     const data = {
       uuid: sessionStorage.getItem("uuid"),
@@ -253,6 +264,11 @@ class CreateProfile extends Component {
 }
 
   render() {
+
+    console.log(sessionStorage.getItem("token"));
+    console.log(sessionStorage.getItem("uuid"));
+
+
     if (this.state.toProfile === true) {
       return <Redirect to="/profile" />;
     }
