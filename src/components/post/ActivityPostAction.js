@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./post.css";
 import axios from 'axios';
 import {API_URL} from "../config";
+import ThumbUp from "@material-ui/icons/ThumbUp";
 
 export default class ActivitySinglePost extends Component {
 
@@ -11,6 +12,7 @@ export default class ActivitySinglePost extends Component {
         this.state = {
             like: "",
             likes: [],
+            liked: false,
             comments: 0
         };
 
@@ -87,6 +89,9 @@ export default class ActivitySinglePost extends Component {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
 
+            this.setState({
+                liked: true,
+            })
         const id = this.props.postID;
 
         const data = {
@@ -121,20 +126,16 @@ export default class ActivitySinglePost extends Component {
 
     render() {
 
-        const { likes, comments } = this.state;
+        const { likes, comments, liked } = this.state;
 
         return (
             <div className="post-actions-container">
-                {/*<button className="post-action"
-        onClick={this.likePost.bind(this)}>
-                onClick={() => console.log(this.props.postID)}>
-          <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
-        </button>*/}
-                <button className="post-action"
-                        onClick={() => this.likePost(this.props.postID)}
-                    //onClick={() => console.log(this.props.postID)}
+                <button
+                    className= {liked ? "post-action avtive" : "post-action avtive"}
+                    onClick={() => this.likePost(this.props.postID)}
+                    onLoad={this.showLikesCount.bind(this, this.props.postID)}
                 >
-                    <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}  like{likes === 1 ? '' : 's'}
+                <ThumbUp /> {likes}  like{likes === 1 ? '' : 's'}
                 </button>
                 <button className="post-action" onLoad={this.showCommentsCount.bind(this, this.props.postID)} onClick={this.showComment}>
                     {" "}

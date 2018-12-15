@@ -2,44 +2,10 @@ import React, { Component } from "react";
 import "./post.css";
 import axios from 'axios';
 import {API_URL} from "../config";
-import { Link } from 'react-router-dom';
-import {
-    FacebookShareButton,
-    GooglePlusShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-    TelegramShareButton,
-    WhatsappShareButton,
-    PinterestShareButton,
-    VKShareButton,
-    OKShareButton,
-    RedditShareButton,
-    TumblrShareButton,
-    LivejournalShareButton,
-    MailruShareButton,
-    ViberShareButton,
-    WorkplaceShareButton,
-    LineShareButton,
-    EmailShareButton,
-
-    FacebookIcon,
-    TwitterIcon,
-    GooglePlusIcon,
-    LinkedinIcon,
-    PinterestIcon,
-    VKIcon,
-    OKIcon,
-    TelegramIcon,
-    WhatsappIcon,
-    RedditIcon,
-    TumblrIcon,
-    MailruIcon,
-    EmailIcon,
-    LivejournalIcon,
-    ViberIcon,
-    WorkplaceIcon,
-    LineIcon,
-} from 'react-share';
+import ThumbUp from "@material-ui/icons/ThumbUp";
+import ChatBubbleOutline from "@material-ui/icons/ChatBubbleOutline";
+import Reply from "@material-ui/icons/Reply";
+import { Manager, Reference, Popper } from "react-popper";
 
 export default class SinglePost extends Component {
 
@@ -50,19 +16,18 @@ export default class SinglePost extends Component {
             like: "",
             likes: [],
             comments: 0,
-            comment: []
+            comment: [],
+            liked: false,
+            showDropup: false,
         };
 
     }
-
-
     componentWillMount() {
 
         this.showLikesCount();
         this.showCommentsCount();
 
     }
-
     showLikesCount(){
 
         const id = sessionStorage.getItem("uuid"),
@@ -91,6 +56,12 @@ export default class SinglePost extends Component {
 
             })
         });
+    }
+    openDropup = () => {
+        const currentState = this.state.showDropup
+        this.setState({
+            showDropup: !currentState,
+        })
     }
 
     showCommentsCount(){
@@ -161,6 +132,9 @@ export default class SinglePost extends Component {
     likePost = () => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
+            this.setState({
+                liked: true,
+            })
 
         const id = this.props.postID;
 
@@ -187,47 +161,99 @@ export default class SinglePost extends Component {
         }).then(res => {
             this.showLikesCount();
         })
-
-        /*const likes = this.state;
-
-        const newLikes = res.data[0].reactions*/
-
     };
 
   render() {
 
-      const { likes, comment } = this.state;
+      const { likes, comment, liked } = this.state;
 
     return (
       <div className="post-actions-container">
-        {/*<button className="post-action"
-        onClick={this.likePost.bind(this)}>
-                onClick={() => console.log(this.props.postID)}>
-          <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}
-        </button>*/}
-        <button className="post-action"
-                onClick={() => this.likePost(this.props.postID)}
-                //onClick={() => console.log(this.props.postID)}
+        <button
+            className= {liked ? "post-action active" : "post-action avtive"}
+            onClick={() => this.likePost(this.props.postID)}
+            onLoad={this.showLikesCount.bind(this, this.props.postID)}
         >
-            <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}  like{likes === 1 ? '' : 's'}
+            <ThumbUp />
+            {likes} {"  "}  like{likes <= 1 ? '' : 's'}
         </button>
-        <button className="post-action" onLoad={this.showCommentsCount.bind(this, this.props.postID)} onClick={this.showComment}>
-          {" "}
-          <i className="far fa-comment"/> {comment} comment{comment === 1 ? '' : 's'}
-       </button>
-        <button className="post-action" onClick={() => this.registerShare(this.props.postID)}>
-          {" "}
-            <i className="fas fa-share" /><a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${this.props.postID}`}>Fcaebook</a>
+        <button
+            className="post-action"
+            onLoad={this.showCommentsCount.bind(this, this.props.postID)}
+            onClick={this.showComment}>
+            <ChatBubbleOutline />
+            {comment} {" "} comment{comment <= 1 ? '' : 's'}
         </button>
-          <button className="post-action" onClick={() => this.registerShare(this.props.postID)}>
-            <i className="fas fa-share"/><a target="_blank" className="twitter-share-button"
-                                            href={`https://twitter.com/intent/tweet?text=${this.props.post}&url=https://www.dev.gclout.com/activity/${this.props.postID}`}>
-            Tweet</a>
-          </button>
-          <button className="post-action" onClick={() => this.registerShare(this.props.postID)}>
-            <i className="fas fa-share" /><a target="_blank" href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${this.props.postID}&title=${this.props.post}`}>Linkedin</a>
+        <Manager>
+            <Reference>
+                {({ ref }) => (
+                    <button
+                        type="button"
+                        ref={ref}
+                        className="post-action"
+                        onClick={this.openDropup}>
 
-        </button>
+                        <Reply className="flipped-reply" />
+                        {" "} Share
+                    </button>
+                )}
+            </Reference>
+            <Popper placement="bootom">
+                {({ ref, style, placement, arrowProps }) => (
+                <div ref={ref} style={style} data-placement={placement}>
+                    <div
+                        className={
+                            this.state.showDropup
+                            ? "dropup show"
+                            : "dropup"
+                        }>
+                        <ul className="dropup-list">
+                            <li
+                                className="dropup-list-item"
+                                onClick={this.openDropup}>
+                                <button
+                                    onClick={() => this.registerShare(this.props.postID)}>
+                                    <a
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href={`https://www.facebook.com/sharer/sharer.php?u=https://dev.gclout.com/activity/${this.props.postID}`}>
+                                        <i class="fab fa-facebook-f"/>
+                                    </a>
+                                </button>
+                            </li>
+                            <li
+                                className="dropup-list-item"
+                                onClick={this.openDropup}>
+                                <button
+                                    onClick={() => this.registerShare(this.props.postID)}>
+                                    <a
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${this.props.postID}&title=${this.props.post}`}>
+                                        <i className="fab fa-linkedin" />
+                                    </a>
+                                </button>
+                            </li>
+                            <li
+                                className="dropup-list-item"
+                                onClick={this.openDropup}>
+                                <button
+                                    onClick={() => this.registerShare(this.props.postID)}>
+                                    <a
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href={`https://twitter.com/intent/tweet?text=${this.props.post}&url=https://www.dev.gclout.com/activity/${this.props.postID}`}>
+                                        <i className="fab fa-twitter" />
+                                    </a>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ref={arrowProps.ref} style={arrowProps.style} />
+                </div>
+                )}
+            </Popper>
+            </Manager>
       </div>
     );
   }
