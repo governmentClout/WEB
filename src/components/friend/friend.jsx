@@ -114,7 +114,7 @@ class Friend extends Component {
                         >Add Friend</button>
                     )}
                 </div>
-                <ToastContainer />
+                {/* <ToastContainer /> */}
             </div>
         );
     }

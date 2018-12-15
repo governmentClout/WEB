@@ -96,20 +96,17 @@ class ProfileDetails extends Component {
   };
 
   componentDidMount() {
-    const id =  sessionStorage.getItem("uuid");
+    let id =  sessionStorage.getItem("uuid");
     const token  = sessionStorage.getItem("token");
+    console.log("hello world");
 
-    // if(this.props.match.params.id) {
-    //   id = this.props.match.params.id
-      console.log(this.props.userId)
-    // } else {
-      // id = sessionStorage.getItem("uuid");
-    // }
+    if(this.props.userId) {
+      id = this.props.userId;
+    } else {
+      id = sessionStorage.getItem("uuid");
+    }
 
     if(this.state.profile !== []) {
-
-    //   id = sessionStorage.getItem("uuid"),
-    //   token = sessionStorage.getItem("token");
     const url = `http://api.gclout.com:3000/profiles/${id}`;
     
     axios({

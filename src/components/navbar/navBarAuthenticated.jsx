@@ -3,7 +3,7 @@ import { Manager, Reference, Popper } from "react-popper";
 import Notifications from "../notifications/notifications";
 import NavMessages from "../navMessages/navMessages";
 import "./navBar.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class NavBarAuthenticated extends Component {
   constructor(props) {
@@ -31,6 +31,13 @@ class NavBarAuthenticated extends Component {
   }
   closeAll = () => {
     this.setState({ showProfile: false, showNotifications: false, showMessages: false });
+  }
+  logout = () => {
+    let that = this;
+    async function f() {
+      that.props.logout();
+    }
+    f().then(this.props.history.push('/activity'));
   }
 
   render() {
@@ -197,7 +204,7 @@ class NavBarAuthenticated extends Component {
                           >
                             <button
                               className="profile-dropdown-button"
-                              onClick={this.props.logout}
+                              onClick={this.logout}
                             >
                               Logout
                             </button>
@@ -216,4 +223,4 @@ class NavBarAuthenticated extends Component {
     );
   }
 }
-export default NavBarAuthenticated;
+export default withRouter(NavBarAuthenticated);
