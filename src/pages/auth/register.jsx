@@ -112,14 +112,18 @@ class Register extends Component {
       }
     })
       .then(response => {
-        console.log(response);
 
         let responseJson = response;
+        console.log(responseJson);
 
         // if(Login Failed: User Not created, Phone number already in use)
 
         if (responseJson.data) {
           sessionStorage.setItem("data", JSON.stringify(responseJson));
+          sessionStorage.setItem("token", responseJson.data.Token);
+          sessionStorage.setItem("uuid", responseJson.data.uuid);
+
+
 
           this.props.login(responseJson.data.user);
         }
@@ -191,6 +195,7 @@ console.log('something jus happen rai now')
               let responseJson = response;
 
               if (responseJson.data) {
+                console.log(responseJson.data.uuid);
 
                   sessionStorage.setItem("data", JSON.stringify(responseJson));
                   this.props.login(responseJson.data.user);
@@ -231,14 +236,6 @@ console.log('something jus happen rai now')
       };
 
       console.log(data);
-
-
-/*         let responseJson = res;
-        sessionStorage.setItem("userData", responseJson);
-        this.setStata({
-          redirect: true
-        }) */
-
 
     }
 
