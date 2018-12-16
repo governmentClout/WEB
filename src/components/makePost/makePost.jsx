@@ -537,6 +537,7 @@ class PollCreation extends Component {
     }).then(res => {
 
       console.log(res.data);
+      this.getPolls();
 
       this.setState({
 
@@ -551,6 +552,31 @@ class PollCreation extends Component {
       console.log(err)
 
     });
+
+  }
+
+  componentWillMount() {
+
+    this.getPolls();
+
+  }
+
+  getPolls() {
+
+    axios({
+      method: 'get',
+      url: `http://api.gclout.com:3000/polls`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: sessionStorage.getItem('token'),
+        uuid: sessionStorage.getItem('uuid')
+      }
+    }).then(res => {
+      console.log(res.data);
+      this.setState({
+        polls: res.data
+      })
+    })
 
   }
   render() {
