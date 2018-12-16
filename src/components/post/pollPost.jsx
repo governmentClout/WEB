@@ -72,6 +72,8 @@ class SinglePoll extends Component {
         }).then(res => {
             console.log(res.data);
             if(res.data.Success === "response submitted"){
+
+                this.getPolls();
                 this.setState({
                     option: ''
                 })
@@ -83,20 +85,28 @@ class SinglePoll extends Component {
 
     }
     componentWillMount() {
-      axios({
-          method: 'get',
-          url: `http://api.gclout.com:3000/polls`,
-          headers: {
-              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-              token: sessionStorage.getItem('token'),
-              uuid: sessionStorage.getItem('uuid')
-          }
-      }).then(res => {
-        console.log(res.data);
-        this.setState({
-            polls: res.data
+      
+        this.getPolls();
+
+    }
+
+    getPolls(){
+
+        axios({
+            method: 'get',
+            url: `http://api.gclout.com:3000/polls`,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                token: sessionStorage.getItem('token'),
+                uuid: sessionStorage.getItem('uuid')
+            }
+        }).then(res => {
+            console.log(res.data);
+            this.setState({
+                polls: res.data
+            })
         })
-      })
+    
     }
 
     render() {
