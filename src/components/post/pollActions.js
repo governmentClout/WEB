@@ -138,7 +138,7 @@ export default class PollActions extends Component {
         </button>*/}
                 <button className="post-action"
                         onClick={() => this.likePost(this.props.postID)}
-                    //onClick={() => console.log(this.props.postID)}
+                    // onClick={() => console.log(this.props.postID)}
                 >
                     <i className="far fa-thumbs-up" onLoad={this.showLikesCount.bind(this, this.props.postID)}/> {likes}  like{likes === 1 ? '' : 's'}
                 </button>

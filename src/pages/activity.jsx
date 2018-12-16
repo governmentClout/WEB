@@ -72,7 +72,7 @@ class ActivityPage extends Component {
 //
 // /*}
 
-console.log(res.data);
+//console.log(res.data);
                 const posts = res.data.reverse();
 
                 this.setState({
@@ -105,7 +105,7 @@ console.log(res.data);
                     <LoadingPost />
                     <LoadingPost />
                     <LoadingPost />
-                    </> : 
+                    </> :
                     (this.state.posts.map(post => <SinglePost key={post.post.id.toString()} post={post} />))
                 }
                   {/*<SinglePost postType="sponsored" />

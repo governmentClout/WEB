@@ -24,7 +24,7 @@ export default class SinglePost extends Component {
   }
   render() {
     const { uuid } = this.props.post.post;
-    console.log(uuid);
+    //console.log(uuid);
 
     return (
       <div style={{ marginBottom: "1em" }}>

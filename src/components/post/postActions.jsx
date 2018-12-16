@@ -107,10 +107,10 @@ export default class SinglePost extends Component {
                 uuid: id
             }
         }).then(res => {
-            console.log(res.data[0].length);
-            console.log(res.data)
-            console.log(res.data[0].comment)
-            console.log(res.data[0].comment.length);
+            // console.log(res.data[0].length);
+            // console.log(res.data)
+            // console.log(res.data[0].comment)
+            // console.log(res.data[0].comment.length);
             this.setState ({
                 comment: res.data[0].comment.length
             });

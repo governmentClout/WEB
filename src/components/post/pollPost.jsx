@@ -146,6 +146,7 @@ class SinglePoll extends Component {
                               className="form-check-i"
                               type="radio"
                               name="option"
+                              onClick={id => this.respond(poll.polls.uuid)}
                               value="2"
                               // checked={this.state.selectedOption === "no"}
                               onChange={this.onChange}
@@ -159,6 +160,7 @@ class SinglePoll extends Component {
                             <input
                               className="form-check-i"
                               type="radio"
+                              onClick={id => this.respond(poll.polls.uuid)}
                               name="option"
                               value="3"
                               // checked={this.state.selectedOption === "maybe"}
