@@ -11,33 +11,26 @@ class EditProfile extends Component {
     super(props);
 
     this.state = {
-
       showModal: false,
       uploadType: "",
       fname: this.props.userFirstName,
       lname: this.props.userLastName,
-      // nationality_origin: this.props.nationalityOrigin,
-        nationality_origin: '',
-      // nationality_residence: this.props.nationalityResidence,
-        nationality_residence: "",
-        // state: this.props.state,
-        state: '',
-        lgas: [],
-      // lga: this.props.lga,
-        lga: '',
+      nationality_origin: this.props.nationalityOrigin,
+      nationality_residence: this.props.nationalityResidence,
+      state: this.props.state,
+      lgas: [],
+      lga: this.props.lga,
       photo: "",
       phone: this.props.phone,
       allStates: [],
       loading: false,
-        countries: []
-
+      countries: [],
+      email: this.props.email,
+      isNigerian: false
     };
 
     this.onChange = this.onChange.bind(this);
-
-    // this.handleChange = this.handleChange.bind(this);
     this.editProfile = this.editProfile.bind(this);
-
   }
 
     componentDidMount(){
@@ -58,23 +51,52 @@ class EditProfile extends Component {
             }).catch(err => {
 
             console.log(err);
-
         })
+        if(this.state.nationality_origin === 'Nigeria') {
+
+          this.setState({
+            isNigerian: true
+          });
+        } else {
+          this.setState({
+            isNigerian: false
+          });
+        }
     }
 
     onChange(e) {
+      if(this.state.nationality_origin === 'Nigeria') {
+
         this.setState({
-            [e.target.name]: e.target.value
+          [e.target.name]: e.target.value,
+          isNigerian: true
         });
+      } else {
+        this.setState({
+          [e.target.name]: e.target.value,
+          isNigerian: false
+        });
+      }
+  
     }
 
   handleChange(e) {
+    if(this.state.nationality_origin === 'Nigeria') {
 
-    this.setState({
-
-      [e.target.name]: e.target.value
-
-    });
+      this.setState({
+  
+        [e.target.name]: e.target.value,
+        isNigerian: true
+  
+      });
+    } else {
+      this.setState({
+  
+        [e.target.name]: e.target.value,
+        isNigerian: false
+  
+      });
+    }
 
   }
 
@@ -200,7 +222,7 @@ class EditProfile extends Component {
             })
         }).catch(err => console.log(err));
         return(
-            <div className="form-group col-md">
+            <div className="form-group col-md right">
                 <label htmlFor="state">LGA</label>
                 <select
                     onChange={this.onChange}
@@ -218,29 +240,6 @@ class EditProfile extends Component {
             </div>
         )
 
-    }
-
-    displayState(){
-        if(this.state.nationality_residence === "Nigeria"){
-            return(
-                <div className="form-group col-md">
-                    <label htmlFor="state">State</label>
-                    <select
-                        onChange={this.onChange}
-                        name="state"
-                        className="form-control"
-                    >
-                        {this.state.allStates.map(state => {
-                            return (
-                                <option value={state.name} key={state.name}>
-                                    {state.name}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </div>
-            )
-        }
     }
 
   render() {
@@ -308,7 +307,7 @@ class EditProfile extends Component {
         <div className="col-md-9 mx-auto">
           <form onSubmit={this.editProfile}>
             <div className="form-row">
-              <div className="form-group col-md">
+              <div className="form-group col-md left">
                 <label htmlFor="Fname">First Name</label>
                 <input
                   name="fname"
@@ -320,7 +319,7 @@ class EditProfile extends Component {
                   required
                 />
               </div>
-              <div className="form-group col-md">
+              <div className="form-group col-md right">
                 <label htmlFor="lname">Last Name</label>
                 <input
                   name="lname"
@@ -333,9 +332,35 @@ class EditProfile extends Component {
                 />
               </div>
             </div>
+            <div className="form-row">
+              <div className="form-group col-md left">
+                <label htmlFor="email">Email address</label>
+                <input
+                  name="email"
+                  className="form-control"
+                  type="email"
+                  placeholder={this.props.email}
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  required
+                />
+              </div>
+              <div className="form-group col-md right">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  name="phone"
+                  className="form-control"
+                  type="tel"
+                  placeholder={this.props.phone}
+                  value={this.state.phone}
+                  onChange={this.onChange}
+                  required
+                />
+              </div>
+            </div>
 
               <div className="form-row">
-                  <dziv className="form-group col-md">
+                  <div className="form-group col-md left">
                       <label htmlFor="nationality_residence">Country of Residence</label>
                       <select
                           name="nationality_residence"
@@ -350,9 +375,9 @@ class EditProfile extends Component {
                               )
                           })}
                       </select>
-                  </dziv>
-                  <div className="form-group col-md">
-                      <label htmlFor="nationality_residence">Country of Origin</label>
+                  </div>
+                  <div className="form-group col-md right">
+                      <label htmlFor="nationality_origin">Country of Origin</label>
                       <select
                           name="nationality_origin"
                           className="form-control"
@@ -369,14 +394,25 @@ class EditProfile extends Component {
                   </div>
 
               </div>
-              <div className="form-row">
-                  {this.displayState()}
-
-                  <div className="form-group col-md">
-                      {this.displayLga()}
-
-                  </div>
-              </div>
+              {this.state.isNigerian ? (  <div className="form-row">
+                <div className="form-group col-md left">
+                  <label htmlFor="state">State</label>
+                  <select
+                      onChange={this.onChange}
+                      name="state"
+                      className="form-control">
+                      {this.state.allStates.map(state => {
+                        return (
+                          <option value={state.name} key={state.name}>
+                            {state.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+                {this.displayLga()}
+              </div> ) : ""
+              }
 
             <div className="d-flex mb-4">
               <button className="btn btn-gclout-blue mb-4" type="submit">

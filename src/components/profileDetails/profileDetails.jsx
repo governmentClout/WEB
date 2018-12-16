@@ -192,6 +192,7 @@ class ProfileDetails extends Component {
                       state={this.state.profile.state}
                       lga={this.state.profile.lga}
                       phone={this.props.user.phone}
+                      email={this.props.user.email}
                     />
                 </Modal>
               )}
