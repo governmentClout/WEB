@@ -1,18 +1,96 @@
 import React, { Component } from "react";
 import "./upgrade.css";
+import axios from 'axios';
+import { API_URL } from './../config';
 
 class UpgradeModal extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            about: '',
+
+            party: '',
+            aboutYou: '',
+            aboutParty: '',
             position: '',
             tosAgreement: false,
             success: false,
-            error: false
+            error: false,
+            loading: false
+        
+        };
+
+        this.requestUpgrade = this.requestUpgrade.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    
+    }
+
+    handleChange(e){
+
+        this.setState({
+
+            [e.target.name]: e.target.value
+
+        });
+    
+    }
+
+    requestUpgrade(e){
+
+        e.preventDefault();
+
+        this.setState({
+
+            loading: true
+        
+        })
+
+        const data = {
+
+            party: this.state.party,
+            about_you: this.state.aboutYou,
+            about_party: this.state.aboutParty,
+            office: this.state.position
+
         }
-    } 
+
+        console.log(data);
+
+        const id = sessionStorage.getItem("uuid"),
+            token = sessionStorage.getItem("token");
+
+        axios({
+
+            method: 'post',
+            data: data,
+            url: `${API_URL}/executives`,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                token: token,
+                uuid: id
+            }
+
+        }).then(res => {
+
+            console.log(res.data);
+            this.setState({
+
+                loading: false,
+                party: '',
+                aboutYou: '',
+                aboutParty: '',
+                position: ''
+
+            });
+        
+        }).catch(err => {
+            console.log(err);
+        })
+    
+    }
+
+
+
     render() {
         return (
             <>
@@ -27,12 +105,12 @@ class UpgradeModal extends Component {
                     <div className="mx-auto col-md-8">
                     <h5 className="text-center"><strong>Request Upgrade</strong></h5>
                     <br />
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.requestUpgrade}>
                         <div className="form-row">
                         <div className="form-group col-md">
                             <label>Select political office</label>
                             <select
-                            name="office"
+                            name="position"
                             className="form-control"
                             onChange={this.handleChange}
                             required
@@ -67,21 +145,21 @@ class UpgradeModal extends Component {
                             <textarea
                             className="form-control"
                             rows="3"
-                            name="about"
+                            name="aboutYou"
                             onChange={this.handleChange}
-                            value={this.state.about}
+                            value={this.state.aboutYou}
                             placeholder="Type text here..."
                             required={true}
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="about_position"> Tell us about your position </label>
+                            <label htmlFor="about_position"> Tell us about your party </label>
                             <textarea
                             className="form-control"
                             rows="3"
-                            name="position"
+                            name="aboutParty"
                             onChange={this.handleChange}
-                            value={this.state.position}
+                            value={this.state.aboutParty}
                             placeholder="Type text here..."
                             required={true}
                             />
