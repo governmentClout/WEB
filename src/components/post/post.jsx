@@ -29,7 +29,7 @@ export default class SinglePost extends Component {
     return (
       <div style={{ marginBottom: "1em" }}>
         <Link to={`/activity/${this.props.post.post.uuid}`} className="post-link">
-          <div className="post-container">
+          <div className  ="post-container">
             <div className="post-owner">
               <div className="post-owner-image-wrapper">
                 <img

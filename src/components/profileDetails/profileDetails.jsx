@@ -24,6 +24,8 @@ class ProfileDetails extends Component {
       office: '',
       party: '',
       loading: true,
+      friends: []
+
     };
 
       this.handleChange = this.handleChange.bind(this);
@@ -96,6 +98,9 @@ class ProfileDetails extends Component {
   };
 
   componentDidMount() {
+
+    this.getFriends();
+
     let id =  sessionStorage.getItem("uuid");
     const token  = sessionStorage.getItem("token");
     console.log("hello world");
@@ -131,18 +136,37 @@ class ProfileDetails extends Component {
   toggleUpgrade() {
     this.setState({ showUpgradeModal: !this.state.showUpgradeModal });
   }
-  // handleChange(e) {
 
-  //   this.setState({
+  getFriends() {
 
-  //     [e.target.name]: e.target.value
+    axios({
 
-  //   });
-  
-  // }
+      method: 'get',
+      url: `${API_URL}/friends`,
+      headers: {
+
+        token: sessionStorage.getItem('token'),
+        uuid: sessionStorage.getItem('uuid')
+
+      }
+
+    }).then(res => {
+
+      this.setState({
+
+        friends: res.data.friends.length
+
+      })
+
+    })
+
+  }
 
   render() {
-    const { showModal, showUpgradeModal, loading } = this.state;
+    const { showModal, showUpgradeModal, loading, friends } = this.state;
+
+    console.log(friends);
+
     return (
         <React.Fragment>
         { loading ? <ProfileDetailsLoader /> :
@@ -271,7 +295,7 @@ class ProfileDetails extends Component {
                         className="profile-link text-center col-6"
                       >
                         <p>Friends</p>
-                        <h5 className="text-gclout-blue">300</h5>
+                        <h5 className="text-gclout-blue">{friends}</h5>
                       </Link>
                     </div>
                   </div>

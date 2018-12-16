@@ -10,11 +10,16 @@ class Sidebar extends Component {
         super(props);
 
         this.state = {
-            profile: []
-        }
+
+            profile: [],
+            friends: []
+        
+        };
     }
 
-    componentWillMount() {
+    componentDidMount() {
+
+      this.getFriends();
 
         const id =  sessionStorage.getItem("uuid");
         const token  = sessionStorage.getItem("token");
@@ -43,12 +48,40 @@ class Sidebar extends Component {
 
     }
 
+    getFriends() {
+
+      axios({
+
+        method: 'get',
+        url: `http://api.gclout.com:3000/friends`,
+        headers: {
+
+          token: sessionStorage.getItem('token'),
+          uuid: sessionStorage.getItem('uuid')
+
+        }
+
+      }).then(res => {
+
+        this.setState({
+
+          friends: res.data.friends.length
+
+        })
+
+      })
+
+    }
+
 
     render() {
 
+      const { friends } = this.state;
+
       const { profile } = this.state;
       console.log(profile);
-    return (
+    
+      return (
       <div className="sidebar  d-none d-md-block">
         <div className="sidebar-top">
           <div className="sidebar-cover-image-wrapper">
@@ -76,7 +109,7 @@ class Sidebar extends Component {
               </div>
               <div className="text-center col-6">
                 <p>Friends</p>
-                <h5 className="text-gclout-blue">300</h5>
+                <h5 className="text-gclout-blue">{friends}</h5>
               </div>
             </div>
           </div>
