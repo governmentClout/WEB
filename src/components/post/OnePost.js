@@ -37,7 +37,7 @@ class OnePost extends Component {
     likePost = (id) => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-
+            
         const pid = id;
 
         const data = {
@@ -45,7 +45,7 @@ class OnePost extends Component {
             post: pid
 
         };
-        const url = 'http://api.gclout.com:3000/reactions/' +id;
+        const url = `${API_URL}/reactions/` +id;
         axios({
 
             method: 'post',
@@ -107,6 +107,7 @@ class OnePost extends Component {
     }
 
     displayLike(){
+
         const authid = sessionStorage.getItem('uuid');
         const token = sessionStorage.getItem('token');
         const user = this.state.uuid;
@@ -133,17 +134,20 @@ class OnePost extends Component {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
                     token: token,
-                    uuid: user
+                    uuid: authid
                 }
             }).then(res => {
                 console.log(res.data);
             })
         } else {
-          const headers =  {
-            'crossDomain': true,
-              token: token,
-              uuid: user
-          };
+        
+            const headers =  {
+                
+                'crossDomain': true,
+                token: token,
+                uuid: user
+    
+            };
 
             axios.delete(`${API_URL}/reactions/${this.state.reactionid}`, {headers})
             .then(res => {
@@ -216,6 +220,7 @@ class OnePost extends Component {
 
         this.fetchPost();
         this.registerView()
+    
     }
 
     registerView(){

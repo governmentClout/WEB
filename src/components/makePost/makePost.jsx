@@ -115,6 +115,7 @@ class PostCreation extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      
       wordCount: 0,
       post: "",
       uploadImages: false,
@@ -122,7 +123,8 @@ class PostCreation extends Component {
       disable: false,
       loading: false,
         selectedFile: ''
-    };
+    
+      };
 
     this.updateWordCount= this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
@@ -157,18 +159,26 @@ class PostCreation extends Component {
 // /*      attachment: fd*/
 //
 //     };
-    const { post, selectedFile } = this.state;
-    let formData = new FormData();
-    formData.append('post', post);
-    formData.append('selectedFile', selectedFile);
-    console.log(formData);
+    // const { post } = this.state;
+    //let formData = new FormData();
+    //formData.append('post', post);
+    //formData.append('selectedFile', selectedFile);
+    //console.log(formData);
+
+    const data = {
+
+      post:this.state.post
+
+    };
+
+    console.log(data);
 
     const url = `${API_URL}/posts`;
     axios({
 
       method: "post",
       url: url,
-      data: formData,
+      data: data,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
@@ -295,6 +305,7 @@ class ArticleCreation extends Component {
     super(props);
 
     this.state = {
+
         wordCount: 0,
         article: "",
         title: "",
@@ -303,13 +314,14 @@ class ArticleCreation extends Component {
         selectedFile: null
 
       };
-    this.updateWordCount = this.updateWordCount.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onImageChange = this.onImageChange.bind(this);
-
-
+    
+      this.updateWordCount = this.updateWordCount.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.onImageChange = this.onImageChange.bind(this);
+      this.onChange= this.onChange.bind(this);
 
   }
+
   updatePostsNow = () => this.props.updatePosts();
 
   onImageChange = event => {
@@ -342,9 +354,17 @@ class ArticleCreation extends Component {
     this.setState({ uploadImages: !currentState });
   };
 
+  onChange(e){
+
+    this.setState({
+
+      [e.target.name]: e.target.value
+    })
+  }
+
   onSubmit(e) {
 
-     this.setState({loading: true});
+    this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -355,19 +375,21 @@ class ArticleCreation extends Component {
 
     const data = {
 
-      post: this.state.article,
-      attachment: this.state.selectedFile
-
+      article: this.state.article,
+      article_title: this.state.title,
+      attachment: this.state.selectedFile,
+      post_type: "article",
 
     };
 
     console.log(data);
-    console.log("lmao");
+    const url = `${API_URL}/articles`;
+    console.log(url);
 
     axios({
 
       method: "post",
-      url: "http://api.gclout.com:3000/posts",
+      url: url,
       data: data,
       headers: {
 
@@ -377,10 +399,16 @@ class ArticleCreation extends Component {
 
       }
 
-    })
-      .then(response => {
+    }).then(response => {
         console.log(response.data);
-        this.setState({loading: false, post: ""});
+        
+        this.setState({
+        
+          loading: false, 
+          article: "",
+          title: "",
+        
+        });
         this.updatePostsNow();
 
         if (response.data.Success) {
@@ -405,11 +433,11 @@ class ArticleCreation extends Component {
 
         console.log(response.data.Success);
 
-      })
-      .catch(err => {
+      }).catch(err => {
         this.setState({loading: false, post: ""});
         console.log(err)
-      });
+    
+    });
   }
 
   render() {
@@ -431,7 +459,8 @@ class ArticleCreation extends Component {
                 className="form-control"
                 name="title"
                 placeholder="Title of article ..."
-                value={this.state.tile}
+                value={this.state.title}
+                onChange={this.onChange}
               />
             </div>
             <div className="form-group">
