@@ -65,7 +65,7 @@ class Friend extends Component {
                     </div>
                     <div className="deats  my-auto">
                         <h5>{this.props.friend.firstName + " " + this.props.friend.lastName}</h5>
-                        <p>Togo</p>
+                        <p>{this.props.friend.nationality_residence}</p>
                     </div>
                 </div>
                 <div className="friend-action">

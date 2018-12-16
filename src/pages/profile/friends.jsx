@@ -11,12 +11,17 @@ class FriendsPage extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             friends: []
-        };
-    }
+
+          };
+
+        }
     componentWillMount() {
-        this.fetchFriends();
+
+      this.fetchFriends();
+
     }
 
     fetchFriends(){

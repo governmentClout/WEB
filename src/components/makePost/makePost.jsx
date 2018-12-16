@@ -4,6 +4,7 @@ import PostMedia from "./postMedia";
 import axios from "axios";
 import {API_URL} from "../config";
 import {Image} from 'cloudinary-react';
+import {CloudinaryContext, Transformation} from 'cloudinary-react';
 
 class MakePost extends Component {
   constructor(props) {
@@ -422,6 +423,7 @@ class ArticleCreation extends Component {
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
           <button id="upload_widget" class="cloudinary-button">Upload files</button>
+          {/*// <Image cloudName="xyluz" publicId="sample" width="300" crop="scale"/> */}
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
