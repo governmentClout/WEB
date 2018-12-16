@@ -3,6 +3,7 @@ import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
 import {API_URL} from "../config";
+import {Image} from 'cloudinary-react';
 
 class MakePost extends Component {
   constructor(props) {
@@ -260,7 +261,7 @@ class PostCreation extends Component {
               {100 - this.state.wordCount} {""} words left
             </p>
             {/*<PostMedia showUploader={this.state.uploadImages} />*/}
-            <input type="file" onChange={this.onChange} name="selectedFile" />
+            {/*<input type="file" onChange={this.onChange} name="selectedFile" />*/}
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
@@ -409,6 +410,7 @@ class ArticleCreation extends Component {
         console.log(err)
       });
   }
+
   render() {
     return (
       <div
@@ -419,6 +421,7 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
+          <button id="upload_widget" class="cloudinary-button">Upload files</button>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
