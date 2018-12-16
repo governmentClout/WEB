@@ -487,14 +487,14 @@ class ArticleCreation extends Component {
               >
                 Share article
               </button>
-              <button
+              {/* <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
                 onClick={this.showImageUploader}
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
