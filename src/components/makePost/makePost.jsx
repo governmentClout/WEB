@@ -364,6 +364,12 @@ class ArticleCreation extends Component {
 
   onSubmit(e) {
 
+    this.setState({
+
+      loading: true
+
+    })
+
     this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
