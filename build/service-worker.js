@@ -14,19 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "/precache-manifest.028c31b974c682466451befd3ec29c15.js"
-=======
-  "/precache-manifest.f1b6c4e9acde86f6296ea4695c74ce9c.js"
->>>>>>> added build v4
-=======
-  "/precache-manifest.028c31b974c682466451befd3ec29c15.js"
->>>>>>> adde build v5
-=======
-  "/precache-manifest.3619ad9181c141cdaece7813ab2b33d1.js"
->>>>>>> built files
+  "/precache-manifest.80f801b2e84ed62c2a1c0a6ecdacdcb9.js"
 );
 
 workbox.clientsClaim();
