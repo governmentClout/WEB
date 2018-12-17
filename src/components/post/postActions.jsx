@@ -198,7 +198,7 @@ export default class SinglePost extends Component {
                     </button>
                 )}
             </Reference>
-            <Popper placement="bootom">
+            <Popper placement="bootom-end">
                 {({ ref, style, placement, arrowProps }) => (
                 <div ref={ref} style={style} data-placement={placement}>
                     <div

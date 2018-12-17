@@ -95,7 +95,8 @@
   padding: 1em 3em;
   border-radius: 8px;
   display: none;
-  left: -15em;
+  left: -10em;
+  margin-top: -10px
 }
 .dropup.show {
   display: block;
@@ -121,8 +122,8 @@
   transform: translateY(-1px);
 }
 .dropup-list-item a{
-  padding: 1em;
-  font-size: 24px;
+  padding: 0.9em;
+  font-size: 14px;
   color: #ffffff;
   border-radius: 50%;
 }
