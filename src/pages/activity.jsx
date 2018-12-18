@@ -63,31 +63,14 @@ class ActivityPage extends Component {
             headers: header
         })
             .then(res => {
-
-                // for(let i = 0; i < res.data.length ; i++){
-
-//               //console.log(res.data[i].post);  //for the post object
-//              // console.log(res.data[i].post.post);  //for the post content
-//               //console.log(res.data[i].comments);  //for the comments object
-//
-// /*}
-
-//console.log(res.data);
                 const posts = res.data.reverse();
 
                 this.setState({
-
                     posts,
                     loading: false
-
                 });
-
-//        console.log(res.data.reverse());
-
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -100,7 +83,7 @@ class ActivityPage extends Component {
             <div className="d-flex">
               <Sidebar />
               <div className="flex-1">
-                  {this.state.userId.id === 'executive' ? <MakeExecutivePost updatePosts={this.loadNow} /> : <MakePost updatePosts={this.loadNow} />}
+                {this.state.userId.id === 'executive' ? <MakeExecutivePost updatePosts={this.loadNow} /> : <MakePost updatePosts={this.loadNow} />}
                 {this.state.loading ?  <>
                     <LoadingPost />
                     <LoadingPost />
@@ -108,8 +91,6 @@ class ActivityPage extends Component {
                     </> :
                     (this.state.posts.map(post => <SinglePost key={post.post.id.toString()} post={post} />))
                 }
-                  {/*<SinglePost postType="sponsored" />
-                <SinglePost media /> */}
               </div>
             </div>
           </div>

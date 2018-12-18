@@ -32,15 +32,18 @@ export default class SinglePost extends Component {
           <div className  ="post-container">
             <div className="post-owner">
               <div className="post-owner-image-wrapper">
-                <img
+                {this.props.post.user[0] ? (
+                  <img
                   src={this.props.post.user[0].photo}
                   alt="lol"
                   className="post-owner-image"
-                />
+                /> ) : (
+                  <p>lol</p>
+                )}
               </div>
 
               <div className="post-owner-details">
-                <p>{this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName}</p>
+                <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
                 {this.props.postType === "sponsored" ? (
                   <p className="post-type">Sponsored</p>
                 ) : (
