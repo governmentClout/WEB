@@ -12,13 +12,15 @@ class SinglePoll extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             selectedOption: "yes",
             showComment: false,
             polls: [],
             option: '',
             firstName: "",
             lastName: "",
-            user: []
+            user: [],
+            loading: false
         
         };
     }
@@ -96,6 +98,12 @@ class SinglePoll extends Component {
 
     getPolls(){
 
+        this.setState({
+
+            loading: true
+
+        });
+
         axios({
             method: 'get',
             url: `http://api.gclout.com:3000/polls`,
@@ -106,102 +114,112 @@ class SinglePoll extends Component {
             }
         }).then(res => {
 
-                // for (let i in res.data) {
-                //     let user = res.data[i].user[0];
-                //     console.log(user);
+            //  for (let i in res.data) {
+            // let user = res.data[i].user[0];
+            // console.log(user);
+            console.log(res.data.user[0]);
+            // const users = res.data.map(inventory => inventory);
+                 this.setState({
 
-                    this.setState({
-                        polls: res.data,
-                        
-                    })
+                     polls: res.data,
+                     loading: false
+
+                 });
+        // }
+            // const user = res.data.user[0].map(obj => obj.data);
+            //console.log(user);
+            console.log(res.data);
                 // }
-
-            
         })
     
     }
 
     render() {
         console.log(this.state.user);
-        const {polls } = this.state;
+        const {polls, loading } = this.state;
         console.log(polls);
+        console.log(loading);
+        if(loading){
+            return <img src="https://i.gifer.com/8ZFL.gif" />
+        }
 
       return (
-      <div style={{ marginBottom: "1em" }}>
-          { polls.map(
-              (poll, index) => (
-                  <div className="post-container">
-                      <div className="post-owner">
-                          <div className="post-owner-image-wrapper">
-                              <img
-                                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                                  alt="lol"
-                                  className="post-owner-image"
-                              />
+          <div style={{ marginBottom: "1em" }}>
+              {polls.map(
+                  (poll, index) => (
+                      <div className="post-container">
+                          <div className="post-owner">
+                              <div className="post-owner-image-wrapper">
+                                  <img
+                                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                                      alt="lol"
+                                      className="post-owner-image"
+                                  />
+                              </div>
+                              <div className="post-owner-details">
+                                  <p onLoad={() => alert(poll.polls.created_by)}>user</p>
+                                  <p className="post-type">{poll.polls.sector}</p>
+                              </div>
                           </div>
-                          <div className="post-owner-details">
-                              <p onLoad={() => alert(poll.polls.created_by)}>{polls.user[0].firstName} {poll.lastName}</p>
-                              <p className="post-type">{poll.polls.sector}</p>
+                          <div className="post-content">
+                              <p>
+                                  {poll.polls.opinion}
+                              </p>
+                              <form className="poll-form">
+                                  <div className="form-check">
+                                      <input
+                                          className="form-check-i"
+                                          type="radio"
+                                          name="option"
+                                          onClick={id => this.respond(poll.polls.uuid)}
+                                          value="1"
+                                          // checked={this.state.selectedOption === "yes"}
+                                          onChange={this.onChange}
+                                      />
+                                      <span className="checkmark"/>
+                                      <label className="form-check-label" htmlFor="pollOptions">
+                                          Yes/Agree/True
+                                      </label>
+                                  </div>
+                                  <div className="form-check">
+                                      <input
+                                          className="form-check-i"
+                                          type="radio"
+                                          name="option"
+                                          onClick={id => this.respond(poll.polls.uuid)}
+                                          value="2"
+                                          // checked={this.state.selectedOption === "no"}
+                                          onChange={this.onChange}
+                                      />
+                                      <span className="checkmark"/>
+                                      <label className="form-check-label" htmlFor="pollOptions">
+                                          No/Disagree/False
+                                      </label>
+                                  </div>
+                                  <div className="form-check">
+                                      <input
+                                          className="form-check-i"
+                                          type="radio"
+                                          onClick={id => this.respond(poll.polls.uuid)}
+                                          name="option"
+                                          value="3"
+                                          // checked={this.state.selectedOption === "maybe"}
+                                          onChange={this.onChange}
+                                      />
+                                      <span className="checkmark"/>
+                                      <label className="form-check-label" htmlFor="pollOptions">
+                                          Undecided/Ambiguos
+                                      </label>
+                                  </div>
+                              </form>
                           </div>
+                          <hr/>
                       </div>
-                      <div className="post-content">
-                          <p>
-                              {poll.polls.opinion}
-                          </p>
-                          <form className="poll-form">
-                            <div className="form-check">
-                            <input
-                            className="form-check-i"
-                            type="radio"
-                            name="option"
-                            onClick={id => this.respond(poll.polls.uuid)}
-                            value="1"
-                            // checked={this.state.selectedOption === "yes"}
-                            onChange={this.onChange}
-                            />
-                            <span className="checkmark" />
-                            <label className="form-check-label" htmlFor="pollOptions">
-                            Yes/Agree/True
-                            </label>
-                            </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-i"
-                              type="radio"
-                              name="option"
-                              onClick={id => this.respond(poll.polls.uuid)}
-                              value="2"
-                              // checked={this.state.selectedOption === "no"}
-                              onChange={this.onChange}
-                            />
-                            <span className="checkmark" />
-                            <label className="form-check-label" htmlFor="pollOptions">
-                              No/Disagree/False
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-i"
-                              type="radio"
-                              onClick={id => this.respond(poll.polls.uuid)}
-                              name="option"
-                              value="3"
-                              // checked={this.state.selectedOption === "maybe"}
-                              onChange={this.onChange}
-                            />
-                            <span className="checkmark" />
-                            <label className="form-check-label" htmlFor="pollOptions">
-                              Undecided/Ambiguos
-                            </label>
-                          </div>
-                        </form>
-                      </div>
-                      <hr/>
-                  </div>
+                  )
               )
-          )}
-        {/*<PostActions showComment={this.showComment} />*/}
-      </div>
+              }
+              }
+          </div>
     );
   }
 }
