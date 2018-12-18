@@ -15,7 +15,11 @@ class SinglePoll extends Component {
             selectedOption: "yes",
             showComment: false,
             polls: [],
-            option: ''
+            option: '',
+            firstName: "",
+            lastName: "",
+            user: []
+        
         };
     }
 
@@ -101,17 +105,26 @@ class SinglePoll extends Component {
                 uuid: sessionStorage.getItem('uuid')
             }
         }).then(res => {
-            console.log(res.data);
-            this.setState({
-                polls: res.data
-            })
+
+                // for (let i in res.data) {
+                //     let user = res.data[i].user[0];
+                //     console.log(user);
+
+                    this.setState({
+                        polls: res.data,
+                        
+                    })
+                // }
+
+            
         })
     
     }
 
     render() {
-
-      const {polls} = this.state;
+        console.log(this.state.user);
+        const {polls } = this.state;
+        console.log(polls);
 
       return (
       <div style={{ marginBottom: "1em" }}>
@@ -127,7 +140,7 @@ class SinglePoll extends Component {
                               />
                           </div>
                           <div className="post-owner-details">
-                              <p onLoad={() => alert(poll.polls.created_by)}>{poll.polls.created_by}</p>
+                              <p onLoad={() => alert(poll.polls.created_by)}>{polls.user[0].firstName} {poll.lastName}</p>
                               <p className="post-type">{poll.polls.sector}</p>
                           </div>
                       </div>
