@@ -117,7 +117,7 @@ class SinglePoll extends Component {
             //  for (let i in res.data) {
             // let user = res.data[i].user[0];
             // console.log(user);
-            console.log(res.data.user[0]);
+//            console.log(res.data.user[0]);
             // const users = res.data.map(inventory => inventory);
                  this.setState({
 

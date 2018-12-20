@@ -368,7 +368,7 @@ class ArticleCreation extends Component {
 
       loading: true
 
-    })
+    });
 
     this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
@@ -383,7 +383,7 @@ class ArticleCreation extends Component {
 
       article: this.state.article,
       article_title: this.state.title,
-      attachment: this.state.selectedFile,
+      //attachment: this.state.selectedFile,
       post_type: "article",
 
     };
