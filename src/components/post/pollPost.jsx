@@ -54,19 +54,19 @@ class SinglePoll extends Component {
     respond(id){
 
         const pollId = id;
-        console.log(id);
+       // console.log(id);
 
         const data = {
             poll: id,
             status: this.state.option
         };
 
-        console.log(data);
+        //console.log(data);
         const header = {
             token: sessionStorage.getItem('token'),
             uuid: sessionStorage.getItem('uuid')
         };
-        console.log(header);
+       // console.log(header);
 
         axios({
 
@@ -76,7 +76,7 @@ class SinglePoll extends Component {
             headers: header
 
         }).then(res => {
-            console.log(res.data);
+           // console.log(res.data);
             if(res.data.Success === "response submitted"){
 
                 this.getPolls();
@@ -85,7 +85,7 @@ class SinglePoll extends Component {
                 })
             } else {
                 // toastr.error('please select something');
-                console.log("lol")
+               // console.log("lol")
             }
         })
 
@@ -118,34 +118,52 @@ class SinglePoll extends Component {
             // let user = res.data[i].user[0];
             // console.log(user);
 //            console.log(res.data.user[0]);
-            // const users = res.data.map(inventory => inventory);
-                 this.setState({
-
-                     polls: res.data,
-                     loading: false
-
-                 });
+            //const user =  res.data.user[0].map(inventory => inventory);
+            //console.log(user);
+            /*res.data.map(da => {
+               // console.log(da.user.map(d => console.log(d)));
+               da.user.map(d => {
+                   this.setState({
+                       user: d,
+                       polls: res.data,
+                       loading: false
+                   })
+               })
+            });*/
+            res.data.map(da => {
+                //const d => da.user.map(d => d);
+                this.setState({
+                    user: da.user[0],
+                    polls: res.data,
+                    loading: false
+                })
+            })
+                 // this.setState({
+                 //
+                 //     polls: res.data,
+                 //     loading: false
+                 //
+                 // });
         // }
             // const user = res.data.user[0].map(obj => obj.data);
             //console.log(user);
-            console.log(res.data);
+           // console.log(res.data);
                 // }
         })
     
     }
 
     render() {
-        console.log(this.state.user);
-        const {polls, loading } = this.state;
-        console.log(polls);
-        console.log(loading);
+       // console.log(this.state.user);
+        const {polls, loading, user } = this.state;
+        console.log(user);
         if(loading){
             return <img src="https://i.gifer.com/8ZFL.gif" />
         }
 
       return (
           <div style={{ marginBottom: "1em" }}>
-              {polls.map(
+              {polls.map (
                   (poll, index) => (
                       <div className="post-container">
                           <div className="post-owner">
@@ -157,7 +175,12 @@ class SinglePoll extends Component {
                                   />
                               </div>
                               <div className="post-owner-details">
-                                  <p onLoad={() => alert(poll.polls.created_by)}>user</p>
+
+                                      {poll.user.map(i => {
+                                          return <p onLoad={() => alert(poll.polls.created_by)}> {i.firstName} {i.lastName} </p>
+                                      })}
+                                      {/*{user.firstName}*/}
+
                                   <p className="post-type">{poll.polls.sector}</p>
                               </div>
                           </div>
