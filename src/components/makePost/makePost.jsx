@@ -312,7 +312,7 @@ class ArticleCreation extends Component {
         uploadImages: false,
         toProfile: false,
         selectedFile: null,
-
+      uploadedFileCloudinaryUrl: "",
         loaded: 0
 
       };
@@ -393,6 +393,14 @@ class ArticleCreation extends Component {
       loading: true
 
     });
+
+    var myWidget = window.cloudinary.createUploadWidget({
+      cloudName: 'xyluz',
+      uploadPreset: 'bbhcijzf'}, (error, result) => { console.log(error, result) });
+
+    document.getElementById("upload_widget").addEventListener("click", function(){
+      myWidget.open();
+    }, false);
 
     /*if(this.state.selectedFile !== null){
       alert("file selected");
@@ -478,6 +486,26 @@ class ArticleCreation extends Component {
         console.log(err)
     
     });
+  }
+
+  onImage(files) {
+
+    this.setState({
+      uploadedFile: files[0]
+    });
+    this.handleImageUpload(files[0])
+  }
+
+  handleImageUpload(file){
+
+    const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/xyluz/image/upload";
+    const CLOUDINARY_UPLOAD_PRESET = 'bbhcijzf';
+
+    axios({
+      method: 'post',
+      url: CLOUDINARY_UPLOAD_URL,
+      data: 
+    })
   }
 
   render() {
