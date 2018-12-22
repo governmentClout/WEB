@@ -122,7 +122,8 @@ class PostCreation extends Component {
       toProfile: false,
       disable: false,
       loading: false,
-        selectedFile: ''
+        selectedFile: '',
+        post_type: ""
     
       };
 
@@ -167,7 +168,8 @@ class PostCreation extends Component {
 
     const data = {
 
-      post:this.state.post
+      post:this.state.post,
+      post_type: "post"
 
     };
 
@@ -187,14 +189,15 @@ class PostCreation extends Component {
     })
       .then(response => {
 
-        this.setState({
-
-            loading: false,
-            post: ""
-
-        });
-
         if (response.data.Success) {
+
+            this.setState({
+
+                loading: false,
+                post: ""
+
+            });
+
             this.updatePostsNow();
           sessionStorage.setItem("message", response.data.Success)
         } else {
@@ -410,9 +413,6 @@ class ArticleCreation extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    console.log(id);
-    console.log(token);
-
     e.preventDefault();
 
     const form = new FormData();
@@ -432,7 +432,7 @@ class ArticleCreation extends Component {
 
 //    console.log(data);
     const url = `${API_URL}/articles`;
-    console.log(url);
+
 
     axios({
 
@@ -468,9 +468,6 @@ class ArticleCreation extends Component {
             title: ""
 
           });
-
-          console.log('success');
-
           sessionStorage.setItem("message", response.data.Success)
 
         } else {
@@ -501,11 +498,11 @@ class ArticleCreation extends Component {
     const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/xyluz/image/upload";
     const CLOUDINARY_UPLOAD_PRESET = 'bbhcijzf';
 
-    axios({
+    /*axios({
       method: 'post',
       url: CLOUDINARY_UPLOAD_URL,
       data: 
-    })
+    })*/
   }
 
   render() {
