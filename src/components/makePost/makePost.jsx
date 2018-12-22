@@ -122,7 +122,8 @@ class PostCreation extends Component {
       toProfile: false,
       disable: false,
       loading: false,
-        selectedFile: ''
+        selectedFile: '',
+        post_type: ""
     
       };
 
@@ -167,7 +168,8 @@ class PostCreation extends Component {
 
     const data = {
 
-      post:this.state.post
+      post:this.state.post,
+      post_type: "post"
 
     };
 
@@ -187,14 +189,15 @@ class PostCreation extends Component {
     })
       .then(response => {
 
-        this.setState({
-
-            loading: false,
-            post: ""
-
-        });
-
         if (response.data.Success) {
+
+            this.setState({
+
+                loading: false,
+                post: ""
+
+            });
+
             this.updatePostsNow();
           sessionStorage.setItem("message", response.data.Success)
         } else {
@@ -312,8 +315,9 @@ class ArticleCreation extends Component {
         uploadImages: false,
         toProfile: false,
         selectedFile: null,
-
-        loaded: 0
+      uploadedFileCloudinaryUrl: "",
+        loaded: 0,
+        loading: false
 
       };
     
@@ -387,12 +391,19 @@ class ArticleCreation extends Component {
   }
 
   onSubmit(e) {
-
     this.setState({
 
       loading: true
 
     });
+
+/*    var myWidget = window.cloudinary.createUploadWidget({
+      cloudName: 'xyluz',
+      uploadPreset: 'bbhcijzf'}, (error, result) => { console.log(error, result) });
+
+    document.getElementById("upload_widget").addEventListener("click", function(){
+      myWidget.open();
+    }, false);*/
 
     /*if(this.state.selectedFile !== null){
       alert("file selected");
@@ -402,14 +413,11 @@ class ArticleCreation extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    console.log(id);
-    console.log(token);
-
     e.preventDefault();
 
     const form = new FormData();
 
-    form.append('file', this.state.selectedFile);
+//    form.append('file', this.state.selectedFile);
 
     const data = {
 
@@ -430,7 +438,7 @@ class ArticleCreation extends Component {
 
       method: "post",
       url: url,
-      data: form,
+      data: data,
       headers: {
 
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -460,9 +468,6 @@ class ArticleCreation extends Component {
             title: ""
 
           });
-
-          console.log('success');
-
           sessionStorage.setItem("message", response.data.Success)
 
         } else {
@@ -480,7 +485,28 @@ class ArticleCreation extends Component {
     });
   }
 
+  onImage(files) {
+
+    this.setState({
+      uploadedFile: files[0]
+    });
+    this.handleImageUpload(files[0])
+  }
+
+  handleImageUpload(file){
+
+    const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/xyluz/image/upload";
+    const CLOUDINARY_UPLOAD_PRESET = 'bbhcijzf';
+
+    /*axios({
+      method: 'post',
+      url: CLOUDINARY_UPLOAD_URL,
+      data: 
+    })*/
+  }
+
   render() {
+      const { loading } = this.state;
     return (
       <div
         className={
@@ -490,7 +516,7 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-          <button id="upload_widget" className="cloudinary-button">Upload files</button>
+          {/*<button id="upload_widget" className="cloudinary-button">Upload files</button>*/}
           {/*// <Image cloudName="xyluz" publicId="sample" width="300" crop="scale"/> */}
             {/*<Dropzone
                 onDrop={this.handleDrop}
@@ -528,12 +554,13 @@ class ArticleCreation extends Component {
 {/*            <PostMedia type="file" showUploader={this.state.uploadImages} />*/}
 
             <div className="d-flex">
-              <button
-                className="btn btn-gclout-blue mr-2"
-                style={{ marginBottom: "0" }}
-              >
-                Share article
-              </button>
+                <button
+                    className="btn btn-gclout-blue mr-2"
+                    style={{ marginBottom: "0" }}
+                    type="submit"
+                >
+                    {loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share Article"}
+                </button>
               {/* <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
