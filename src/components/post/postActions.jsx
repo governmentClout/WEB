@@ -217,7 +217,7 @@ export default class SinglePost extends Component {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         href={`https://www.facebook.com/sharer/sharer.php?u=https://dev.gclout.com/activity/${this.props.postID}`}>
-                                        <i class="fab fa-facebook-f"/>
+                                        <i className="fab fa-facebook-f"/>
                                     </a>
                                 </button>
                             </li>

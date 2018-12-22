@@ -34,7 +34,7 @@ class ProfilePage extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    const url = "http://api.gclout.com:3000/posts?user=" + id;
+    const url = "http://api.gclout.com:3000/posts?user=" + id + "&page=1&limit=10&sort=ASC";
     const header = {
 
       token: token,
@@ -50,17 +50,8 @@ class ProfilePage extends Component {
       headers: header
     })
       .then(res => {
-        
-          // for(let i = 0; i < res.data.length ; i++){
 
-//               //console.log(res.data[i].post);  //for the post object
-//              // console.log(res.data[i].post.post);  //for the post content
-//               //console.log(res.data[i].comments);  //for the comments object
-//
-// /*}
-
-
-        const posts = res.data.reverse();
+        const posts = res.data.posts;
 
         this.setState({
           
