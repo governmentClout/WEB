@@ -316,7 +316,8 @@ class ArticleCreation extends Component {
         toProfile: false,
         selectedFile: null,
       uploadedFileCloudinaryUrl: "",
-        loaded: 0
+        loaded: 0,
+        loading: false
 
       };
     
@@ -390,20 +391,19 @@ class ArticleCreation extends Component {
   }
 
   onSubmit(e) {
-
     this.setState({
 
       loading: true
 
     });
 
-    var myWidget = window.cloudinary.createUploadWidget({
+/*    var myWidget = window.cloudinary.createUploadWidget({
       cloudName: 'xyluz',
       uploadPreset: 'bbhcijzf'}, (error, result) => { console.log(error, result) });
 
     document.getElementById("upload_widget").addEventListener("click", function(){
       myWidget.open();
-    }, false);
+    }, false);*/
 
     /*if(this.state.selectedFile !== null){
       alert("file selected");
@@ -417,7 +417,7 @@ class ArticleCreation extends Component {
 
     const form = new FormData();
 
-    form.append('file', this.state.selectedFile);
+//    form.append('file', this.state.selectedFile);
 
     const data = {
 
@@ -432,13 +432,13 @@ class ArticleCreation extends Component {
 
 //    console.log(data);
     const url = `${API_URL}/articles`;
-
+    console.log(url);
 
     axios({
 
       method: "post",
       url: url,
-      data: form,
+      data: data,
       headers: {
 
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -506,6 +506,7 @@ class ArticleCreation extends Component {
   }
 
   render() {
+      const { loading } = this.state;
     return (
       <div
         className={
@@ -515,7 +516,7 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-          <button id="upload_widget" className="cloudinary-button">Upload files</button>
+          {/*<button id="upload_widget" className="cloudinary-button">Upload files</button>*/}
           {/*// <Image cloudName="xyluz" publicId="sample" width="300" crop="scale"/> */}
             {/*<Dropzone
                 onDrop={this.handleDrop}
@@ -553,12 +554,13 @@ class ArticleCreation extends Component {
 {/*            <PostMedia type="file" showUploader={this.state.uploadImages} />*/}
 
             <div className="d-flex">
-              <button
-                className="btn btn-gclout-blue mr-2"
-                style={{ marginBottom: "0" }}
-              >
-                Share article
-              </button>
+                <button
+                    className="btn btn-gclout-blue mr-2"
+                    style={{ marginBottom: "0" }}
+                    type="submit"
+                >
+                    {loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share Article"}
+                </button>
               {/* <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
