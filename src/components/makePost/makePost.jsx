@@ -3,8 +3,8 @@ import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
 import {API_URL} from "../config";
-import {Image} from 'cloudinary-react';
-import {CloudinaryContext, Transformation} from 'cloudinary-react';
+import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import Dropzone from 'react-dropzone'
 
 class MakePost extends Component {
   constructor(props) {
@@ -311,7 +311,9 @@ class ArticleCreation extends Component {
         title: "",
         uploadImages: false,
         toProfile: false,
-        selectedFile: null
+        selectedFile: null,
+
+        loaded: 0
 
       };
     
@@ -321,6 +323,28 @@ class ArticleCreation extends Component {
       this.onChange= this.onChange.bind(this);
 
   }
+
+  /*handleDrop = (files) => {
+    // Push all the axios request promise into a single array
+    const uploaders = files.map(file => {
+      // Initial FormData
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", `codeinfuse, medium, gist`);
+      formData.append("upload_preset", "bbhcijzf"); // Replace the preset name with your own
+      formData.append("api_key", "359125599617762"); // Replace API key with your own Cloudinary key
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      return axios.post("https://api.cloudinary.com/v1_1/xyluz/image/upload", formData, {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      }).then(response => {
+        const data = response.data;
+        const fileURL = data.secure_url; // You should store this URL for future references in your app
+        console.log(data);
+        console.log(fileURL);
+      })
+    });*/
 
   updatePostsNow = () => this.props.updatePosts();
 
@@ -368,7 +392,11 @@ class ArticleCreation extends Component {
 
       loading: true
 
-    })
+    });
+
+    /*if(this.state.selectedFile !== null){
+      alert("file selected");
+    }*/
 
     this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
@@ -379,16 +407,22 @@ class ArticleCreation extends Component {
 
     e.preventDefault();
 
+    const form = new FormData();
+
+    form.append('file', this.state.selectedFile);
+
     const data = {
 
       article: this.state.article,
       article_title: this.state.title,
-      attachment: this.state.selectedFile,
+      //attachment: this.state.selectedFile,
       post_type: "article",
 
     };
 
     console.log(data);
+
+//    console.log(data);
     const url = `${API_URL}/articles`;
     console.log(url);
 
@@ -396,7 +430,7 @@ class ArticleCreation extends Component {
 
       method: "post",
       url: url,
-      data: data,
+      data: form,
       headers: {
 
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -413,7 +447,7 @@ class ArticleCreation extends Component {
           loading: false, 
           article: "",
           title: "",
-        
+
         });
         this.updatePostsNow();
 
@@ -456,8 +490,15 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-          <button id="upload_widget" class="cloudinary-button">Upload files</button>
+          <button id="upload_widget" className="cloudinary-button">Upload files</button>
           {/*// <Image cloudName="xyluz" publicId="sample" width="300" crop="scale"/> */}
+            {/*<Dropzone
+                onDrop={this.handleDrop}
+                multiple
+                accept="image/*"
+            >
+              <p>Drop your files or click here to upload</p>
+            </Dropzone>*/}
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input

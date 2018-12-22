@@ -47,7 +47,7 @@ class ActivityPage extends Component {
         const id = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
 
-        const url = "http://api.gclout.com:3000/posts";
+        const url = "http://api.gclout.com:3000/posts?page=1&limit=10&sort=DESC";
         const header = {
 
             token: token,
@@ -63,7 +63,7 @@ class ActivityPage extends Component {
             headers: header
         })
             .then(res => {
-                const posts = res.data.reverse();
+                const posts = res.data.posts;
 
                 this.setState({
                     posts,
