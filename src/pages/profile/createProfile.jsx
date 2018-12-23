@@ -376,7 +376,7 @@ class CreateProfile extends Component {
             <div className="col-md-9 mx-auto">
               <form>
                 <div className="form-row">
-                    
+
                     {/*<div style={{ width: "160px", height: "160px" }}>
                         <div className="lifted-profile-image-wrapper" style={{ marginTop: "-80px" }}>
                             <img
