@@ -144,8 +144,6 @@ class PostCreation extends Component {
 
     e.preventDefault();
 
-
-
     if(this.state.selectedFile !== null ){
 
       const file = this.state.selectedFile;
@@ -211,51 +209,52 @@ class PostCreation extends Component {
 
       })
 
-    }
+    } else {
 
-    const data = {
+      const data = {
 
-      post:this.state.post,
-      post_type: "post"
+        post:this.state.post,
+        post_type: "post"
 
-    };
+      };
 
-    console.log(data);
+      console.log(data);
 
-    const url = `${API_URL}/posts`;
-    axios({
+      const url = `${API_URL}/posts`;
+      axios({
 
-      method: "post",
-      url: url,
-      data: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        token: token,
-        uuid: id
-      }
-    })
-      .then(response => {
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          token: token,
+          uuid: id
+        }
+      })
+          .then(response => {
 
-        if (response.data.Success) {
+            if (response.data.Success) {
 
-            this.setState({
+              this.setState({
 
                 loading: false,
                 post: ""
 
-            });
+              });
 
-            this.updatePostsNow();
-          sessionStorage.setItem("message", response.data.Success)
-        } else {
-          console.log("login error")
-        }
-        console.log(response.data.Success);
-      })
-      .catch(err => {
-        this.setState({loading: false, post: ""});
-        console.log(err)
-      });
+              this.updatePostsNow();
+              sessionStorage.setItem("message", response.data.Success)
+            } else {
+              console.log("login error")
+            }
+            console.log(response.data.Success);
+          })
+          .catch(err => {
+            this.setState({loading: false, post: ""});
+            console.log(err)
+          });
+    }
   }
 
   updateWordCount = event => {
@@ -287,7 +286,7 @@ class PostCreation extends Component {
         default:
           this.setState({ [e.target.name]: e.target.value });
       }
-    }
+    };
 
   fileSelected = event => {
     this.setState({
@@ -376,56 +375,19 @@ class ArticleCreation extends Component {
         uploadImages: false,
         toProfile: false,
         selectedFile: null,
-      uploadedFileCloudinaryUrl: "",
+        uploadedFileCloudinaryUrl: "",
         loaded: 0,
-        loading: false
+        loading: false,
 
       };
     
       this.updateWordCount = this.updateWordCount.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-      this.onImageChange = this.onImageChange.bind(this);
       this.onChange= this.onChange.bind(this);
 
   }
 
-  /*handleDrop = (files) => {
-    // Push all the axios request promise into a single array
-    const uploaders = files.map(file => {
-      // Initial FormData
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("tags", `codeinfuse, medium, gist`);
-      formData.append("upload_preset", "bbhcijzf"); // Replace the preset name with your own
-      formData.append("api_key", "359125599617762"); // Replace API key with your own Cloudinary key
-      formData.append("timestamp", (Date.now() / 1000) | 0);
-
-      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-      return axios.post("https://api.cloudinary.com/v1_1/xyluz/image/upload", formData, {
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-      }).then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url; // You should store this URL for future references in your app
-        console.log(data);
-        console.log(fileURL);
-      })
-    });*/
-
   updatePostsNow = () => this.props.updatePosts();
-
-  onImageChange = event => {
-    console.log(event);
-
-/*    const file = e.target.files[0];
-    console.log(file);
-
-    this.setState({
-
-        selectedFile: e.target.files[0]
-
-    })*/
-
-  };
 
     updateWordCount(event) {
     this.setState({ article: event.target.value });
@@ -457,63 +419,110 @@ class ArticleCreation extends Component {
       loading: true
 
     });
-
-/*    var myWidget = window.cloudinary.createUploadWidget({
-      cloudName: 'xyluz',
-      uploadPreset: 'bbhcijzf'}, (error, result) => { console.log(error, result) });
-
-    document.getElementById("upload_widget").addEventListener("click", function(){
-      myWidget.open();
-    }, false);*/
-
-    /*if(this.state.selectedFile !== null){
-      alert("file selected");
-    }*/
-
-    this.setState({loading: true});
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
     e.preventDefault();
+    if(this.state.selectedFile !== null){
 
-    const form = new FormData();
+      const file = this.state.selectedFile;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
+      // console.log(`${CLOUDINARY_UPLOAD_PRESET}`);
+      //console.log(file);
+      axios({
 
+        url: `${CLOUDINARY_URL}`,
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData,
+        onUploadProgress: progressEvent => {
+          console.log(progressEvent.loaded / progressEvent.total)
+          this.setState({
+            // loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+            loaded: (ProgressEvent.loaded/ ProgressEvent.total*1)
+          })
+        }
+
+      }).then(res => {
+        console.log(res.data.url);
+
+        const data = {
+
+          article: this.state.article,
+          article_title: this.state.title,
+          post_type: "article",
+          attachment: res.data.url
+
+        };
+        console.log(data);
+        axios({
+
+          method: 'post',
+          url: `${API_URL}/articles`,
+          data: data,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            token: token,
+            uuid: id
+          }
+
+        }).then(res => {
+          console.log(res.data);
+          if(res.data.Success){
+            this.setState({
+              loading: false,
+              article: "",
+              title: "",
+              newArticleToggle: false,
+              selectedFile: null,
+              loaded: 0
+            });
+            this.updatePostsNow();
+          }
+        })
+      })
+
+    } else {
 //    form.append('file', this.state.selectedFile);
 
-    const data = {
+      const data = {
 
-      article: this.state.article,
-      article_title: this.state.title,
-      //attachment: this.state.selectedFile,
-      post_type: "article",
+        article: this.state.article,
+        article_title: this.state.title,
+        //attachment: this.state.selectedFile,
+        post_type: "article",
 
-    };
+      };
 
-    console.log(data);
+      console.log(data);
 
 //    console.log(data);
-    const url = `${API_URL}/articles`;
-    console.log(url);
+      const url = `${API_URL}/articles`;
+      console.log(url);
 
-    axios({
+      axios({
 
-      method: "post",
-      url: url,
-      data: data,
-      headers: {
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
 
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        token: token,
-        uuid: id
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          token: token,
+          uuid: id
 
-      }
+        }
 
-    }).then(response => {
+      }).then(response => {
         console.log(response.data);
-        
+
         this.setState({
-        
-          loading: false, 
+
+          loading: false,
           article: "",
           title: "",
 
@@ -542,29 +551,17 @@ class ArticleCreation extends Component {
       }).catch(err => {
         this.setState({loading: false, post: ""});
         console.log(err)
-    
-    });
+
+      });
+    }
   }
 
-  onImage(files) {
-
+  fileSelected = event => {
     this.setState({
-      uploadedFile: files[0]
-    });
-    this.handleImageUpload(files[0])
-  }
-
-  handleImageUpload(file){
-
-    const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/xyluz/image/upload";
-    const CLOUDINARY_UPLOAD_PRESET = 'bbhcijzf';
-
-    /*axios({
-      method: 'post',
-      url: CLOUDINARY_UPLOAD_URL,
-      data: 
-    })*/
-  }
+      selectedFile: event.target.files[0],
+      loaded: 0
+    })
+  };
 
   render() {
       const { loading } = this.state;
@@ -577,15 +574,10 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-          {/*<button id="upload_widget" className="cloudinary-button">Upload files</button>*/}
-          {/*// <Image cloudName="xyluz" publicId="sample" width="300" crop="scale"/> */}
-            {/*<Dropzone
-                onDrop={this.handleDrop}
-                multiple
-                accept="image/*"
-            >
-              <p>Drop your files or click here to upload</p>
-            </Dropzone>*/}
+            <div className="form-group">
+              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button>
+            </div>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
