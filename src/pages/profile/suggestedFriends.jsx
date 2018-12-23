@@ -16,7 +16,8 @@ class SuggestedFriendsPage extends Component {
 
           suggesteds: [],
             filtered: [],
-            keyword: ''
+            keyword: '',
+            loading: false
 
         }
 
@@ -29,6 +30,12 @@ class SuggestedFriendsPage extends Component {
     }
 
     fetchFriends(){
+
+        this.setState({
+            loading: true
+
+        })
+
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
         axios({
@@ -43,7 +50,8 @@ class SuggestedFriendsPage extends Component {
             console.log(response.data);
             this.setState({
                 suggesteds: response.data,
-                filtered: response.data
+                filtered: response.data,
+                loading: false
             })
         })
     }
@@ -76,6 +84,13 @@ class SuggestedFriendsPage extends Component {
     };
 
   render() {
+
+      const { loading } =  this.state;
+
+      if(loading){
+          return <img src="https://i.gifer.com/8ZFL.gif" />
+      }
+
     return(
     /*return !this.props.isLoggedIn ? (
             <Redirect to="/login" />

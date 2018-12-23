@@ -113,23 +113,7 @@ class SinglePoll extends Component {
                 uuid: sessionStorage.getItem('uuid')
             }
         }).then(res => {
-
-            //  for (let i in res.data) {
-            // let user = res.data[i].user[0];
-            // console.log(user);
-//            console.log(res.data.user[0]);
-            //const user =  res.data.user[0].map(inventory => inventory);
-            //console.log(user);
-            /*res.data.map(da => {
-               // console.log(da.user.map(d => console.log(d)));
-               da.user.map(d => {
-                   this.setState({
-                       user: d,
-                       polls: res.data,
-                       loading: false
-                   })
-               })
-            });*/
+            console.log(res.data)
             res.data.map(da => {
                 //const d => da.user.map(d => d);
                 this.setState({

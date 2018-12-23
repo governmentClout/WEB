@@ -50,16 +50,31 @@ class navMessagees extends Component {
     }).then(res => {
 
       console.log(res.data);
-      console.log('here');
+      console.log(typeof res);
+      this.setState({
+          mesages: res.data.received.message
+      }, () => console.log(this.state.mesages))
+      /*res.data.received.map(m => {
+          this.setState({
+              messages: m.received.messages
+          })
+      })*/
+      /*this.setState({
+          messages: res.data.received
+      }, ()=> console.log(this.state.messages))*/
+
+      /*console.log(res.data.received);
+      this.setState({
+        messages: res.data.received
+      })*/
 
     })
-
   }
-
-
   render() {
-    return (
-      <React.Fragment>
+     const { messages } = this.state;
+     console.log(messages);
+
+  return (
         <div
           className={
             this.props.show
@@ -80,34 +95,12 @@ class navMessagees extends Component {
                <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
               </div>
             </li>
-            <li className="navMessage">
-            <div className="navMessage-image-wrapper">
-              <img className="navMessage-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
-            </div>
-              <div className="navMessage-content-wrapper">
-                <p> <strong>Oreoluwa Ojo</strong>
-                <span>11:20pm</span>
-              </p>
-               <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
-              </div>
-            </li>
-            <li className="navMessage">
-            <div className="navMessage-image-wrapper">
-              <img className="navMessage-image" src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="lol" />
-            </div>
-              <div className="navMessage-content-wrapper">
-                <p> <strong>Oreoluwa Ojo</strong>
-                <span>11:20pm</span>
-              </p>
-               <p className="navMessage-content"><Reply className="icon-16" /> Hii !! </p>
-              </div>
-            </li>
           </ul>
           <div className="navMessages-footer text-center">
             <Link to="/messages" onClick={this.props.close}>View more</Link>
           </div>
         </div>
-      </React.Fragment>
+      /*</React.Fragment>*/
     );
   }
 }

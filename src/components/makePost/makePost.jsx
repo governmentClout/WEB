@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
-import {API_URL} from "../config";
+import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../config";
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import Dropzone from 'react-dropzone'
 
@@ -115,14 +115,14 @@ class PostCreation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
       wordCount: 0,
       post: "",
       uploadImages: false,
       toProfile: false,
       disable: false,
       loading: false,
-        selectedFile: '',
+      selectedFile: null,
         post_type: ""
     
       };
@@ -151,20 +151,66 @@ class PostCreation extends Component {
 
     e.preventDefault();
 
-/*    const fd = new FormData();
-    fd.append('image', this.state.selectedFile, this.state.selectedFile.name);*/
 
-//     const data = {
-//
-//       post: this.state.post,
-// /*      attachment: fd*/
-//
-//     };
-    // const { post } = this.state;
-    //let formData = new FormData();
-    //formData.append('post', post);
-    //formData.append('selectedFile', selectedFile);
-    //console.log(formData);
+
+    if(this.state.selectedFile !== null ){
+
+      const file = this.state.selectedFile;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
+     // console.log(`${CLOUDINARY_UPLOAD_PRESET}`);
+      //console.log(file);
+      axios({
+
+        url: `${CLOUDINARY_URL}`,
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData
+
+      }).then(res => {
+        console.log(res.data.url);
+        const data = {
+
+          post:this.state.post,
+          post_type: "post",
+          attachment: res.data.url
+
+        };
+        console.log(data);
+
+        axios({
+
+          method: 'post',
+          url: `${API_URL}/posts`,
+          data: data,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            token: token,
+            uuid: id
+          }
+
+        }).then(res => {
+          console.log(res.data);
+          if(res.data.Success){
+           this.setState({
+             loading: false,
+             post: "",
+             selectedFile: null
+           });
+           this.updatePostsNow();
+          }
+        })
+
+      })
+
+      /*alert('gile selected');
+      const fd = new FormData();
+      fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+*/
+    }
 
     const data = {
 
@@ -242,6 +288,32 @@ class PostCreation extends Component {
       }
     }
 
+    // handleDrop = files => {
+    //     // Push all the axios request promise into a single array
+    //     const uploaders = files.map(file => {
+    //         // Initial FormData
+    //         const formData = new FormData();
+    //         formData.append("file", file);
+    //         formData.append("tags", `codeinfuse, medium, gist`);
+    //         formData.append("upload_preset", "pvhilzh7"); // Replace the preset name with your own
+    //         formData.append("api_key", "1234567"); // Replace API key with your own Cloudinary key
+    //         formData.append("timestamp", (Date.now() / 1000) | 0);
+    //
+    //         // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+    //         return axios.post("https://api.cloudinary.com/v1_1/codeinfuse/image/upload", formData, {
+    //             headers: { "X-Requested-With": "XMLHttpRequest" },
+    //         }).then(response => {
+    //             const data = response.data;
+    //             const fileURL = data.secure_url // You should store this URL for future references in your app
+    //             console.log(data);
+    //         })
+    //     });
+  fileSelected = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    })
+  };
+
   render() {
     return (
       <div
@@ -252,6 +324,19 @@ class PostCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Post</h5>
           <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <input type="file" onChange={this.fileSelected}/>
+            </div>
+              {/*<Dropzone
+                  // onDrop={this.handleDrop}
+                  multiple
+                  accept="image/*"
+                  name="selectedFile"
+                  onChange={this.handleChange}
+                  // style={styles.dropzone}
+              >
+                  <p>Drop your files or click here to upload</p>
+              </Dropzone>*/}
             <div className="form-group">
               <textarea
                 className={
@@ -280,7 +365,7 @@ class PostCreation extends Component {
               <button
                 className="btn btn-gclout-blue mr-2"
                 style={{ marginBottom: "0" }}
-                disabled={!this.state.disable}
+                type="submit"
               >
                 {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"}
               </button>
