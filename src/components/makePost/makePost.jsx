@@ -165,7 +165,8 @@ class PostCreation extends Component {
         onUploadProgress: progressEvent => {
           console.log(progressEvent.loaded / progressEvent.total)
           this.setState({
-            loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+            // loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+            loaded: (ProgressEvent.loaded/ ProgressEvent.total*1)
           })
         }
 
@@ -200,7 +201,8 @@ class PostCreation extends Component {
              loading: false,
              post: "",
              showNewPost: false,
-             selectedFile: null
+             selectedFile: null,
+             loaded: 0
 
            });
            this.updatePostsNow();
@@ -307,6 +309,7 @@ class PostCreation extends Component {
             <div className="form-group">
               <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
               <button onClick={() => this.fileInput.click() }>Select Photo</button>
+              {/*{this.state.loaded === 0 ? <button onClick={() => this.fileInput.click() }>Select Photo</button> : <div>{Math.round(this.state.loaded,2) } %</div> }*/}
               {/*<input type="file" onChange={this.fileSelected}/>*/}
 
             </div>
@@ -332,7 +335,7 @@ class PostCreation extends Component {
             <p className="text-right mb-0">
               {100 - this.state.wordCount} {""} words left
             </p>
-            <PostMedia showUploader={this.state.uploadImages} />
+            {/*<PostMedia showUploader={this.state.uploadImages} />*/}
             {/*<input type="file" onChange={this.onChange} name="selectedFile" />*/}
             <div className="d-flex">
               <button
