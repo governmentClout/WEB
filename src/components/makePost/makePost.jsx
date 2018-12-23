@@ -3,17 +3,17 @@ import "./makePost.css";
 import PostMedia from "./postMedia";
 import axios from "axios";
 import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../config";
-import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
-import Dropzone from 'react-dropzone'
 
 class MakePost extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showNewPost: false,
       showNewArticle: false,
       showNewPoll: false
     };
+
     this.newPostToggle = this.newPostToggle.bind(this);
     this.newArticleToggle = this.newArticleToggle.bind(this);
     this.newPollToggle = this.newPollToggle.bind(this);
@@ -123,7 +123,8 @@ class PostCreation extends Component {
       disable: false,
       loading: false,
       selectedFile: null,
-        post_type: ""
+        post_type: "",
+      loaded: 0
     
       };
 
@@ -133,15 +134,7 @@ class PostCreation extends Component {
 
   updatePostsNow = () => this.props.updatePosts();
 
-  // fileSelected = (e) => {
-  //   console.log(e.target.files[0]);
-  //   this.setState({
-  //       selectedFile: e.target.files[0]
-  //   })
-  //
-  // };
-
-    onSubmit(e) {
+  onSubmit(e) {
 
   // postData(ev) {
     this.setState({loading: true});
@@ -168,10 +161,17 @@ class PostCreation extends Component {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        data: formData
+        data: formData,
+        onUploadProgress: progressEvent => {
+          console.log(progressEvent.loaded / progressEvent.total)
+          this.setState({
+            loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+          })
+        }
 
       }).then(res => {
         console.log(res.data.url);
+
         const data = {
 
           post:this.state.post,
@@ -196,9 +196,12 @@ class PostCreation extends Component {
           console.log(res.data);
           if(res.data.Success){
            this.setState({
+
              loading: false,
              post: "",
+             showNewPost: false,
              selectedFile: null
+
            });
            this.updatePostsNow();
           }
@@ -206,10 +209,6 @@ class PostCreation extends Component {
 
       })
 
-      /*alert('gile selected');
-      const fd = new FormData();
-      fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-*/
     }
 
     const data = {
@@ -288,29 +287,10 @@ class PostCreation extends Component {
       }
     }
 
-    // handleDrop = files => {
-    //     // Push all the axios request promise into a single array
-    //     const uploaders = files.map(file => {
-    //         // Initial FormData
-    //         const formData = new FormData();
-    //         formData.append("file", file);
-    //         formData.append("tags", `codeinfuse, medium, gist`);
-    //         formData.append("upload_preset", "pvhilzh7"); // Replace the preset name with your own
-    //         formData.append("api_key", "1234567"); // Replace API key with your own Cloudinary key
-    //         formData.append("timestamp", (Date.now() / 1000) | 0);
-    //
-    //         // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-    //         return axios.post("https://api.cloudinary.com/v1_1/codeinfuse/image/upload", formData, {
-    //             headers: { "X-Requested-With": "XMLHttpRequest" },
-    //         }).then(response => {
-    //             const data = response.data;
-    //             const fileURL = data.secure_url // You should store this URL for future references in your app
-    //             console.log(data);
-    //         })
-    //     });
   fileSelected = event => {
     this.setState({
-      selectedFile: event.target.files[0]
+      selectedFile: event.target.files[0],
+      loaded: 0
     })
   };
 
@@ -325,18 +305,11 @@ class PostCreation extends Component {
           <h5>Post</h5>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <input type="file" onChange={this.fileSelected}/>
+              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button>
+              {/*<input type="file" onChange={this.fileSelected}/>*/}
+
             </div>
-              {/*<Dropzone
-                  // onDrop={this.handleDrop}
-                  multiple
-                  accept="image/*"
-                  name="selectedFile"
-                  onChange={this.handleChange}
-                  // style={styles.dropzone}
-              >
-                  <p>Drop your files or click here to upload</p>
-              </Dropzone>*/}
             <div className="form-group">
               <textarea
                 className={
@@ -359,7 +332,7 @@ class PostCreation extends Component {
             <p className="text-right mb-0">
               {100 - this.state.wordCount} {""} words left
             </p>
-            {/*<PostMedia showUploader={this.state.uploadImages} />*/}
+            <PostMedia showUploader={this.state.uploadImages} />
             {/*<input type="file" onChange={this.onChange} name="selectedFile" />*/}
             <div className="d-flex">
               <button
