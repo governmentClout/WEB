@@ -180,8 +180,8 @@ class ProfileDetails extends Component {
                     style={{ marginTop: "-80px" }}
                   >
                     <img
-                      className="lifted-profile-image"
-                      src={this.state.profile.photo}
+                        src={this.state.profile.photo}
+                        className="lifted-profile-image"
                       alt="profile7"
                     />
                   </div>

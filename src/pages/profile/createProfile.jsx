@@ -165,7 +165,7 @@ class CreateProfile extends Component {
             }
 
         }).then(res => {
-            console.log(res.data.url);
+            console.log(res.data.secure_url);
 
             const data = {
 
@@ -174,7 +174,7 @@ class CreateProfile extends Component {
                 nationality_origin: this.state.nationality_origin,
                 state: this.state.state,
                 lga: this.state.lga,
-                photo: res.data.url,
+                photo: res.data.secure_url,
                 firstName: this.state.fname,
                 lastName: this.state.lname,
                 token: sessionStorage.getItem("token")
