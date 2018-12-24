@@ -156,9 +156,13 @@ class EditProfile extends Component {
 
     const data = {
 
-      nationality_residence: this.state.nationality_residence,
-      nationality_origin: this.state.nationality_origin,
-      state: this.state.state,
+        firstName: this.state.fname,
+        lastName: this.state.lname,
+        nationality_residence: this.state.nationality_residence,
+        nationality_origin: this.state.nationality_origin,
+        state: this.state.state,
+        lga: this.state.lga,
+        photo: this.state.photo
 
     };
 
@@ -171,6 +175,7 @@ class EditProfile extends Component {
       data: data,
       mode: 'no-cors',
       headers: {
+
         "Content-Type": "application/json;charset=utf-8",
         token: token,
         uuid: id,
@@ -179,7 +184,7 @@ class EditProfile extends Component {
 
     }).then(response => {
 
-      console.log(response);
+      console.log(response.data);
       this.setState({
         loading: false
       })

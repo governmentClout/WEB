@@ -49,8 +49,8 @@ class navMessagees extends Component {
 
     }).then(res => {
 
-      console.log(res.data);
-      console.log(typeof res);
+     /* console.log(res.data);
+      console.log(typeof res);*/
       this.setState({
           mesages: res.data.received.message
       }, () => console.log(this.state.mesages))
@@ -72,7 +72,7 @@ class navMessagees extends Component {
   }
   render() {
      const { messages } = this.state;
-     console.log(messages);
+     //console.log(messages);
 
   return (
         <div

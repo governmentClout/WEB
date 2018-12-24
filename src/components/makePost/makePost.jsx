@@ -124,7 +124,8 @@ class PostCreation extends Component {
       loading: false,
       selectedFile: null,
         post_type: "",
-      loaded: 0
+      loaded: 0,
+      preview: ""
     
       };
 
@@ -169,13 +170,18 @@ class PostCreation extends Component {
         }
 
       }).then(res => {
-        console.log(res.data.url);
+        //console.log(res.data.secure_url);
+        this.setState({
+
+          preview: res.data.secure_url
+
+        });
 
         const data = {
 
           post:this.state.post,
           post_type: "post",
-          attachment: res.data.url
+          attachment: res.data.secure_url
 
         };
         console.log(data);
@@ -200,7 +206,8 @@ class PostCreation extends Component {
              post: "",
              showNewPost: false,
              selectedFile: null,
-             loaded: 0
+             loaded: 0,
+             preview: ''
 
            });
            this.updatePostsNow();
@@ -307,7 +314,7 @@ class PostCreation extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button><div><img src={this.state.preview}/> </div>
               {/*{this.state.loaded === 0 ? <button onClick={() => this.fileInput.click() }>Select Photo</button> : <div>{Math.round(this.state.loaded,2) } %</div> }*/}
               {/*<input type="file" onChange={this.fileSelected}/>*/}
 
@@ -378,6 +385,7 @@ class ArticleCreation extends Component {
         uploadedFileCloudinaryUrl: "",
         loaded: 0,
         loading: false,
+        preview: ''
 
       };
     
@@ -449,13 +457,18 @@ class ArticleCreation extends Component {
 
       }).then(res => {
         console.log(res.data.url);
+        this.setState({
+
+          preview: res.data.secure_url
+
+        });
 
         const data = {
 
           article: this.state.article,
           article_title: this.state.title,
           post_type: "article",
-          attachment: res.data.url
+          attachment: res.data.secure_url
 
         };
         console.log(data);
@@ -479,7 +492,8 @@ class ArticleCreation extends Component {
               title: "",
               newArticleToggle: false,
               selectedFile: null,
-              loaded: 0
+              loaded: 0,
+              preview: ''
             });
             this.updatePostsNow();
           }
@@ -560,7 +574,7 @@ class ArticleCreation extends Component {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0
-    })
+    }, () => console.log(this.state.selectedFile))
   };
 
   render() {
@@ -576,7 +590,7 @@ class ArticleCreation extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button><div> <img src={this.state.preview}/> </div>
             </div>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
