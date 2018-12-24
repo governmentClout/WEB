@@ -50,8 +50,6 @@ class ProfileDetails extends Component {
 
         };
 
-      console.log(data);
-
       const id = sessionStorage.getItem("uuid"),
           token = sessionStorage.getItem("token");
 
@@ -74,7 +72,6 @@ class ProfileDetails extends Component {
           headers: header
 
         }).then(res => {
-            console.log(res.data);
             if(res.data.Success){
                 this.setState({
 
@@ -103,7 +100,6 @@ class ProfileDetails extends Component {
 
     let id =  sessionStorage.getItem("uuid");
     const token  = sessionStorage.getItem("token");
-    console.log("hello world");
 
     if(this.props.userId) {
       id = this.props.userId;
@@ -126,7 +122,7 @@ class ProfileDetails extends Component {
       this.setState({
         profile: res.data.profile[0],
         loading: false
-      });
+      }, () => console.log(this.state.profile));
     });
   }
   }
@@ -164,9 +160,7 @@ class ProfileDetails extends Component {
 
   render() {
     const { showModal, showUpgradeModal, loading, friends } = this.state;
-
-    console.log(friends);
-
+   console.log(this.state.profile.photo);
     return (
         <React.Fragment>
         { loading ? <ProfileDetailsLoader /> :
@@ -174,7 +168,7 @@ class ProfileDetails extends Component {
             <div className="profile-cover-image-wrapper">
               <img
                 className="profile-cover-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
+                src={this.state.profile.photo}
                 alt="cover"
               />
             </div>
@@ -187,7 +181,7 @@ class ProfileDetails extends Component {
                   >
                     <img
                       className="lifted-profile-image"
-                      src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                      src={this.state.profile.photo}
                       alt="profile7"
                     />
                   </div>

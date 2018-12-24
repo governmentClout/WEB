@@ -6,28 +6,33 @@ import { Redirect } from "react-router-dom";
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../../components/config";
 
 class CreateProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // user: [],
-      showModal: false,
-      uploadType: "",
-      fname: "",
-      lname: "",
-      nationality_origin: "",
-      nationality_residence: "",
-      state: "",
+
+        showModal: false,
+        uploadType: "",
+        fname: "",
+        lname: "",
+        nationality_origin: "",
+        nationality_residence: "",
+        state: "",
         lgas: [],
-      lga: "",
-      photo: "",
-      loading: false,
-      redirect: false,
-      allStates: [],
-      toProfile: false,
-        countries: []
+        lga: "",
+        photo: "",
+        loading: false,
+        redirect: false,
+        allStates: [],
+        toProfile: false,
+        countries: [],
+        selectedProfile: null,
+        loaded: 0,
+        selectedFile: null
+
     };
 
     this.onChange = this.onChange.bind(this);
@@ -36,25 +41,15 @@ class CreateProfile extends Component {
   }
 
   componentDidMount(){
-
         axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
             .then(res => {
-
                 const states = res.data.map(state => state);
-
                 //console.log(states);
-
                 this.setState({
-
                     allStates: states
-
                 })
-
             }).catch(err => {
-
             console.log(err);
-
-
         })
     }
 
@@ -105,7 +100,6 @@ class CreateProfile extends Component {
               })
           })
           .catch(err => console.log(err))
-
   }
 
   getCountries(){
@@ -118,84 +112,158 @@ class CreateProfile extends Component {
     }).then(res => {
     //  console.log(res.data);
       this.setState({
-
           countries: res.data
-
       })
-
     }).catch(err => {
-
       console.log(err);
-
     })
   }
 
+  fileSelected = event => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0
+        }, () => console.log(this.state.selectedFile))
+    };
+
   createProfile(e) {
-    this.setState({ loading: true });
-    e.preventDefault();
+      e.preventDefault();
+      this.setState({
+        loading: true
+    });
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
     console.log(id);
     console.log(token);
     e.preventDefault();
     if(this.state.lga === ""){
-
       this.state.lga = "N/A";
-
     }
-
     if(this.state.state === ""){
-
       this.state.state = "N/A";
-
     }
 
-    const data = {
-      uuid: sessionStorage.getItem("uuid"),
-      nationality_residence: this.state.nationality_residence,
-      nationality_origin: this.state.nationality_origin,
-      state: this.state.state,
-      lga: this.state.lga,
-      photo:
-        "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
-      firstName: this.state.fname,
-      lastName: this.state.lname,
-      token: sessionStorage.getItem("token")
-    };
+    if(this.state.selectedFile !== null){
 
-    console.log(data);
+        const file = this.state.selectedFile;
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
+        axios({
+            url: `${CLOUDINARY_URL}`,
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: formData,
+            onUploadProgress: progressEvent => {
+                console.log(progressEvent.loaded / progressEvent.total)
+                this.setState({
+                    // loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+                    loaded: (ProgressEvent.loaded/ ProgressEvent.total*1)
+                })
+            }
 
-    axios({
-      method: "post",
-      url: "http://api.gclout.com:3000/profiles",
-      data: data,
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        token: token,
-        uuid: id
-      }
-    })
-      .then(response => {
-        this.setState({ loading: false });
-        if (response.data.Success) {
-          this.setState({
-            toProfile: true
-          });
-        }
-        console.log(response);
-      })
-      .catch(err => {
-        this.setState({ loading: false });
+        }).then(res => {
+            console.log(res.data.url);
 
-        console.log(err);
-        this.notify(err);
-            this.setState({
+            const data = {
 
-                loading: false
+                uuid: sessionStorage.getItem("uuid"),
+                nationality_residence: this.state.nationality_residence,
+                nationality_origin: this.state.nationality_origin,
+                state: this.state.state,
+                lga: this.state.lga,
+                photo: res.data.url,
+                firstName: this.state.fname,
+                lastName: this.state.lname,
+                token: sessionStorage.getItem("token")
 
+            };
+            console.log(data);
+
+            axios({
+
+                method: 'post',
+                url: `${API_URL}/profiles`,
+                data: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: id
+                }
+
+            }).then(response => {
+                this.setState({ loading: false });
+                if (response.data.Success) {
+                    this.setState({
+                        toProfile: true
+                    });
+                }
+                console.log(response);
+            })
+                .catch(err => {
+                    this.setState({ loading: false });
+
+                    console.log(err);
+                    this.notify(err);
+                    this.setState({
+
+                        loading: false
+
+                    });
+                });
+            console.log(data);
+
+        })
+    } else {
+        const data = {
+            uuid: sessionStorage.getItem("uuid"),
+            nationality_residence: this.state.nationality_residence,
+            nationality_origin: this.state.nationality_origin,
+            state: this.state.state,
+            lga: this.state.lga,
+            photo:
+                "https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg",
+            firstName: this.state.fname,
+            lastName: this.state.lname,
+            token: sessionStorage.getItem("token")
+        };
+
+        console.log(data);
+
+        axios({
+            method: "post",
+            url: "http://api.gclout.com:3000/profiles",
+            data: data,
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                token: token,
+                uuid: id
+            }
+        })
+            .then(response => {
+                this.setState({loading: false});
+                if (response.data.Success) {
+                    this.setState({
+                        toProfile: true
+                    });
+                }
+                console.log(response);
+            })
+            .catch(err => {
+                this.setState({loading: false});
+
+                console.log(err);
+                this.notify(err);
+                this.setState({
+
+                    loading: false
+
+                });
             });
-      });
-    console.log(data);
+        console.log(data);
+    }
   }
   onChange(e) {
     this.setState({
@@ -305,48 +373,47 @@ class CreateProfile extends Component {
                 </svg>
               </button>
             </div>
-            <div style={{ width: "160px", height: "160px" }}>
-              <div className="lifted-profile-image-wrapper" style={{ marginTop: "-80px" }}>
-                <img
-                  className="lifted-profile-image"
-                  src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                  alt="profile"
-                />
-              </div>
-              <button
-                className="floating-edit-button-wrapper --profile-picture"
-                style={{ top: "28%", left: "26%" }}
-                onClick={() => this.shouldShowModal("Profile Photo")}
-                onChange={this.handleChange}
-                name="photo"
-                value={this.state.photo}
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
-                    fill="white"
-                  />
-                </svg>
-              </button>
-            </div>
             <div className="col-md-9 mx-auto">
               <form>
                 <div className="form-row">
 
-                    <CloudinaryContext cloudName="demo">
-                        <div>
-                            <Image publicId="sample" width="50" />
+                    {/*<div style={{ width: "160px", height: "160px" }}>
+                        <div className="lifted-profile-image-wrapper" style={{ marginTop: "-80px" }}>
+                            <img
+                                className="lifted-profile-image"
+                                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                                alt="profile"
+                            />
                         </div>
-                        <Image publicId="sample" width="0.5" />
-                    </CloudinaryContext>
+                        <button
+                            className="floating-edit-button-wrapper --profile-picture"
+                            style={{ top: "28%", left: "26%" }}
+                            onClick={() => this.shouldShowModal("Profile Photo")}
+                            onChange={this.fileSelected}
+                            name="photo"
+                            type="file"
+                        >
+                            <svg
+                                width="22"
+                                height="22"
+                                viewBox="0 0 22 22"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M0.875 16.9032V21.122H5.09375L17.5362 8.67945L13.3175 4.4607L0.875 16.9032ZM20.7987 5.41695C21.2375 4.9782 21.2375 4.26945 20.7987 3.8307L18.1663 1.1982C17.7275 0.759453 17.0187 0.759453 16.58 1.1982L14.5212 3.25695L18.74 7.4757L20.7987 5.41695Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                    </div>*/}
+                    <div className="form-group">
+                        <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
+                        <button onClick={() => this.fileInput.click() }>Select Photo</button>
+                        {/*{this.state.loaded === 0 ? <button onClick={() => this.fileInput.click() }>Select Photo</button> : <div>{Math.round(this.state.loaded,2) } %</div> }*/}
+                        {/*<input type="file" onChange={this.fileSelected}/>*/}
 
-
+                    </div>
                     <div className="form-group col-md">
                     <label htmlFor="Fname">First Name</label>
                     <input
