@@ -7,9 +7,7 @@ import Countdown from "../components/countdown";
 
 class NotificationsPage extends Component {
   render() {
-    return!this.props.isLoggedIn ? (
-            <Redirect to="/login" />
-        ) : (
+    return (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

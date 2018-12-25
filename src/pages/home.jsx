@@ -20,9 +20,7 @@ class Home extends Component {
         }
     }
     render() {
-        return !this.props.isLoggedIn ? (
-            <Redirect to="/login" />
-        ) : this.state.redirect ? (
+        return this.state.redirect ? (
             <Redirect to="/profile/create" />
         ) : (
             <div className="App">

@@ -36,7 +36,7 @@ export default class NavBarMobile extends Component {
         <nav>
           <ul className="mobile-navigation-menu d-flex justify-content-around">
             <li className="mobile-navigation-menu-item">
-              <Link to="/activity">
+              <Link to="/">
                 <svg
                   width="18"
                   height="18"

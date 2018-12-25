@@ -45,7 +45,7 @@ class NavBarAuthenticated extends Component {
       <div className="navigation --with-shadow  no-mobile">
         <nav className="container d-flex justify-content-between">
           <div className="d-flex">
-            <Link to="/activity" style={{ maxHeight: "70px" }}>
+            <Link to="/" style={{ maxHeight: "70px" }}>
               <img
                 src="../logo.png"
                 alt="gclout logo"

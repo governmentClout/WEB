@@ -50,7 +50,8 @@
     "server:build": "cross-env NODE_ENV=production webpack --config webpack.server.js --mode=production",
     "server": "node ./server-build/index.js",
     "start": "npm-run-all build server:build server",
-    "starter": "react-scripts start"
+    "starter": "react-scripts start",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

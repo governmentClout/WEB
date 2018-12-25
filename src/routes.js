@@ -26,131 +26,32 @@ import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 import SinglePost from "./components/post/post";
 import OnePost from "./components/post/OnePost";
 import ChatPage from "./pages/chat.jsx";
+import { Redirect } from "react-router-dom";
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <AuthConsumer>
+        {({ isLoggedIn, logout }) =>
+        (<Route {...rest} render={(props) => isLoggedIn ?  <Component {...props} /> : <Redirect to={{ pathname: '/login'}} />} />)}
+    </AuthConsumer>
+);
 
 const Routes = () => (
     <Router>
         <App>
-            <AuthConsumer>
-                {({ isLoggedIn, login, user }) => (
-                    <Switch>
-                        <Route
-                            exact
-                            path="/register"
-                            render={props => (
-                                <Register login={login} isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/login"
-                            render={props => (
-                                <LoginPage login={login} isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/forgot-password"
-                            render={props => (
-                                <ForgotPassword isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/password-reset"
-                            render={props => (
-                                <PasswordReset isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/password-reset-code"
-                            render={props => (
-                                <PasswordCode isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/"
-                            render={props => (
-                                <Home user={user} isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/profile/create"
-                            render={props => (
-                                <ProfileCreate isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/profile/:id?"
-                            render={props => (
-                                <ProfilePage user={user} isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/friends"
-                            render={props => (
-                                <FriendsPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/friends/suggested"
-                            component={SuggestedFriendsPage}
-                        />
-                        <Route
-                            exact
-                            path="/activity"
-                            render={props => (
-                                <ActivityPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route exact path="/activity/:id" component={OnePost}/>
-                        <Route
-                            exact
-                            path="/polls"
-                            render={props => (
-                                <OpinionPollPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/notifications"
-                            render={props => (
-                                <NotificationsPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/petition"
-                            render={props => (
-                                <PetitionPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/messages"
-                            render={props => (
-                                <ChatPage isLoggedIn={isLoggedIn} {...props} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/reset-password/code"
-                            component={ResetPasswordCode}
-                        />
-                        <Route path="/privacy" component={PrivacyPage} />
-                        <Route path="/faq" component={HelpPage} />
-                        <Route path="/terms" component={TermsPage} />
-                        {/* The 404 page.. Dont Touch, lol */}
-                        <Route component={Error404} />
-                    </Switch>
-                )}
-            </AuthConsumer>
-        </App>
+            <Switch>
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/forgot-password" component={ForgotPassword} />
+                <Route exact path="/password-reset" component={PasswordReset} />
+                <Route exact path="/password-reset-code" component={PasswordCode} />
+                <Route exact path="/reset-password/code" component={ResetPasswordCode} />
+                <Route exact path="/privacy" component={PrivacyPage} />
+                <Route exact path="/faq" component={HelpPage} />
+                <Route exact path="/terms" component={TermsPage} />
+                <PrivateRoute exact path="/" component={ActivityPage} />
+                <Route exact  component={Error404} />
+            </Switch>
+        </App> 
     </Router>
 );
 

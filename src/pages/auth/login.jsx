@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -158,9 +158,7 @@ class Login extends Component {
           console.log(response);
           this.signin(response, "google");
       };
-    return this.props.isLoggedIn ? (
-      <Redirect to="/activity" />
-    ) : (
+    return  (
       <div className="auth-page d-flex">
         <AuthBackground />
         <div className="authy">

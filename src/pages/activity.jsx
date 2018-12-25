@@ -4,7 +4,6 @@ import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
 import MakePost from "../components/makePost/makePost";
-import { Redirect } from "react-router-dom"
 import SinglePost from "../components/post/post";
 import axios from "axios";
 import LoadingPost from "../components/loaders/posts";
@@ -74,9 +73,7 @@ class ActivityPage extends Component {
     }
 
     render() {
-    return!this.props.isLoggedIn ? (
-            <Redirect to="/login" />
-        ) : (
+    return  (
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">

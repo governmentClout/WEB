@@ -303,9 +303,7 @@ console.log('something jus happen rai now')
   /*  return (
 =======*/
 /*    const { password, email, phone } = this.state;*/
-    return this.props.isLoggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
