@@ -26,8 +26,11 @@ import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 import SinglePost from "./components/post/post";
 import OnePost from "./components/post/OnePost";
 import ChatPage from "./pages/chat.jsx";
+import { Provider } from 'react-redux';
+import store from './store';
 
 const Routes = () => (
+//    <Provider store={store}>
     <Router>
         <App>
             <AuthConsumer>
@@ -152,6 +155,7 @@ const Routes = () => (
             </AuthConsumer>
         </App>
     </Router>
+    // </Provider>
 );
 
 export default Routes;
