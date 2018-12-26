@@ -95,6 +95,7 @@ class Register extends Component {
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
       provider: "email",
+      redirect: false
       //redirectToReferrer: false
     };
 
@@ -126,6 +127,9 @@ class Register extends Component {
 
 
           this.props.login(responseJson.data.user);
+          this.setState({
+            redirect: true
+          })
         }
       })
       .catch(error => {
@@ -196,10 +200,8 @@ console.log('something jus happen rai now')
 
               if (responseJson.data) {
                 console.log(responseJson.data.uuid);
-
                   sessionStorage.setItem("data", JSON.stringify(responseJson));
                   this.props.login(responseJson.data.user);
-
               }
 
       })
@@ -261,10 +263,6 @@ console.log('something jus happen rai now')
   };
 
   render() {
-    if (this.state.redirect || sessionStorage.getItem("data")) {
-      return <Redirect to={"/profile/create"} />;
-    }
-
     const responseFacebook = response => {
       console.log(response);
       this.signup(response, "facebook");
@@ -303,9 +301,7 @@ console.log('something jus happen rai now')
   /*  return (
 =======*/
 /*    const { password, email, phone } = this.state;*/
-    return this.props.isLoggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
