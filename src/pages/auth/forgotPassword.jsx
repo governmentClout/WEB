@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Redirect } from "react-router-dom";
 import axios from 'axios';
 // import toastr from 'toastr';
 
@@ -71,7 +70,6 @@ class ForgotPassword extends Component {
 
   render() {
     return (
-      this.props.isLoggedIn ? <Redirect to="/" /> :
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />

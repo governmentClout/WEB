@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
 class PasswordReset extends Component {
@@ -67,9 +66,7 @@ class PasswordReset extends Component {
   }
 
   render() {
-    return this.props.isLoggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />
