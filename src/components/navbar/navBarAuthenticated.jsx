@@ -37,7 +37,7 @@ class NavBarAuthenticated extends Component {
     async function f() {
       that.props.logout();
     }
-    f().then(this.props.history.push('/activity'));
+    f().then(this.props.history.push('/'));
   }
 
   render() {
