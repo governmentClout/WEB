@@ -1,10 +1,23 @@
 import React, { Component } from "react";
 import "../assets/css/external.css";
+import Footer from "../components/footer/footer";
+import { AuthConsumer } from "../components/authcontext";
+import NavBarMobile from "../components/navbar/navBarMobile";
+import NavBarAuthenticated from "../components/navbar/navBarAuthenticated";
 
 
 class PrivacyPage extends Component {
   render() {
     return (
+      <>
+        <AuthConsumer>
+          {({ logout }) => (
+            <>
+              <NavBarAuthenticated logout={logout} />
+              <NavBarMobile logout={logout} />
+            </>
+          )}
+        </AuthConsumer>
       <div className="external-content">
         <div className="page-title">
           <h1 className="text-center">Privacy Policy</h1>
@@ -58,6 +71,8 @@ class PrivacyPage extends Component {
           </p>
           </div>
         </div>
+        <Footer />
+        </>
     );
   }
 }

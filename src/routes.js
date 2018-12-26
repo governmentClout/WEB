@@ -22,6 +22,7 @@ import HelpPage from "./pages/faq";
 import TermsPage from "./pages/terms";
 import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 import ChatPage from "./pages/chat.jsx";
+import CreateProfile from "./pages/profile/create";
 import { Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -33,7 +34,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const AuthRoute = ({ component: Component, ...rest }) => (
     <AuthConsumer>
         {({ isLoggedIn, login }) =>
-            (<Route {...rest} render={(props) => !isLoggedIn ? <Component login={login} {...props} /> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />} />)}
+            (<Route {...rest} render={(props) => !isLoggedIn ? <Component login={login} {...props} /> : <Redirect to={{ pathname: '/'}} />} />)}
     </AuthConsumer>
 );
 
@@ -52,6 +53,7 @@ const Routes = () => (
                 <AuthRoute exact path="/reset-password/code" component={ResetPasswordCode} />
                 {/* Internal pages */}
                 <PrivateRoute exact path="/profile" component={ProfilePage} />
+                <PrivateRoute exact path="/profile/create" component={CreateProfile} />
                 <PrivateRoute exact path="/friends" component={FriendsPage} />
                 <PrivateRoute exact path="/friends/suggested" component={SuggestedFriendsPage} />
                 <PrivateRoute exact path="/polls" component={OpinionPollPage} />
