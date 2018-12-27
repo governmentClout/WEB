@@ -1,3 +1,4 @@
+/*
 const initialState = {
 
     isAuthenticated: false,
@@ -11,4 +12,4 @@ export default function(state = initialState, action){
         default:
             return state;
     }
-}
+}*/

@@ -22,10 +22,8 @@ import HelpPage from "./pages/faq";
 import TermsPage from "./pages/terms";
 import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
 import ChatPage from "./pages/chat.jsx";
-<<<<<<< HEAD
 import { Provider } from 'react-redux';
 import store from './store';
-=======
 import CreateProfile from "./pages/profile/create";
 import { Redirect } from "react-router-dom";
 
@@ -41,7 +39,6 @@ const AuthRoute = ({ component: Component, ...rest }) => (
             (<Route {...rest} render={(props) => !isLoggedIn ? <Component login={login} {...props} /> : <Redirect to={{ pathname: '/'}} />} />)}
     </AuthConsumer>
 );
->>>>>>> cdf15317402d303285171f80947b2a7a8ce0f4e6
 
 const Routes = () => (
 //    <Provider store={store}>

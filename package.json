@@ -72,15 +72,11 @@
     "react-share": "^2.4.0",
     "react-toastify": "^4.4.0",
     "react-twitter-auth": "0.0.12",
-<<<<<<< HEAD
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "style-loader": "^0.23.1",
-=======
+    "style-loader": "0.23.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
-    "style-loader": "0.23.0",
->>>>>>> cdf15317402d303285171f80947b2a7a8ce0f4e6
     "sweetalert": "^2.1.2",
     "terser-webpack-plugin": "1.1.0",
     "toastr": "^2.1.4",
