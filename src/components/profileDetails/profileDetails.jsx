@@ -24,7 +24,10 @@ class ProfileDetails extends Component {
       office: '',
       party: '',
       loading: true,
-      friends: []
+      friends: [],
+      email: '',
+      phone: '',
+      dob: ''
 
     };
 
@@ -99,7 +102,17 @@ class ProfileDetails extends Component {
     this.getFriends();
 
     let id =  sessionStorage.getItem("uuid");
-    const token  = sessionStorage.getItem("token");
+    const token  = sessionStorage.getItem("token"),
+    data = JSON.parse(sessionStorage.getItem('data')),
+      email = data.data.user.email,
+      phone = data.data.user.phone,
+      dob = data.data.user.dob
+
+      this.setState({
+        email,
+        phone,
+        dob
+      })
 
     if(this.props.userId) {
       id = this.props.userId;
@@ -209,8 +222,8 @@ class ProfileDetails extends Component {
                       nationalityResidence={this.state.profile.nationality_residence}
                       state={this.state.profile.state}
                       lga={this.state.profile.lga}
-                      phone={this.props.user.phone}
-                      email={this.props.user.email}
+                      phone={this.state.phone}
+                      email={this.state.email}
                     />
                 </Modal>
               )}
@@ -296,10 +309,10 @@ class ProfileDetails extends Component {
                   <div className="col-md-3 dashed-border-right details-column mx-auto">
                     <p className="text-gclout-blue">Contact Information</p>
                     <p className="slightly-bold">Email Address</p>
-                    <p>{this.props.user.email}</p>
+                    <p>{this.state.email}</p>
                     <br />
                     <p className="slightly-bold">Phone Number</p>
-                    <p>{this.props.user.phone}</p>
+                    <p>{this.state.phone}</p>
                   </div>
                   <div className="col-md-5 details-column">
                     <p className="text-gclout-blue">Other Information</p>
@@ -316,7 +329,7 @@ class ProfileDetails extends Component {
                         <p>{this.state.profile.state} State</p>
                         <br />
                         <p className="slightly-bold">Date of birth</p>
-                        <p>{moment(this.props.user.dob).format("l")}</p>
+                        <p>{moment(this.state.dob).format("l")}</p>
                       </div>
                     </div>
                   </div>

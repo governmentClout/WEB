@@ -42,22 +42,43 @@ class CreateProfile extends Component {
 
   }
   componentDidMount() {
-    const userData  = JSON.parse(sessionStorage.getItem("data")),
-      email = userData.data.user.email,
-      phone = userData.data.user.phone;
+//    console.log(JSON.parse(sessionStorage.getItem("data")));
+    const url = `${API_URL}/users/${sessionStorage.getItem('uuid')}`;
 
-    this.setState({
+    axios({
+
+      method: 'get',
+      url: url,
+      headers: {
+
+        token: sessionStorage.getItem('token'),
+        uuid: sessionStorage.getItem('uuid')
+
+      }
+
+    }).then(res => {
+
+      this.setState({
+        phone: res.data[0].phone,
+        email: res.data[0].email
+
+      });
+
+    });
+  /*  const userData  = JSON.parse(sessionStorage.getItem("data")),
+      email = userData.user.email,
+      phone = userData.user.phone;*/
+
+    /*this.setState({
       phone,
       email
-    });
+    });*/
     
 
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
       .then(res => {
 
         const states = res.data.map(state => state);
-
-        console.log(states);
 
         this.setState({
 
@@ -117,7 +138,7 @@ class CreateProfile extends Component {
       url: "https://restcountries.eu/rest/v2/all"
 
     }).then(res => {
-      console.log(res.data);
+
       this.setState({
 
         countries: res.data
@@ -144,9 +165,6 @@ class CreateProfile extends Component {
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
-    console.log(id);
-    console.log(token);
-
     if (this.state.selectedFile !== null) {
 
       const file = this.state.selectedFile;
@@ -172,7 +190,7 @@ class CreateProfile extends Component {
         }
       })
       .then(res => {
-        console.log(res.data);
+
         this.setState({
 
           preview: res.data.secure_url
@@ -190,7 +208,7 @@ class CreateProfile extends Component {
           photo: this.state.photo
 
         };
-        console.log(data);
+
         //axios
         axios({
 
@@ -208,7 +226,6 @@ class CreateProfile extends Component {
 
         }).then(response => {
 
-          console.log(response.data);
           this.setState({
             loading: false,
             redirect: true

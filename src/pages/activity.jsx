@@ -24,7 +24,7 @@ class ActivityPage extends Component {
             userId: '',
             loading: true,
             days: 0,
-            hasProfile: false
+            hasProfile: true
         }
     }
 
@@ -33,13 +33,10 @@ class ActivityPage extends Component {
         this.setState({
             userId,
         })
-    }
-
-    componentWillMount() {
         let id = sessionStorage.getItem("uuid");
         const token = sessionStorage.getItem("token");
         const url = `http://api.gclout.com:3000/profiles/${id}`;
-
+    
         axios({
             method: "GET",
             url: url,
@@ -48,10 +45,15 @@ class ActivityPage extends Component {
                 token: token
             }
         }).then(res => {
-            console.log(res)
+            this.setState({
+                hasProfile: true
+            })
         }).catch(err => this.setState({
             hasProfile: false
         }));
+    }
+
+    componentWillMount() {
         this.loadPosts();
 
     }
@@ -95,7 +97,7 @@ class ActivityPage extends Component {
     }
 
     render() {
-        if(this.state.hasProfile == false) {
+        if(this.state.hasProfile === false) {
             return <Redirect to="/profile/create" />
         }
     return  (
