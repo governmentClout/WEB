@@ -191,6 +191,8 @@ class CreateProfile extends Component {
       })
       .then(res => {
 
+        console.log(res.data);
+
         this.setState({
 
           preview: res.data.secure_url
@@ -205,11 +207,12 @@ class CreateProfile extends Component {
           nationality_origin: this.state.nationality_origin,
           state: this.state.state,
           lga: this.state.lga,
-          photo: this.state.photo
+          photo: res.data.secure_url
 
         };
 
-        //axios
+        console.log(data);
+
         axios({
 
           method: "post",
@@ -224,11 +227,15 @@ class CreateProfile extends Component {
 
           }
 
-        }).then(response => {
+        }).then(res => {
+
+          console.log(res.data);
 
           this.setState({
+
             loading: false,
             redirect: true
+
           })
 
         }).catch(err => {
@@ -311,7 +318,7 @@ class CreateProfile extends Component {
       loaded: 0
     })
 
-  }
+  };
 
   render() {
     if(this.state.redirect == true) {
@@ -366,9 +373,6 @@ class CreateProfile extends Component {
                       <button
                         className="floating-edit-button-wrapper --profile-picture"
                         onClick={() => this.fileInput.click()}
-                        onChange={this.onChange}
-                        name="photo"
-                        value={this.state.photo}
                       >
                         <svg
                           width="22"

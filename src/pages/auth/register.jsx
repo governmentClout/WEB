@@ -196,7 +196,7 @@ console.log('something jus happen rai now')
               let responseJson = response.data;
 
               if (responseJson) {
-                console.log(responseJson.uuid);
+//                console.log(responseJson.uuid);
                   sessionStorage.setItem("data", JSON.stringify(responseJson));
                   this.props.login(responseJson.data.user);
                 /*this.setState({
@@ -291,7 +291,11 @@ console.log('something jus happen rai now')
     // };
 
 
-    const { password, email, phone, tosAgreement } = this.state;
+    const { password, email, phone, redirect, tosAgreement } = this.state;
+    if(redirect){
+
+        return (<Redirect to={"/profile/create"}/>)
+    }
 
     return (
       <div>
