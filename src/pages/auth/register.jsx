@@ -202,6 +202,9 @@ console.log('something jus happen rai now')
                 console.log(responseJson.data.uuid);
                   sessionStorage.setItem("data", JSON.stringify(responseJson));
                   this.props.login(responseJson.data.user);
+                this.setState({
+                  redirect: true
+                })
               }
 
       })
@@ -254,7 +257,7 @@ console.log('something jus happen rai now')
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Login Failed: " + error.response.data.Error,
+      "Registration Failed: ",
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false

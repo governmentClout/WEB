@@ -49,14 +49,18 @@ class Login extends Component {
       }
       })
       .then(response => {
-        if (response.data) {
-          sessionStorage.setItem("uuid", response.data.user.uuid);
-          sessionStorage.setItem("token", response.data.user.token);
-          sessionStorage.setItem("data", JSON.stringify(response));
-          this.props.login(response.data.user);
-          this.setState(() => ({
+        let responseJSON = response
+        if (responseJSON.data) {
+          sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+          sessionStorage.setItem("token", responseJSON.data.user.token);
+          sessionStorage.setItem("data", JSON.stringify(responseJSON));
+          let that = this;
+          async function f() {
+            that.props.login(responseJSON.data.user)
+          }
+          f().then(that.setState(() => ({
             redirectToReferrer: true
-          }))
+          })))
         }
       })
       .catch(error => {
@@ -83,10 +87,13 @@ class Login extends Component {
           .then(response => {
               if (response.data) {
                   sessionStorage.setItem("data", JSON.stringify(response));
-                  this.props.login(response.data.user);
-                  this.setState(() => ({
-                    redirectToReferrer: true
-                  }))
+                let that = this;
+                async function f() {
+                  that.props.login(response.data.user)
+                }
+                f().then(that.setState(() => ({
+                  redirectToReferrer: true
+                })))
               }
           })
           .catch(error => {
