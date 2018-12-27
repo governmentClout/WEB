@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../assets/css/auth.css";
 import AuthBackground from "./../../components/authBackground/authBackground";
-import { Redirect } from "react-router-dom";
 
 class PasswordCode extends Component {
 
@@ -43,7 +42,6 @@ class PasswordCode extends Component {
   }
   render() {
     return (
-      this.props.isLoggedIn ? <Redirect to="/" /> :
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />

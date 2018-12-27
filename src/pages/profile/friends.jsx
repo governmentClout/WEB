@@ -6,6 +6,11 @@ import Sidebar from "../../components/sidebar/sidebar";
 import axios from "axios";
 import Friend from "../../components/friend/friend";
 import Countdown from "../../components/countdown";
+import Footer from "../../components/footer/footer";
+import { AuthConsumer } from "../../components/authcontext";
+import NavBarMobile from "../../components/navbar/navBarMobile";
+import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
+
 
 class FriendsPage extends Component {
 
@@ -49,6 +54,15 @@ class FriendsPage extends Component {
   render() {
 
     return  (
+      <>
+      <AuthConsumer>
+        {({ logout }) =>(
+          <>
+            <NavBarAuthenticated logout={logout} />
+            <NavBarMobile logout={logout} />
+          </>
+        )}
+      </AuthConsumer>
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
@@ -88,6 +102,8 @@ class FriendsPage extends Component {
           </div>
         </div>
       </div>
+      <Footer />
+      </>
     );
   }
 }

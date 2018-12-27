@@ -7,9 +7,12 @@ import SidebarFooter from "../../components/sidebar/sidebarFooter";
 import MakePost from "../../components/makePost/makePost";
 import MakeExecutivePost from "../../components/makePost/makeExecutivePost";
 import SinglePost from "../../components/post/post";
-import { Redirect } from "react-router-dom"
 import axios from "axios";
 import Countdown from "../../components/countdown";
+import Footer from "../../components/footer/footer";
+import { AuthConsumer } from "../../components/authcontext";
+import NavBarMobile from "../../components/navbar/navBarMobile";
+import NavBarAuthenticated from "../../components/navbar/navBarAuthenticated";
 
 class ProfilePage extends Component {
 
@@ -72,10 +75,19 @@ class ProfilePage extends Component {
     //         <Redirect to="/login" />
     //     ) : (
     return (
+      <>
+        <AuthConsumer>
+          {({ logout }) => (
+            <>
+              <NavBarAuthenticated logout={logout} />
+              <NavBarMobile logout={logout} />
+            </>
+          )}
+        </AuthConsumer>
       <div className="app-wrapper">
         <div className="container app-container mx-auto d-flex">
           <div className="col-md-9">
-            <ProfileDetails userId={this.state.userId.id} user={this.props.user} />
+            <ProfileDetails userId={this.state.userId.id} />
             <div className="d-flex">
               <SidebarFooter />
               <div className="flex-1">
@@ -98,6 +110,8 @@ class ProfilePage extends Component {
           </div>
         </div>
       </div>
+      <Footer />
+      </>
     );
   }
 }

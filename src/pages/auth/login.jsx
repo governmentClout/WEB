@@ -15,11 +15,10 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      loading: false
+      loading: false,
+      redirectToReferrer: false
     };
-
     this.signin = this.signin.bind(this);
-
   }
 
   dataChange(ev) {
@@ -31,125 +30,93 @@ class Login extends Component {
   postData(ev) {
     ev.preventDefault();
     this.setState({ loading: true });
+    const email = this.state.email,
+          password = this.state.password,
+          provider = "email",
+          data = {
+            email,
+            password,
+            provider
+          },
+          url = `${API_URL}/login`;
 
-    const email = this.state.email;
-    const password = this.state.password;
-    const provider = "email";
-
-    const data = {
-
-      email,
-      password,
-      provider
-    };
-    console.log(data);
-
-/*
-    const url = "http://api.gclout.com:3000/login";
-*/
-    const url = `${API_URL}/login`;
-    console.log(url);
-
-    if (this.state.email && this.state.password) {
-      /* axios sraers here */
-      console.log("e dey");
-
-      axios({
-        method: "post",
-        url: url,
-        data: data,
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      }
+      })
+      .then(response => {
+        let responseJSON = response
+        if (responseJSON.data) {
+          sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
+          sessionStorage.setItem("token", responseJSON.data.user.token);
+          sessionStorage.setItem("data", JSON.stringify(responseJSON));
+          let that = this;
+          async function f() {
+            that.props.login(responseJSON.data.user)
+          }
+          f().then(that.setState(() => ({
+            redirectToReferrer: true
+          })))
         }
       })
-        .then(response => {
-          let responseJSON = response;
-          if (responseJSON.data) {
-            sessionStorage.setItem("uuid", responseJSON.data.user.uuid);
-            sessionStorage.setItem("token", responseJSON.data.user.token);
-            sessionStorage.setItem("data", JSON.stringify(responseJSON));
-            this.props.login(responseJSON.data.user);
-          } else {
-            console.log("login error");
-          }
-        })
-        .catch(error => {
-//          this.notify(error);
-          this.setState({ loading: false });
-        });
-
-      /* axios ends here */
-    } else {
-      console.log("noting here");
+      .catch(error => {
+        this.notify(error);
+        this.setState({ loading: false });
+      });
     }
-  }
 
     signin(res, type) {
-
-        if (type === "google" && res.w3.U3) {
-
-            const data = {
-
-                provider: type,
-                email: res.w3.U3
-
-            };
-
-            console.log(data);
-            const url = "http://api.gclout.com:3000/login";
-
-            axios({
-
-                method: 'post',
-                url: url,
-                data: data,
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      if (type === "google" && res.w3.U3) {
+          const data = {
+            provider: type,
+            email: res.w3.U3
+          };
+          const url = "http://api.gclout.com:3000/login";
+          axios({
+              method: 'post',
+              url: url,
+              data: data,
+              headers: {
+                  "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+              }
+          })
+          .then(response => {
+              if (response.data) {
+                  sessionStorage.setItem("data", JSON.stringify(response));
+                let that = this;
+                async function f() {
+                  that.props.login(response.data.user)
                 }
-
-            }).then(response => {
-                console.log(response);
-                let responseJson = response;
-
-                if (responseJson.data) {
-
-                    sessionStorage.setItem("data", JSON.stringify(responseJson));
-                    this.props.login(responseJson.data.user);
-
-                }
-
-            })
-                .catch(error => {
-
-                    console.log(error);
-                    this.notify(error);
-                    this.setState({
-
-                        loading: false
-
-                    });
-
-                });
-
-        }
-
+                f().then(that.setState(() => ({
+                  redirectToReferrer: true
+                })))
+              }
+          })
+          .catch(error => {
+              console.log(error);
+              this.notify(error);
+              this.setState({
+                loading: false
+            });
+          });
+      }
     }
-
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
-    // this.errorToast = toast.error(
-    //   "Login Failed: " + error.response.data.Error,
-    //   {
-    //     position: toast.POSITION.TOP_LEFT,
-    //     autoClose: false
-    //   }
-    // );
-      this.errorToast = toast.error(
-          "Login Failed: "
-      );
+    this.errorToast = toast.error(
+      "Login Failed: ",
+      {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: false
+      }
+    );
   };
 
   render() {
@@ -158,9 +125,13 @@ class Login extends Component {
           console.log(response);
           this.signin(response, "google");
       };
-    return this.props.isLoggedIn ? (
-      <Redirect to="/activity" />
-    ) : (
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { redirectToReferrer } = this.state
+
+    if (redirectToReferrer === true) {
+      return <Redirect to={from} />
+    }
+    return  (
       <div className="auth-page d-flex">
         <AuthBackground />
         <div className="authy">

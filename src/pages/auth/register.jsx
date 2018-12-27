@@ -95,6 +95,7 @@ class Register extends Component {
       password: this.state.password,
       tosAgreement: this.state.tosAgreement,
       provider: "email",
+      redirect: false
       //redirectToReferrer: false
     };
 
@@ -116,21 +117,21 @@ class Register extends Component {
         let responseJson = response;
         console.log(responseJson);
 
-        // if(Login Failed: User Not created, Phone number already in use)
-
         if (responseJson.data) {
+
           sessionStorage.setItem("data", JSON.stringify(responseJson));
           sessionStorage.setItem("token", responseJson.data.Token);
           sessionStorage.setItem("uuid", responseJson.data.uuid);
 
-
-
           this.props.login(responseJson.data.user);
+          this.setState({
+            redirect: true
+          })
         }
       })
       .catch(error => {
-        console.log(error)
-        this.notify(error)
+        console.log(error);
+        /*this.notify(error)*/
         this.setState({ loading: false });
       });
   }
@@ -191,15 +192,16 @@ console.log('something jus happen rai now')
 
       }).then(response => {
 
-              console.log(response);
-              let responseJson = response;
+              console.log(response.data);
+              let responseJson = response.data;
 
-              if (responseJson.data) {
-                console.log(responseJson.data.uuid);
-
+              if (responseJson) {
+//                console.log(responseJson.uuid);
                   sessionStorage.setItem("data", JSON.stringify(responseJson));
                   this.props.login(responseJson.data.user);
-
+                /*this.setState({
+                  redirect: true
+                })*/
               }
 
       })
@@ -241,9 +243,6 @@ console.log('something jus happen rai now')
 
   }
 
-
-
-
   onDateChange = date_of_birth => this.setState({ date_of_birth });
 
   errorToast = null;
@@ -252,7 +251,7 @@ console.log('something jus happen rai now')
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Login Failed: " + error.response.data.Error,
+      "Registration Failed: ",
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false
@@ -261,10 +260,6 @@ console.log('something jus happen rai now')
   };
 
   render() {
-    if (this.state.redirect || sessionStorage.getItem("data")) {
-      return <Redirect to={"/profile/create"} />;
-    }
-
     const responseFacebook = response => {
       console.log(response);
       this.signup(response, "facebook");
@@ -296,16 +291,13 @@ console.log('something jus happen rai now')
     // };
 
 
+    const { password, email, phone, redirect, tosAgreement } = this.state;
+    if(redirect){
 
+        return (<Redirect to={"/profile/create"}/>)
+    }
 
-
-    const { password, email, phone, tosAgreement } = this.state;
-  /*  return (
-=======*/
-/*    const { password, email, phone } = this.state;*/
-    return this.props.isLoggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <div>
         <div className="auth-page d-flex">
           <AuthBackground />

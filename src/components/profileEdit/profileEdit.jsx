@@ -4,7 +4,7 @@ import "../../assets/css/pages.css";
 import "./profileEdit.css"
 import axios from 'axios';
 import { stat } from "fs";
-import {API_URL} from "../config";
+import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../config";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -26,7 +26,10 @@ class EditProfile extends Component {
       loading: false,
       countries: [],
       email: this.props.email,
-      isNigerian: false
+      isNigerian: false,
+        selectedFile: null,
+        loaded: 0
+
     };
 
     this.onChange = this.onChange.bind(this);
@@ -143,10 +146,13 @@ class EditProfile extends Component {
 
   editProfile(e){
 
+      this.setState({
+
+          loading: true
+
+      });
+
     e.preventDefault();
-    this.setState({
-      loading: true
-    })
 
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
@@ -154,50 +160,129 @@ class EditProfile extends Component {
       console.log(id);
       console.log(token);
 
-    const data = {
+      if(this.state.selectedFile !== null){
 
-        firstName: this.state.fname,
-        lastName: this.state.lname,
-        nationality_residence: this.state.nationality_residence,
-        nationality_origin: this.state.nationality_origin,
-        state: this.state.state,
-        lga: this.state.lga,
-        photo: this.state.photo
+          const file = this.state.selectedFile;
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
+          // console.log(`${CLOUDINARY_UPLOAD_PRESET}`);
 
-    };
+          axios({
 
-    console.log(data);
+              url: `${CLOUDINARY_URL}`,
+              method: 'post',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: formData,
+              onUploadProgress: progressEvent => {
+                  console.log(progressEvent.loaded / progressEvent.total)
+                  this.setState({
+                      // loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
+                      loaded: (ProgressEvent.loaded/ ProgressEvent.total*1)
+                  })
+              }
 
-    axios({
+          }).then(res => {
+              console.log(res.data);
+              this.setState({
 
-      method: "put",
-      url: `${API_URL}/profiles`,
-      data: data,
-      mode: 'no-cors',
-      headers: {
+                  preview: res.data.secure_url
 
-        "Content-Type": "application/json;charset=utf-8",
-        token: token,
-        uuid: id,
+              });
 
+              const data = {
+
+                  firstName: this.state.fname,
+                  lastName: this.state.lname,
+                  nationality_residence: this.state.nationality_residence,
+                  nationality_origin: this.state.nationality_origin,
+                  state: this.state.state,
+                  lga: this.state.lga,
+                  photo: this.state.photo
+
+              };
+              console.log(data);
+              //axios
+              axios({
+
+                  method: "put",
+                  url: `${API_URL}/profiles`,
+                  data: data,
+                  mode: 'no-cors',
+                  headers: {
+
+                      "Content-Type": "application/json;charset=utf-8",
+                      token: token,
+                      uuid: id,
+
+                  }
+
+              }).then(response => {
+
+                  console.log(response.data);
+                  this.setState({
+                      loading: false
+                  })
+
+              }).catch(err => {
+
+                  console.log(err);
+                  this.setState({
+                      loading: false
+                  })
+
+              })
+
+          });
+
+      } else {
+
+          const data = {
+
+              firstName: this.state.fname,
+              lastName: this.state.lname,
+              nationality_residence: this.state.nationality_residence,
+              nationality_origin: this.state.nationality_origin,
+              state: this.state.state,
+              lga: this.state.lga,
+              photo: this.state.photo
+
+          };
+
+          console.log(data);
+
+          axios({
+
+              method: "put",
+              url: `${API_URL}/profiles`,
+              data: data,
+              mode: 'no-cors',
+              headers: {
+
+                  "Content-Type": "application/json;charset=utf-8",
+                  token: token,
+                  uuid: id,
+
+              }
+
+          }).then(response => {
+
+              console.log(response.data);
+              this.setState({
+                  loading: false
+              })
+
+          }).catch(err => {
+
+              console.log(err);
+              this.setState({
+                  loading: false
+              })
+
+          })
       }
-
-    }).then(response => {
-
-      console.log(response.data);
-      this.setState({
-        loading: false
-      })
-
-    }).catch(err => {
-
-      console.log(err);
-      this.setState({
-        loading: false
-      })
-
-    })
-
 
   }
 
@@ -247,6 +332,16 @@ class EditProfile extends Component {
 
     }
 
+    fileSelected = event => {
+
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0
+        })
+
+    }
+
+
   render() {
 
     return (
@@ -289,10 +384,16 @@ class EditProfile extends Component {
                               src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
                               alt="profile"
                           />
+                          <img
+                              className="lifted-profile-image"
+                              alt="profile"
+                              src={this.state.preview}/>
                       </div>
+                      <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
                       <button
                           className="floating-edit-button-wrapper --profile-picture"
-                          onClick={() => this.shouldShowModal("Profile Photo")}
+                          /*onClick={() => this.shouldShowModal("Profile Photo")}*/
+                          onClick={() => this.fileInput.click()}
                           onChange={this.onChange}
                           name="photo"
                           value={this.state.photo}

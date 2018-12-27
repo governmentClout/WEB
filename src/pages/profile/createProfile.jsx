@@ -342,9 +342,7 @@ class CreateProfile extends Component {
     }
     const { lgas } = this.state;
 
-    return !this.props.isLoggedIn ? (
-            <Redirect to="/login" />
-        ) : (
+    return  (
       <div className="app-wrapper">
         <div className="container app-container d-md-flex col-md-8 nx-auto">
           <div className="app-content">

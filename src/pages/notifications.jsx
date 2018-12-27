@@ -4,46 +4,59 @@ import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import { Redirect, Link } from "react-router-dom"
 import Countdown from "../components/countdown";
+import Footer from "../components/footer/footer";
+import { AuthConsumer } from "../components/authcontext";
+import NavBarMobile from "../components/navbar/navBarMobile";
+import NavBarAuthenticated from "../components/navbar/navBarAuthenticated";
 
 class NotificationsPage extends Component {
   render() {
-    return!this.props.isLoggedIn ? (
-            <Redirect to="/login" />
-        ) : (
-      <div className="app-wrapper">
-        <div className="container app-container mx-auto d-flex">
-          <div className="col-md-9">
-            <div className="d-flex">
-              <div className="sidebar" style={{ width: "250px" }} />
-              <div className="flex-1">
-                <div className="notifications-container">
-                  <div className="notifications-page-header">
-                    <h5 className="text-bold">Notifications</h5>
+    return (
+      <>
+        <AuthConsumer>
+          {({ logout }) => (
+            <>
+              <NavBarAuthenticated logout={logout} />
+              <NavBarMobile logout={logout} />
+            </>
+          )}
+        </AuthConsumer>
+        <div className="app-wrapper">
+          <div className="container app-container mx-auto d-flex">
+            <div className="col-md-9">
+              <div className="d-flex">
+                <div className="sidebar" style={{ width: "250px" }} />
+                <div className="flex-1">
+                  <div className="notifications-container">
+                    <div className="notifications-page-header">
+                      <h5 className="text-bold">Notifications</h5>
+                    </div>
+                    <Notification type="comment" />
+                    <Notification type="share" />
+                    <Notification type="comment" />
+                    <Notification type="share" />
+                    <Notification type="comment" />
+                    <Notification type="share" />
+                    <Notification type="comment" />
+                    <Notification type="share" />
+                    <Notification type="comment" />
+                    <Notification type="share" />
                   </div>
-                  <Notification type="comment" />
-                  <Notification type="share" />
-                  <Notification type="comment" />
-                  <Notification type="share" />
-                  <Notification type="comment" />
-                  <Notification type="share" />
-                  <Notification type="comment" />
-                  <Notification type="share" />
-                  <Notification type="comment" />
-                  <Notification type="share" />
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="col-md-3 d-none d-md-block"
-            style={{ padding: "0px" }}
-          >
-            <Countdown />
-            <Suggestions />
-            <Trending />
+            <div
+              className="col-md-3 d-none d-md-block"
+              style={{ padding: "0px" }}
+            >
+              <Countdown />
+              <Suggestions />
+              <Trending />
+            </div>
           </div>
         </div>
-      </div>
+        <Footer />
+      </>
     );
   }
 }
