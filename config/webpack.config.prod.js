@@ -1,5 +1,6 @@
 'use strict';
 
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -18,6 +19,7 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+// webpack.config.js
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -480,6 +482,9 @@ module.exports = {
         // public/ and not a SPA route
         new RegExp('/[^/]+\\.[^/]+$'),
       ],
+    }),
+    new ReactLoadablePlugin({
+      filename: './build/react-loadable.json',
     }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
