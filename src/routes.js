@@ -1,31 +1,148 @@
 import React from "react";
+import Loadable from 'react-loadable';
 import { BrowserRouter as Router,Route, Switch } from "react-router-dom";
 //import Main App file
 import { AuthConsumer } from "./components/authcontext";
 import App from "./App";
-//import pages to be routed (should be a jsx files in the /pages folder)
-import Register from "./pages/auth/register";
-import LoginPage from "./pages/auth/login";
-import ForgotPassword from "./pages/auth/forgotPassword";
-import PasswordReset from "./pages/auth/passwordReset";
-import PasswordCode from "./pages/auth/code";
-import ProfilePage from "./pages/profile/index";
-import FriendsPage from "./pages/profile/friends";
-import SuggestedFriendsPage from "./pages/profile/suggestedFriends";
-import ActivityPage from "./pages/activity";
-import OpinionPollPage from "./pages/opinionPoll";
-import NotificationsPage from "./pages/notifications";
-import Error404 from "./pages/errors/404";
-import PetitionPage from "./pages/petition";
-import PrivacyPage from "./pages/privacy";
-import HelpPage from "./pages/faq";
-import TermsPage from "./pages/terms";
-import ResetPasswordCode from "./pages/auth/ResetPasswordCode";
-import ChatPage from "./pages/chat.jsx";
-import { Provider } from 'react-redux';
-import store from './store';
-import CreateProfile from "./pages/profile/create";
+// import { Provider } from 'react-redux';
+// import store from './store';
 import { Redirect } from "react-router-dom";
+import logo from './assets/images/logo.png';
+
+//import pages to be routed (should be a jsx files in the /pages folder)
+const Register = Loadable({
+    loader: () => import(/* webpackChunkName: "Register" */ "./pages/auth/register"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Register'],
+    delay: 100,
+});
+const LoginPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Login" */ "./pages/auth/login"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Login'],
+    delay: 100,
+});
+const ForgotPassword = Loadable({
+    loader: () => import(/* webpackChunkName: "ForgotPassword" */ "./pages/auth/forgotPassword"),
+    delay: 100,
+    loading: Loading,
+    timeout: 10000,
+    modules: ['ForgotPassword'],
+});
+const PasswordReset = Loadable({
+    loader: () => import(/* webpackChunkName: "PasswordReset" */"./pages/auth/passwordReset"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['PasswordReset'],
+    delay: 100,
+});
+const PasswordCode = Loadable({
+    loader: () => import(/* webpackChunkName: "PasswordCode" */ "./pages/auth/code"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['PasswordCode'],
+    delay: 100,
+});
+const ResetPasswordCode = Loadable({
+    loader: () => import(/* webpackChunkName: "ResetPasswordCode" */ "./pages/auth/ResetPasswordCode"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['ResetPasswordCode'],
+    delay: 100,
+});
+const ProfilePage = Loadable({
+    loader: () => import(/* webpackChunkName: "ProfilePage" */ "./pages/profile/index"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['ProfilePage'],
+    delay: 100,
+});
+const CreateProfile = Loadable({
+    loader: () => import(/* webpackChunkName: "CreateProfile" */"./pages/profile/create"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['CreateProfile'],
+    delay: 100,
+});
+const FriendsPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Friends" */ "./pages/profile/friends"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Friends'],
+    delay: 100,
+});
+const SuggestedFriendsPage = Loadable({
+    loader: () => import(/* webpackChunkName: "SuggestedFriends" */ "./pages/profile/suggestedFriends"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['SuggestedFriends'],
+    delay: 100,
+});
+const ActivityPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Activity" */ "./pages/activity"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Activity'],
+    delay: 100,
+});
+const OpinionPollPage = Loadable({
+    loader: () => import(/* webpackChunkName: "OpinionPoll" */ "./pages/opinionPoll"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['OpinionPoll'],
+    delay: 100,
+});
+const NotificationsPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Notifications" */ "./pages/notifications"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Notifications'],
+    delay: 100,
+});
+const Error404 = Loadable({
+    loader: () => import(/* webpackChunkName: "error404" */ "./pages/errors/404"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['error404'],
+    delay: 100,
+});
+const PetitionPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Petiton" */"./pages/petition"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Petition'],
+    delay: 100,
+});
+const PrivacyPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Privacy" */ "./pages/privacy"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Privacy'],
+    delay: 100,
+});
+const HelpPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Help" */ "./pages/faq"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Help'],
+    delay: 100,
+});
+const TermsPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Terms" */ "./pages/terms"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Terms'],
+    delay: 100,
+});
+const ChatPage = Loadable({
+    loader: () => import(/* webpackChunkName: "Chat" */"./pages/chat"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['Chat'],
+    delay: 100,
+});
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <AuthConsumer>
@@ -39,6 +156,24 @@ const AuthRoute = ({ component: Component, ...rest }) => (
             (<Route {...rest} render={(props) => !isLoggedIn ? <Component login={login} {...props} /> : <Redirect to={{ pathname: '/'}} />} />)}
     </AuthConsumer>
 );
+function Loading(props) {
+    if (props.isLoading) {
+        if (props.timedOut) {
+            return <div>Loader timed out!</div>;
+        } else if (props.pastDelay) {
+            return <div className="fullscreen">
+                <img src={logo} className="bounce" alt="logo" />
+                <p>Loading...</p>
+            </div>;
+        } else {
+            return null;
+        }
+    } else if (props.error) {
+        return <div>Error! Component failed to load</div>;
+    } else {
+        return null;
+    }
+}
 
 const Routes = () => (
 //    <Provider store={store}>

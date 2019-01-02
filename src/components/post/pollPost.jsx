@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./post.css";
 import axios from 'axios';
-import PollActions from "./pollActions";
-import PollCommentInput from "../comments/PollCommentInput";
 import {API_URL} from "../config";
 // import toastr from 'toastr';
 
@@ -53,7 +51,7 @@ class SinglePoll extends Component {
 
     respond(id){
 
-        const pollId = id;
+        // const pollId = id;
        // console.log(id);
 
         const data = {
@@ -114,14 +112,14 @@ class SinglePoll extends Component {
             }
         }).then(res => {
             console.log(res.data)
-            res.data.map(da => {
+            res.data.map(da => (
                 //const d => da.user.map(d => d);
                 this.setState({
                     user: da.user[0],
                     polls: res.data,
                     loading: false
                 })
-            })
+            ))
                  // this.setState({
                  //
                  //     polls: res.data,
@@ -142,7 +140,7 @@ class SinglePoll extends Component {
         const {polls, loading, user } = this.state;
         console.log(user);
         if(loading){
-            return <img src="https://i.gifer.com/8ZFL.gif" />
+            return <img src="https://i.gifer.com/8ZFL.gif" alt="fake loader" />
         }
 
       return (

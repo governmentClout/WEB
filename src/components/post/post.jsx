@@ -4,7 +4,6 @@ import "./post.css";
 import PostActions from "./postActions";
 import CommentInput from "./../comments/commentInput";
 import {Link} from 'react-router-dom';
-import OnePost from "./OnePost";
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -23,8 +22,6 @@ export default class SinglePost extends Component {
     })
   }
   render() {
-    const { uuid } = this.props.post.post;
-    //console.log(uuid);
 
     return (
       <div style={{ marginBottom: "1em" }}>
@@ -56,18 +53,25 @@ export default class SinglePost extends Component {
             </div>
           </div>
         </Link>
-        {this.props.postType !== "sponsored" ? (
+        {/* {this.props.postType !== "sponsored" ? (
           <>
-            {" "}
-            <PostActions showComment={this.showComment} post={this.props.post.post.post} postID={this.props.post.post.uuid} />
+            {" "} */}
+            <PostActions
+              showComment={this.showComment}
+              comments={this.props.post.comments}
+              post={this.props.post.post.post}
+              postID={this.props.post.post.uuid}
+              reactions={this.props.post.reactions}
+              shares={this.props.post.shares}
+            />
 
 
               <CommentInput postID={this.props.post.post.uuid} show={this.state.showComment}/>
             {" "}
-          </>
+          {/* </>
         ) : (
           ""
-        )}
+        )} */}
       </div>
     );
   }

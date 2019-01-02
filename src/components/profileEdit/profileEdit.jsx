@@ -3,7 +3,7 @@ import UploadModal from "../uploadModal/uploadModal";
 import "../../assets/css/pages.css";
 import "./profileEdit.css"
 import axios from 'axios';
-import { stat } from "fs";
+// import { stat } from "fs";
 import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../config";
 
 class EditProfile extends Component {

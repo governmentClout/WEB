@@ -79,7 +79,6 @@ class Sidebar extends Component {
       const { friends } = this.state;
 
       const { profile } = this.state;
-      console.log(profile);
     
       return (
       <div className="sidebar  d-none d-md-block">

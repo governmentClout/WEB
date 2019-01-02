@@ -13,48 +13,24 @@ export default class SinglePost extends Component {
         super();
 
         this.state = {
-            like: "",
-            likes: [],
-            comments: 0,
+            reactions: [],
+            comments: [],
+            shares: [],
             comment: [],
             liked: false,
             showDropup: false,
         };
 
     }
-    componentWillMount() {
-
-        this.showLikesCount();
-        this.showCommentsCount();
-
-    }
-    showLikesCount(){
-
-        const id = sessionStorage.getItem("uuid"),
-            token = sessionStorage.getItem("token");
-
-        const url = "http://api.gclout.com:3000/reactions/" + this.props.postID;
-
-        axios({
-
-            method: 'get',
-            url: url,
-            headers: {
-
-                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                token: token,
-                uuid: id
-
-            }
-
-        }).then(res => {
-
-
-            this.setState ({
-
-                likes: res.data[0].reactions
-
-            })
+    componentDidMount() {
+        this.setState({
+            reactions: this.props.reactions,
+            comments: this.props.comments,
+            shares: this.props.shares,
+        })
+        let id = sessionStorage.getItem('uuid');
+        this.props.reactions.forEach(reaction => {
+            return reaction.user === id ? this.setState({liked: true}) : this.setState({liked: false});
         });
     }
     openDropup = () => {
@@ -62,30 +38,6 @@ export default class SinglePost extends Component {
         this.setState({
             showDropup: !currentState,
         })
-    }
-
-    showCommentsCount(){
-        const id = sessionStorage.getItem("uuid"),
-            token = sessionStorage.getItem("token");
-
-        const url = `${API_URL}/comments/` + this.props.postID;
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                token: token,
-                uuid: id
-            }
-        }).then(res => {
-            // console.log(res.data[0].length);
-            // console.log(res.data)
-            // console.log(res.data[0].comment)
-            // console.log(res.data[0].comment.length);
-            this.setState ({
-                comment: res.data[0].comment.length
-            });
-        });
     }
 
     showComment = () => {
@@ -122,9 +74,16 @@ export default class SinglePost extends Component {
             headers: header
 
         }).then(res => {
-
-            console.log(res.data);
-
+            let reaction = {
+                created_at: Date.now(),
+                id: XPathExpression,
+                post: this.props.postID,
+                status: 1,
+                user: sessionStorage.getItem('uuid'),
+            }
+            let oldState =  this.state.reactions
+            let newState = oldState.push(reaction)
+            this.setState({ reactions: newState});
         })
 
     }
@@ -159,30 +118,29 @@ export default class SinglePost extends Component {
             }
 
         }).then(res => {
-            this.showLikesCount();
+            console.log(res);
         })
     };
 
   render() {
 
-      const { likes, comment, liked } = this.state;
+      const { reactions, comments, shares, liked } = this.state;
 
     return (
+        <>
       <div className="post-actions-container">
         <button
-            className= {liked ? "post-action active" : "post-action avtive"}
+            className= {liked ? "post-action active" : "post-action"}
             onClick={() => this.likePost(this.props.postID)}
-            onLoad={this.showLikesCount.bind(this, this.props.postID)}
         >
             <ThumbUp />
-            {likes} {"  "}  like{likes <= 1 ? '' : 's'}
+            {reactions.length} {"  "}  like{reactions.length === 1 ? '' : 's'}
         </button>
         <button
             className="post-action"
-            onLoad={this.showCommentsCount.bind(this, this.props.postID)}
             onClick={this.showComment}>
             <ChatBubbleOutline />
-            {comment} {" "} comment{comment <= 1 ? '' : 's'}
+            {comments.length} {" "} comment{comments.length === 1 ? '' : 's'}
         </button>
         <Manager>
             <Reference>
@@ -194,7 +152,7 @@ export default class SinglePost extends Component {
                         onClick={this.openDropup}>
 
                         <Reply className="flipped-reply" />
-                        {" "} Share
+                            {shares.length} {" "} share{shares.length === 1 ? '' : 's'}
                     </button>
                 )}
             </Reference>
@@ -255,6 +213,7 @@ export default class SinglePost extends Component {
             </Popper>
             </Manager>
       </div>
+      </>
     );
   }
 }

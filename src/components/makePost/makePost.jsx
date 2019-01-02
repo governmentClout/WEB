@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./makePost.css";
-import PostMedia from "./postMedia";
+// import PostMedia from "./postMedia";
 import axios from "axios";
 import {API_URL, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL} from "../config";
 
@@ -314,7 +314,7 @@ class PostCreation extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button><div><img src={this.state.preview}/> </div>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button><div><img src={this.state.preview} alt="preview"/> </div>
               {/*{this.state.loaded === 0 ? <button onClick={() => this.fileInput.click() }>Select Photo</button> : <div>{Math.round(this.state.loaded,2) } %</div> }*/}
               {/*<input type="file" onChange={this.fileSelected}/>*/}
 
@@ -590,7 +590,7 @@ class ArticleCreation extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button><div> <img src={this.state.preview}/> </div>
+              <button onClick={() => this.fileInput.click() }>Select Photo</button><div> <img src={this.state.preview} alt="preview"/> </div>
             </div>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>

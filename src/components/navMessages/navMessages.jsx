@@ -71,7 +71,7 @@ class navMessagees extends Component {
     })
   }
   render() {
-     const { messages } = this.state;
+    //  const { messages } = this.state;
      //console.log(messages);
 
   return (

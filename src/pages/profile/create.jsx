@@ -93,7 +93,7 @@ class CreateProfile extends Component {
     }
     
     onChange(e) {
-      if(e.target.name == 'state') {
+      if(e.target.name === 'state') {
         this.displayLga(e.target.value);
       }
       if (this.state.nationality_origin === 'Nigeria') {
@@ -321,7 +321,7 @@ class CreateProfile extends Component {
   };
 
   render() {
-    if(this.state.redirect == true) {
+    if(this.state.redirect === true) {
       return <Redirect to="/" />
     }
     return (

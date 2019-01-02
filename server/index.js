@@ -1,40 +1,41 @@
-import path from 'path';
-import fs from 'fs';
-
-import React from 'react';
 import express from 'express';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
-import Routes from '../src/routes.js';
 
-const PORT = process.env.PORT || 3000;
+// we'll talk about this in a minute:
+import serverRenderer from './middleware/renderer';
+
+const PORT = 3000;
+const path = require('path');
+
+// initialize the application and create the routes
 const app = express();
+const router = express.Router();
 
-app.use(express.static('./build'));
 
-app.get('/*', (req, res) => {
-  const context = {};
-  const app = ReactDOMServer.renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <Routes />
-    </StaticRouter>
-  );
+// Always route the home page to our router
+router.use('^/$', serverRenderer);
 
-  const indexFile = path.resolve('./build/index.html');
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!');
+// anything else should act as our index page
+// react-router will take care of everything
+
+// other static resources should just be served as they are
+router.use(express.static(
+  path.resolve(__dirname, '..', 'build'),
+  { maxAge: '30d' },
+  ));
+  
+router.use('*', serverRenderer);
+// tell the app to use the above rules
+app.use(router);
+
+// start the app
+Loadable.preloadAll().then(() => {
+  app.listen(PORT, (error) => {
+    if (error) {
+      return console.log('something bad happened', error);
     }
-
-    return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-    );
+  
+    console.log(`server started on http://localhost:${PORT}`);
   });
-});
-
-app.listen(PORT, () => {
-  console.log(`😎  Server is listening on port ${PORT}`);
-  console.log(`😎  open http://localhost:${PORT} in your browser`);
 });

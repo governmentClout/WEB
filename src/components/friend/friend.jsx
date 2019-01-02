@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import { Manager, Reference, Popper } from "react-popper";
 import axios from "axios";
 import {API_URL} from "../config";
-import {ToastContainer} from "react-toastify";
+// import {ToastContainer} from "react-toastify";
 import toastr from 'toastr';
 import MoreVert from "@material-ui/icons/MoreVert";
 
@@ -23,7 +23,7 @@ class Friend extends Component {
     }
 
     sendRequest(id){
-        const userid = id;
+        // const userid = id;
         //alert(userid);
 
         const data = {

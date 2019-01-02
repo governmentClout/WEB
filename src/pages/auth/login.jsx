@@ -31,14 +31,14 @@ class Login extends Component {
     ev.preventDefault();
     this.setState({ loading: true });
     const email = this.state.email,
-          password = this.state.password,
-          provider = "email",
-          data = {
-            email,
-            password,
-            provider
-          },
-          url = `${API_URL}/login`;
+      password = this.state.password,
+      provider = "email",
+      data = {
+        email,
+        password,
+        provider
+      },
+      url = `${API_URL}/login`;
 
     axios({
       method: "post",
@@ -47,7 +47,7 @@ class Login extends Component {
       headers: {
         "Content-Type": "text/plain;charset=utf-8"
       }
-      })
+    })
       .then(response => {
         let responseJSON = response
         if (responseJSON.data) {
@@ -67,51 +67,51 @@ class Login extends Component {
         this.notify(error);
         this.setState({ loading: false });
       });
-    }
+  }
 
-    signin(res, type) {
-      if (type === "google" && res.w3.U3) {
-          const data = {
-            provider: type,
-            email: res.w3.U3
-          };
-          const url = "http://api.gclout.com:3000/login";
-          axios({
-              method: 'post',
-              url: url,
-              data: data,
-              headers: {
-                  "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-              }
-          })
-          .then(response => {
-              if (response.data) {
-                  sessionStorage.setItem("data", JSON.stringify(response));
-                let that = this;
-                async function f() {
-                  that.props.login(response.data.user)
-                }
-                f().then(that.setState(() => ({
-                  redirectToReferrer: true
-                })))
-              }
-          })
-          .catch(error => {
-              console.log(error);
-              this.notify(error);
-              this.setState({
-                loading: false
-            });
+  signin(res, type) {
+    if (type === "google" && res.w3.U3) {
+      const data = {
+        provider: type,
+        email: res.w3.U3
+      };
+      const url = "http://api.gclout.com:3000/login";
+      axios({
+        method: 'post',
+        url: url,
+        data: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        }
+      })
+        .then(response => {
+          if (response.data) {
+            sessionStorage.setItem("data", JSON.stringify(response));
+            let that = this;
+            async function f() {
+              that.props.login(response.data.user)
+            }
+            f().then(that.setState(() => ({
+              redirectToReferrer: true
+            })))
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          this.notify(error);
+          this.setState({
+            loading: false
           });
-      }
+        });
     }
+  }
   errorToast = null;
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
     }
     this.errorToast = toast.error(
-      "Login Failed: ",
+      "Login Failed: " + error,
       {
         position: toast.POSITION.TOP_LEFT,
         autoClose: false
@@ -121,21 +121,21 @@ class Login extends Component {
 
   render() {
 
-      const responseGoogle = response => {
-          console.log(response);
-          this.signin(response, "google");
-      };
+    const responseGoogle = response => {
+      console.log(response);
+      this.signin(response, "google");
+    };
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { redirectToReferrer } = this.state
 
     if (redirectToReferrer === true) {
       return <Redirect to={from} />
     }
-    return  (
+    return (
       <div className="auth-page d-flex">
         <AuthBackground />
         <div className="authy">
-          <div  className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
+          <div className="m-auto bg-white auth-page-card col-lg-7 col-md-8">
             <h2 className="auth-card-title text-center mb-3">
               Sign Into Your GClout Account
             </h2>
@@ -173,8 +173,8 @@ class Login extends Component {
                     {this.state.loading ? (
                       <i className="fas fa-circle-notch fa-spin" />
                     ) : (
-                      "Sign in"
-                    )}
+                        "Sign in"
+                      )}
                   </button>
                   <div className="form-group mt-2 d-flex">
                     <div className="form-check">
@@ -204,14 +204,14 @@ class Login extends Component {
                     <i className="fab fa-twitter" />
                     Twitter
                   </button>
-                    <GoogleLogin
-                        className="social-button-google btn btn-block"
-                        clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
-                        buttonText="Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                    >
-                        <i className="fab fa-google" /> Google
+                  <GoogleLogin
+                    className="social-button-google btn btn-block"
+                    clientId="721177315518-ebi0q400rdhuvphrkff962s5encqd3b4.apps.googleusercontent.com"
+                    buttonText="Google"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                  >
+                    <i className="fab fa-google" /> Google
                     </GoogleLogin>
                   <button className="social-button-linkedin btn btn-block">
                     <i className="fab fa-linkedin-in" />
