@@ -4,9 +4,10 @@ import { BrowserRouter as Router,Route, Switch } from "react-router-dom";
 //import Main App file
 import { AuthConsumer } from "./components/authcontext";
 import App from "./App";
-import { Provider } from 'react-redux';
-import store from './store';
+// import { Provider } from 'react-redux';
+// import store from './store';
 import { Redirect } from "react-router-dom";
+import logo from './assets/images/logo.png';
 
 //import pages to be routed (should be a jsx files in the /pages folder)
 const Register = Loadable({
@@ -160,7 +161,10 @@ function Loading(props) {
         if (props.timedOut) {
             return <div>Loader timed out!</div>;
         } else if (props.pastDelay) {
-            return <div>Loading...</div>;
+            return <div className="fullscreen">
+                <img src={logo} className="bounce" alt="logo" />
+                <p>Loading...</p>
+            </div>;
         } else {
             return null;
         }

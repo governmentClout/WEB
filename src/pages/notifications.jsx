@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../assets/css/pages.css";
 import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
-import { Redirect, Link } from "react-router-dom"
+import {  Link } from "react-router-dom"
 import Countdown from "../components/countdown";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";

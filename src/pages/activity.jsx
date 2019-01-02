@@ -77,7 +77,6 @@ class ActivityPage extends Component {
             uuid: id
 
         };
-        console.log(header);
 
         axios({
 

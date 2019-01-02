@@ -69,6 +69,7 @@ class SuggestedFriendsPage extends Component {
                 if(friend.lastName.indexOf(keyword) !== -1){
                     return friend;
                 }
+                return null;
             });
             this.setState({
                 filtered: list
@@ -92,7 +93,7 @@ class SuggestedFriendsPage extends Component {
       const { loading } =  this.state;
 
       if(loading){
-          return <img src="https://i.gifer.com/8ZFL.gif" />
+          return <img src="https://i.gifer.com/8ZFL.gif" alt="fake loader" />
       }
 
     return(

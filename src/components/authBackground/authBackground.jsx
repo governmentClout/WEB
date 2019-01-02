@@ -47,7 +47,7 @@ class AuthBackground extends Component {
   }
   componentDidMount() {
     const temArr = this.rearrangeArray(this.state.shuffleList);
-    const fullArr = [temArr, ...this.state.bottomImages];
+    // const fullArr = [temArr, ...this.state.bottomImages];
     this.setState({
       imagesList: temArr
     })

@@ -342,7 +342,7 @@ class OnePost extends Component {
     }
 
     render() {
-        const { post, likes, photo, uuid, postId, loading, firstName, lastName, comments } = this.state;
+        const { post, likes, photo,  postId, loading, firstName, lastName, comments } = this.state;
 
         if(loading){
             return <i className="fas fa-spinner"></i>
@@ -398,16 +398,16 @@ class OnePost extends Component {
                             </button>
                             <button className="post-action" onClick={() => this.registerShare(postId)}>
                                 {" "}
-                                <i className="fas fa-share" /><a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${postId}`}>Fcaebook</a>
+                                <i className="fas fa-share" /><a target="_blank" rel="noopener noreferrer" href={`https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity/${postId}`}>Fcaebook</a>
                             </button>
                                 <button className="post-action" onClick={() => this.registerShare(postId)}>
-                                <i className="fas fa-share"/><a target="_blank" className="twitter-share-button"
+                                <i className="fas fa-share" /><a target="_blank" rel="noopener noreferrer"className="twitter-share-button"
                                    href={`https://twitter.com/intent/tweet?text=${post}&url=https://www.dev.gclout.com/activity/${postId}`}>
                                     Tweet</a>
                                 </button>
                                 {/*<i className="fas fa-share" /><a href={`https://twitter.com/intent/tweet?text=${post}&url=http://www.dev.gclout.com/activity/${parameter?parameter:''}`}>Twitter</a>*/}
                                 <button onClick={() => this.registerShare(postId)} className="post-action">
-                                <i className="fas fa-share"/><a target="_blank" href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${postId}&title=${post}`}>Linkedin</a>
+                                <i className="fas fa-share" /><a target="_blank" rel="noopener noreferrer" href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${postId}&title=${post}`}>Linkedin</a>
                                 {/*<i className="fas fa-share" /><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dev.gclout.com/activity">Share</a>*/}
                             </button>
                         </div>
