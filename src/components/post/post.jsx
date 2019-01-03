@@ -66,7 +66,10 @@ export default class SinglePost extends Component {
             />
 
 
-              <CommentInput postID={this.props.post.post.uuid} show={this.state.showComment}/>
+        <CommentInput
+          postID={this.props.post.post.uuid}
+          comments={this.props.post.comments}
+          show={this.state.showComment}/>
             {" "}
           {/* </>
         ) : (

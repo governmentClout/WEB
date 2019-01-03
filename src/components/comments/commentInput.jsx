@@ -30,18 +30,6 @@ class CommentInput extends Component {
     })
 
   }
-
-/*   onSubmit() {
-    
-    const data = {
-      
-      comment: this.state.comment
-
-    }
-
-    console.log(data);
-
-  } */
 onKeyPress = (e) => {
 
     if(e.which === 13) {
@@ -86,27 +74,42 @@ onKeyPress = (e) => {
 
   render() {
     return (
-      <div className={ this.props.show ? "comment-input-wrapper" : "comment-input-wrapper hidden" } >
-        <div className="comment-owner-wrapper">
-          <img
-            className="comment-owner"
-            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-            alt="comment-owner"
+      <div className={this.props.show ? "comment-wrapper" : "comment-wrapper hidden"} >
+        <div className="comment-input-wrapper">
+          <div className="comment-owner-wrapper">
+            <img
+              className="comment-owner"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+              alt="comment-owner"
+            />
+          </div>
+          <input
+            onKeyPress={this.onKeyPress}
+            type="text"
+            onSubmit={this.onSubmit}
+            name="comment"
+            className="form-control"
+            placeholder="write a comment here..."
+            value={this.state.comment}
+            onChange={this.onChange}
+            onClick={() => this.props.postID}
           />
         </div>
-        <input
-          onKeyPress={this.onKeyPress}
-          type="text"
-          onSubmit={this.onSubmit}
-          name="comment"
-          className="form-control"
-          placeholder="write a comment here..."
-          value={this.state.comment}
-          onChange={this.onChange}
-          onClick={() => this.props.postID}
-          /*ref={console.log(this.props.postID)}*/
-        />
-{/*         <input value={this.props.postID} name="ref" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}/> */}
+        <div className="previous-comments">
+          <div className="single-comment">
+            <div className="comment-owner-wrapper">
+              <img
+                className="comment-owner"
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                alt="comment-owner"
+              />
+            </div>
+            <div>
+              <strong>Oreoluwa Ojo</strong>
+              <p>this is the main comment and all.. we will still support emoji later.. lol</p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
