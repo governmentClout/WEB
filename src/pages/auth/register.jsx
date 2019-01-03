@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import TwitterLogin from 'react-twitter-auth/lib/react-twitter-auth-component.js';
 
 
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +132,16 @@ class Register extends Component {
       })
       .catch(error => {
         console.log(error);
-        /*this.notify(error)*/
+        const myError = {
+          response: {
+            data: {
+              "Error" : [
+                'Please try again in a little while'
+              ]
+            }
+          }
+        }
+        this.notify(error || myError)
         this.setState({ loading: false });
       });
   }
@@ -247,16 +257,33 @@ console.log('something jus happen rai now')
 
   errorToast = null;
   notify = error => {
-    if (this.errorToast) {
-      toast.dismiss(this.errorToast);
+    // if (this.errorToast) {
+    //   toast.dismiss(this.errorToast);
+    // }
+    let errorArray = error.response.data.Error
+    if (errorArray.constructor === Array ) {
+      
+      errorArray.forEach(error => {
+        if (error == 'tosAgreement cannot be false') {
+          error = "you must agree to the terms and conditions"
+        }
+        this.errorToast = toast.error(
+          "Registration Failed: " + error,
+          {
+            position: toast.POSITION.TOP_LEFT,
+            autoClose: false
+          }
+        );
+      });
+    } else {
+      this.errorToast = toast.error(
+        "Registration Failed: " + errorArray,
+        {
+          position: toast.POSITION.TOP_LEFT,
+          autoClose: false
+        }
+      );
     }
-    this.errorToast = toast.error(
-      "Registration Failed: ",
-      {
-        position: toast.POSITION.TOP_LEFT,
-        autoClose: false
-      }
-    );
   };
 
   render() {
@@ -439,7 +466,6 @@ console.log('something jus happen rai now')
                           className="social-button-linkedin btn btn-block"
                       /> */}
                       <button
-                        disabled
                         className="social-button-linkedin btn btn-block">
                         <i className="fab fa-linkedin-in" />
                         Linkedin
