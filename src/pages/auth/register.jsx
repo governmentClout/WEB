@@ -203,6 +203,7 @@ console.log('something jus happen rai now')
       }).then(response => {
 
               console.log(response.data);
+              sessionStorage.setItem('id', res.data.uuid);
               let responseJson = response.data;
 
               if (responseJson) {
