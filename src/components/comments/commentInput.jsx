@@ -11,7 +11,9 @@ class CommentInput extends Component {
     this.state ={
 
       comment: "",
-      ref: ""
+      ref: "",
+      comments: "",
+      disable: false,
     
     }
 
@@ -21,6 +23,9 @@ class CommentInput extends Component {
 
   }
   componentDidMount() {
+    this.loadComments()
+  }
+  loadComments() {
     const uuid = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token"),
       id = this.props.postID;
@@ -28,7 +33,7 @@ class CommentInput extends Component {
     axios({
 
       method: "get",
-      url: "http://api.gclout.com:3000/comments/"+id ,
+      url: "http://api.gclout.com:3000/comments/" + id,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
@@ -60,7 +65,7 @@ class CommentInput extends Component {
 onKeyPress = (e) => {
 
     if(e.which === 13) {
-
+      this.setState({ disable: true })
       const uuid = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -88,12 +93,20 @@ onKeyPress = (e) => {
       }).then(res => {
         console.log(res.data);
 
+          this.loadComments()
           this.setState({
 
               comment: '',
+              disable: false,
 
           });
 
+
+      }).catch( err => {
+        this.setState({
+          disable: false
+
+        });
 
       })
     }
@@ -119,6 +132,7 @@ onKeyPress = (e) => {
             placeholder="write a comment here..."
             value={this.state.comment}
             onChange={this.onChange}
+            disabled={this.state.disable}
             onClick={() => this.props.postID}
           />
         </div>
