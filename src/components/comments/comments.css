@@ -30,6 +30,8 @@
 }
 .single-comment {
   display: flex;
+  border-bottom: 1px solid #cecece;
+  margin-bottom: 1em;
 }
 .single-comment .comment-owner-wrapper {
   width: 30px !important;

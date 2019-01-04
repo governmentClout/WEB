@@ -20,6 +20,33 @@ class CommentInput extends Component {
     this.onKeyPress = this.onKeyPress.bind(this);
 
   }
+  componentDidMount() {
+    const uuid = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token"),
+      id = this.props.postID;
+
+    axios({
+
+      method: "get",
+      url: "http://api.gclout.com:3000/comments/"+id ,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: token,
+        uuid: uuid
+      }
+
+    }).then(res => {
+      console.log(res.data);
+
+      this.setState({
+
+        comments: res.data,
+
+      });
+
+
+    })
+  }
 
   onChange(ev){
 
@@ -96,19 +123,23 @@ onKeyPress = (e) => {
           />
         </div>
         <div className="previous-comments">
+          { this.state.comments ? this.state.comments.map(comment => (
           <div className="single-comment">
             <div className="comment-owner-wrapper">
               <img
                 className="comment-owner"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                src={comment.user[0].photo}
                 alt="comment-owner"
               />
             </div>
             <div>
-              <strong>Oreoluwa Ojo</strong>
-              <p>this is the main comment and all.. we will still support emoji later.. lol</p>
+                <strong>{comment.user[0].firstName + " " + comment.user[0].lastName}</strong>
+              <p>{comment.comment.comment}</p>
             </div>
+
           </div>
+        ) 
+          ) : ""}
         </div>
       </div>
     );
