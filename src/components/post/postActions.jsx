@@ -91,37 +91,67 @@ export default class SinglePost extends Component {
     likePost = () => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-            this.setState({
-                liked: true,
+        let newLikes = this.state.reactions;
+        if(!this.state.liked) {
+            newLikes = newLikes + 1
+            this.setState({ reactions: newLikes, liked: true });
+
+            const id = this.props.postID;
+
+            const data = {
+
+                post: this.props.postID
+
+            };
+            const url = 'http://api.gclout.com:3000/reactions/' +id;
+            axios({
+
+                method: 'post',
+                url: url,
+                data: data,
+                mode: 'no-cors',
+                headers: {
+
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: uuid
+
+                }
+
+            }).then(res => {
+                
+            }).catch(console.log('an error occured'))
+        }
+        else {
+            newLikes = newLikes - 1
+            this.setState({ reactions: newLikes, liked: false });
+
+            const id = this.props.postID;
+
+            const data = {
+
+                post: this.props.postID
+
+            };
+            const url = 'http://api.gclout.com:3000/reactions/' + id;
+            axios({
+
+                method: 'delete',
+                url: url,
+                data: data,
+                mode: 'no-cors',
+                headers: {
+
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: uuid
+
+                }
+
+            }).then(res => {
+
             })
-
-        const id = this.props.postID;
-
-        const data = {
-
-            post: this.props.postID
-
-        };
-        const url = 'http://api.gclout.com:3000/reactions/' +id;
-        axios({
-
-            method: 'post',
-            url: url,
-            data: data,
-            mode: 'no-cors',
-            headers: {
-
-                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                token: token,
-                uuid: uuid
-
-            }
-
-        }).then(res => {
-            let newLikes = this.state.reactions;
-            newLikes = newLikes+1
-            this.setState({ reactions: newLikes });
-        })
+        }
     };
 
   render() {
