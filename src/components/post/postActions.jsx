@@ -123,8 +123,7 @@ export default class SinglePost extends Component {
             }).catch(console.log('an error occured'))
         }
         else {
-            newLikes = newLikes - 1
-            this.setState({ reactions: newLikes, liked: false });
+            
 
             const id = this.props.postID;
 
@@ -149,9 +148,35 @@ export default class SinglePost extends Component {
                 }
 
             }).then(res => {
-
+                newLikes = newLikes - 1
+                this.setState({ reactions: newLikes, liked: false });
             })
         }
+        const id = this.props.postID;
+
+        const data = {
+
+            post: this.props.postID
+
+        };
+        const url = 'http://api.gclout.com:3000/reactions/' + id;
+        axios({
+
+            method: 'get',
+            url: url,
+            data: data,
+            mode: 'no-cors',
+            headers: {
+
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                token: token,
+                uuid: uuid
+
+            }
+
+        }).then(res => {
+
+        })
     };
 
   render() {
