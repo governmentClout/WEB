@@ -24,7 +24,7 @@ export default class SinglePost extends Component {
     }
     componentDidMount() {
         this.setState({
-            reactions: this.props.reactions,
+            reactions: this.props.reactions.length,
             comments: this.props.comments,
             shares: this.props.shares,
         })
@@ -83,7 +83,7 @@ export default class SinglePost extends Component {
             }
             let oldState =  this.state.reactions
             let newState = oldState.push(reaction)
-            this.setState({ reactions: newState});
+            this.setState({ shares: newState});
         })
 
     }
@@ -118,7 +118,9 @@ export default class SinglePost extends Component {
             }
 
         }).then(res => {
-            console.log(res);
+            let newLikes = this.state.reactions;
+            newLikes = newLikes+1
+            this.setState({ reactions: newLikes });
         })
     };
 
@@ -134,7 +136,7 @@ export default class SinglePost extends Component {
             onClick={() => this.likePost(this.props.postID)}
         >
             <ThumbUp />
-            {reactions.length} {"  "}  like{reactions.length === 1 ? '' : 's'}
+            {reactions} {"  "}  like{reactions === 1 ? '' : 's'}
         </button>
         <button
             className="post-action"
