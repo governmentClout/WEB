@@ -6,6 +6,8 @@ import ThumbUp from "@material-ui/icons/ThumbUp";
 import ChatBubbleOutline from "@material-ui/icons/ChatBubbleOutline";
 import Reply from "@material-ui/icons/Reply";
 import { Manager, Reference, Popper } from "react-popper";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class SinglePost extends Component {
 
@@ -117,8 +119,20 @@ export default class SinglePost extends Component {
 
             }
 
-        }).then(res => {
-            console.log(res);
+        }).then(response => {
+
+        }).catch(error => {
+          console.log(error.response.data.Error);
+          if(error.response.data.Error === "User already liked this post"){
+            toast.info('You have already liked this post!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+              })
+          }
         })
     };
 
@@ -185,7 +199,7 @@ export default class SinglePost extends Component {
                                 <button
                                     onClick={() => this.registerShare(this.props.postID)}>
                                     <a
-                                        target="_blank" 
+                                        target="_blank"
                                         rel="noopener noreferrer"
                                         href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${this.props.postID}&title=${this.props.post}`}>
                                         <i className="fab fa-linkedin" />
@@ -212,6 +226,7 @@ export default class SinglePost extends Component {
                 )}
             </Popper>
             </Manager>
+            <ToastContainer/>
       </div>
       </>
     );
