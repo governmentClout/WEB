@@ -73,7 +73,7 @@ class CreateProfile extends Component {
       phone,
       email
     });*/
-    
+
 
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
       .then(res => {
@@ -91,7 +91,7 @@ class CreateProfile extends Component {
         console.log(err);
       })
     }
-    
+
     onChange(e) {
       if(e.target.name === 'state') {
         this.displayLga(e.target.value);
@@ -159,6 +159,13 @@ class CreateProfile extends Component {
       loading: true
 
     });
+
+    if(this.state.lga === ""){
+      this.state.lga = "N/A";
+    }
+    if(this.state.state === ""){
+      this.state.state = "N/A";
+    }
 
     e.preventDefault();
 
