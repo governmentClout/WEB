@@ -178,8 +178,7 @@ class CreateProfile extends Component {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
-      // console.log(`${CLOUDINARY_UPLOAD_PRESET}`);
-
+    
       axios({
 
         url: `${CLOUDINARY_URL}`,
@@ -197,8 +196,6 @@ class CreateProfile extends Component {
         }
       })
       .then(res => {
-
-        console.log(res.data);
 
         this.setState({
 
@@ -218,8 +215,6 @@ class CreateProfile extends Component {
 
         };
 
-        console.log(data);
-
         axios({
 
           method: "post",
@@ -235,8 +230,6 @@ class CreateProfile extends Component {
           }
 
         }).then(res => {
-
-          console.log(res.data);
 
           this.setState({
 
