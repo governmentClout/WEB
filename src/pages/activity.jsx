@@ -14,6 +14,7 @@ import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
 import NavBarMobile from "../components/navbar/navBarMobile";
 import NavBarAuthenticated from "../components/navbar/navBarAuthenticated";
+import InfiniteScroll from 'react-infinite-scroller';
 
 class ActivityPage extends Component {
     constructor(props) {
