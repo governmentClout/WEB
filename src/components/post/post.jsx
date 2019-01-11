@@ -4,6 +4,8 @@ import "./post.css";
 import PostActions from "./postActions";
 import CommentInput from "./../comments/commentInput";
 import {Link} from 'react-router-dom';
+import moment from "moment";
+
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -41,11 +43,11 @@ export default class SinglePost extends Component {
 
               <div className="post-owner-details">
                 <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
-                {this.props.postType === "sponsored" ? (
-                  <p className="post-type">Sponsored</p>
-                ) : (
-                  ""
-                )}
+                <p className="post-type">
+                  {this.props.postType === "sponsored" ? "Sponsored | " : ""}
+                  {moment(this.props.post.post.created_at).fromNow()}
+                  
+                </p>
               </div>
             </div>
             <div className="post-content">
