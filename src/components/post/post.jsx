@@ -27,7 +27,7 @@ export default class SinglePost extends Component {
 
     return (
       <div style={{ marginBottom: "1em" }}>
-        <Link to={`/post/${this.props.post.post.uuid}`} className="post-link">
+        {/* <Link to={`/post/${this.props.post.post.uuid}`} className="post-link"> */}
           <div className  ="post-container">
             <div className="post-owner">
               <div className="post-owner-image-wrapper">
@@ -42,7 +42,9 @@ export default class SinglePost extends Component {
               </div>
 
               <div className="post-owner-details">
+              <Link to={`/profile/${this.props.post.post.user}`} className="post-link">
                 <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
+              </Link>
                 <p className="post-type">
                   {this.props.postType === "sponsored" ? "Sponsored | " : ""}
                   {moment(this.props.post.post.created_at).fromNow()}
@@ -53,8 +55,9 @@ export default class SinglePost extends Component {
             <div className="post-content">
                 <p>{this.props.post.post.post}</p>
             </div>
+            {this.props.post.post.attachment !=="null" && <img className="img-responsive" src={this.props.post.post.attachment} />}
           </div>
-        </Link>
+        {/* </Link> */}
         {/* {this.props.postType !== "sponsored" ? (
           <>
             {" "} */}

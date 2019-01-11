@@ -52,7 +52,10 @@
   background: transparent;
   border: none;
   line-height: 24px;
-  font-size: 19px;
+  font-size: 16px;
+}
+.post-action .MuiSvgIcon-root-1 {
+    font-size: 19px !important;
 }
 .flipped-reply {
   transform: matrix(-1, 0, 0, 1, 0, 0);
