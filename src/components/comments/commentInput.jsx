@@ -140,14 +140,18 @@ onKeyPress = (e) => {
           { this.state.comments ? this.state.comments.map(comment => (
           <div className="single-comment">
             <div className="comment-owner-wrapper">
-              <img
-                className="comment-owner"
-                src={comment.user[0].photo}
-                alt="comment-owner"
-              />
+                {comment.user[0] !== undefined? (
+                  <img
+                    className="comment-owner"
+                    src={comment.user[0].photo}
+                    alt="comment-owner"
+                  />) : (
+                    <p>lol</p>
+                  )}
+              
             </div>
             <div>
-                <strong>{comment.user[0].firstName + " " + comment.user[0].lastName}</strong>
+                {comment.user[0] !== undefined ? ( <strong>{comment.user[0].firstName + " " + comment.user[0].lastName}</strong>) : 'lol'}
               <p>{comment.comment.comment}</p>
             </div>
 
