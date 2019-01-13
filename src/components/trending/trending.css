@@ -1,6 +1,10 @@
 .trending-section-header {
   padding: 1em;
 }
+.trending-section {
+  background: #ffffff;
+  border-radius: 4px;
+}
 .trending-image-wrapper {
   width: 40px;
   height: 40px;
@@ -22,8 +26,8 @@
 
 .trending-section-content {
   padding: 1em;
-  border-radius: 8px;
-  background: #ffffff;
+  border-radius: 4px;
+  padding-top: 0;
 }
 
 .trending-text p {
