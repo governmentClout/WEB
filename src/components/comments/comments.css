@@ -2,6 +2,7 @@
   background: #ffffff;
   display: flex;
   align-content: center;
+  padding: 1em 2em;
 }
 .comment-wrapper.hidden {
   display: none !important;
@@ -9,7 +10,6 @@
 .comment-wrapper {
   display: block;
   background: #ffffff;
-  padding: 1em 2em;
 }
 .comment-owner-wrapper {
   width: 40px !important;
@@ -26,7 +26,8 @@
   flex: 1;
 }
 .previous-comments {
-  margin-top: 2em;
+  background:  #F7F7F7;
+  padding: 1em 2em;
 }
 .single-comment {
   display: flex;
