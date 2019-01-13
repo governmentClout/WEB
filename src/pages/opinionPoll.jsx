@@ -5,8 +5,7 @@ import { Manager, Reference, Popper } from "react-popper";
 import Trending from "../components/trending/trending";
 import Sidebar from "../components/sidebar/sidebar";
 import MakePost from "../components/makePost/makePost";
-import SinglePoll from "../components/post/pollPost"
-import Countdown from "../components/countdown";
+import SinglePoll from "../components/post/pollPost";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
 import NavBarMobile from "../components/navbar/navBarMobile";
@@ -146,7 +145,6 @@ class OpinionPage extends Component {
               className="col-md-3 d-none d-md-block"
               style={{ padding: "0px" }}
             >
-              <Countdown />
               <Suggestions />
               <Trending />
             </div>

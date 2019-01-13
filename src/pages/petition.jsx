@@ -7,7 +7,6 @@ import Sidebar from "../components/sidebar/sidebar";
 import MakePetition from "../components/makePost/makePetition";
 import { Manager, Reference, Popper } from "react-popper";
 import SinglePetition from "../components/post/petition";
-import Countdown from "../components/countdown";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
 import NavBarMobile from "../components/navbar/navBarMobile";
@@ -134,7 +133,6 @@ class PetitionPage extends Component {
               className="col-md-3 d-none d-md-block"
               style={{ padding: "0px" }}
             >
-              <Countdown />
               <Suggestions />
               <Trending />
             </div>

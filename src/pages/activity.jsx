@@ -8,7 +8,6 @@ import SinglePost from "../components/post/post";
 import axios from "axios";
 import LoadingPost from "../components/loaders/posts";
 import MakeExecutivePost from "../components/makePost/makeExecutivePost";
-import Countdown from "../components/countdown";
 import { Redirect } from "react-router-dom";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
@@ -131,7 +130,6 @@ class ActivityPage extends Component {
                 className="col-md-3 d-none d-md-block"
                 style={{ padding: "0px" }}
             >
-                <Countdown />
                 <Suggestions />
                 <Trending />
             </div>
