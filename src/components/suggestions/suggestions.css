@@ -4,15 +4,19 @@
   margin-bottom: 30px;
 }
 .suggestions-header {
-  background: #f2f2f2;
   padding: 1em;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+}
+.text-gclout-blue:hover {
+  text-decoration: none;
+  color: #00b0f0;
 }
 .suggestion-image-wrapper {
   width: 40px;
   height: 40px;
   border-radius: 100%;
+  margin-right: 4px;
   overflow: hidden;
 }
 .suggestion-image {
@@ -22,20 +26,12 @@
 .single-suggestion {
   display: flex;
   align-content: center;
-  padding: 1em;
-  justify-content: space-between;
+  padding: 0.5em;
 }
-.single-suggestion .btn {
-  font-size: 12px;
-  padding: 0.7em;
-}
-.suggested-name {
-  margin: auto 0;
-}
-.tagline {
-  padding: 1em;
-  padding-bottom: 0;
-  margin-bottom: 0.3em;
+.single-suggestion a,
+.single-suggestion p {
+  font-size: 14px;
+  margin-bottom: 0;
 }
 .dashed-border-bottom {
   border-bottom: 1px dashed #c4c4c4;
@@ -52,4 +48,8 @@
   cursor: pointer;
   text-decoration: none;
   color: #333333;
+}
+.suggested-friend-actions {
+  display: flex;
+  align-self: center;
 }

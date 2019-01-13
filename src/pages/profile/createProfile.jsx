@@ -371,7 +371,7 @@ class CreateProfile extends Component {
                 </svg>
               </button>
             </div>
-            <div className="col-md-9 mx-auto">
+            <div className="page-70 mx-auto">
               <form>
                 <div className="form-row">
 
