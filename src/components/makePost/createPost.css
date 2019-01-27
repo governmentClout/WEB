@@ -1,0 +1,76 @@
+.create-post__container {
+  background: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  z-index: 1;
+}
+.fullscreen-overlay {
+  width: 100vw;
+  height: calc(100vh - 50px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: rgba(51, 51, 51, 0.6);
+}
+.create-post__header {
+  border-bottom: 1px solid #F0F0F0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  align-content: center;
+}
+.create-post__header > p {
+  margin-bottom: 0;
+}
+.create-post__filter-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.create-post__filter-button:active,
+.create-post__filter-button:focus-within, {
+  outline: 0;
+}
+.create-post__content {
+  padding: 1em;
+}
+.create-post__input-container {
+  margin-bottom: 1em;
+  display: flex;
+}
+.create-post__image-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  align-self: flex-start;
+  margin-right: 10px;
+}
+.create-post__image {
+  width: 100%;
+  height: 100%;
+}
+.create-post__input {
+  padding: 0.75em;
+  border: 1px solid #BDBDBD;
+  flex: 1;
+  border-radius: 6px;
+}
+.create-post__input:focus-within {
+  outline: 0;
+}
+.create-post__actions {
+  display: flex;
+}
+.create-post__action-button {
+  border: 0;
+  background: #F1F1F1;
+  border: 1px solid #F0F0F0;
+  border-radius: 444px;
+  display: flex;
+  margin: 0 4px;
+  cursor: pointer;
+}
