@@ -94,125 +94,122 @@ class Sidebar extends Component {
             <div className="sidebar-profile-image-wrapper">
               <img
                 className="sidebar-profile-image"
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                src={profile.photo}
                 alt="profile"
               />
             </div>
-            <Link to="/profile">
-              <h5 className="text-center">{profile.firstName} {profile.lastName}</h5>
-            </Link>
-            <div className="d-flex justify-content-between friends-details">
-              <div className="text-center col-6">
-                <p>Following</p>
-                <h5 className="text-gclout-blue">300</h5>
-              </div>
-              <div className="text-center col-6">
-                <p>Friends</p>
-                <h5 className="text-gclout-blue">{friends}</h5>
-              </div>
-            </div>
-          </div>
-          <div className="sidebar-section --no-border">
-            <p className="text-gclout-blue">Political Office Holders</p>
-            <div className="d-flex">
-              <div className="section-half">
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>President</small>
-                  </Link>
+              <Link to="/profile">
+                <h5 className="text-center">{profile.firstName} {profile.lastName}</h5>
+              </Link>
+              <div className="row d-flex justify-content-between friends-details text-gclout-blue">
+                <div className="text-center col-4 px-0">
+                  <p><strong>Clouts</strong></p>
+                  <h5>300</h5>
                 </div>
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>Council Chairman</small>
-                  </Link>
+                <div className="text-center col-4  px-0">
+                  <p><strong>Leaders</strong></p>
+                  <h5>37</h5>
                 </div>
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>Federal Rep</small>
+                <div className="text-center col-4  px-0">
+                  <Link to="/friends">
+                    <p className="text-gclout-blue"><strong>Friends</strong></p>
                   </Link>
-                </div>
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>Councilor</small>
-                  </Link>
-                </div>
-              </div>
-              <div className="section-half">
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>Governor</small>
-                  </Link>
-                </div>
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>Senator</small>
-                  </Link>
-                </div>
-                <div className="text-center sidebar-politician">
-                  <Link to="/profile/executive">
-                    <div className="politician-profile-image-wrapper">
-                      <img
-                        className="politician-profile-image"
-                        src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-                        alt="friend profile"
-                      />
-                    </div>
-                    <p>Marks Webber</p>
-                    <small>State Rep</small>
-                  </Link>
+                  <h5>{friends}</h5>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <div className="sidebar-section mb-3">
+            <h5><strong>Political Office Holders</strong></h5>
+            <div className="sidebar-politician">
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image"/>
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">President</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image" />
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">Governor</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image"/>
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">Senator</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image" />
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">Federal Rep</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image" />
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">State Rep</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image"/>
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">Council Chairman</p>
+                </div>
+              </Link>
+              <Link to="profile/executive">
+                <div className="sidebar-politician-wrapper">
+                  <img src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg" alt="Sidebar politician" className="sidebar-politician-image" />
+                </div>
+                <div className="politician-details">
+                  <p>Marks Weber</p>
+                  <p className="text-muted">Counsil</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div className="sidebar-section mb-3">
+          <h5><strong>Shortcuts</strong></h5>
+          <div className="sidebar-shortcut d-flex align-content-center">
+            <div className="empty-icon"></div>
+            <a href="#">Governance Clout</a>
+          </div>
+          <div className="sidebar-shortcut d-flex align-content-center">
+            <div className="empty-icon"></div>
+            <a href="#">Governance Clout</a>
+          </div>
+          <div className="sidebar-shortcut d-flex align-content-center">
+            <div className="empty-icon"></div>
+            <a href="#">Governance Clout</a>
+          </div>
+          <div className="sidebar-shortcut d-flex align-content-center">
+            <div className="empty-icon"></div>
+            <a href="#">Governance Clout</a>
+          </div>
+          <div className="sidebar-shortcut d-flex align-content-center">
+            <div className="empty-icon"></div>
+            <a href="#">Governance Clout</a>
+          </div>
+          </div>
         <SidebarFooter />
       </div>
     );

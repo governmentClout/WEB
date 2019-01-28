@@ -4,7 +4,6 @@ import Suggestions from "../components/suggestions/suggestions";
 import Trending from "../components/trending/trending";
 import Clear from "@material-ui/icons/Clear";
 import ChatInterface from "../components/chatInterface";
-import Countdown from "../components/countdown";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
 import NavBarMobile from "../components/navbar/navBarMobile";
@@ -27,7 +26,7 @@ class ChatPage extends Component {
         </AuthConsumer>
         <div className="app-wrapper">
           <div className="container app-container mx-auto d-flex">
-            <div className="col-md-9">
+            <div className="page-70">
               <div className="d-flex">
                 <div className="sidebar mr-0 ">
                   <div className="friends-list-container">
@@ -87,10 +86,9 @@ class ChatPage extends Component {
               </div>
             </div>
             <div
-              className="col-md-3 d-none d-md-block"
+              className="page-30 d-none d-md-block"
               style={{ padding: "0px" }}
             >
-              <Countdown />
               <Suggestions />
               <Trending />
             </div>

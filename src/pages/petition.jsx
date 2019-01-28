@@ -7,7 +7,6 @@ import Sidebar from "../components/sidebar/sidebar";
 import MakePetition from "../components/makePost/makePetition";
 import { Manager, Reference, Popper } from "react-popper";
 import SinglePetition from "../components/post/petition";
-import Countdown from "../components/countdown";
 import Footer from "../components/footer/footer";
 import { AuthConsumer } from "../components/authcontext";
 import NavBarMobile from "../components/navbar/navBarMobile";
@@ -33,7 +32,7 @@ class PetitionPage extends Component {
         </AuthConsumer>
         <div className="app-wrapper">
           <div className="container app-container mx-auto d-flex">
-            <div className="col-md-9">
+            <div className="page-70">
               <div className="d-flex">
                 <Sidebar />
                 <div className="flex-1">
@@ -131,10 +130,9 @@ class PetitionPage extends Component {
               </div>
               </div>
               <div
-              className="col-md-3 d-none d-md-block"
+              className="page-30 d-none d-md-block"
               style={{ padding: "0px" }}
             >
-              <Countdown />
               <Suggestions />
               <Trending />
             </div>

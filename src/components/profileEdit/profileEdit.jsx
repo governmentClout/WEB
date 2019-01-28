@@ -26,6 +26,7 @@ class EditProfile extends Component {
       loading: false,
       countries: [],
       email: this.props.email,
+        preview: "",
       isNigerian: false,
         selectedFile: null,
         loaded: 0
@@ -200,7 +201,7 @@ class EditProfile extends Component {
                   nationality_origin: this.state.nationality_origin,
                   state: this.state.state,
                   lga: this.state.lga,
-                  photo: this.state.photo
+                  photo: this.state.preview
 
               };
               console.log(data);
@@ -374,7 +375,7 @@ class EditProfile extends Component {
           </button>
         </div>
 
-        <div className="col-md-9 mx-auto">
+        <div className="page-70 mx-auto">
           <form onSubmit={this.editProfile}>
               <div className="col-md-3 offset-md-1" >
                   <div>

@@ -31,9 +31,13 @@ export default class SinglePost extends Component {
             shares: this.props.shares,
         })
         let id = sessionStorage.getItem('uuid');
+        let reactionsArray = [];
         this.props.reactions.forEach(reaction => {
-            return reaction.user === id ? this.setState({liked: true}) : this.setState({liked: false});
+            reactionsArray.push(reaction.user)
+            return reactionsArray;
         });
+        reactionsArray.indexOf(id) > -1 ? this.setState({ liked: true }) : this.setState({ liked: false });
+        
     }
     openDropup = () => {
         const currentState = this.state.showDropup
@@ -205,13 +209,13 @@ export default class SinglePost extends Component {
             onClick={() => this.likePost(this.props.postID)}
         >
             <ThumbUp />
-            {reactions} {"  "}  like{reactions === 1 ? '' : 's'}
+            {reactions > 0 && reactions} {"  "}  like{reactions <= 1 ? '' : 's'}
         </button>
         <button
             className="post-action"
             onClick={this.showComment}>
             <ChatBubbleOutline />
-            {comments.length} {" "} comment{comments.length === 1 ? '' : 's'}
+            {comments.length !== 0 && comments.length} {" "} comment{comments.length <= 1 ? '' : 's'}
         </button>
         <Manager>
             <Reference>
@@ -223,7 +227,7 @@ export default class SinglePost extends Component {
                         onClick={this.openDropup}>
 
                         <Reply className="flipped-reply" />
-                            {shares.length} {" "} share{shares.length === 1 ? '' : 's'}
+                            {shares.length !== 0 && shares.length} {" "} share{shares.length <= 1 ? '' : 's'}
                     </button>
                 )}
             </Reference>
