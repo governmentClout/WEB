@@ -374,7 +374,7 @@ class EditProfile extends Component {
           </button>
         </div>
 
-        <div className="col-md-9 mx-auto">
+        <div className="page-70 mx-auto">
           <form onSubmit={this.editProfile}>
               <div className="col-md-3 offset-md-1" >
                   <div>

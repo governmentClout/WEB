@@ -143,6 +143,13 @@ const ChatPage = Loadable({
     modules: ['Chat'],
     delay: 100,
 });
+const SinglePostPage = Loadable({
+    loader: () => import(/* webpackChunkName: "SinglePost" */"./pages/singlePost"),
+    loading: Loading,
+    timeout: 10000,
+    modules: ['SinglePost'],
+    delay: 100,
+});
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <AuthConsumer>
@@ -198,6 +205,7 @@ const Routes = () => (
                 <PrivateRoute exact path="/notifications" component={NotificationsPage} />
                 <PrivateRoute exact path="/petition" component={PetitionPage} />
                 <PrivateRoute exact path="/messages" component={ChatPage} />
+                <PrivateRoute path="/post/:id" component={SinglePostPage} />
                 {/* external pages */}
                 <Route exact path="/privacy" component={PrivacyPage} />
                 <Route exact path="/faq" component={HelpPage} />

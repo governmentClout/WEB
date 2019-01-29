@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lato", sans-serif;
+    font-family: "Lato";
     -webkit-font-smoothing: antialiased;
     color: #333333;
     -moz-osx-font-smoothing: grayscale;
@@ -218,4 +218,32 @@ select.form-control {
 .bounce {
   -webkit-animation-name: bounce;
   animation-name: bounce;
+}
+.btn-accept {
+    background: #00b0f0;
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+    padding: 4px 16px;
+    border-radius: 4px;
+    margin: 0 6px;
+}
+.btn-reject {
+    background: #f1f1f1;
+    color: #333333;
+    font-size: 14px;
+    margin: 0;
+    border: 1px solid #6D6D6D;
+    border-radius: 4px;
+    margin: 0 6px;
+    padding: 4px 8px;
+}
+.page-30 {
+    flex: 30%;
+    width: 30%;
+    margin-left: 15px;
+}
+.page-70 {
+    flex: 70%;
+    width: 70%;
 }

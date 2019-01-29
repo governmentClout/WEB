@@ -1,5 +1,5 @@
 .navigation {
-    height: 80px;
+    height: 54px;
     padding: 10px;
     z-index: 700;
     background: #ffffff;
@@ -9,7 +9,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
 }
 .navigation-logo {
-    height: 70px;
+    height: 36px;
     width: auto;
 }
 .searchContainer {
@@ -17,8 +17,8 @@
     border: 1px solid #c4c4c4;
     border-radius: 4px;
     overflow: hidden;
-    max-height: 40px;
-    margin: 0.6em 2em;
+    max-height: 34px;
+    margin: 0 2em;
     width: 300px;
     align-items: center;
 }
@@ -28,13 +28,13 @@
     height: 100%;
 }
 .searchIcon {
-    padding: 0.8rem;
-    font-size: 16px;
+    padding: 0.6rem;
+    font-size: 12px;
 }
 
 .searchBox {
     border: 0;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
     flex: 1;
 }
 .navigation-menu {
@@ -46,25 +46,9 @@
 .navigation-menu-item {
     padding: 0 10px;
 }
-.navigation-menu-item a {
-    color: #333333;
-    font-size: 16px;
-    line-height: 19px;
-    font-weight: 500;
-}
-.navigation-menu-button {
-    background: #00b0f0;
-    color: #ffffff !important;
-    padding: 0.6em 1em;
-    border: 2px solid #00b0f0;
-    margin-top: 0.5em !important;
-}
 .navigation-menu-item a:hover {
-    color: #00b0f0;
+    /* color: #00b0f0; */
     text-decoration: none;
-}
-.navigation-menu-button:hover {
-    filter: brightness(0.95);
 }
 .navigation-menu-icon {
     background: transparent;
@@ -91,8 +75,8 @@
 }
 .navigation-toggle {
     display: none;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     position: relative;
     margin-right: 1em;
     align-self: center;
@@ -192,11 +176,12 @@
 
 .navigation-profile-wrapper {
     border: none;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     padding: 0;
     border-radius: 100px;
     overflow: hidden;
+    margin-left: 4em;
 }
 .navbar-profile-image {
     width: 100%;
@@ -211,7 +196,7 @@
     cursor: pointer;
 }
 .dropdown-toggle::after {
-    margin-top: 20px;
+    margin-top: 16px;
 }
 .profile-dropdown {
     background: #ffffff;

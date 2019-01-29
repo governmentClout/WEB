@@ -298,7 +298,8 @@ class PostCreation extends Component {
   fileSelected = event => {
     this.setState({
       selectedFile: event.target.files[0],
-      loaded: 0
+      loaded: 0,
+      preview: URL.createObjectURL(event.target.files[0])
     })
   };
 
@@ -313,13 +314,6 @@ class PostCreation extends Component {
           <h5>Post</h5>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button><div><img src={this.state.preview} alt="preview"/> </div>
-              {/*{this.state.loaded === 0 ? <button onClick={() => this.fileInput.click() }>Select Photo</button> : <div>{Math.round(this.state.loaded,2) } %</div> }*/}
-              {/*<input type="file" onChange={this.fileSelected}/>*/}
-
-            </div>
-            <div className="form-group">
               <textarea
                 className={
                   this.state.wordCount < 100
@@ -328,7 +322,6 @@ class PostCreation extends Component {
                 }
                 rows="4"
                 name="post"
-                // onChange={this.updateWordCount}
                 onChange={this.updateWordCount}
                 onCut={this.updateWordCount}
                 onBlur={this.updateWordCount}
@@ -341,8 +334,7 @@ class PostCreation extends Component {
             <p className="text-right mb-0">
               {100 - this.state.wordCount} {""} words left
             </p>
-            {/*<PostMedia showUploader={this.state.uploadImages} />*/}
-            {/*<input type="file" onChange={this.onChange} name="selectedFile" />*/}
+            {this.state.preview ? <div><img class="img-thumbnail" src={this.state.preview} alt="preview" /></div> : ""}
             <div className="d-flex">
               <button
                 className="btn btn-gclout-blue mr-2"
@@ -351,10 +343,11 @@ class PostCreation extends Component {
               >
                 {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"}
               </button>
+              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none' }} />
               <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
-                onClick={this.showImageUploader}
+                onClick={() => this.fileInput.click()}
                 type="button"
               >
                 <i className="fas fa-camera mr-2" />
@@ -573,7 +566,8 @@ class ArticleCreation extends Component {
   fileSelected = event => {
     this.setState({
       selectedFile: event.target.files[0],
-      loaded: 0
+      loaded: 0,
+      preview: URL.createObjectURL(event.target.files[0])
     }, () => console.log(this.state.selectedFile))
   };
 
@@ -588,10 +582,6 @@ class ArticleCreation extends Component {
         <div className="pt-4 px-4 pb-5">
           <h5>Article</h5>
           <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none'}}/>
-              <button onClick={() => this.fileInput.click() }>Select Photo</button><div> <img src={this.state.preview} alt="preview"/> </div>
-            </div>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>
               <input
@@ -617,9 +607,7 @@ class ArticleCreation extends Component {
             <p className="text-right mb-0">
               {this.state.wordCount} {""} words
             </p>
-
-{/*            <PostMedia type="file" showUploader={this.state.uploadImages} />*/}
-
+            {this.state.preview ? <div><img class="img-thumbnail" src={this.state.preview} alt="preview" /></div> : ""}
             <div className="d-flex">
                 <button
                     className="btn btn-gclout-blue mr-2"
@@ -628,14 +616,16 @@ class ArticleCreation extends Component {
                 >
                     {loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share Article"}
                 </button>
-              {/* <button
+              <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={this.fileSelected} style={{ display: 'none' }} />
+              <button
                 className="btn btn-gclout-blue-outline"
                 style={{ marginBottom: "0" }}
-                onClick={this.showImageUploader}
+                onClick={() => this.fileInput.click()}
+                type="button"
               >
                 <i className="fas fa-camera mr-2" />
                 Photo & Video
-              </button> */}
+              </button>
             </div>
           </form>
         </div>

@@ -53,10 +53,9 @@ class Suggestions extends Component {
     return (
       <div className="suggestions">
         <div className="suggestions-header">
-          <h5>GClout friends suggestions</h5>
+          <h5>People you may know</h5>
         </div>
         <div className="suggestions-content">
-          <p className="tagline">These are people you may know</p>
           <div className="single-suggestion dashed-border-bottom">
             <div className="suggestion-image-wrapper">
               <img
@@ -65,8 +64,73 @@ class Suggestions extends Component {
                 alt="suggested1"
               />
             </div>
-            <span className="suggested-name">Markus Anthony</span>{" "}
-            <button className="btn btn-gclout-blue-outline">Add Friend</button>
+            <div className="px-2">
+              <Link className="text-gclout-blue" to="/profile/id">
+                David Benjamin
+              </Link>
+              <p className="text-muted">3 mutual Friends</p>
+            </div>
+            <div className="suggested-friend-actions">
+              <button className="btn btn-accept">Add</button>
+              <button className="btn btn-reject">Remove</button>
+            </div>
+          </div>
+          <div className="single-suggestion dashed-border-bottom">
+            <div className="suggestion-image-wrapper">
+              <img
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                className="suggestion-image"
+                alt="suggested1"
+              />
+            </div>
+            <div className="px-2">
+              <Link className="text-gclout-blue" to="/profile/id">
+                David Benjamin
+              </Link>
+              <p className="text-muted">3 mutual Friends</p>
+            </div>
+            <div className="suggested-friend-actions">
+              <button className="btn btn-accept">Add</button>
+              <button className="btn btn-reject">Remove</button>
+            </div>
+          </div>
+          <div className="single-suggestion dashed-border-bottom">
+            <div className="suggestion-image-wrapper">
+              <img
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                className="suggestion-image"
+                alt="suggested1"
+              />
+            </div>
+            <div className="px-2">
+              <Link className="text-gclout-blue" to="/profile/id">
+                David Benjamin
+              </Link>
+              <p className="text-muted">3 mutual Friends</p>
+            </div>
+            <div className="suggested-friend-actions">
+              <button className="btn btn-accept">Add</button>
+              <button className="btn btn-reject">Remove</button>
+            </div>
+          </div>
+          <div className="single-suggestion dashed-border-bottom">
+            <div className="suggestion-image-wrapper">
+              <img
+                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                className="suggestion-image"
+                alt="suggested1"
+              />
+            </div>
+            <div className="px-2">
+              <Link className="text-gclout-blue" to="/profile/id">
+                David Benjamin
+              </Link>
+              <p className="text-muted">3 mutual Friends</p>
+            </div>
+            <div className="suggested-friend-actions">
+              <button className="btn btn-accept">Add</button>
+              <button className="btn btn-reject">Remove</button>
+            </div>
           </div>
         </div>
         <div className="suggestion-footer">

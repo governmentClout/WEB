@@ -97,7 +97,6 @@ class Login extends Component {
           }
         })
         .catch(error => {
-          console.log(error);
           this.notify(error);
           this.setState({
             loading: false
@@ -109,6 +108,11 @@ class Login extends Component {
   notify = error => {
     if (this.errorToast) {
       toast.dismiss(this.errorToast);
+    }
+    if (error.response.status === 404) {
+      error = "invalid email or password"
+    }  else {
+      return error
     }
     this.errorToast = toast.error(
       "Login Failed: " + error,

@@ -24,14 +24,18 @@ export default class SinglePost extends Component {
     }
     componentDidMount() {
         this.setState({
-            reactions: this.props.reactions,
+            reactions: this.props.reactions.length,
             comments: this.props.comments,
             shares: this.props.shares,
         })
         let id = sessionStorage.getItem('uuid');
+        let reactionsArray = [];
         this.props.reactions.forEach(reaction => {
-            return reaction.user === id ? this.setState({liked: true}) : this.setState({liked: false});
+            reactionsArray.push(reaction.user)
+            return reactionsArray;
         });
+        reactionsArray.indexOf(id) > -1 ? this.setState({ liked: true }) : this.setState({ liked: false });
+        
     }
     openDropup = () => {
         const currentState = this.state.showDropup
@@ -83,7 +87,7 @@ export default class SinglePost extends Component {
             }
             let oldState =  this.state.reactions
             let newState = oldState.push(reaction)
-            this.setState({ reactions: newState});
+            this.setState({ shares: newState});
         })
 
     }
@@ -91,10 +95,67 @@ export default class SinglePost extends Component {
     likePost = () => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-            this.setState({
-                liked: true,
-            })
+        let newLikes = this.state.reactions;
+        if(!this.state.liked) {
+            newLikes = newLikes + 1
+            this.setState({ reactions: newLikes, liked: true });
 
+            const id = this.props.postID;
+
+            const data = {
+
+                post: this.props.postID
+
+            };
+            const url = 'http://api.gclout.com:3000/reactions/' +id;
+            axios({
+
+                method: 'post',
+                url: url,
+                data: data,
+                mode: 'no-cors',
+                headers: {
+
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: uuid
+
+                }
+
+            }).then(res => {
+                
+            }).catch(console.log('an error occured'))
+        }
+        else {
+            
+
+            const id = this.props.postID;
+
+            const data = {
+
+                post: this.props.postID
+
+            };
+            const url = 'http://api.gclout.com:3000/reactions/' + id;
+            axios({
+
+                method: 'delete',
+                url: url,
+                data: data,
+                mode: 'no-cors',
+                headers: {
+
+                    "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    token: token,
+                    uuid: uuid
+
+                }
+
+            }).then(res => {
+                newLikes = newLikes - 1
+                this.setState({ reactions: newLikes, liked: false });
+            })
+        }
         const id = this.props.postID;
 
         const data = {
@@ -102,10 +163,10 @@ export default class SinglePost extends Component {
             post: this.props.postID
 
         };
-        const url = 'http://api.gclout.com:3000/reactions/' +id;
+        const url = 'http://api.gclout.com:3000/reactions/' + id;
         axios({
 
-            method: 'post',
+            method: 'get',
             url: url,
             data: data,
             mode: 'no-cors',
@@ -118,7 +179,7 @@ export default class SinglePost extends Component {
             }
 
         }).then(res => {
-            console.log(res);
+
         })
     };
 
@@ -134,13 +195,13 @@ export default class SinglePost extends Component {
             onClick={() => this.likePost(this.props.postID)}
         >
             <ThumbUp />
-            {reactions.length} {"  "}  like{reactions.length === 1 ? '' : 's'}
+            {reactions > 0 && reactions} {"  "}  like{reactions <= 1 ? '' : 's'}
         </button>
         <button
             className="post-action"
             onClick={this.showComment}>
             <ChatBubbleOutline />
-            {comments.length} {" "} comment{comments.length === 1 ? '' : 's'}
+            {comments.length !== 0 && comments.length} {" "} comment{comments.length <= 1 ? '' : 's'}
         </button>
         <Manager>
             <Reference>
@@ -152,7 +213,7 @@ export default class SinglePost extends Component {
                         onClick={this.openDropup}>
 
                         <Reply className="flipped-reply" />
-                            {shares.length} {" "} share{shares.length === 1 ? '' : 's'}
+                            {shares.length !== 0 && shares.length} {" "} share{shares.length <= 1 ? '' : 's'}
                     </button>
                 )}
             </Reference>

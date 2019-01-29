@@ -59,6 +59,7 @@ class CreateProfile extends Component {
     }).then(res => {
 
       this.setState({
+
         phone: res.data[0].phone,
         email: res.data[0].email
 
@@ -426,6 +427,7 @@ class CreateProfile extends Component {
                         value={this.state.email}
                         onChange={this.onChange}
                         required
+                        readOnly
                       />
                     </div>
                     <div className="form-group col-md right">
@@ -438,6 +440,7 @@ class CreateProfile extends Component {
                         value={this.state.phone}
                         onChange={this.onChange}
                         required
+                        readOnly
                       />
                     </div>
                   </div>

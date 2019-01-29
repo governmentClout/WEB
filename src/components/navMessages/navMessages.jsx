@@ -21,7 +21,7 @@ class navMessagees extends Component {
 
   componentDidMount() {
 
-    this.getMessages();
+    // this.getMessages();
 
   }
 

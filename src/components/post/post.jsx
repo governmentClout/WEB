@@ -4,6 +4,8 @@ import "./post.css";
 import PostActions from "./postActions";
 import CommentInput from "./../comments/commentInput";
 import {Link} from 'react-router-dom';
+import moment from "moment";
+
 
 export default class SinglePost extends Component {
   static propTypes = {
@@ -25,7 +27,7 @@ export default class SinglePost extends Component {
 
     return (
       <div style={{ marginBottom: "1em" }}>
-        <Link to={`/activity/${this.props.post.post.uuid}`} className="post-link">
+        {/* <Link to={`/post/${this.props.post.post.uuid}`} className="post-link"> */}
           <div className  ="post-container">
             <div className="post-owner">
               <div className="post-owner-image-wrapper">
@@ -40,19 +42,22 @@ export default class SinglePost extends Component {
               </div>
 
               <div className="post-owner-details">
+              <Link to={`/profile/${this.props.post.post.user}`} className="post-link">
                 <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
-                {this.props.postType === "sponsored" ? (
-                  <p className="post-type">Sponsored</p>
-                ) : (
-                  ""
-                )}
+              </Link>
+                <p className="post-type">
+                  {this.props.postType === "sponsored" ? "Sponsored | " : ""}
+                  {moment(this.props.post.post.created_at).fromNow()}
+                  
+                </p>
               </div>
             </div>
             <div className="post-content">
                 <p>{this.props.post.post.post}</p>
             </div>
+            {this.props.post.post.attachment !=="null" && <img className="img-responsive" src={this.props.post.post.attachment} />}
           </div>
-        </Link>
+        {/* </Link> */}
         {/* {this.props.postType !== "sponsored" ? (
           <>
             {" "} */}
@@ -66,7 +71,10 @@ export default class SinglePost extends Component {
             />
 
 
-              <CommentInput postID={this.props.post.post.uuid} show={this.state.showComment}/>
+        <CommentInput
+          postID={this.props.post.post.uuid}
+          comments={this.props.post.comments}
+          show={this.state.showComment}/>
             {" "}
           {/* </>
         ) : (

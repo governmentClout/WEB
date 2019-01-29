@@ -11,7 +11,9 @@ class CommentInput extends Component {
     this.state ={
 
       comment: "",
-      ref: ""
+      ref: "",
+      comments: "",
+      disable: false,
     
     }
 
@@ -19,6 +21,36 @@ class CommentInput extends Component {
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
 
+  }
+  componentDidMount() {
+    this.loadComments()
+  }
+  loadComments() {
+    const uuid = sessionStorage.getItem("uuid"),
+      token = sessionStorage.getItem("token"),
+      id = this.props.postID;
+
+    axios({
+
+      method: "get",
+      url: "http://api.gclout.com:3000/comments/" + id,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: token,
+        uuid: uuid
+      }
+
+    }).then(res => {
+      console.log(res.data);
+
+      this.setState({
+
+        comments: res.data,
+
+      });
+
+
+    })
   }
 
   onChange(ev){
@@ -30,22 +62,10 @@ class CommentInput extends Component {
     })
 
   }
-
-/*   onSubmit() {
-    
-    const data = {
-      
-      comment: this.state.comment
-
-    }
-
-    console.log(data);
-
-  } */
 onKeyPress = (e) => {
 
     if(e.which === 13) {
-
+      this.setState({ disable: true })
       const uuid = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
 
@@ -73,12 +93,20 @@ onKeyPress = (e) => {
       }).then(res => {
         console.log(res.data);
 
+          this.loadComments()
           this.setState({
 
               comment: '',
+              disable: false,
 
           });
 
+
+      }).catch( err => {
+        this.setState({
+          disable: false
+
+        });
 
       })
     }
@@ -86,27 +114,51 @@ onKeyPress = (e) => {
 
   render() {
     return (
-      <div className={ this.props.show ? "comment-input-wrapper" : "comment-input-wrapper hidden" } >
-        <div className="comment-owner-wrapper">
-          <img
-            className="comment-owner"
-            src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
-            alt="comment-owner"
+      <div className={this.props.show ? "comment-wrapper" : "comment-wrapper hidden"} >
+        <div className="comment-input-wrapper">
+          <div className="comment-owner-wrapper">
+            <img
+              className="comment-owner"
+              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+              alt="comment-owner"
+            />
+          </div>
+          <input
+            onKeyPress={this.onKeyPress}
+            type="text"
+            onSubmit={this.onSubmit}
+            name="comment"
+            className="form-control"
+            placeholder="write a comment here..."
+            value={this.state.comment}
+            onChange={this.onChange}
+            disabled={this.state.disable}
+            onClick={() => this.props.postID}
           />
         </div>
-        <input
-          onKeyPress={this.onKeyPress}
-          type="text"
-          onSubmit={this.onSubmit}
-          name="comment"
-          className="form-control"
-          placeholder="write a comment here..."
-          value={this.state.comment}
-          onChange={this.onChange}
-          onClick={() => this.props.postID}
-          /*ref={console.log(this.props.postID)}*/
-        />
-{/*         <input value={this.props.postID} name="ref" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}/> */}
+        <div className="previous-comments">
+          { this.state.comments ? this.state.comments.map(comment => (
+          <div className="single-comment">
+            <div className="comment-owner-wrapper">
+                {comment.user[0] !== undefined? (
+                  <img
+                    className="comment-owner"
+                    src={comment.user[0].photo}
+                    alt="comment-owner"
+                  />) : (
+                    <p>lol</p>
+                  )}
+              
+            </div>
+            <div>
+                {comment.user[0] !== undefined ? ( <strong>{comment.user[0].firstName + " " + comment.user[0].lastName}</strong>) : 'lol'}
+              <p>{comment.comment.comment}</p>
+            </div>
+
+          </div>
+        ) 
+          ) : ""}
+        </div>
       </div>
     );
   }
