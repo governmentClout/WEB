@@ -15,11 +15,6 @@ class SidebarFooter extends Component {
             <Link to="/faq">Help &FAQ</Link> | <Link to="/terms">Terms Of Use</Link> |{" "}
             <Link to="/privacy">Privacy Policy</Link>
           </p>
-          <p className="smaller-margin">
-            <strong>Contact Us</strong>
-          </p>
-          <p className="smaller-margin">Email: gclout@gmail.com</p>
-          <p className="smaller-margin">Phone: 080 3333 3333</p>
           <div className="advert-section">
             <p className="smaller-margin">
               <Link to="/advert" className="advert-link">
