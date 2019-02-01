@@ -74,7 +74,7 @@ class CreateProfile extends Component {
       phone,
       email
     });*/
-    
+
 
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
       .then(res => {
@@ -92,7 +92,7 @@ class CreateProfile extends Component {
         console.log(err);
       })
     }
-    
+
     onChange(e) {
       if(e.target.name === 'state') {
         this.displayLga(e.target.value);
@@ -161,6 +161,13 @@ class CreateProfile extends Component {
 
     });
 
+    if(this.state.lga === ""){
+      this.state.lga = "N/A";
+    }
+    if(this.state.state === ""){
+      this.state.state = "N/A";
+    }
+
     e.preventDefault();
 
     const id = sessionStorage.getItem("uuid"),
@@ -172,8 +179,7 @@ class CreateProfile extends Component {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
-      // console.log(`${CLOUDINARY_UPLOAD_PRESET}`);
-
+    
       axios({
 
         url: `${CLOUDINARY_URL}`,
@@ -191,8 +197,6 @@ class CreateProfile extends Component {
         }
       })
       .then(res => {
-
-        console.log(res.data);
 
         this.setState({
 
@@ -212,8 +216,6 @@ class CreateProfile extends Component {
 
         };
 
-        console.log(data);
-
         axios({
 
           method: "post",
@@ -229,8 +231,6 @@ class CreateProfile extends Component {
           }
 
         }).then(res => {
-
-          console.log(res.data);
 
           this.setState({
 

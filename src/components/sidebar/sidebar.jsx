@@ -187,29 +187,6 @@ class Sidebar extends Component {
               </Link>
             </div>
           </div>
-          <div className="sidebar-section mb-3">
-          <h5><strong>Shortcuts</strong></h5>
-          <div className="sidebar-shortcut d-flex align-content-center">
-            <div className="empty-icon"></div>
-            <a href="#">Governance Clout</a>
-          </div>
-          <div className="sidebar-shortcut d-flex align-content-center">
-            <div className="empty-icon"></div>
-            <a href="#">Governance Clout</a>
-          </div>
-          <div className="sidebar-shortcut d-flex align-content-center">
-            <div className="empty-icon"></div>
-            <a href="#">Governance Clout</a>
-          </div>
-          <div className="sidebar-shortcut d-flex align-content-center">
-            <div className="empty-icon"></div>
-            <a href="#">Governance Clout</a>
-          </div>
-          <div className="sidebar-shortcut d-flex align-content-center">
-            <div className="empty-icon"></div>
-            <a href="#">Governance Clout</a>
-          </div>
-          </div>
         <SidebarFooter />
       </div>
     );
