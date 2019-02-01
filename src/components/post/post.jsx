@@ -40,20 +40,21 @@ export default class SinglePost extends Component {
                   <p>lol</p>
                 )}
               </div>
-
-              <div className="post-owner-details">
-              <Link to={`/profile/${this.props.post.post.user}`} className="post-link">
-                <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
-              </Link>
-                <p className="post-type">
-                  {this.props.postType === "sponsored" ? "Sponsored | " : ""}
-                  {moment(this.props.post.post.created_at).fromNow()}
-                  
-                </p>
+              <div>
+                <div className="post-owner-details">
+                <Link to={`/profile/${this.props.post.post.user}`} className="post-link">
+                  <p>{this.props.post.user[0] ? this.props.post.user[0].firstName + " " + this.props.post.user[0].lastName : 'undefined'}</p>
+                </Link>
+                  <p className="post-type">
+                    {this.props.postType === "sponsored" ? "Sponsored | " : ""}
+                  {moment(this.props.post.post.created_at).format('DD MMMM HH:mm a')}
+                    
+                  </p>
+                </div>
+                <div className="post-content">
+                    <p>{this.props.post.post.post}</p>
+                </div>
               </div>
-            </div>
-            <div className="post-content">
-                <p>{this.props.post.post.post}</p>
             </div>
             {this.props.post.post.attachment !=="null" && <img className="img-responsive" src={this.props.post.post.attachment} />}
           </div>
