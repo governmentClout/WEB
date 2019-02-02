@@ -44,7 +44,7 @@ class CommentInput extends Component {
 
       this.setState({
 
-        comments: res.data,
+        comments: res.data.reverse(),
 
       });
 
