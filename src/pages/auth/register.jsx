@@ -14,8 +14,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import TwitterLogin from 'react-twitter-auth/lib/react-twitter-auth-component.js';
 
-
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -86,10 +84,31 @@ class Register extends Component {
 
 
     handleSubmit(e) {
-    this.setState({ loading: true });
+    this.setState({
+
+        loading:
+
+            true });
+
+    const d = new Date();
+    const newDate = d.getFullYear();
+
+    if(newDate - this.state.date_of_birth < 12){
+
+        toast.error("Too young to be on this platform");
+
+        this.setState({
+
+            loading: false
+
+        })
+
+    }
+
     e.preventDefault();
 
     const data = {
+
       phone: this.state.phone,
       email: this.state.email,
       dob: this.state.date_of_birth,

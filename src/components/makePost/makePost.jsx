@@ -122,9 +122,8 @@ class PostCreation extends Component {
       toProfile: false,
       disable: false,
       loading: false,
-
-  : null,
-        post_type: "",
+      selectedFile : null,
+      post_type: "",
       loaded: 0,
       preview: ""
     

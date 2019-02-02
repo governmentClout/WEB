@@ -193,7 +193,7 @@ class ProfileDetails extends Component {
                     style={{ marginTop: "-80px" }}
                   >
                     <img
-                        src={this.state.profile.photo}
+                        src={this.state.profile.background}
                         className="lifted-profile-image"
                       alt="profile7"
                     />
