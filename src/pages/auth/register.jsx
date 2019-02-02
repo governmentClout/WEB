@@ -364,7 +364,7 @@ console.log('something jus happen rai now')
                         name="email"
                         onChange={ev => this.onChange("email", ev)}
                         value={email}
-                        placeholder="Email address"
+                        placeholder="user@gclout.com"
                         required
                       />
                     </div>
@@ -374,7 +374,7 @@ console.log('something jus happen rai now')
                         type="password"
                         className="form-control"
                         name="password"
-                        placeholder="Password"
+                        placeholder="********"
                         onChange={ev => this.onChange("password", ev)}
                         value={password}
                         required
@@ -387,7 +387,7 @@ console.log('something jus happen rai now')
                           type="phone"
                           className="form-control"
                           name="phone"
-                          placeholder="Phone number"
+                          placeholder="0812345786"
                           onChange={ev => this.onChange("phone", ev)}
                           value={phone}
                           required
