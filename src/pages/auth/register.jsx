@@ -13,6 +13,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import TwitterLogin from 'react-twitter-auth/lib/react-twitter-auth-component.js';
+import moment from 'moment';
 
 class Register extends Component {
   constructor(props) {
@@ -95,8 +96,9 @@ class Register extends Component {
 
     const d = new Date();
     const newDate = d.getFullYear();
+    const formattedDate = moment(this.state.date_of_birth).year();
 
-    if(newDate - this.state.date_of_birth < 12){
+    if(newDate - formattedDate < 12){
 
         toast.error("Too young to be on this platform");
 
