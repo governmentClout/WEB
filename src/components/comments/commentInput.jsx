@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./comments.css";
 import axios from "axios";
+import {API_URL} from "../config";
 
 class CommentInput extends Component {
 
@@ -14,16 +15,19 @@ class CommentInput extends Component {
       ref: "",
       comments: "",
       disable: false,
+      profile: []
     
-    }
+    };
 
-    /* this.onSubmit = this.onSubmit.bind(this); */
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
 
   }
-  componentDidMount() {
-    this.loadComments()
+  componentWillMount() {
+
+    this.loadComments();
+    this.getProfile();
+
   }
   loadComments() {
     const uuid = sessionStorage.getItem("uuid"),
@@ -35,9 +39,11 @@ class CommentInput extends Component {
       method: "get",
       url: "http://api.gclout.com:3000/comments/" + id,
       headers: {
+
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         token: token,
         uuid: uuid
+
       }
 
     }).then(res => {
@@ -50,6 +56,46 @@ class CommentInput extends Component {
 
 
     })
+
+  }
+
+  getProfile(){
+
+    if(this.state.profile !== []){
+
+      const id =  sessionStorage.getItem("uuid");
+      const token  = sessionStorage.getItem("token");
+
+      if(this.state.profile !== []) {
+
+        //   id = sessionStorage.getItem("uuid"),
+        //   token = sessionStorage.getItem("token");
+        const url = `${API_URL}/profiles/${id}`;
+
+        axios({
+
+          method: "GET",
+          url: url,
+          headers: {
+
+            uuid: id,
+            token: token
+
+          }
+
+        }).then(res => {
+
+          this.setState({
+
+            profile: res.data.profile[0],
+            loading: false
+
+          });
+
+        });
+      }
+
+    }
   }
 
   onChange(ev){
@@ -112,13 +158,16 @@ onKeyPress = (e) => {
   };
 
   render() {
+
+    const { profile } = this.state;
+
     return (
       <div className={this.props.show ? "comment-wrapper" : "comment-wrapper hidden"} >
         <div className="comment-input-wrapper">
           <div className="comment-owner-wrapper">
             <img
               className="comment-owner"
-              src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+              src={profile.photo}
               alt="comment-owner"
             />
           </div>

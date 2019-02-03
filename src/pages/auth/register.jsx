@@ -84,7 +84,10 @@ class Register extends Component {
 
 
     handleSubmit(e) {
-    this.setState({
+
+        e.preventDefault();
+
+        this.setState({
 
         loading:
 
@@ -103,66 +106,71 @@ class Register extends Component {
 
         })
 
+    } else {
+
+        const data = {
+
+            phone: this.state.phone,
+            email: this.state.email,
+            dob: this.state.date_of_birth,
+            password: this.state.password,
+            tosAgreement: this.state.tosAgreement,
+            provider: "email",
+            redirect: false
+            //redirectToReferrer: false
+        };
+
+        const url = "http://api.gclout.com:3000/users";
+        console.log(data);
+
+        /* console.log(this.state); */
+        axios({
+            method: "post",
+            url: url,
+            data: data,
+            /* mode: 'no-cors', */
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+            }
+        })
+            .then(response => {
+
+                let responseJson = response;
+                console.log(responseJson);
+
+                if (responseJson.data) {
+
+                    sessionStorage.setItem("data", JSON.stringify(responseJson));
+                    sessionStorage.setItem("token", responseJson.data.Token);
+                    sessionStorage.setItem("uuid", responseJson.data.uuid);
+
+                    this.props.login(responseJson.data.user);
+                    this.setState({
+                        redirect: true
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                const myError = {
+                    response: {
+                        data: {
+                            "Error" : [
+                                'Please try again in a little while'
+                            ]
+                        }
+                    }
+                };
+                this.notify(error || myError);
+                this.setState({
+
+                    loading: false
+
+                });
+            });
+
     }
 
-    e.preventDefault();
-
-    const data = {
-
-      phone: this.state.phone,
-      email: this.state.email,
-      dob: this.state.date_of_birth,
-      password: this.state.password,
-      tosAgreement: this.state.tosAgreement,
-      provider: "email",
-      redirect: false
-      //redirectToReferrer: false
-    };
-
-    const url = "http://api.gclout.com:3000/users";
-    console.log(data);
-
-    /* console.log(this.state); */
-    axios({
-      method: "post",
-      url: url,
-      data: data,
-      /* mode: 'no-cors', */
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-      }
-    })
-      .then(response => {
-
-        let responseJson = response;
-        console.log(responseJson);
-
-        if (responseJson.data) {
-
-          sessionStorage.setItem("data", JSON.stringify(responseJson));
-          sessionStorage.setItem("token", responseJson.data.Token);
-          sessionStorage.setItem("uuid", responseJson.data.uuid);
-
-          this.props.login(responseJson.data.user);
-          this.setState({
-            redirect: true
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        const myError = {
-          response: {
-            data: {
-              "Error" : [
-                'Please try again in a little while'
-              ]
-            }
-          }
-        }
-        this.notify(error || myError)
-        this.setState({ loading: false });
-      });
   }
 
   onChange(key, event) {

@@ -1,16 +1,72 @@
 import React, { Component } from "react";
 import './createPost.css';
 import { FilterList, Assignment, LocationOn, CameraAlt, DeveloperBoard, Poll } from '@material-ui/icons';
+import axios from "axios";
+import {API_URL} from "../config";
 
 class CreatePost extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
+
       focused: false,
+      profile: []
+
+    }
+
+  }
+
+  componentDidMount() {
+
+    this.getProfile();
+
+  }
+
+  getProfile(){
+
+    if(this.state.profile !== []){
+
+      const id =  sessionStorage.getItem("uuid");
+      const token  = sessionStorage.getItem("token");
+
+      if(this.state.profile !== []) {
+
+        //   id = sessionStorage.getItem("uuid"),
+        //   token = sessionStorage.getItem("token");
+        const url = `${API_URL}/profiles/${id}`;
+
+        axios({
+
+          method: "GET",
+          url: url,
+          headers: {
+
+            uuid: id,
+            token: token
+
+          }
+
+        }).then(res => {
+
+          this.setState({
+
+            profile: res.data.profile[0],
+            loading: false
+
+          });
+
+        });
+      }
+
     }
   }
 
   render() {
+
+    const { profile } = this.state;
+
     return (
       <div className="create-post__container">
         <div className="create-post__header">
@@ -24,7 +80,7 @@ class CreatePost extends Component {
           <div className="create-post__input-container">
             <div className="create-post__image-wrapper">
               <img
-                src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                src={profile.photo}
                 alt="user name"
                 className="create-post__image"/>
             </div>

@@ -6,14 +6,31 @@ import "./navBar.css";
 import { Link, withRouter } from "react-router-dom";
 import Mail from "@material-ui/icons/Mail";
 import Notifications from "@material-ui/icons/Notifications";
+import {API_URL} from "../config";
+import axios from "axios";
 
 class NavBarAuthenticated extends Component {
   constructor(props) {
     super(props);
-    this.state = { showNotifications: false, showProfile: false, showMessages: false };
+    this.state = {
+
+      showNotifications: false,
+      showProfile: false,
+      showMessages: false,
+      profile: []
+
+    };
+
     this.showNotifications = this.showNotifications.bind(this);
     this.showMessages = this.showMessages.bind(this);
     this.showProfile = this.showProfile.bind(this);
+
+  }
+
+  componentWillMount() {
+
+    this.getProfile()
+
   }
 
   searchHandler(e) {
@@ -33,16 +50,59 @@ class NavBarAuthenticated extends Component {
   }
   closeAll = () => {
     this.setState({ showProfile: false, showNotifications: false, showMessages: false });
-  }
+  };
   logout = () => {
     let that = this;
     async function f() {
       that.props.logout();
     }
     f().then(this.props.history.push('/'));
+
+  };
+
+  getProfile(){
+
+    if(this.state.profile !== []){
+
+      const id =  sessionStorage.getItem("uuid");
+      const token  = sessionStorage.getItem("token");
+
+      if(this.state.profile !== []) {
+
+        //   id = sessionStorage.getItem("uuid"),
+        //   token = sessionStorage.getItem("token");
+        const url = `${API_URL}/profiles/${id}`;
+
+        axios({
+
+          method: "GET",
+          url: url,
+          headers: {
+
+            uuid: id,
+            token: token
+
+          }
+
+        }).then(res => {
+
+          this.setState({
+
+            profile: res.data.profile[0],
+            loading: false
+
+          });
+
+        });
+      }
+
+    }
   }
 
   render() {
+
+    const { profile } = this.state;
+
     return (
       <div className="navigation --with-shadow  no-mobile">
         <nav className="container d-flex justify-content-between">
@@ -130,7 +190,7 @@ class NavBarAuthenticated extends Component {
                       <div className="navigation-profile-wrapper">
                         <img
                           className="navbar-profile-image"
-                          src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540898186/profile_eyjfnd.jpg"
+                          src={profile.photo}
                           alt="profile"
                         />
                       </div>
