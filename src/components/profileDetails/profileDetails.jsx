@@ -179,11 +179,15 @@ class ProfileDetails extends Component {
         { loading ? <ProfileDetailsLoader /> :
           <div className="profile-details-container">
             <div className="profile-cover-image-wrapper">
-              <img
-                className="profile-cover-image"
-                src={this.state.profile.photo}
-                alt="cover"
-              />
+                {this.state.profile.background ? <img
+                    className="profile-cover-image"
+                    src={this.state.profile.background}
+                    alt="cover"
+                /> : <img
+                    className="profile-cover-image"
+                    src="https://via.placeholder.com/150"
+                    alt="cover"
+                />}
             </div>
             <div className="container real-details-container">
               <div className="main-details d-md-flex justify-content-btween">
@@ -193,7 +197,7 @@ class ProfileDetails extends Component {
                     style={{ marginTop: "-80px" }}
                   >
                     <img
-                        src={this.state.profile.background}
+                        src={this.state.profile.photo}
                         className="lifted-profile-image"
                       alt="profile7"
                     />
