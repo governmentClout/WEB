@@ -415,6 +415,7 @@ class ArticleCreation extends Component {
   }
 
   onSubmit(e) {
+
     this.setState({
 
       loading: true
@@ -422,6 +423,7 @@ class ArticleCreation extends Component {
     });
     const id = sessionStorage.getItem("uuid"),
       token = sessionStorage.getItem("token");
+    console.log(this.state.selectedFile)
 
     e.preventDefault();
     if(this.state.selectedFile !== null){
@@ -441,7 +443,7 @@ class ArticleCreation extends Component {
         },
         data: formData,
         onUploadProgress: progressEvent => {
-          console.log(progressEvent.loaded / progressEvent.total)
+          console.log(progressEvent.loaded / progressEvent.total);
           this.setState({
             // loaded: (ProgressEvent.loaded/ ProgressEvent.total*100)
             loaded: (ProgressEvent.loaded/ ProgressEvent.total*1)
@@ -564,11 +566,15 @@ class ArticleCreation extends Component {
   }
 
   fileSelected = event => {
+
     this.setState({
+
       selectedFile: event.target.files[0],
       loaded: 0,
       preview: URL.createObjectURL(event.target.files[0])
+
     }, () => console.log(this.state.selectedFile))
+
   };
 
   render() {

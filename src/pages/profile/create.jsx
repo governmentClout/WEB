@@ -162,10 +162,22 @@ class CreateProfile extends Component {
     });
 
     if(this.state.lga === ""){
-      this.state.lga = "N/A";
+      this.setState({
+
+        lga : "N/A"
+
+      })
+
     }
+
     if(this.state.state === ""){
-      this.state.state = "N/A";
+
+      this.setState({
+
+        state: "N/A"
+
+      });
+
     }
 
     e.preventDefault();
