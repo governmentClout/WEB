@@ -341,6 +341,14 @@ class EditProfile extends Component {
         })
 
     }
+    coverSelected = event => {
+
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0
+        })
+
+    }
 
 
   render() {
@@ -356,10 +364,11 @@ class EditProfile extends Component {
             src="https://res.cloudinary.com/plushdeveloper/image/upload/v1540948129/background-pine-texture-82256_w2aimd.jpg"
             alt="cover"
           />
-          <button
-            className="floating-edit-button-wrapper"
-            onClick={() => this.shouldShowModal("Cover Photo")}
-          >
+            <input type="file" ref={coverInput => this.coverInput = coverInput} onChange={this.coverSelected} style={{ display: 'none' }} />
+                <button
+                    className="floating-edit-button-wrapper"
+                    onClick={() => this.coverInput.click()}
+                >
             <svg
               width="22"
               height="22"

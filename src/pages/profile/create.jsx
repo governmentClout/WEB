@@ -66,15 +66,6 @@ class CreateProfile extends Component {
       });
 
     });
-  /*  const userData  = JSON.parse(sessionStorage.getItem("data")),
-      email = userData.user.email,
-      phone = userData.user.phone;*/
-
-    /*this.setState({
-      phone,
-      email
-    });*/
-
 
     axios.get('http://locationsng-api.herokuapp.com/api/v1/states')
       .then(res => {
@@ -224,7 +215,8 @@ class CreateProfile extends Component {
           nationality_origin: this.state.nationality_origin,
           state: this.state.state,
           lga: this.state.lga,
-          photo: res.data.secure_url
+          photo: res.data.secure_url,
+          background: res.data.secure_url
 
         };
 
@@ -332,6 +324,14 @@ class CreateProfile extends Component {
     })
 
   };
+  coverSelected = event => {
+
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0
+    })
+
+  };
 
   render() {
     if(this.state.redirect === true) {
@@ -349,9 +349,10 @@ class CreateProfile extends Component {
                   src="../cover.svg"
                   alt="cover"
                 />
+                <input type="file" ref={coverInput => this.coverInput = coverInput} onChange={this.coverSelected} style={{ display: 'none' }} />
                 <button
                   className="floating-edit-button-wrapper"
-                  onClick={() => this.shouldShowModal("Cover Photo")}
+                  onClick={() => this.coverInput.click()}
                 >
                   <svg
                     width="22"
