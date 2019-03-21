@@ -37,7 +37,7 @@ class OnePost extends Component {
     likePost = (id) => {
         const uuid = sessionStorage.getItem("uuid"),
             token = sessionStorage.getItem("token");
-            
+
         const pid = id;
 
         const data = {
@@ -140,13 +140,13 @@ class OnePost extends Component {
                 console.log(res.data);
             })
         } else {
-        
+
             const headers =  {
-                
+
                 'crossDomain': true,
                 token: token,
                 uuid: user
-    
+
             };
 
             axios.delete(`${API_URL}/reactions/${this.state.reactionid}`, {headers})
@@ -220,7 +220,7 @@ class OnePost extends Component {
 
         this.fetchPost();
         this.registerView()
-    
+
     }
 
     registerView(){

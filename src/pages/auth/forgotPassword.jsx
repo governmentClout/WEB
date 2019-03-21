@@ -48,13 +48,13 @@ class ForgotPassword extends Component {
     }).then(res => {
 
       console.log(res.data);
-      
+
       if(res.data.Success){
 
         this.setState({
-      
+
           email: ""
-      
+
         });
 
 

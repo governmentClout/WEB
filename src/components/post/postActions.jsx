@@ -35,7 +35,7 @@ export default class SinglePost extends Component {
             return reactionsArray;
         });
         reactionsArray.indexOf(id) > -1 ? this.setState({ liked: true }) : this.setState({ liked: false });
-        
+
     }
     openDropup = () => {
         const currentState = this.state.showDropup
@@ -123,11 +123,11 @@ export default class SinglePost extends Component {
                 }
 
             }).then(res => {
-                
+
             }).catch(console.log('an error occured'))
         }
         else {
-            
+
 
             const id = this.props.postID;
 
@@ -246,7 +246,7 @@ export default class SinglePost extends Component {
                                 <button
                                     onClick={() => this.registerShare(this.props.postID)}>
                                     <a
-                                        target="_blank" 
+                                        target="_blank"
                                         rel="noopener noreferrer"
                                         href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.dev.gclout.com/activity/${this.props.postID}&title=${this.props.post}`}>
                                         <i className="fab fa-linkedin" />

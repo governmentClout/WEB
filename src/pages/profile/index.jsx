@@ -56,9 +56,9 @@ class ProfilePage extends Component {
         const posts = res.data.posts;
 
         this.setState({
-          
+
           posts
-        
+
         });
 
 //        console.log(res.data.reverse());

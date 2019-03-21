@@ -126,7 +126,7 @@ class PostCreation extends Component {
         post_type: "",
       loaded: 0,
       preview: ""
-    
+
       };
 
     this.updateWordCount= this.updateWordCount.bind(this);
@@ -381,7 +381,7 @@ class ArticleCreation extends Component {
         preview: ''
 
       };
-    
+
       this.updateWordCount = this.updateWordCount.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       this.onChange= this.onChange.bind(this);

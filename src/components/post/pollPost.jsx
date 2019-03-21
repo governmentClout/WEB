@@ -19,7 +19,7 @@ class SinglePoll extends Component {
             lastName: "",
             user: [],
             loading: false
-        
+
         };
     }
 
@@ -89,7 +89,7 @@ class SinglePoll extends Component {
 
     }
     componentWillMount() {
-      
+
         this.getPolls();
 
     }
@@ -132,7 +132,7 @@ class SinglePoll extends Component {
            // console.log(res.data);
                 // }
         })
-    
+
     }
 
     render() {

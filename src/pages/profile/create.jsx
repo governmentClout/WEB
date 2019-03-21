@@ -179,7 +179,7 @@ class CreateProfile extends Component {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', `${CLOUDINARY_UPLOAD_PRESET}`);
-    
+
       axios({
 
         url: `${CLOUDINARY_URL}`,
@@ -300,6 +300,7 @@ class CreateProfile extends Component {
   };
 
   displayLga(state) {
+    console.log(state)
     // let state = this.state.state;
     axios({
       method: 'get',
@@ -505,13 +506,14 @@ class CreateProfile extends Component {
                         className="form-control"
                         value={this.state.lga}
                       >
-                        {this.state.lgas.map(lga => {
+                      {console.log(this.state.lgas)}
+                        {this.state.lgas ? this.state.lgas.map(lga => {
                           return (
                             <option value={lga} key={lga}>
                               {lga}
                             </option>
                           );
-                        })}
+                        }) : ""}
                       </select>
                     </div>
                   </div>) : ""

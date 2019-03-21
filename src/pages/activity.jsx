@@ -37,7 +37,7 @@ class ActivityPage extends Component {
         let id = sessionStorage.getItem("uuid");
         const token = sessionStorage.getItem("token");
         const url = `http://api.gclout.com:3000/profiles/${id}`;
-    
+
         axios({
             method: "GET",
             url: url,

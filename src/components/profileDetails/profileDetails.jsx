@@ -122,7 +122,7 @@ class ProfileDetails extends Component {
 
     if(this.state.profile !== []) {
     const url = `http://api.gclout.com:3000/profiles/${id}`;
-    
+
     axios({
       method: "GET",
       url: url,
@@ -200,7 +200,7 @@ class ProfileDetails extends Component {
                   </div>
                 </div>
                 {!this.props.userId ? <div className="top-details d-flex justify-content-center offset-md-2 col-md-8">
-                  <button className="btn btn-gclout-blue align-self-center" onClick={() => this.toggleUpgrade()}> 
+                  <button className="btn btn-gclout-blue align-self-center" onClick={() => this.toggleUpgrade()}>
                     Upgrade
                   </button>
                   <button
@@ -215,7 +215,7 @@ class ProfileDetails extends Component {
 
               {showModal && (
                 <Modal onCloseRequest={() => this.handleToggleModal()}>
-                    <ProfileEdit  
+                    <ProfileEdit
                       userFirstName={this.state.profile.firstName}
                       userLastName={this.state.profile.lastName}
                       nationalityOrigin={this.state.profile.nationality_origin}
@@ -233,18 +233,18 @@ class ProfileDetails extends Component {
                 </Modal>
               )}
 
-              
+
                 <div className="main-details d-md-flex justify-content-btween">
                   <div className="col-md-4 dashed-border-right details-column">
                     <h5 className="text-center">
                       {this.state.profile.firstName} {this.state.profile.lastName}
                     </h5>
-                    {this.props.userId ? 
+                    {this.props.userId ?
                       (this.props.userId === 'executive' ?
                       <p className="text-muted text-center">President</p> :
                       <div className="d-flex justify-content-between friend-actions">
                         <Link to="/" className="btn btn-gclout-blue">Message</Link>
-                        {this.props.userId === 'friend' ? 
+                        {this.props.userId === 'friend' ?
                         <Manager>
                           <Reference>
                             {({ ref }) => (
@@ -288,7 +288,7 @@ class ProfileDetails extends Component {
                               </div>
                             )}
                           </Popper>
-                        </Manager> 
+                        </Manager>
                         : <button className="btn btn-gclout-blue-outline">Add Friend</button>
                       }
                       </div> ) : " "}

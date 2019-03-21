@@ -13,7 +13,7 @@ class Sidebar extends Component {
 
             profile: [],
             friends: []
-        
+
         };
     }
 
@@ -79,7 +79,7 @@ class Sidebar extends Component {
       const { friends } = this.state;
 
       const { profile } = this.state;
-    
+
       return (
       <div className="sidebar  d-none d-md-block">
         <div className="sidebar-top">

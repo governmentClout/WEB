@@ -263,7 +263,7 @@ console.log('something jus happen rai now')
     // }
     let errorArray = error.response.data.Error
     if (errorArray.constructor === Array ) {
-      
+
       errorArray.forEach(error => {
         if (error === 'tosAgreement cannot be false') {
           error = "you must agree to the terms and conditions"

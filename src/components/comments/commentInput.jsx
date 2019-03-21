@@ -14,7 +14,7 @@ class CommentInput extends Component {
       ref: "",
       comments: "",
       disable: false,
-    
+
     }
 
     /* this.onSubmit = this.onSubmit.bind(this); */
@@ -70,10 +70,10 @@ onKeyPress = (e) => {
       token = sessionStorage.getItem("token");
 
       const data = {
-      
+
         comment: this.state.comment,
         ref: this.props.postID
-      
+
       };
 
       console.log(data);
@@ -87,9 +87,9 @@ onKeyPress = (e) => {
           "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
           token: token,
           uuid: uuid
-        
+
         }
-      
+
       }).then(res => {
         console.log(res.data);
 
@@ -148,7 +148,7 @@ onKeyPress = (e) => {
                   />) : (
                     <p>lol</p>
                   )}
-              
+
             </div>
             <div>
                 {comment.user[0] !== undefined ? ( <strong>{comment.user[0].firstName + " " + comment.user[0].lastName}</strong>) : 'lol'}
@@ -156,7 +156,7 @@ onKeyPress = (e) => {
             </div>
 
           </div>
-        ) 
+        )
           ) : ""}
         </div>
       </div>

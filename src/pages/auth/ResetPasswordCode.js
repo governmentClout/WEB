@@ -53,17 +53,17 @@ class ResetPasswordCode extends Component {
 
             console.log(res.data);
             if(res.data.uuid){
-                
+
                 swal('Operation Successful!');
                 sessionStorage.setItem("resetuuid", res.data.uuid);
-            
+
             }
-            
+
             this.setState({
-                
+
                 code: "",
                 redirect: true
-            
+
             })
 
         }).catch(err => {
@@ -74,7 +74,7 @@ class ResetPasswordCode extends Component {
 
     }
     render() {
-        
+
         const { redirect } = this.state;
 
         if(redirect){

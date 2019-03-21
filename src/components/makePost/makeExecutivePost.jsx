@@ -91,7 +91,7 @@ class MakeExecutivePost extends Component {
                   </div>
                 )}
               </Popper>
-            </Manager> 
+            </Manager>
           </div>
         </div>
         <PostCreation updatePosts={this.updatePosts} show={this.state.showNewPost} />
@@ -103,7 +103,7 @@ class MakeExecutivePost extends Component {
 export default MakeExecutivePost;
 
 class PostCreation extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -121,7 +121,7 @@ class PostCreation extends Component {
     this.updateWordCount= this.updateWordCount.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
   }
-  
+
   handleChange = (e) => {
 
     this.setState({
@@ -129,7 +129,7 @@ class PostCreation extends Component {
       [e.target.name]: e.target.value
 
     });
-  
+
   }
   updatePostsNow = () => this.props.updatePosts()
   onSubmit(e) {
@@ -145,7 +145,7 @@ class PostCreation extends Component {
     }
 
     axios({
-    
+
       method: "post",
       url: "http://api.gclout.com:3000/posts",
       data: data,
@@ -272,7 +272,7 @@ class PostCreation extends Component {
                 style={{ marginBottom: "0" }}
                 disabled={!this.state.disable}
               >
-                {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"} 
+                {this.state.loading ? <i className="fas fa-circle-notch fa-spin" /> : "Share post"}
               </button>
               <button
                 className="btn btn-gclout-blue-outline"
