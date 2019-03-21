@@ -282,7 +282,7 @@ class CreateProfile extends Component {
 //        console.log(res.data);
         this.setState({
             lgas: res.data
-        })
+        }, ()=>console.log(this.state.lgas))
       }).catch(err => console.log(err));
       return(
           <div className="form-group col-md">
@@ -292,13 +292,13 @@ class CreateProfile extends Component {
                   name="lga"
                   className="form-control"
               >
-                  {this.state.lgas.map(lga => {
+                  {this.state.lgas.length > 0 ? this.state.lgas.map(lga => {
                       return (
                           <option value={lga} key={lga}>
                               {lga}
                           </option>
                       );
-                  })}
+                  }): ''}
               </select>
           </div>
       )

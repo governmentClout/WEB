@@ -10,7 +10,7 @@ class Trending extends Component {
     return (
       <div className="trending-section">
         <div className="trending-section-header">
-          <h5>Trending for you</h5>
+          <h5><strong>Trending for you</strong></h5>
         </div>
         <div className="trending-section-content">
           <div className="trending-post">

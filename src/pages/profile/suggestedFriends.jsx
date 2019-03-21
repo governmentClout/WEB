@@ -115,7 +115,7 @@ class SuggestedFriendsPage extends Component {
               <Sidebar />
               <div className="friends-list-container">
                 <div className="friends-list-header">
-                  <h5>GClout Friends Suggestion</h5>
+                  <h5><strong>GClout Friends Suggestion</strong></h5>
                   <p>These are people you may know</p>
                 </div>
                 <div className="friends-search-container">

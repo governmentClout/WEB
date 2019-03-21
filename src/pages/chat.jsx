@@ -31,7 +31,7 @@ class ChatPage extends Component {
                 <div className="sidebar mr-0 ">
                   <div className="friends-list-container">
                     <div className="friends-list-header d-flex">
-                      <h5>Messages</h5>
+                      <h5><strong>Messages</strong></h5>
                     </div>
                     <div className="friends-search-container chatbox">
                       <form className="searchContainer" onSubmit={this.searchHandler}>

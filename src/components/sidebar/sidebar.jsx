@@ -99,22 +99,22 @@ class Sidebar extends Component {
               />
             </div>
               <Link to="/profile">
-                <h5 className="text-center">{profile.firstName} {profile.lastName}</h5>
+                <h5 className="text-center"><strong>{profile.firstName} </strong> <strong> {profile.lastName}</strong></h5>
               </Link>
               <div className="row d-flex justify-content-between friends-details text-gclout-blue">
                 <div className="text-center col-4 px-0">
                   <p><strong>Clouts</strong></p>
-                  <h5>300</h5>
+                  <h5><strong>300</strong></h5>
                 </div>
                 <div className="text-center col-4  px-0">
                   <p><strong>Leaders</strong></p>
-                  <h5>37</h5>
+                  <h5><strong>37</strong></h5>
                 </div>
                 <div className="text-center col-4  px-0">
                   <Link to="/friends">
                     <p className="text-gclout-blue"><strong>Friends</strong></p>
                   </Link>
-                  <h5>{friends}</h5>
+                  <h5><strong>{friends}</strong></h5>
                 </div>
               </div>
             </div>

@@ -311,7 +311,7 @@ class PostCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          <h5>Post</h5>
+          <h5><strong>Post</strong></h5>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <textarea
@@ -580,7 +580,7 @@ class ArticleCreation extends Component {
         }
       >
         <div className="pt-4 px-4 pb-5">
-          <h5>Article</h5>
+          <h5><strong>Article</strong></h5>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="article-title">Title</label>

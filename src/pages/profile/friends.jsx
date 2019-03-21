@@ -69,7 +69,7 @@ class FriendsPage extends Component {
               <Sidebar />
               <div className="friends-list-container">
                 <div className="friends-list-header d-flex">
-                  <h5>300 Friends</h5>
+                  <h5><strong>300 Friends</strong></h5>
                 </div>
                 <div className="friends-search-container">
                   <form className="searchContainer" onSubmit={this.searchHandler}>

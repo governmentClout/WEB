@@ -54,7 +54,7 @@ class Friend extends Component {
                                 />
                             </div>
                             <div className="deats  my-auto">
-                                <h5>Oreoluwa Ojo</h5>
+                                <h5><strong>Oreoluwa Ojo</strong></h5>
                                 <p>Lagos, Nigeria</p>
                             </div>
                         </div>

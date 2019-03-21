@@ -64,7 +64,7 @@ class Friend extends Component {
                         />
                     </div>
                     <div className="deats  my-auto">
-                        <h5>{this.props.friend.firstName + " " + this.props.friend.lastName}</h5>
+                        <h5><strong>{this.props.friend.firstName + " " + this.props.friend.lastName}</strong></h5>
                         <p>{this.props.friend.nationality_residence}</p>
                     </div>
                 </div>

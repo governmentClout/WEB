@@ -237,8 +237,9 @@ class ProfileDetails extends Component {
                 <div className="main-details d-md-flex justify-content-btween">
                   <div className="col-md-4 dashed-border-right details-column">
                     <h5 className="text-center">
+                    <strong>
                       {this.state.profile.firstName} {this.state.profile.lastName}
-                    </h5>
+                    </strong></h5>
                     {this.props.userId ?
                       (this.props.userId === 'executive' ?
                       <p className="text-muted text-center">President</p> :
@@ -295,14 +296,14 @@ class ProfileDetails extends Component {
                     <div className="d-flex justify-content-between friends-details">
                       <div className="text-center col-6">
                         <p>Following</p>
-                        <h5 className="text-gclout-blue">300</h5>
+                        <h5 className="text-gclout-blue"><strong>300</strong></h5>
                       </div>
                       <Link
                         to="/friends"
                         className="profile-link text-center col-6"
                       >
                         <p>Friends</p>
-                        <h5 className="text-gclout-blue">{friends}</h5>
+                        <h5 className="text-gclout-blue"><strong>{friends}</strong></h5>
                       </Link>
                     </div>
                   </div>

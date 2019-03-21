@@ -53,7 +53,7 @@ class Suggestions extends Component {
     return (
       <div className="suggestions">
         <div className="suggestions-header">
-          <h5>People you may know</h5>
+          <h5><strong>People you may know</strong></h5>
         </div>
         <div className="suggestions-content">
           <div className="single-suggestion dashed-border-bottom">

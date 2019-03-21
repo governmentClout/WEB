@@ -28,7 +28,7 @@ class NotificationsPage extends Component {
                 <div className="flex-1">
                   <div className="notifications-container">
                     <div className="notifications-page-header">
-                      <h5 className="text-bold">Notifications</h5>
+                      <h5 className="text-bold"><strong>Notifications</strong></h5>
                     </div>
                     <Notification type="comment" />
                     <Notification type="share" />
