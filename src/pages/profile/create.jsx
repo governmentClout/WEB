@@ -155,6 +155,7 @@ class CreateProfile extends Component {
 
   createProfile(e) {
 
+    console.log('saving profile')
     this.setState({
 
       loading: true

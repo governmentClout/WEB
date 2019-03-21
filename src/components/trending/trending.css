@@ -33,7 +33,9 @@
 .trending-text p {
   font-size: 14px;
   text-align: justify;
-  margin-top: 0.5em;
+  margin-top: 0.3em;
+  position: relative;
+  left:3.5rem;
 }
 .like-btn {
   background: transparent;
