@@ -2473,38 +2473,38 @@
     {
       "id": 141,
       "name": null,
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 313,
       "name": null,
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 141,
       "name": null,
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 313,
       "name": null,
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 141,
       "name": null,
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     },
     {
       "id": 313,
       "name": null,
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     },
     {
       "id": 350,
@@ -5323,80 +5323,80 @@
     {
       "id": 51,
       "name": "./src/components/authcontext.jsx",
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 51,
       "name": "./src/components/authcontext.jsx",
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 51,
       "name": "./src/components/authcontext.jsx",
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     }
   ],
   "./assets/images/logo.png": [
     {
       "id": 132,
       "name": "./src/assets/images/logo.png",
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 132,
       "name": "./src/assets/images/logo.png",
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 132,
       "name": "./src/assets/images/logo.png",
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     }
   ],
   "./index.css": [
     {
       "id": 312,
       "name": "./src/index.css",
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 312,
       "name": "./src/index.css",
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 312,
       "name": "./src/index.css",
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     }
   ],
   "C:\\Users\\T540P\\Desktop\\projects\\2019\\gclout\\src\\index.js": [
     {
       "id": 335,
       "name": "./src/index.js",
-      "file": "static/css/main.bb44960e.chunk.css",
-      "publicPath": "/static/css/main.bb44960e.chunk.css"
+      "file": "static/css/main.a879abd2.chunk.css",
+      "publicPath": "/static/css/main.a879abd2.chunk.css"
     },
     {
       "id": 335,
       "name": "./src/index.js",
-      "file": "static/js/main.0c2c99d8.chunk.js",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js"
+      "file": "static/js/main.dd3ee43d.chunk.js",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js"
     },
     {
       "id": 335,
       "name": "./src/index.js",
-      "file": "static/js/main.0c2c99d8.chunk.js.map",
-      "publicPath": "/static/js/main.0c2c99d8.chunk.js.map"
+      "file": "static/js/main.dd3ee43d.chunk.js.map",
+      "publicPath": "/static/js/main.dd3ee43d.chunk.js.map"
     }
   ],
   "../../assets/css/auth.css": [
