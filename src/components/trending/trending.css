@@ -22,6 +22,8 @@
 }
 .trending-name {
   margin: auto 0;
+  position: relative;
+  top: -.5rem;
 }
 
 .trending-section-content {
@@ -36,6 +38,7 @@
   margin-top: 0.3em;
   position: relative;
   left:3.5rem;
+  top: -.5rem;
 }
 .like-btn {
   background: transparent;

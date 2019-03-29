@@ -37,8 +37,9 @@
   border-bottom: 1px dashed #c4c4c4;
 }
 .suggestion-footer {
-  padding: 1em 1em;
-  padding-top: 0.1em;
+  height: 4rem;
+  display: grid;
+  align-items: center;
 }
 .suggestion-footer-link {
   color: #00b0f0;
